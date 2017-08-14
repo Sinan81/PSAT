@@ -1,0 +1,326 @@
+#!/usr/bin/perl -w
+# PSAT2OCTAVE adapts PSAT for the GNU/OCtave environment
+#
+# SIMPOW2MAT [OPTIONS] [FILEOUTPUT]
+#
+# Author:  Federico Milano
+# Date:    30 April 2008
+# Version: 1.0.0
+#
+#e-mail:   federico.milano@ucd.ie
+
+use strict;
+use Cwd;
+use File::Find;
+use File::Copy;
+
+# -----------------------------------------------------------------------
+# variable declaration
+# -----------------------------------------------------------------------
+
+my ($h,$i,$j,$k,$u,$v);
+my $nargin = 0;
+my $verbose = 0;
+my $reallyv = 0;
+my $helpmsg = 0;
+my $testmode = 0;
+my $skipmode = 0;
+my $restore = 0;
+my $dir = getcwd;
+my $path;
+my $filename;
+my @filename;
+my @class;
+my @data;
+my @classdir;
+my @psatfile;
+my %cname;
+my %classname;
+my $ndir = -1;
+my $nfile = -1;
+
+# -----------------------------------------------------------------------
+# check inputs
+# -----------------------------------------------------------------------
+$nargin = @ARGV;
+if ($nargin) {
+    while ($ARGV[0] =~ /^-/) {
+	$restore = 1 if $ARGV[0] =~ /r/;
+	$verbose = 1 if $ARGV[0] =~ /v/;
+	$reallyv = 1 if $ARGV[0] =~ /w/;
+	$helpmsg = 1 if $ARGV[0] =~ /h/;
+	$testmode = 1 if $ARGV[0] =~ /t/;
+	$skipmode = 1 if $ARGV[0] =~ /s/;
+	shift(@ARGV);
+	$nargin--;
+	if ($nargin == 0) { last; }
+    }
+}
+
+# the "really verbose" option implies the "verbose" one
+$verbose = 1 if $reallyv;
+
+print "Working directory <" . $dir . ">\n" if $verbose;
+if ($nargin) {
+    $path = $ARGV[0];
+} else {
+    $path = $dir;
+}
+
+# -----------------------------------------------------------------------
+# help (if requested)
+# -----------------------------------------------------------------------
+if ($helpmsg) {
+    print "\nPSAT2OCTAVE adapts PSAT for the GNU/Octave environment.\n\n";
+    print "psat2octave <options> <path>\n";
+    print "  -v   verbose\n";
+    print "  -w   really verbose\n";
+    print "  -t   test (no change is applied)\n";
+    print "  -s   skip file scan\n";
+    print "  -r   restore the original files\n";
+    print "  -h   print this help and exit\n\n";
+    print "Author:   Federico Milano\n";
+    print "Date:     30-Apr-2008\n";
+    print "Version:  1.0.0\n\n";
+    print "E-mail:   Federico.Milano\@uclm.es\n";
+    die "\n";
+}
+
+print "Getting PSAT class folders... " if $verbose;
+print "\n" if $reallyv;
+find (\&psatclass,$path);
+print "\n" if (($ndir+1) % 5) && $reallyv;
+print "done.\n" if $verbose && !$reallyv;
+
+print "Getting PSAT Matlab files... "  if $verbose;
+find (\&psatfile,$path);
+print "done.\n" if $verbose;
+
+if ($restore) {
+    @class = qw(bus   line   shunt   breaker
+	  fault   sw     pv      pq      mn
+	  pl      fl     lines   twt     syn
+	  ind     ltc    thload  tg      exc
+	  pss     oxl    hvdc    svc     tcsc
+	  statcom sssc   upfc    mass    ssr
+	  tap     demand supply  rsrv    rmpg
+	  rmpl    vltn   ypdp    sofc    cac
+	  cluster exload phs     cswt    dfig
+	  ddsg    wind   busfreq pmu     jimma
+	  mixload pod    areas   coi     wtfr
+          spq     spv);
+} else {
+    @class = qw(Bus   Line   Shunt   Breaker Mn
+	  Fault   SW     PV      PQ      PQgen
+	  Pl      Fl     Lines   Twt     Syn
+	  Ind     Ltc    Thload  Tg      Exc
+	  Pss     Oxl    Hvdc    Svc     Tcsc
+	  Statcom Sssc   Upfc    Mass    SSR
+	  Tap     Demand Supply  Rsrv    Rmpg
+	  Rmpl    Vltn   Ypdp    Sofc    Cac
+	  Cluster Exload Phs     Cswt    Dfig
+	  Ddsg    Wind   Busfreq Pmu     Jimma
+	  Mixload Pod    Areas   Regions COI
+          WTFR    Spq    Spv);
+}
+
+unless ($skipmode) {
+    print "Scanning PSAT Matlab files... " if $verbose;
+    print "\n" if $reallyv;
+    foreach $filename (@psatfile) {
+	open(IN,$filename) || die "Cannot open $filename: $!\n";
+	@data = <IN>;
+	close(IN) || die "Cannot close $filename: $!\n";
+
+	print " - scan file $filename\n" if $reallyv;
+	open(OUT,">$filename") || die "cannot open $filename: $!\n";
+	while (defined($i = shift(@data))) {
+	    foreach $k (@class) {
+		if ($restore) {
+		    $i =~ s/_$k\(/\(/g;
+		} else {
+		    $h = $k;
+		    $h =~ tr/A-Z/a-z/;
+		    if ($k eq "PQgen") { $h = "pq"; }
+		    if ($k eq "Regions") { $h = "areas"; }
+		    unless ($i =~ /_$h\(/) {
+			$i =~ s/\($k,/_$h\($k,/g;
+			$i =~ s/\($k\)/_$h\($k\)/g;
+		    }
+		    if ($filename =~ /fm_nequit.m/ || $filename =~ /write.m/) {
+			$i =~ s/write\(SWeq,/write_sw\(SWeq,/g;
+			$i =~ s/write\(PVeq,/write_pv\(PVeq,/g;
+			$i =~ s/write\(PQeq,/write_pq\(PQeq,/g;
+			$i =~ s/write\(Buseq,/write_bus\(Buseq,/g;
+			$i =~ s/write\(Syneq,/write_syn\(Syneq,/g;
+			$i =~ s/write\(AVReq,/write_exc\(AVReq,/g;
+		    }
+		}
+	    }
+	    print OUT $i unless $testmode;
+	}
+	close(OUT) || die "Cannot close $filename: $!\n";
+    }
+    print "done.\n" if $verbose;
+} else {
+    print "PSAT file scan skipped." if $verbose;
+}
+
+$cname{"\@ARclass"} = "areas";
+$cname{"\@AVclass"} = "exc";
+$cname{"\@BFclass"} = "busfreq";
+$cname{"\@BKclass"} = "breaker";
+$cname{"\@BUclass"} = "bus";
+
+$cname{"\@CCclass"} = "cac";
+$cname{"\@CIclass"} = "coi";
+$cname{"\@CLclass"} = "cluster";
+$cname{"\@CSclass"} = "cswt";
+
+$cname{"\@DDclass"} = "ddsg";
+$cname{"\@DFclass"} = "dfig";
+$cname{"\@DMclass"} = "demand";
+$cname{"\@DSclass"} = "mass";
+
+$cname{"\@ELclass"} = "exload";
+
+$cname{"\@FCclass"} = "sofc";
+$cname{"\@FLclass"} = "fl";
+$cname{"\@FTclass"} = "fault";
+
+$cname{"\@HVclass"} = "hvdc";
+
+$cname{"\@IMclass"} = "ind";
+
+$cname{"\@JIclass"} = "jimma";
+
+$cname{"\@LNclass"} = "line";
+$cname{"\@LSclass"} = "lines";
+$cname{"\@LTclass"} = "ltc";
+
+$cname{"\@MNclass"} = "mn";
+$cname{"\@MXclass"} = "mixload";
+
+$cname{"\@OXclass"} = "oxl";
+
+$cname{"\@PHclass"} = "phs";
+$cname{"\@PLclass"} = "pl";
+$cname{"\@PMclass"} = "pmu";
+$cname{"\@POclass"} = "pod";
+$cname{"\@PQclass"} = "pq";
+$cname{"\@PSclass"} = "pss";
+$cname{"\@PVclass"} = "pv";
+
+$cname{"\@RGclass"} = "rmpg";
+$cname{"\@RLclass"} = "rmpl";
+$cname{"\@RSclass"} = "rsrv";
+
+$cname{"\@SHclass"} = "shunt";
+$cname{"\@SPQclass"} = "spq";
+$cname{"\@SPVclass"} = "spv";
+$cname{"\@SRclass"} = "ssr";
+$cname{"\@SSclass"} = "sssc";
+$cname{"\@STclass"} = "statcom";
+$cname{"\@SUclass"} = "supply";
+$cname{"\@SVclass"} = "svc";
+$cname{"\@SWclass"} = "sw";
+$cname{"\@SYclass"} = "syn";
+
+$cname{"\@TCclass"} = "tcsc";
+$cname{"\@TGclass"} = "tg";
+$cname{"\@THclass"} = "thload";
+$cname{"\@TPclass"} = "tap";
+$cname{"\@TWclass"} = "twt";
+
+$cname{"\@UPclass"} = "upfc";
+
+$cname{"\@VLclass"} = "vltn";
+
+$cname{"\@WNclass"} = "wind";
+$cname{"\@WTFRclass"} = "wtfr";
+
+$cname{"\@YPclass"} = "ypdp";
+
+print "Adapting PSAT class folders..." if $verbose;
+
+$i = -1;
+foreach $h (@classdir) {
+
+    print "\n * scan folder " . $classname{$h} . "\n" if $reallyv && !$restore;
+    @psatfile = ();
+    @filename = ();
+    $nfile = -1;
+    find(\&psatfile,$h);
+
+    foreach $k (@psatfile) {
+
+	# adapt functions
+	unless ($skipmode || $restore) {
+	    open(IN,$k) || die "Cannot open $k: $!\n";
+	    @data = <IN>;
+	    close(IN) || die "Cannot close $k: $!\n";
+	    print "    - scan & rename file $k\n" if $reallyv;
+	    open(OUT,">$k") || die "cannot open $k: $!\n";
+	    while (defined($i = shift(@data))) {
+		foreach $j (@filename) {
+		    $v = $cname{$classname{$h}};
+		    $j =~ s/_$v$//;
+		    $u = $j . "_" . $v;
+		    $i =~ s/$j\(a,/$u\(a,/g;
+		    $i =~ s/$j\(p,/$u\(p,/g;
+		    $i =~ s/$j\(a\)/$u\(a\)/g;
+		    $i =~ s/$j\(p\)/$u\(p\)/g;
+		    # critical occurrences of uint8 have been removed
+		    # $i =~ s/uint8//g;
+		}
+		print OUT $i unless $testmode;
+	    }
+	    close(OUT) || die "Cannot close $k: $!\n";
+	}
+
+	# change file name
+	if ($restore) {
+	    $v = $cname{$classname{$h}};
+	    $u = $k;
+	    $u =~ s/_$v\.m$/\.m/;
+	    move ($k,$u) unless $u eq $k;
+	} else {
+	    $i = $k;
+	    $i =~ s/\.m$//;
+	    $i = $i . "_" . $cname{$classname{$h}} . ".m";
+	    move ($k,$i) unless $k =~ /[A-Z][A-Z]class\.m/
+		|| $k =~ /_$cname{$classname{$h}}/ || $testmode;
+	}
+    }
+}
+
+print " done.\n" if $verbose;
+print "Conversion completed.\n";
+
+# -----------------------------------------------------------------------
+# PSAT class folders
+# -----------------------------------------------------------------------
+sub psatclass {
+    my $element = $_;
+    if (-d $element && $element =~ /^@/) {
+	$classdir[++$ndir] = $File::Find::name;
+	$classname{$classdir[$ndir]} = $element;
+	if ($reallyv) {
+	    print " - " . $element;
+	    print "\n" if (($ndir+1) % 5) == 0;
+	}
+    }
+}
+
+# -----------------------------------------------------------------------
+# PSAT Matlab files
+# -----------------------------------------------------------------------
+sub psatfile {
+    my $element = $_;
+    if (-f $element && $element =~ /\.m$/) {
+	$psatfile[++$nfile] = $File::Find::name;
+	$element =~ s/\.m$//;
+	$filename[$nfile] = $element;
+	#print $psatfile[$nfile] . "\n" if $reallyv;
+    }
+}

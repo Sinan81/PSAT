@@ -1,0 +1,39 @@
+function [enables,prompts] = block(a,object,values,enables,prompts)
+
+display1 = ['plot([1 0.8],[0.5 0.5],[0 0.2],[0.5 0.5],', ...
+            '[0.8 0.8 0.2 0.2 0.8],[0 1 1 0 0]), ' ...
+            'color(''green''), ', ...
+            'plot([0.1 0.3 0.7 0.9],[-0.4 -0.4 1.4 1.4])'];
+
+display2 = ['plot([-1.6 -1.8 -1.8],[0.5 0.5 4],', ...
+            '[0.2 0.2],[0.5 4],[-0.9 -0.9],[3 5],', ...
+            '[0 0.2],[0.5 0.5],[-0.65 -0.85],[0.5 0.5],' ...
+            '[-1.8 -0.9],[4 4],[0.2 -0.8],[4 4],', ...
+            '[0.2 0.4],[1.9 1.9],[-1.8 -2],[1.9 1.9]), ', ...
+            'plot(-0.7+0.1*xc,4+yc,', ...
+            '-1.15+0.175+0.125*yi,0.5+0.5*xi,', ...
+            '-1.15-0.325+0.125*yi,0.5+0.5*xi,', ...
+            '-1.15-0.075+0.125*yi,0.5+0.5*xi), ', ...
+            'color(''magenta''), plot(xa,ya)'];
+
+type = values{2};
+switch type
+ case 'Xc'
+  prompts{7} = 'Xc_max and Xc_min [p.u.  p.u.]';
+  enables{9} = 'off';
+  set_param(object,'MaskDisplay',display1);
+ case 'Alpha'
+  prompts{7} = 'Alpha_max and Alpha_min [rad  rad]';
+  enables{9} = 'on';
+  set_param(object,'MaskDisplay',display2);
+end
+
+type = values{3};
+switch type
+ case 'constant_power_flow'
+  enables{8} = 'on';
+ otherwise
+  enables{8} = 'off';
+end
+
+

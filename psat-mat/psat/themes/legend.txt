@@ -1,0 +1,57 @@
+Legend for defining custom themes
+
+Create a "FILENAME.THM" file, where FILENAME is the name of the theme and THM 
+is the extension.  No other extension are allowed. The file has to be written 
+with the following structure:
+
+         1         2
+123456789012345678901234567890
+
+field_name     field_value
+
+The field_name has to be in the first 15 columns, the field_value starts from 
+the 16th column. No blank line are allowed. 
+field_value is a numeric or a string value. If the field_value is a vector it
+has to be included in square brackets []. If it is a string, in single quota-
+tion marks ''. 
+The fields can be listed in any order. It is not mandatory to include all the 
+fields, and nonspecified fields mantain the current values. Thus final result 
+depends on the previous selected theme.
+
+List of fields and their meaning:
+
+-----------------------------------------------------------------------------
+| Name      | Type    |  Description                                        |
+|===========|=========|=====================================================|
+| color01   | vector  |  background color of figures                        |
+|-----------|---------|-----------------------------------------------------|
+| color02   | vector  |  background color of frames and buttons             |
+|-----------|---------|-----------------------------------------------------|
+| color03   | vector  |  background color of special buttons and lists      |
+|-----------|---------|-----------------------------------------------------|
+| color04   | vector  |  background color of edit texts                     |
+|-----------|---------|-----------------------------------------------------|
+| color05   | vector  |  foreground color of edit texts                     |
+|-----------|---------|-----------------------------------------------------|
+| color06   | vector  |  foreground color of special lists                  |
+|-----------|---------|-----------------------------------------------------|
+| color07   | vector  |  foreground color of certain edit text              |
+|-----------|---------|-----------------------------------------------------|
+| color08   | vector  |  color of the loading bar in the main window        |
+|-----------|---------|-----------------------------------------------------|
+| color09   | vector  |  foreground color of special buttons                |
+|-----------|---------|-----------------------------------------------------|
+| color10   | vector  |  foreground color of lists                          |
+|-----------|---------|-----------------------------------------------------|
+| color11   | vector  |  axis color                          |
+|-----------|---------|-----------------------------------------------------|
+| font01    | string  |  font name of buttons and static texts              |
+|-----------|---------|-----------------------------------------------------|
+| font02    | string  |  font name of edit texts                            |
+|-----------|---------|-----------------------------------------------------|
+| font03    | string  |  font name of the command line in the main window   |
+|-----------|---------|-----------------------------------------------------|
+| font04    | string  |  font name of the command history in the main window|
+-----------------------------------------------------------------------------
+
+

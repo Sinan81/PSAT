@@ -1,0 +1,329 @@
+#!/usr/bin/perl -w
+# IPSS2PSAT converts InterPSS data file into PSAT data file
+#
+# IPSS2PSAT <OPTIONS> FILEINPUT <FILEOUTPUT>
+#
+# Author:  Federico Milano
+# Date:    29-Sept-2006
+# Version: 1.0.0
+#
+# E-mail:  federico.milano@ucd.ie
+#
+
+use strict;
+
+# -----------------------------------------------------------------------
+# variable declaration
+# -----------------------------------------------------------------------
+
+my $nargin = 0;
+my $verbose = 0;
+my $helpmsg = 0;
+my ($i,$h,$j);
+
+my $nbus = -1;
+my $nsw = -1;
+my $npv = -1;
+my $npq = -1;
+my $nsh = -1;
+my $nline = -1;
+
+my $title1 = 'Generic plain text InterPSS data format.';
+my $title2;
+my $pbas = 100;
+my $freq = 60;
+my $format;
+my $type = "";
+my $pos = 0;
+
+my ($data,$subdata,@data,@datafile,%data);
+
+my (@busvb,@busname,@busid,@busvol,@busang,@pgen,@qgen,@pload,@qload);
+my (@swidx,@pvidx,@pqidx,@shidx,@qmin,@qmax,@qcap);
+my (@busfr,@busto,@rline,@xline,@bshunt,@tap);
+my (%busidxn,%lineid,%lineno);
+
+# -----------------------------------------------------------------------
+# check inputs
+# -----------------------------------------------------------------------
+$nargin = @ARGV;
+$nargin || die "Error: No input data file.\n";
+
+# -----------------------------------------------------------------------
+# check options
+# -----------------------------------------------------------------------
+while ($ARGV[0] =~ /^-/) {
+    if ($ARGV[0] =~ /v/) {$verbose = 1;}
+    if ($ARGV[0] =~ /h/) {$helpmsg = 1;}
+    shift(@ARGV);
+    $nargin--;
+    if ($nargin == 0) {
+	last;
+    }
+}
+$title1 = 'Generic InterPSS data format '.$ARGV[0];
+
+# -----------------------------------------------------------------------
+# help (if requested)
+# -----------------------------------------------------------------------
+if ($helpmsg) {
+    print "\nIPSS2PSAT converts InterPSS data files into PSAT data files.\n\n";
+    print "ipss2psat <options> fileinput <fileoutput>\n";
+    print "  -v   verbose\n";
+    print "  -h   print this help and exit\n\n";
+    print "Author:   Federico Milano\n";
+    print "Date:     29-Sept-2006\n";
+    print "Version:  1.0.0\n\n";
+    print "E-mail:   Federico.Milano\@uclm.es\n";
+    die "\n";
+}
+
+# -----------------------------------------------------------------------
+# define output file name (if necessary)
+# -----------------------------------------------------------------------
+if ($nargin == 1) {
+    $ARGV[1] = $ARGV[0];
+    $ARGV[1] =~ s/^d*_*/d_/;
+    $ARGV[1] =~ s/[^\w\.]/_/g;
+    $ARGV[1] =~ s/\..+$/.m/;
+} elsif ($nargin == 0) {
+    die "Error: Input file name is missing.\n";
+}
+
+# -----------------------------------------------------------------------
+# open input data file
+# -----------------------------------------------------------------------
+print "Opening InterPSS data file \"$ARGV[0]\"...\n";
+carret();
+
+open(IN,$ARGV[0]) || die "cannot open $ARGV[0]: $!\n";
+@datafile = <IN>;
+close(IN) || die "Cannot close $ARGV[0]: $!\n";
+
+while (defined($_ = shift(@datafile))) {
+
+    # removing initials blanks
+
+    $_ =~ s/^\s*//;
+    next if (!$_);
+
+    # defining kind of data to be read
+
+    if (/^AclfNetInfo/) { $type = "title"; next; }
+    elsif (/^BusInfoNoBaseV/) { $type  = "bus"; $pos = 0; next; }
+    elsif (/^BusInfo/) { $type  = "bus"; $pos = 1; next; }
+    elsif (/^SwingBusInfo/) { $type  = "slack"; next; }
+    elsif (/^PVBusInfo/) { $type  = "pv"; next; }
+    elsif (/^CapacitorBusInfo/) { $type  = "shunt"; next; }
+    elsif (/^BranchInfo/) { $type  = "line"; next; }
+    elsif (/^XformerInfo/) { $type  = "transf"; next; }
+    elsif (/^end/) {$type = ""; next; }
+    elsif (/^EndOfFile/) { last; }
+
+    @data = split(/\s+/);
+
+    # scanning data
+
+    if ($type eq "title") {
+
+	$pbas = $data[0]/1000;
+
+    } elsif ($type eq "bus") {
+
+	$nbus++;
+	$busname[$nbus] = $data[0];
+	$busid[$nbus] = "Bus " . $data[0];
+	$busvb[$nbus] = 1;
+	if ($pos) { $busvb[$nbus] = $data[1]; }
+	$busidxn{$busname[$nbus]} = $nbus;
+	$busvol[$nbus] = $data[1+$pos];
+	$busang[$nbus] = $data[2+$pos];
+	$pgen[$nbus] = $data[3+$pos]/$pbas;
+	$qgen[$nbus] = $data[4+$pos]/$pbas;
+	$pload[$nbus] = $data[5+$pos]/$pbas;
+	$qload[$nbus] = $data[6+$pos]/$pbas;
+
+	if ($pload[$nbus] != 0 || $qload[$nbus] != 0) {
+	    $npq++;
+	    $pqidx[$npq] = $nbus;
+	}
+
+    } elsif ($type eq "slack") {
+
+	$nsw++;
+	$swidx[$nsw] = $busidxn{$data[0]};
+
+    } elsif ($type eq "pv") {
+
+	$npv++;
+	$pvidx[$npv] = $busidxn{$data[0]};
+	$busvol[$pvidx[$npv]] = $data[1];
+	$qmin[$npv] = $data[2]/$pbas;
+	$qmax[$npv] = $data[3]/$pbas;
+
+    } elsif ($type eq "shunt") {
+
+	$nsh++;
+	$shidx[$nsh] = $busidxn{$data[0]};
+	$qcap[$nsh] = $data[1];
+
+    } elsif ($type eq "line") {
+
+	$nline++;
+	@data = split(/\s+/);
+	$i = $data[0] . "-" . $data[1];
+	if ( exists $lineno{$i} ) {
+	    $lineno{$i} = $lineno{$i} + 1;
+	} else {
+	    $lineno{$i} = 1;
+	}
+	$j = $i . "-" . $lineno{$i};
+	$lineid{$j} = $nline;
+	$busfr[$nline] = $busidxn{$data[0]};
+	$busto[$nline] = $busidxn{$data[1]};
+	$rline[$nline]  = $data[2];
+	$xline[$nline]  = $data[3];
+	$bshunt[$nline] = $data[4];
+	$tap[$nline] = 0;
+
+    } elsif ($type eq "transf") {
+
+	$i = $data[0] . "-" . $data[1] . "-" . $data[2];
+	$j = $data[1] . "-" . $data[0] . "-" . $data[2];
+	if (exists $lineid{$i}) {
+	    $tap[$lineid{$i}] = $data[3];
+	} elsif (exists $lineid{$j}) {
+	    if ($data[3] == 0) { $data[3] = 1; }
+	    $tap[$lineid{$j}] = 1/$data[3];
+	}
+    }
+}
+
+# -----------------------------------------------------------------------
+# open output data file
+# -----------------------------------------------------------------------
+print "Writing PSAT file \"$ARGV[1]\"...\n";
+carret();
+open(OUT,">$ARGV[1]") || die "cannot open $ARGV[1]: $!\n";
+
+# -----------------------------------------------------------------------
+# write output data file
+# -----------------------------------------------------------------------
+print OUT "% File generated by PSAT from InterPSS data file.\n";
+print OUT "% "."-" x 78 . "\n";
+print OUT "% Author:   Federico Milano\n";
+print OUT "% E-mail:   Federico.Milano\@uclm.es\n";
+print OUT "% "."-" x 78 . "\n";
+print OUT "% $title1\n";
+
+# -----------------------------------------------------------------------
+# write Bus.con
+# -----------------------------------------------------------------------
+if ($nbus >= 0) {
+    $format = "%4d %7.2f %8.5f  %8.5f  1  1;\n";
+    print OUT "Bus.con = [ ...\n";
+    for ($i = 0; $i <= $nbus; $i++) {
+	printf OUT $format,$i+1,$busvb[$i],$busvol[$i],$busang[$i];
+    }
+    printf OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write SW.con
+# -----------------------------------------------------------------------
+if ($nsw >= 0) {
+    print OUT "SW.con = [ ...\n";
+    $format = "%4d $pbas %7.2f %8.5f  %8.5f  " .
+	"9.9900  -9.9900  1.1  0.9  %8.5f  1;\n";
+    for ($i = 0; $i <= $nsw; $i++) {
+	$h = $swidx[$i];
+	printf OUT $format,$h+1,$busvb[$h],$busvol[$h],
+	$busang[$h],$pgen[$h];
+    }
+    printf OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write PV.con
+# -----------------------------------------------------------------------
+if ($npv >= 0) {
+    print OUT "PV.con = [ ...\n";
+    $format = "%4d $pbas %7.2f " . "%8.5f " x 4 . "  1.1  0.9  1 1;\n";
+    for ($i = 0; $i <= $npv; $i++) {
+	$h = $pvidx[$i];
+	printf OUT $format,$h+1,$busvb[$h],$pgen[$h],
+	$busvol[$h],$qmax[$i],$qmin[$i];
+    }
+    printf OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write PQ.con
+# -----------------------------------------------------------------------
+if ($npq >= 0) {
+    print OUT "PQ.con = [ ...\n";
+    $format = "%4d $pbas %7.2f " . "%8.5f " x 2 . "  1.1   0.9   1 1;\n";
+    for ($i = 0; $i <= $npq; $i++) {
+	$h = $pqidx[$i];
+	printf OUT $format,$h+1,$busvb[$h],$pload[$h],$qload[$h];
+    }
+    printf OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write Shunt.con
+# -----------------------------------------------------------------------
+if ($nsh >= 0) {
+    print OUT "Shunt.con = [ ...\n";
+    $format = "%4d $pbas %7.2f 60 0 %8.5f 1;\n";
+    for ($i = 0; $i <= $nsh; $i++) {
+	$h = $shidx[$i];
+	printf OUT $format,$h+1,$busvb[$h],$qcap[$i];
+    }
+    printf OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write Line.con
+# -----------------------------------------------------------------------
+if ($nline >= 0) {
+    print OUT "Line.con = [ ...\n";
+    $format = "%4d %4d $pbas %7.2f 60 0 0 " . "%8.5f " x 4 . "0 0 0 0 1;\n";
+    for ($i = 0; $i <= $nline; $i++) {
+	printf OUT $format,$busfr[$i]+1,$busto[$i]+1,$busvb[$busfr[$i]],
+	$rline[$i],$xline[$i],$bshunt[$i],$tap[$i];
+    }
+    printf OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write bus names
+# -----------------------------------------------------------------------
+$nbus >= 0 && print OUT "Bus.names = { ...\n";
+$h = ($nbus+1) % 5;
+if ($h == 0) {$h = 5;}
+if (($nbus+1) > 5) {
+    for ($i = 0; $i <= $nbus-$h; $i+=5) {
+	print OUT "  '$busid[$i]'; '$busid[$i+1]'; " .
+	    "'$busid[$i+2]'; '$busid[$i+3]'; '$busid[$i+4]';\n";
+    }
+}
+print OUT "  ";
+for ($i = $nbus-$h+1; $i <= $nbus-1; $i++) {
+    print OUT "'$busid[$i]'; ";
+}
+print OUT "'$busid[$nbus]'};\n\n";
+
+# -----------------------------------------------------------------------
+# close output data file
+# -----------------------------------------------------------------------
+close(OUT) || die "cannot close $ARGV[1]: $!\n";
+print "Conversion completed.\n";
+
+# -----------------------------------------------------------------------
+# function for writing a separator
+# -----------------------------------------------------------------------
+sub carret {
+    $verbose && print "-" x 50 . "\n";
+}
+

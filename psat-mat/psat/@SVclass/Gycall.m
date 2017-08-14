@@ -1,0 +1,13 @@
+function Gycall(a)
+
+global DAE
+
+if ~a.n, return, end
+
+V = a.u.*DAE.y(a.vbus);
+
+DAE.Gy = DAE.Gy ...
+         - sparse(a.vbus,a.q,1,DAE.m,DAE.m) ...
+         + sparse(a.q,a.vbus,2*a.Be.*V,DAE.m,DAE.m) ...
+         - sparse(a.q,a.q,1,DAE.m,DAE.m) ...
+         - sparse(a.vref,a.vref,1,DAE.m,DAE.m);

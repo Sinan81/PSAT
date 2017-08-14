@@ -1,0 +1,721 @@
+Model {
+  Name			  d_hvdc
+  Version		  5.1
+  SaveDefaultBlockParams  on
+  DataTypeOverride	  "UseLocalSettings"
+  MinMaxOverflowLogging	  "UseLocalSettings"
+  MinMaxOverflowArchiveMode "Overwrite"
+  Created		  "Sat Apr 20 18:54:50 2002"
+  Creator		  "fmilano"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "fmilano"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Fri Oct 30 13:38:55 2009"
+  ModelVersionFormat	  "1.%<AutoIncrement:142>"
+  ConfigurationManager	  "None"
+  SampleTimeColors	  off
+  LibraryLinkDisplay	  "none"
+  WideLines		  off
+  ShowLineDimensions	  off
+  ShowPortDataTypes	  off
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  ShowStorageClass	  off
+  SortedOrder		  off
+  BlockNameDataTip	  off
+  BlockParametersDataTip  off
+  BlockDescriptionStringDataTip	off
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks off
+  BrowserLookUnderMasks	  off
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "MATLABWorkspace"
+  AccelSystemTargetFile	  "accel.tlc"
+  AccelTemplateMakefile	  "accel_default_tmf"
+  AccelMakeCommand	  "make_rtw"
+  TryForcingSFcnDF	  off
+  RecordCoverage	  off
+  CovPath		  "/"
+  CovSaveName		  "covdata"
+  CovMetricSettings	  "dw"
+  CovNameIncrementing	  off
+  CovHtmlReporting	  on
+  covSaveCumulativeToWorkspaceVar on
+  CovSaveSingleToWorkspaceVar on
+  CovCumulativeVarName	  "covCumulativeData"
+  CovCumulativeReport	  off
+  ExtModeBatchMode	  off
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock off
+  BufferReuse		  on
+  Solver		  "ode45"
+  SolverMode		  "Auto"
+  StartTime		  "0.0"
+  StopTime		  "10.0"
+  MaxOrder		  5
+  MaxStep		  "auto"
+  MinStep		  "auto"
+  MaxNumMinSteps	  "-1"
+  InitialStep		  "auto"
+  FixedStep		  "auto"
+  RelTol		  "1e-3"
+  AbsTol		  "auto"
+  OutputOption		  "RefineOutputTimes"
+  OutputTimes		  "[]"
+  Refine		  "1"
+  LoadExternalInput	  off
+  ExternalInput		  "[t, u]"
+  LoadInitialState	  off
+  InitialState		  "xInitial"
+  SaveTime		  on
+  TimeSaveName		  "tout"
+  SaveState		  off
+  StateSaveName		  "xout"
+  SaveOutput		  on
+  OutputSaveName	  "yout"
+  SaveFinalState	  off
+  FinalStateName	  "xFinal"
+  SaveFormat		  "Array"
+  Decimation		  "1"
+  LimitDataPoints	  on
+  MaxDataPoints		  "1000"
+  SignalLoggingName	  "logsout"
+  ConsistencyChecking	  "none"
+  ArrayBoundsChecking	  "none"
+  AlgebraicLoopMsg	  "warning"
+  BlockPriorityViolationMsg "warning"
+  MinStepSizeMsg	  "warning"
+  InheritedTsInSrcMsg	  "warning"
+  DiscreteInheritContinuousMsg "warning"
+  MultiTaskRateTransMsg	  "error"
+  SingleTaskRateTransMsg  "none"
+  CheckForMatrixSingularity "none"
+  IntegerOverflowMsg	  "warning"
+  Int32ToFloatConvMsg	  "warning"
+  ParameterDowncastMsg	  "error"
+  ParameterOverflowMsg	  "error"
+  ParameterPrecisionLossMsg "warning"
+  UnderSpecifiedDataTypeMsg "none"
+  UnnecessaryDatatypeConvMsg "none"
+  VectorMatrixConversionMsg "none"
+  InvalidFcnCallConnMsg	  "error"
+  SignalLabelMismatchMsg  "none"
+  UnconnectedInputMsg	  "warning"
+  UnconnectedOutputMsg	  "warning"
+  UnconnectedLineMsg	  "warning"
+  SfunCompatibilityCheckMsg "none"
+  RTWInlineParameters	  off
+  BlockReductionOpt	  on
+  BooleanDataType	  off
+  ConditionallyExecuteInputs on
+  OptimizeBlockIOStorage  on
+  AssertionControl	  "UseLocalSettings"
+  ProdHWWordLengths	  "8,16,32,32"
+  RTWSystemTargetFile	  "grt.tlc"
+  RTWTemplateMakefile	  "grt_default_tmf"
+  RTWMakeCommand	  "make_rtw"
+  RTWGenerateCodeOnly	  off
+  RTWRetainRTWFile	  off
+  TLCProfiler		  off
+  TLCDebug		  off
+  TLCCoverage		  off
+  TLCAssertion		  off
+  RTWOptions		  "-aEnforceIntegerDowncast=1 -aFoldNonRolledExpr=1 -aInlineInvariantSignals=1 -aInlineParameters=0 -aLo"
+  "calBlockOutputs=1 -aRollThreshold=5 -aZeroInternalMemoryAtStartup=1 -aZeroExternalMemoryAtStartup=1 -aInitFltsAndDbl"
+  "sToZero=1 -aForceBlockIOInitOptimize=0 -aGenerateReport=0 -aGenCodeOnly=0 -aRTWVerbose=1 -aIncludeHyperlinkInReport="
+  "0 -aLaunchReport=0 -aGenerateTraceInfo=0  -aForceParamTrailComments=0 -aGenerateComments=1 -aIgnoreCustomStorageClas"
+  "ses=1 -aIncHierarchyInIds=0 -aMaxRTWIdLen=31 -aShowEliminatedStatements=0 -aIncDataTypeInIds=0 -aInsertBlockDesc=0 -"
+  "aIgnoreTestpoints=0 -aSimulinkBlockComments=1 -aInlinedPrmAccess=\"Literals\"  -aSuppressErrorStatus=0 -aModelRefere"
+  "nceCompliant=1 -aParenthesesLevel=\"Nominal\" -aModelStepFunctionPrototypeControlCompliant=0 -aPortableWordSizes=0 -"
+  "aParMdlRefBuildCompliant=1 -aSupportNonInlinedSFcns=1 -aSupportContinuousTime=1 -aSupportComplex=1 -aSupportNonFinit"
+  "e=1 -aSupportAbsoluteTime=1 -aMultiwordLength=2048 -aTargetPreCompLibLocation=\"\" -aTargetLibSuffix=\"\" -aTargetFu"
+  "nctionLibrary=\"ANSI_C\" -aTargetFcnLib=\"ansi_tfl_tmw.mat\" -aMultiInstanceERTCode=0 -aLogVarNameModifier=\"rt_\" -"
+  "aERTFirstTimeCompliant=0 -aIsPILTarget=0 -aCombineOutputUpdateFcns=0 -aGenerateASAP2=0 -aGenerateClassInterface=0 -a"
+  "GenerateTestInterfaces=0 -aGenerateSampleERTMain=0 -aGenerateFullHeader=1 -aUtilityFuncGeneration=\"Auto\" -aInclude"
+  "FileDelimiter=\"Auto\" -aIncludeMdlTerminateFcn=1 -aPurelyIntegerCode=0 -aAutosarCompliant=0 -aERTCustomFileBanners="
+  "0 -aRTWCAPIStates=0 -aRTWCAPIParams=0 -aRTWCAPISignals=0 -aMatFileLogging=1 -aCompOptLevelCompliant=0 -aCPPClassGenC"
+  "ompliant=0 -aExtModeIntrfLevel=\"Level1\" -aExtModeMexFile=\"ext_comm\" -aExtModeTransport=0 -aExtModeStaticAllocSiz"
+  "e=1000000 -aExtModeTesting=0 -aExtModeStaticAlloc=0 -aExtMode=0 -aERTMultiwordLength=256 -aERTMultiwordTypeDef=\"Sys"
+  "tem defined\"  -aGenerateTraceInfo=0 -aGenerateTraceInfo=0 -aGenerateTraceInfo=0 -aGenerateTraceInfo=0 -aPrefixModel"
+  "ToSubsysFcnNames=1 "
+  BlockDefaults {
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+    Orientation		    "right"
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      PMComponent
+      SubClassName	      "unknown"
+    }
+  }
+  System {
+    Name		    d_hvdc
+    Location		    [14, 162, 898, 683]
+    Open		    on
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    200
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "usletter"
+    PaperUnits		    "inches"
+    ZoomFactor		    "100"
+    ReportName		    "simulink-default.rpt"
+    Block {
+      BlockType		      PMComponent
+      Name		      "Bus 1"
+      Tag		      "PSATblock"
+      Description	      "Connection"
+      Ports		      [0, 0, 0, 0, 0, 1, 1]
+      Position		      [366, 335, 464, 340]
+      Orientation	      "down"
+      BackgroundColor	      "red"
+      NamePlacement	      "alternate"
+      FontName		      "Courier New"
+      FontSize		      14
+      PhysicalDomain	      "psatdomain"
+      LeftPortType	      "p1"
+      RightPortType	      "p1"
+      LConnTagsString	      "__newl0"
+      RConnTagsString	      "__newr0"
+      MaskType		      "Bus"
+      MaskDescription	      "Bus block."
+      MaskPromptString	      "Number of inputs:|Number of outputs:|Voltage Rating [kV]|Voltage initial guess [p.u.  ra"
+      "d]|Area number|Region number"
+      MaskStyleString	      "edit,edit,edit,edit,edit,edit"
+      MaskTunableValueString  "on,on,on,on,on,on"
+      MaskCallbackString      "||||fm_block|"
+      MaskEnableString	      "on,on,on,on,on,on"
+      MaskVisibilityString    "on,on,on,on,on,on"
+      MaskToolTipString	      "on,on,on,on,on,on"
+      MaskVarAliasString      ",,,,,"
+      MaskVariables	      "in=@1;out=@2;p2q=@3;p3_4q=@4;p5q=@5;p6q=@6;"
+      MaskInitialization      "fm_inout\n\n"
+      MaskDisplay	      "plot([0 1 1 0 0],[0 0 1 1 0])"
+      MaskSelfModifiable      on
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "port"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "1|1|16.5|[1.00   0.00]|4|1"
+    }
+    Block {
+      BlockType		      PMComponent
+      Name		      "Bus 4"
+      Tag		      "PSATblock"
+      Description	      "Connection"
+      Ports		      [0, 0, 0, 0, 0, 2]
+      Position		      [183, 480, 492, 485]
+      Orientation	      "down"
+      BackgroundColor	      "blue"
+      FontName		      "Courier New"
+      FontSize		      14
+      PhysicalDomain	      "psatdomain"
+      LeftPortType	      "p1"
+      RightPortType	      "p1"
+      LConnTagsString	      "__newl0|__newl1"
+      MaskType		      "Bus"
+      MaskDescription	      "Bus block."
+      MaskPromptString	      "Number of inputs:|Number of outputs:|Voltage Rating [kV]|Voltage initial guess [p.u.  ra"
+      "d]|Area number|Region number"
+      MaskStyleString	      "edit,edit,edit,edit,edit,edit"
+      MaskTunableValueString  "on,on,on,on,on,on"
+      MaskCallbackString      "||||fm_block|"
+      MaskEnableString	      "on,on,on,on,on,on"
+      MaskVisibilityString    "on,on,on,on,on,on"
+      MaskToolTipString	      "on,on,on,on,on,on"
+      MaskVarAliasString      ",,,,,"
+      MaskVariables	      "in=@1;out=@2;p2q=@3;p3_4q=@4;p5q=@5;p6q=@6;"
+      MaskInitialization      "fm_inout\n\n"
+      MaskDisplay	      "plot([0 1 1 0 0],[0 0 1 1 0])"
+      MaskSelfModifiable      on
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "port"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "2|0|230|[1.00   0.00]|2|1"
+    }
+    Block {
+      BlockType		      PMComponent
+      Name		      "Bus 5"
+      Tag		      "PSATblock"
+      Description	      "Connection"
+      Ports		      [0, 0, 0, 0, 0, 2, 1]
+      Position		      [211, 290, 309, 295]
+      Orientation	      "down"
+      BackgroundColor	      "blue"
+      NamePlacement	      "alternate"
+      FontName		      "Courier New"
+      FontSize		      14
+      PhysicalDomain	      "psatdomain"
+      LeftPortType	      "p1"
+      RightPortType	      "p1"
+      LConnTagsString	      "__newl0|__newl1"
+      RConnTagsString	      "__newr0"
+      MaskType		      "Bus"
+      MaskDescription	      "Bus block."
+      MaskPromptString	      "Number of inputs:|Number of outputs:|Voltage Rating [kV]|Voltage initial guess [p.u.  ra"
+      "d]|Area number|Region number"
+      MaskStyleString	      "edit,edit,edit,edit,edit,edit"
+      MaskTunableValueString  "on,on,on,on,on,on"
+      MaskCallbackString      "||||fm_block|"
+      MaskEnableString	      "on,on,on,on,on,on"
+      MaskVisibilityString    "on,on,on,on,on,on"
+      MaskToolTipString	      "on,on,on,on,on,on"
+      MaskVarAliasString      ",,,,,"
+      MaskVariables	      "in=@1;out=@2;p2q=@3;p3_4q=@4;p5q=@5;p6q=@6;"
+      MaskInitialization      "fm_inout\n\n"
+      MaskDisplay	      "plot([0 1 1 0 0],[0 0 1 1 0])"
+      MaskSelfModifiable      on
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "port"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "2|1|230|[1.00   0.00]|2|1"
+    }
+    Block {
+      BlockType		      PMComponent
+      Name		      "Bus 7"
+      Tag		      "PSATblock"
+      Description	      "Connection"
+      Ports		      [0, 0, 0, 0, 0, 1, 1]
+      Position		      [265, 91, 270, 169]
+      BackgroundColor	      "blue"
+      NamePlacement	      "alternate"
+      FontName		      "Courier New"
+      FontSize		      14
+      PhysicalDomain	      "psatdomain"
+      LeftPortType	      "p1"
+      RightPortType	      "p1"
+      LConnTagsString	      "__newl0"
+      RConnTagsString	      "__newr0"
+      MaskType		      "Bus"
+      MaskDescription	      "Bus block."
+      MaskPromptString	      "Number of inputs:|Number of outputs:|Voltage Rating [kV]|Voltage initial guess [p.u.  ra"
+      "d]|Area number|Region number"
+      MaskStyleString	      "edit,edit,edit,edit,edit,edit"
+      MaskTunableValueString  "on,on,on,on,on,on"
+      MaskCallbackString      "||||fm_block|"
+      MaskEnableString	      "on,on,on,on,on,on"
+      MaskVisibilityString    "on,on,on,on,on,on"
+      MaskToolTipString	      "on,on,on,on,on,on"
+      MaskVarAliasString      ",,,,,"
+      MaskVariables	      "in=@1;out=@2;p2q=@3;p3_4q=@4;p5q=@5;p6q=@6;"
+      MaskInitialization      "fm_inout\n\n"
+      MaskDisplay	      "plot([0 1 1 0 0],[0 0 1 1 0])"
+      MaskSelfModifiable      on
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "port"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "1|1|230|[1.00   0.00]|2|1"
+    }
+    Block {
+      BlockType		      PMComponent
+      Name		      "Bus 8"
+      Tag		      "PSATblock"
+      Description	      "Connection"
+      Ports		      [0, 0, 0, 0, 0, 1, 2]
+      Position		      [425, 155, 520, 160]
+      Orientation	      "down"
+      BackgroundColor	      "blue"
+      NamePlacement	      "alternate"
+      FontName		      "Courier New"
+      FontSize		      14
+      PhysicalDomain	      "psatdomain"
+      LeftPortType	      "p1"
+      RightPortType	      "p1"
+      LConnTagsString	      "__newl0"
+      RConnTagsString	      "__newr0|__newr1"
+      MaskType		      "Bus"
+      MaskDescription	      "Bus block."
+      MaskPromptString	      "Number of inputs:|Number of outputs:|Voltage Rating [kV]|Voltage initial guess [p.u.  ra"
+      "d]|Area number|Region number"
+      MaskStyleString	      "edit,edit,edit,edit,edit,edit"
+      MaskTunableValueString  "on,on,on,on,on,on"
+      MaskCallbackString      "||||fm_block|"
+      MaskEnableString	      "on,on,on,on,on,on"
+      MaskVisibilityString    "on,on,on,on,on,on"
+      MaskToolTipString	      "on,on,on,on,on,on"
+      MaskVarAliasString      ",,,,,"
+      MaskVariables	      "in=@1;out=@2;p2q=@3;p3_4q=@4;p5q=@5;p6q=@6;"
+      MaskInitialization      "fm_inout\n\n"
+      MaskDisplay	      "plot([0 1 1 0 0],[0 0 1 1 0])"
+      MaskSelfModifiable      on
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "port"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "1|2|230|[1.00   0.00]|2|1"
+    }
+    Block {
+      BlockType		      PMComponent
+      Name		      "Hvdc1"
+      Tag		      "PSATblock"
+      Description	      "FACTS"
+      Ports		      [0, 0, 0, 0, 0, 1, 1]
+      Position		      [320, 118, 420, 142]
+      ShowName		      off
+      PhysicalDomain	      "psatdomain"
+      LeftPortType	      "p1"
+      RightPortType	      "p1"
+      LConnTagsString	      "__newl0"
+      RConnTagsString	      "__newr0"
+      MaskType		      "Hvdc"
+      MaskDescription	      "This block defines a HVDC connection."
+      MaskPromptString	      "Power and Frequency Ratings [MVA,  Hz]|Voltage Rating at Terminal Buses [kV, kV]|DC Rati"
+      "ngs (Vn_dc, In_dc) [kV, kA]|Transformer Reactances (Xcr  Xci) [p.u.  p.u.]|Tap Ratios (Ar Ai) [p.u./p.u.  p.u./p"
+      ".u.]|PI Regulator Constants (Ki, Kp)|DC Line Parameters (Rdc Ldc) [p.u.  p.u.]|Rectifier Angle Limits (a_max, a_"
+      "min) [deg  deg]|Inverter Angle Limits (g_max, g_min) [deg  deg]|Reference dc current limits (Ir_max, Ir_min, Ii_"
+      "max, Ii_min) [p.u.]|Control type|Current, active power and dc voltage orders [p.u.  p.u.  p.u.]|Connected"
+      MaskStyleString	      "edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,popup(Current_control|Power_control|Vol"
+      "tage_control),edit,checkbox"
+      MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on,on,on"
+      MaskCallbackString      "||||||||||||fm_block"
+      MaskEnableString	      "on,on,on,on,on,on,on,on,on,on,on,on,on"
+      MaskVisibilityString    "on,on,on,on,on,on,on,on,on,on,on,on,on"
+      MaskToolTipString	      "on,on,on,on,on,on,on,on,on,on,on,on,on"
+      MaskVarAliasString      ",,,,,,,,,,,,"
+      MaskVariables	      "p3_6q=@1;p4_5q=@2;p7_8q=@3;p9_10q=@4;p11_12q=@5;p13_14q=@6;p15_16q=@7;p17_18q=@8;p19_20q=@9"
+      ";p21_22_23_24q=@10;p25q=@11;p26_27_28q=@12;p29q=@13;"
+      MaskInitialization      "[x,y] = fm_draw('circle');"
+      MaskDisplay	      "plot(0.7+[0 4 4 0 0],[-2 -2 2 2 -2])\nplot(9.7+[0 4 4 0 0],[-2 -2 2 2 -2])\nplot([4.7 9.7],[-"
+      "1.25 -1.25],[4.7 9.7],[1.25 1.25])\n\nplot(x-2,y,x-0.6,y,x+15,y,x+16.4,y)\ncolor('green')\nplot(-2+[-1 -1.3],[0 "
+      "0],-2+[2.4 2.7],[0 0])\nplot(-2+[-0.8 0.7],[-1.2 1.2],-2+[0.5 0.7],[1.1 1.2],-2+[0.7 0.7],[1.0 1.2])\nplot(15+[-"
+      "1 -1.3],[0 0],15+[2.4 2.7],[0 0])\nplot(16.4+[-0.8 0.7],[-1.2 1.2],16.4+[0.5 0.7],[1.1 1.2],16.4+[0.7 0.7],[1.0 "
+      "1.2])\n\ncolor('magenta')\ntext(1.1,1.2,'R')\ntext(10.1,1.2,'I')\nplot(0.7+[1 3 2 1],[-0.9 -0.9 0.9 -0.9])\nplot"
+      "(9.7+[1 3 2 1],[-0.9 -0.9 0.9 -0.9])\nplot(0.7+[2 2],[0.9 1.25],0.7+[2 2],[-0.9 -1.25],0.7+[1.2 2.8],[0.9 0.9])\n"
+      "plot(9.7+[2 2],[0.9 1.25],9.7+[2 2],[-0.9 -1.25],9.7+[1.2 2.8],[0.9 0.9])\nplot(0.7+[2 2.5],[0.9 1.25],9.7+[2 2."
+      "5],[0.9 1.25])\n"
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "port"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "[100  60]|[230 230]|[300 0.3]|[0.1345   0.1257]|[1.25  1.25]|[20  25]|[0.0625  0.200]|[12"
+      "0  5]|[40  18]|[1.0   0.1  0.9  0.0]|Current_control|[0.5  0.5  1.1]|on"
+    }
+    Block {
+
+      BlockType		      Reference
+      Name		      "Line1"
+      Tag		      "PSATblock"
+      Description	      "Power Flow"
+      Ports		      [0, 0, 0, 0, 0, 1, 1]
+      Position		      [279, 175, 291, 250]
+      Orientation	      "down"
+      NamePlacement	      "alternate"
+      ShowName		      off
+      FontName		      "Courier"
+      FontSize		      14
+	SourceBlock	"fm_lib/Power Flow/Line"
+      SourceType	      "Line"
+      PhysicalDomain	      "psatdomain"
+      SubClassName	      "unknown"
+      LeftPortType	      "p1"
+      RightPortType	      "p1"
+      LConnTagsString	      "__newl0"
+      RConnTagsString	      "__newr0"
+      p3_4_5q		      "[100  230  60]"
+      p6q		      "0"
+      p8q		      "0.032"
+      p9q		      "0.161"
+      p10q		      "0.153*2"
+      p13_14_15q	      "[0.0  0.0  0.0]"
+      p16q		      on
+    }
+    Block {
+
+      BlockType		      Reference
+      Name		      "Line3"
+      Tag		      "PSATblock"
+      Description	      "Power Flow"
+      Ports		      [0, 0, 0, 0, 0, 1, 1]
+      Position		      [229, 160, 241, 235]
+      Orientation	      "down"
+      NamePlacement	      "alternate"
+      ShowName		      off
+      FontName		      "Courier"
+      FontSize		      14
+	SourceBlock	"fm_lib/Power Flow/Line"
+      SourceType	      "Line"
+      PhysicalDomain	      "psatdomain"
+      SubClassName	      "unknown"
+      LeftPortType	      "p1"
+      RightPortType	      "p1"
+      LConnTagsString	      "__newl0"
+      RConnTagsString	      "__newr0"
+      p3_4_5q		      "[100  230  60]"
+      p6q		      "0"
+      p8q		      "0.032"
+      p9q		      "0.161"
+      p10q		      "0.153*2"
+      p13_14_15q	      "[0.0  0.0  0.0]"
+      p16q		      on
+    }
+    Block {
+
+      BlockType		      Reference
+      Name		      "Line4"
+      Tag		      "PSATblock"
+      Description	      "Power Flow"
+      Ports		      [0, 0, 0, 0, 0, 1, 1]
+      Position		      [254, 350, 266, 425]
+      Orientation	      "down"
+      NamePlacement	      "alternate"
+      ShowName		      off
+      FontName		      "Courier"
+      FontSize		      14
+	SourceBlock	"fm_lib/Power Flow/Line"
+      SourceType	      "Line"
+      PhysicalDomain	      "psatdomain"
+      SubClassName	      "unknown"
+      LeftPortType	      "p1"
+      RightPortType	      "p1"
+      LConnTagsString	      "__newl0"
+      RConnTagsString	      "__newr0"
+      p3_4_5q		      "[100  230  60]"
+      p6q		      "0"
+      p8q		      "0.01"
+      p9q		      "0.085"
+      p10q		      "0.088*2"
+      p13_14_15q	      "[0.0  0.0  0.0]"
+      p16q		      on
+    }
+    Block {
+      BlockType		      PMComponent
+      Name		      "PQ2"
+      Tag		      "PSATblock"
+      Description	      "Power Flow"
+      Ports		      [0, 0, 0, 0, 0, 1]
+      Position		      [480, 200, 510, 230]
+      Orientation	      "down"
+      NamePlacement	      "alternate"
+      ShowName		      off
+      FontName		      "Courier"
+      FontSize		      14
+      PhysicalDomain	      "psatdomain"
+      LeftPortType	      "p1"
+      RightPortType	      "p1"
+      LConnTagsString	      "__newl0"
+      MaskType		      "PQ"
+      MaskDescription	      "This block defines a constant power load:\n\nP = Pcost.\nQ = Qcost."
+      MaskPromptString	      "Power and Voltage Ratings [MVA, kV]|Active and Reactive Powers [p.u.  p.u.]|Maximum and "
+      "Minimum Allowable Voltage [p.u.   p.u.]|Allow conversion to impendance for min & max voltage|Connected"
+      MaskStyleString	      "edit,edit,edit,checkbox,checkbox"
+      MaskTunableValueString  "on,on,on,on,on"
+      MaskCallbackString      "|||fm_block|fm_block"
+      MaskEnableString	      "on,on,off,on,on"
+      MaskVisibilityString    "on,on,on,on,on"
+      MaskToolTipString	      "on,on,on,on,on"
+      MaskVarAliasString      ",,,,"
+      MaskVariables	      "p2_3q=@1;p4_5q=@2;p6_7q=@3;p8q=@4;p9q=@5;"
+      MaskDisplay	      "plot([1 -0.5 -0.5 1],[0 0.866 -0.866 0])"
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "port"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "[100  230]|[0.50  0.5]|[1.2  0.8]|off|on"
+    }
+    Block {
+
+      BlockType		      Reference
+      Name		      "Slack"
+      Tag		      "PSATblock"
+      Description	      "Power Flow"
+      Ports		      [0, 0, 0, 0, 0, 0, 1]
+      Position		      [396, 265, 434, 300]
+      Orientation	      "down"
+      ShowName		      off
+      FontName		      "Courier"
+      FontSize		      14
+	SourceBlock	"fm_lib/Power Flow/Slack"
+      SourceType	      "SW"
+      PhysicalDomain	      "psatdomain"
+      SubClassName	      "unknown"
+      LeftPortType	      "p1"
+      RightPortType	      "p1"
+      RConnTagsString	      "__newr0"
+      p2_3q		      "[100  16.5]"
+      p4q		      "1.04"
+      p5q		      "0.00"
+      p6_7q		      "[99 -99]"
+      p8_9q		      "[1.1  0.9]"
+      p10q		      "0.80"
+      p11q		      "1"
+      p12q		      on
+      p13q		      on
+    }
+    Block {
+
+      BlockType		      Reference
+      Name		      "Trasf4"
+      Tag		      "PSATblock"
+      Description	      "Power Flow"
+      Ports		      [0, 0, 0, 0, 0, 1, 1]
+      Position		      [399, 385, 431, 440]
+      Orientation	      "down"
+      NamePlacement	      "alternate"
+      ShowName		      off
+      FontName		      "Courier"
+      FontSize		      14
+	SourceBlock	"fm_lib/Power Flow/Transf1"
+      SourceType	      "Line"
+      PhysicalDomain	      "psatdomain"
+      SubClassName	      "unknown"
+      LeftPortType	      "p1"
+      RightPortType	      "p1"
+      LConnTagsString	      "__newl0"
+      RConnTagsString	      "__newr0"
+      p3_4_5q		      "[100  16.5  60]"
+      p7q		      "16.5/230"
+      p8q		      "0.0"
+      p9q		      "0.0576"
+      p13_14_15q	      "[0.0  0.0  0.0]"
+      p16q		      on
+    }
+    Line {
+      LineType		      "Connection"
+      Labels		      [0, 0]
+      SrcBlock		      "Bus 7"
+      SrcPort		      LConn1
+      Points		      [-15, 0]
+      DstBlock		      "Line3"
+      DstPort		      LConn1
+    }
+    Line {
+      LineType		      "Connection"
+      Labels		      [0, 0]
+      SrcBlock		      "Bus 1"
+      SrcPort		      RConn1
+      DstBlock		      "Trasf4"
+      DstPort		      LConn1
+    }
+    Line {
+      LineType		      "Connection"
+      Labels		      [0, 0]
+      SrcBlock		      "Trasf4"
+      SrcPort		      RConn1
+      DstBlock		      "Bus 4"
+      DstPort		      LConn2
+    }
+    Line {
+      LineType		      "Connection"
+      Labels		      [0, 0]
+      SrcBlock		      "Line4"
+      SrcPort		      RConn1
+      DstBlock		      "Bus 4"
+      DstPort		      LConn1
+    }
+    Line {
+      LineType		      "Connection"
+      Labels		      [0, 0]
+      SrcBlock		      "Bus 5"
+      SrcPort		      RConn1
+      DstBlock		      "Line4"
+      DstPort		      LConn1
+    }
+    Line {
+      LineType		      "Connection"
+      Labels		      [0, 0]
+      SrcBlock		      "Line3"
+      SrcPort		      RConn1
+      DstBlock		      "Bus 5"
+      DstPort		      LConn1
+    }
+    Line {
+      LineType		      "Connection"
+      Labels		      [0, 0]
+      SrcBlock		      "Bus 7"
+      SrcPort		      RConn1
+      DstBlock		      "Hvdc1"
+      DstPort		      LConn1
+    }
+    Line {
+      LineType		      "Connection"
+      Labels		      [0, 0]
+      SrcBlock		      "Bus 1"
+      SrcPort		      LConn1
+      DstBlock		      "Slack"
+      DstPort		      RConn1
+    }
+    Line {
+      LineType		      "Connection"
+      SrcBlock		      "Hvdc1"
+      SrcPort		      RConn1
+      Points		      [40, 0]
+      DstBlock		      "Bus 8"
+      DstPort		      LConn1
+    }
+    Line {
+      LineType		      "Connection"
+      SrcBlock		      "Bus 5"
+      SrcPort		      LConn2
+      DstBlock		      "Line1"
+      DstPort		      RConn1
+    }
+    Line {
+      LineType		      "Connection"
+      SrcBlock		      "PQ2"
+      SrcPort		      LConn1
+      DstBlock		      "Bus 8"
+      DstPort		      RConn2
+    }
+    Line {
+      LineType		      "Connection"
+      SrcBlock		      "Line1"
+      SrcPort		      LConn1
+      Points		      [0, -5; 105, 0; 0, 25; 60, 0]
+      DstBlock		      "Bus 8"
+      DstPort		      RConn1
+    }
+    Annotation {
+      Name		      "WSCC 3-machine, 9-bus system (Copyright 1977)"
+      Position		      [430, 28]
+      FontSize		      12
+    }
+  }
+}

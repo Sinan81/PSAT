@@ -1,0 +1,651 @@
+#!/usr/bin/perl -w
+# NEPLAN2PSAT converts NEPLAN data file into PSAT data file
+#
+# NEPLAN2PSAT <OPTIONS> FILEINPUT <FILEOUTPUT>
+#
+# Author:  Federico Milano
+# Date:    30-May-2005
+# Update:  17-mar-2010
+# Version: 1.0.1
+#
+#E-mail:    fmilano@thunderbox.uwaterloo.ca
+#Web-site:  http://thunderbox.uwaterloo.ca/~fmilano
+
+use strict;
+
+# -----------------------------------------------------------------------
+# variable declaration
+# -----------------------------------------------------------------------
+my $tab = 0;
+my %busname;
+my %busnumb;
+my %genname;
+my @list;
+my (@idxpv, @idxsw, @idxpq, @idxsh);
+my $nargin;
+my $verbose = 0;
+my $helpmsg = 0;
+my $colasadd = 0;
+my $addfile = 0;
+my ($i,$h,$k,$j);
+my $format;
+my $n = 0;
+my $npv = -1;
+my $nsw = -1;
+my $npq = -1;
+my $npl = -1;
+my $nsh = -1;
+my $ntw = -1;
+my $ngen = 1;
+my $pbas = 100;
+my $nbus = -1;
+my $nline = -1;
+my $narea = -1;
+my $flag_bus = 0;
+my $flag_line = 0;
+my $flag_area = 0;
+my $flag_trsf = 0;
+my $flag = 1;
+my $key;
+my $value;
+my $add;
+my $unit;
+my $length;
+my $zn;
+my %kvb;
+my @data;
+my @busidx;
+my (@vn,@ein,@ang,@pag,@prg,@qmi,@qma,@pac,@prc,@psh,@qsh,@vmax,@vmin,@switch); 
+my (@kvbase,@busfr,@busto,@rest,@reat,@susc,@tap,@phi,@imax,@kt,@sbase);	    
+my (@kvsh,@bsh,@gsh);
+my (@r12,@r23,@r13,@x12,@x23,@x13,@twbus1,@twbus2,@twbus3);
+my (@twkv1,@twkv2,@twkv3,@twtap,@twbase);
+
+# -----------------------------------------------------------------------
+# check inputs
+# -----------------------------------------------------------------------
+$nargin = @ARGV;
+$nargin || die "Error: No input data file.\n";
+my $title1 = 'Generic NEPLAN Data Format File '.$ARGV[0];
+my $title2 = '   ';
+
+# -----------------------------------------------------------------------
+# check options
+# -----------------------------------------------------------------------
+while ($ARGV[0] =~ /^-/) {
+    if ($ARGV[0] =~ /v/) {$verbose = 1;}
+    if ($ARGV[0] =~ /h/) {$helpmsg = 1;}
+    if ($ARGV[0] =~ /a/) {
+	$colasadd = 1;
+	$addfile = $ARGV[1];
+	@ARGV = @ARGV[0, 2 .. $#ARGV];  
+	$nargin--;
+    }
+    shift(@ARGV);
+    $nargin--;
+    if ($nargin == 0) { 
+	last;
+    }
+}
+
+# -----------------------------------------------------------------------
+# help (if requested)
+# -----------------------------------------------------------------------
+if ($helpmsg) {
+    print "\nNEPLAN2PSAT converts NEPLAN data files into PSAT data files.\n\n";
+    print "psse2psat <options> fileinput <fileoutput>\n";
+    print "  -v   verbose\n";
+    print "  -h   print this help and exit\n\n";
+    print "Author:   Federico Milano\n";
+    print "Date:     30-May-2005\n";
+    print "Version:  1.0.0\n\n";
+    print "E-mail:   fmilano\@thunderbox.uwaterloo.ca\n";
+    print "Web-site: http://thunderbox.uwaterloo.ca/~fmilano\n";
+    die "\n";
+}
+
+# -----------------------------------------------------------------------
+# define output file name (if necessary)
+# -----------------------------------------------------------------------
+if ($nargin == 1) {
+    $ARGV[1] = $ARGV[0];
+    $ARGV[1] =~ s/^d*_*/d_/;
+    $ARGV[1] =~ s/[^\w\.]/_/g;
+    $ARGV[1] =~ s/\..+$/.m/;
+} elsif ($nargin == 0) {
+    die "Error: Input file name is missing.\n";
+}
+
+# -----------------------------------------------------------------------
+# open NDT data file
+# -----------------------------------------------------------------------
+print "Opening NEPLAN NDT file \"$ARGV[0]\"...\n";
+carret();
+open(IN,$ARGV[0]) || die "cannot open $ARGV[0]: $!\n";
+
+# -----------------------------------------------------------------------
+# scan input data file
+# -----------------------------------------------------------------------
+
+# read identification data
+
+$_ = <IN>; # discard first line
+
+if ($_ =~ /;/) {
+    $tab = ';';
+} elsif ($_ =~ /\t/) {
+    $tab = '\t';
+} elsif ($_ =~ /,/) {
+    $tab = ',';
+} else {
+    die "Unknown separator in .ndt file";
+}
+
+@list = split(/$tab/);
+
+while (<IN>) {
+    chomp;
+    if ($tab ne ',') {
+	$_ =~ s/,/\./g;
+    }
+    @data = split(/$tab/);
+
+    # build index of buses
+    # -------------------------------------------------------------------
+    $add = 1;
+    while ( ($key, $value) = each(%busname) ) {
+	if ($key eq $data[0]) {
+	    $add = 0;
+	}	    
+    }
+    if ($add) {
+	$nbus++;
+	$busidx[$nbus] = $nbus+1;
+	$busname{$data[0]} = $nbus;
+    }
+
+    # determine bus type and save data
+    # -------------------------------------------------------------------
+    $value = $busname{$data[0]};
+
+    $vmax[$value] = $data[6]/100;
+    $vmin[$value] = $data[5]/100;
+    if (not $ein[$value]) {
+	$ein[$value] = $data[7]/100;
+    }
+    $ang[$value] = 0;
+    $qma[$value] = 0;
+    $qmi[$value] = 0;
+
+    if ($data[22] eq "T") {
+	$switch[$value] = 1;
+    } elsif ($data[22] eq "F") {
+	$switch[$value] = 0;
+    }    
+
+    # This is to avoid multiple slack buses in the same network
+    if ($nsw == 0 and $data[1] eq "SL") {
+	$data[1] = "PV";
+    }
+
+    # This is to avoid multiple PV generators at the same bus
+    if ($genname{$data[0]}) {
+	$data[1] = "PQ";
+    }
+
+    # This is to avoid multiple PQ loads at the same bus
+    if ($pac[$value] or $prc[$value]) {
+	if (!$data[3]) {$data[3] = 0;} 
+	$pac[$value] += $data[3]/$pbas;
+	if (!$data[4]) {$data[4] = 0;} 
+	$prc[$value] += $data[4]/$pbas;
+	$data[1] = "NOTHING";
+    }
+    
+    if ($data[1] eq "SL") {
+	$nsw++;
+	$ngen++;
+	$genname{$data[0]} = $ngen-1;
+	$idxsw[$nsw] = $value;
+	if ($data[10] and $data[3]) {
+	    $pag[$value] = -$data[10]*$data[3]/$pbas;
+	} else {
+	    $pag[$value] = 0;
+	}  
+	if ($data[21] == 0) {
+	    $ein[$value] = $data[7]/100;
+	} else {
+	    $ein[$value] = $data[21]/100;
+	}
+	$ang[$value] = 0;
+    } elsif ($data[1] eq "PV") {
+	$npv++;
+	$ngen++;
+	$genname{$data[0]} = $ngen-1;
+	$idxpv[$npv] = $value;
+	$pag[$value] = -$data[10]*$data[3]/$pbas;
+	$ein[$value] = $data[21]/100;
+    } elsif ($data[1] eq "PQ") {
+	if (!$data[3]) {$data[3] = 0;} 
+	$pac[$value] = $data[3]/$pbas;
+	if (!$data[4]) {$data[4] = 0;} 
+	$prc[$value] = $data[4]/$pbas;
+	if ($pac[$value] != 0 or $prc[$value] != 0) {
+	    $npq++;
+	    $idxpq[$npq] = $value;
+	    $pac[$value] = $data[10]*$data[3]/$pbas;
+	    $prc[$value] = $data[10]*$data[4]/$pbas;
+	}
+    } elsif ($data[1] eq "NOTHING") {
+        # nothing to do ...
+    } else {
+	print "Conversion from bus type " . $data[1] . "is not supported.";
+    }
+}
+
+# -----------------------------------------------------------------------
+# close NDT data file
+# -----------------------------------------------------------------------
+close(IN) || die "cannot close $ARGV[0]: $!\n";
+
+
+# -----------------------------------------------------------------------
+# open EDT data file
+# -----------------------------------------------------------------------
+if (!$addfile) {
+    $addfile = $ARGV[0];
+    $addfile =~ s/\.ndt$/\.edt/;
+}
+print "Opening NEPLAN EDT file \"$addfile\"...\n";
+open(IN,$addfile) || die "cannot open $addfile: $!\n";
+
+# -----------------------------------------------------------------------
+# scan input data file
+# -----------------------------------------------------------------------
+
+# read identification data
+
+$_ = <IN>; # discard first line
+
+if ($_ =~ /;/) {
+    $tab = ';';
+} elsif ($_ =~ /\t/) {
+    $tab = '\t';
+} elsif ($_ =~ /,/) {
+    $tab = ',';
+} else {
+    die "Unknown separator in .edt file";
+}
+
+@list = split(/$tab/);
+
+while (<IN>) {
+    chomp;
+    if ($tab ne ',') {
+	$_ =~ s/,/\./g;
+    }
+    @data = split(/$tab/);
+    if ($data[0] == 1) { # transmission line
+	$nline++;
+
+	addbus($data[5]);
+	$busfr[$nline] = $busname{$data[5]}+1;
+	$vn[$busname{$data[5]}] = $data[12];
+
+	addbus($data[6]);
+	$busto[$nline] = $busname{$data[6]}+1;
+	$vn[$busname{$data[6]}] = $data[12];
+
+	$sbase[$nline] = $pbas;
+	$kvbase[$nline] = $data[12];
+	$unit = $data[35]; # 1 => Ohm/km
+	                   # 2 => Ohm/mile
+                           # 3 => Ohm/ 1000 feet
+	$length = $data[31];
+	$zn = $data[12]*$data[12]/$pbas;
+	if ($unit == 1 or $unit == 2 or $unit == 3) {
+	    $reat[$nline] = $length*$data[19]/$zn;
+	    $rest[$nline] = $length*$data[22]/$zn;
+	    $susc[$nline] = $zn*$length*$data[25]/1000000;
+	} else {
+	    print "* * * Unknown units for line length. Guessing [p.u.]\n";
+	    $reat[$nline] = $data[19];
+	    $rest[$nline] = $data[22];
+	    $susc[$nline] = $data[25];	    
+	} 
+	$kt[$nline] = 0;
+	$tap[$nline] = 1; 
+	$phi[$nline] = 0; 
+	$imax[$nline] = 1.7320508*$data[12]*$data[18]/$pbas/1000;	
+
+    } elsif ($data[0] == 2) { # coupling transmission line
+
+	$nline++;
+	addbus($data[5]);
+	addbus($data[6]);
+	$busfr[$nline] = $busname{$data[5]}+1;
+	$busto[$nline] = $busname{$data[6]}+1;
+	$vn[$busname{$data[5]}] = $data[12];
+	$vn[$busname{$data[6]}] = $data[12];
+	$sbase[$nline] = $pbas;
+	$kvbase[$nline] = $data[12];
+	$length = $data[31];
+	if (not $length) {$length = 1;}
+	$reat[$nline] = $length*$data[19];
+	$rest[$nline] = $length*$data[22];
+	$susc[$nline] = $length*$data[25]/1000000;
+	$kt[$nline] = 0;
+	$tap[$nline] = 1; 
+	$phi[$nline] = 0; 
+	$imax[$nline] = 0;	
+
+    } elsif ($data[0] == 8) { # not documented (coupling ???)
+
+	$nline++;
+	addbus($data[5]);
+	addbus($data[6]);
+	$busfr[$nline] = $busname{$data[5]}+1;
+	$busto[$nline] = $busname{$data[6]}+1;
+	$vn[$busname{$data[5]}] = $data[12];
+	$vn[$busname{$data[6]}] = $data[12];
+	$sbase[$nline] = $pbas;
+	$kvbase[$nline] = $data[12];
+	# I will suppose data in Ohms
+	$reat[$nline] = $pbas*$data[19]/$data[12]/$data[12];
+	$rest[$nline] = $pbas*$data[22]/$data[12]/$data[12];
+	$susc[$nline] = 0;
+	$kt[$nline] = 0;
+	$tap[$nline] = 1; 
+	$phi[$nline] = 0; 
+	$imax[$nline] = 0;	
+    
+    } elsif ($data[0] == 4) { # two-winding transformer 
+	 
+	$nline++;
+	addbus($data[5]);
+	addbus($data[6]);
+	$busfr[$nline] = $busname{$data[5]}+1;
+	$busto[$nline] = $busname{$data[6]}+1;
+	$vn[$busname{$data[5]}] = $data[12];
+	$vn[$busname{$data[6]}] = $data[13];
+	$sbase[$nline] = $data[18];
+	$kvbase[$nline] = $data[12];
+	$kt[$nline] = $data[12]/$data[13];
+	$rest[$nline] = $data[22]/100;
+	$zn = $data[19]/100;
+	$reat[$nline] = sqrt($zn*$zn - $rest[$nline]*$rest[$nline]);
+	$susc[$nline] = 0;
+	$tap[$nline] = $data[15]/$data[16]/$kt[$nline]; 
+	$phi[$nline] = $data[17]; 
+	$imax[$nline] = 1.7320508*$data[12]*$data[18]/$pbas/1000;
+
+    } elsif ($data[0] == 5) { # three-winding transformer 
+
+	$ntw++;
+	addbus($data[5]);
+	addbus($data[6]);
+	addbus($data[7]);
+	$twbus1[$ntw] = $busname{$data[5]}+1;
+	$twbus2[$ntw] = $busname{$data[6]}+1;
+	$twbus3[$ntw] = $busname{$data[7]}+1;
+	$twbase[$ntw] = $data[18]+$data[33];
+	$twkv1[$ntw] = $data[12];
+	$twkv2[$ntw] = $data[13]; 
+	$twkv3[$ntw] = $data[14]; 
+	$vn[$busname{$data[5]}] = $data[12];
+	$vn[$busname{$data[6]}] = $data[13];
+	$vn[$busname{$data[7]}] = $data[14];
+	$r12[$ntw] = $data[22]/100;
+	$r23[$ntw] = $data[23]/100; 
+	$r13[$ntw] = $data[24]/100; 
+	$zn = $data[19]/100;
+	$x12[$ntw] = sqrt($zn*$zn - $r12[$ntw]*$r12[$ntw]);
+	$zn = $data[20]/100;
+	$x23[$ntw] = sqrt($zn*$zn - $r23[$ntw]*$r23[$ntw]); 
+	$zn = $data[21]/100;
+	$x13[$ntw] = sqrt($zn*$zn - $r13[$ntw]*$r13[$ntw]); 
+	$twtap[$ntw] = $data[15]/$data[12];
+
+    } elsif ($data[0] == 50) { # shunt
+
+	$nsh++;
+	$idxsh[$nsh] = $busname{$data[5]};
+	$kvsh[$nsh] = $data[12];
+	if (!$data[18]) {$data[18] = 0;}
+	$gsh[$nsh] = $data[18]/100;
+	if (!$data[30]) {$data[18] = 0;}
+	$bsh[$nsh] = $data[30]/100;
+
+    } elsif ($data[0] == 51) { # slack bus
+
+	print "Net feeder data [51] are not used.\n";
+
+    } elsif ($data[0] == 52) { # PV bus
+
+	$i = $genname{$data[5]};
+	if (!$i) {
+	    $i = $busname{$data[5]};
+	    $npv++;
+	    $ngen++;
+	    $genname{$data[5]} = $ngen-1;
+	    $idxpv[$npv] = $i;
+	    $pag[$i] = 0;
+	    $vn[$i] = $data[12];
+	    $ein[$i] = $data[15]/$data[12];
+	    $ang[$i] = 0;
+	    $qmi[$i] = 0;
+	    $qma[$i] = 0;
+	}
+	if ($data[34]) {$qmi[$i] = $data[34]/$pbas;}
+	if ($data[35]) {$qma[$i] = $data[35]/$pbas;}
+    }
+
+}
+
+# -----------------------------------------------------------------------
+# close EDT data file
+# -----------------------------------------------------------------------
+close(IN) || die "cannot close $addfile: $!\n";
+
+
+# -----------------------------------------------------------------------
+# open output data file
+# -----------------------------------------------------------------------
+print "Writing PSAT file \"$ARGV[1]\"...\n";
+carret();
+#$ARGV[1] = "d_salida.m";
+open(OUT,">$ARGV[1]") || die "cannot open $ARGV[1]: $!\n";
+
+# -----------------------------------------------------------------------
+# write output data file
+# -----------------------------------------------------------------------
+print OUT "% File generated by PSAT from PSAP data file.\n";
+print OUT "% "."-" x 78 . "\n";
+print OUT "% Author:   Federico Milano\n";
+print OUT "% E-mail:   fmilano\@thunderbox.uwaterloo.ca\n";
+print OUT "% Web-site: http://thunderbox.uwaterloo.ca/~fmilano\n";
+print OUT "% "."-" x 78 . "\n";
+print OUT "% $title1\n";
+print OUT "% $title2\n\n";
+
+# -----------------------------------------------------------------------
+# write Bus.con
+# -----------------------------------------------------------------------
+$format = "%4d %8.5f %8.5f %8.5f 1 1";
+$nbus >= 0 && print OUT "Bus.con = [ ...\n";
+for ($i = 0; $i <= $nbus-1; $i++) {
+	$kvb{$busidx[$i]} = $vn[$i];
+    printf OUT "$format;\n",$busidx[$i],$vn[$i],$ein[$i],$ang[$i];
+}
+$i = $nbus;
+$nbus >= 0 && printf OUT "$format];\n\n",$busidx[$i],$vn[$i],$ein[$i],$ang[$i];
+
+# -----------------------------------------------------------------------
+# write SW.con
+# -----------------------------------------------------------------------
+$nsw >= 0 && print OUT "SW.con = [ ...\n";
+$format = "%4d $pbas %8.5f " . "%8.5f " x 7 . " 1";
+for ($i = 0; $i <= $nsw-1; $i++) {
+    $h = $idxsw[$i];
+    printf OUT "$format;\n", $busidx[$h],$kvb{$busidx[$h]},$ein[$h],$ang[$h],
+    $qma[$h],$qmi[$h],$vmax[$h],$vmin[$h],$pag[$h];
+}
+$h = $idxsw[$nsw];
+    
+$nsw >= 0 && printf OUT "$format];\n\n",$busidx[$h],$kvb{$busidx[$h]},$ein[$h],
+    $ang[$h],$qma[$h],$qmi[$h],$vmax[$h],$vmin[$h],$pag[$h];
+
+# -----------------------------------------------------------------------
+# write PV.con
+# -----------------------------------------------------------------------
+$npv >= 0 && print OUT "PV.con = [ ...\n";
+$format = "%4d $pbas %8.5f  " . "%8.5f " x 6 . " 1";
+for ($i = 0; $i <= $npv-1; $i++) {
+    $h = $idxpv[$i];
+    printf OUT "$format;\n", $busidx[$h],$kvb{$busidx[$h]},$pag[$h],$ein[$h],$qma[$h],
+    $qmi[$h],$vmax[$h],$vmin[$h];
+}
+$h = $idxpv[$npv];
+$npv >= 0 && printf OUT "$format];\n\n",$busidx[$h],$kvb{$busidx[$h]},$pag[$h],$ein[$h],
+    $qma[$h],$qmi[$h],$vmax[$h],$vmin[$h];
+
+# -----------------------------------------------------------------------
+# write PQ.con
+# -----------------------------------------------------------------------
+$npq >= 0 && print OUT "PQ.con = [ ...\n";
+$format = "%4d $pbas %8.5f %8.5f %8.5f %8.5f %8.5f 0";
+for ($i = 0; $i <= $npq-1; $i++) {
+    $h = $idxpq[$i];
+    printf OUT "$format;\n", $busidx[$h],$kvb{$busidx[$h]},$pac[$h],$prc[$h],
+    $vmax[$h],$vmin[$h];
+}
+$h = $idxpq[$npq];
+$npq >= 0 && printf OUT "$format];\n\n",$busidx[$h],$kvb{$busidx[$h]},$pac[$h],
+    $prc[$h],$vmax[$h],$vmin[$h];
+
+# -----------------------------------------------------------------------
+# write Shunt.con
+# -----------------------------------------------------------------------
+$nsh >= 0 && print OUT "Shunt.con = [ ...\n";
+$format = "%4d $pbas %8.2f 60 %8.5f %8.5f";
+for ($i = 0; $i <= $nsh-1; $i++) {
+    $h = $idxsh[$i];
+    printf OUT "$format;\n", $busidx[$h],$kvsh[$i],$gsh[$i],$bsh[$i];
+}
+$h = $idxsh[$nsh];
+$nsh >= 0 && printf OUT "$format];\n\n",$busidx[$h],$kvsh[$i],$gsh[$i],$bsh[$i];
+
+# -----------------------------------------------------------------------
+# write Line.con
+# -----------------------------------------------------------------------
+$nline >= 0 && print OUT "Line.con = [ ...\n";
+$format = "%4d %4d %8.2f %8.2f 60 0 %7.4f " . "%8.5f " x 5 . "%8.3f 0 0";
+for ($i = 0; $i <= $nline-1; $i++) {
+    printf OUT "$format;\n", $busfr[$i],$busto[$i],$sbase[$i],
+    $kvbase[$i],$kt[$i],$rest[$i],$reat[$i],$susc[$i],$tap[$i],
+    $phi[$i],$imax[$i];
+}
+$i = $nline;
+if ($nline >= 0) {
+    printf OUT "$format];\n\n",$busfr[$i],$busto[$i],$sbase[$i],
+    $kvbase[$i],$kt[$i],$rest[$i],$reat[$i],$susc[$i],$tap[$i],
+    $phi[$i],$imax[$i];
+}
+
+# -----------------------------------------------------------------------
+# write Twt.con
+# -----------------------------------------------------------------------
+$ntw >= 0 && print OUT "Twt.con = [ ...\n";
+$format = "%4d %4d %4d %8.2f 60 %8.2f %8.2f %8.2f " . "%8.5f " x 7 . 
+    "0 0 0 0 0 0 0 0 0";
+for ($i = 0; $i <= $ntw-1; $i++) {
+    printf OUT "$format;\n", $twbus1[$i],$twbus2[$i],$twbus3[$i],
+    $twbase[$i],$twkv1[$i],$twkv2[$i],$twkv3[$i],$r12[$i],$r13[$i],
+    $r23[$i],$x12[$i],$x13[$i],$x23[$i],$twtap[$i];
+}
+$i = $ntw;
+if ($ntw >= 0) {
+    printf OUT "$format];\n\n",$twbus1[$i],$twbus2[$i],$twbus3[$i],
+    $twbase[$i],$twkv1[$i],$twkv2[$i],$twkv3[$i],$r12[$i],$r13[$i],
+    $r23[$i],$x12[$i],$x13[$i],$x23[$i],$twtap[$i];
+}
+
+# -----------------------------------------------------------------------
+# write bus names
+# -----------------------------------------------------------------------
+%busnumb = reverse %busname;
+$nbus >= 0 && print OUT "Bus.names = { ...\n";
+$h = ($nbus+1) % 5;
+if ($h == 0) {$h = 5;}
+if (($nbus+1) > 5) {
+    for ($i = 0; $i <= $nbus-$h; $i+=5) {
+	print OUT "  '$busnumb{$i}'; '$busnumb{$i+1}'; " . 
+	    "'$busnumb{$i+2}'; '$busnumb{$i+3}'; '$busnumb{$i+4}';\n";
+    }
+}
+print OUT "  ";
+for ($i = $nbus-$h+1; $i <= $nbus-1; $i++) {
+    print OUT "'$busnumb{$i}'; ";
+}
+print OUT "'$busnumb{$nbus}'};\n\n";
+
+# -----------------------------------------------------------------------
+# close output data file
+# -----------------------------------------------------------------------
+close(OUT) || die "cannot close $ARGV[1]: $!\n";
+print "Conversion completed.\n";
+
+
+
+# -----------------------------------------------------------------------
+# function for formatting data and/or assigning default values
+# -----------------------------------------------------------------------
+sub assign {
+    my $param;
+    $param = substr($_[0],$_[1],$_[2]);
+    $param =~ s/\s*//g;
+    unless ($param) {$param = "0";}
+    #$param =~ s/^0*\.0*//;
+    unless ($param =~ /[1-9]/) {$param = $_[3];}
+    return $param;
+}
+
+# -----------------------------------------------------------------------
+# function for formatting data and/or assigning default values
+# -----------------------------------------------------------------------
+sub deblank {
+    my $name = $_[0];
+    $name =~ s/( *)$//;
+    return $name;
+}
+
+# -----------------------------------------------------------------------
+# function for writing a separator
+# -----------------------------------------------------------------------
+sub carret {
+    $verbose && print "-" x 50 . "\n";
+}
+
+# -----------------------------------------------------------------------
+# function for adding bus indexes
+# -----------------------------------------------------------------------
+sub addbus {
+    my $addbus = 1;
+    while ( ($key, $value) = each(%busname) ) {
+	if ($key eq $_[0]) {
+	    $addbus = 0;
+	}	    
+    }
+    if ($addbus) {
+	$nbus++;
+	$busidx[$nbus] = $nbus+1;
+	$busname{$_[0]} = $nbus;
+	$value = $busname{$_[0]};	    
+	$vmax[$value] = 1.2;
+	$vmin[$value] = 0.8;
+	$ein[$value] = 1;
+	$ang[$value] = 0;
+	$qma[$value] = 0;
+	$qmi[$value] = 0;
+    }
+}

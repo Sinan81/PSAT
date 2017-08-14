@@ -1,0 +1,506 @@
+#!/usr/bin/perl -w
+# CYME2PSAT converts CYME data file into PSAT data file
+#
+# CYME2PSAT <OPTIONS> FILEINPUT <FILEOUTPUT>
+#
+# Author:  Federico Milano
+# Date:    28-Jan-2006
+# Version: 1.0.0
+#
+# E-mail:  federico.milano@ucd.ie
+#
+
+use strict;
+
+# -----------------------------------------------------------------------
+# variable declaration
+# -----------------------------------------------------------------------
+my $nargin = 0;
+my $verbose = 0;
+my $helpmsg = 0;
+my ($i,$h,$k);
+
+my $ntitle = -1;
+my $nbus = -1;
+my $nsw = -1;
+my $npv = -1;
+my $npq = -1;
+my $nsh = -1;
+my $nline = -1;
+my $narea = -1;
+my $nhvdc = -1;
+my $zone = 0;
+my ($title1,@title,$ver);
+my $pbas = 100;
+my $freq = 60;
+my $blanks = " " x 80;
+my $format;
+my $filetype;
+my ($header,$vmax,$vmin,$init,$iter,$dtol,$intc,$ovld);
+
+my @data;
+
+my $value;
+
+my $bustype;
+my (@kvb,@kzo,@busidx,@busname,@busang,
+    @busvol,@pgen,@pload,@qload,@qmi,@qma,@shur,@shux);
+my (@swidx,@pvidx,@pqidx,@shidx);
+my (@areanum,@areaexp,@areatol);
+my (@busfr,@bustt,@rest,@reat,@susc,@rateA,@rateS,@phs,@tap);
+my (@rbus,@ibus,@rnum,@inum,@rKV,@iKV,@alpha,@gamma,@rdc,@pdes,@vdes);
+my (%kvbase,%zoneid);
+
+# -----------------------------------------------------------------------
+# check inputs
+# -----------------------------------------------------------------------
+$nargin = @ARGV;
+$nargin || die "Error: No input data file.\n";
+
+# -----------------------------------------------------------------------
+# check options
+# -----------------------------------------------------------------------
+while ($ARGV[0] =~ /^-/) {
+    if ($ARGV[0] =~ /v/) {$verbose = 1;}
+    if ($ARGV[0] =~ /h/) {$helpmsg = 1;}
+    shift(@ARGV);
+    $nargin--;
+    if ($nargin == 0) {
+	last;
+    }
+}
+
+# -----------------------------------------------------------------------
+# help (if requested)
+# -----------------------------------------------------------------------
+if ($helpmsg) {
+    print "\nCYME2PSAT converts CYME data files into PSAT data files.\n\n";
+    print "CYME2psat <options> fileinput <fileoutput>\n";
+    print "  -v   verbose\n";
+    print "  -h   print this help and exit\n\n";
+    print "Author:   Federico Milano\n";
+    print "Date:     28-Jan-2006\n";
+    print "Version:  1.0.0\n\n";
+    print "E-mail:   Federico.Milano\@uclm.es\n";
+    die "\n";
+}
+
+# -----------------------------------------------------------------------
+# define output file name (if necessary)
+# -----------------------------------------------------------------------
+if ($nargin == 1) {
+    $ARGV[1] = $ARGV[0];
+    $ARGV[1] =~ s/^d*_*/d_/;
+    $ARGV[1] =~ s/[^\w\.]/_/g;
+    $ARGV[1] =~ s/\..+$/.m/;
+} elsif ($nargin == 0) {
+    die "Error: Input file name is missing.\n";
+}
+
+# -----------------------------------------------------------------------
+# open input data file
+# -----------------------------------------------------------------------
+print "Opening CYME data file \"$ARGV[0]\"...\n";
+carret();
+open(IN,$ARGV[0]) || die "cannot open $ARGV[0]: $!\n";
+
+# read header
+$_ = <IN>;
+chomp;
+$_ = $_ . $blanks;
+$header = substr($_,0,2);
+
+if ($header == 81) {
+    print "CYME data file is in free format\n";
+    $filetype = 0;
+} elsif ($header == 91) {
+    $filetype = 1;
+} else {
+    die "Header row is in a wrong format. Conversion interrupted.\n";
+}
+
+if ($filetype) {
+    $title1 = assign($_,3,42,"Generic CYME data file");
+    $pbas = assign($_,45,50,100);
+    $vmax = assign($_,51,56,1.1);
+    $vmin = assign($_,57,62,0.9);
+    $init = assign($_,68,68,1);
+    $iter = assign($_,69,71,60);
+    $dtol = assign($_,72,76,0.0001);
+    $intc = assign($_,79,79,0);
+    $ovld = assign($_,80,80,0);
+} else {
+    @data = split ',' , $_;
+    $title1 = $data[1];
+    $pbas = $data[2];
+    $vmax = $data[3];
+    $vmin = $data[4];
+    $init = $data[5];
+    $iter = $data[6];
+    $dtol = $data[7];
+    $intc = $data[8];
+    $ovld = $data[9];
+}
+
+# read data
+while (<IN>) {
+
+    chomp;
+    $_ = $_ . $blanks;
+
+    if ($filetype) {
+	if (/^92/) {
+	    $header = 92;
+	    $ntitle++;
+	    $title[$ntitle] = substr($_,5,-1);
+	} elsif (/^01/) {
+	    $header = 1;
+	    $narea++;
+	    $areanum[$narea] = assign($_,3,6,0);
+	    $areaexp[$narea] = assign($_,57,62,0)/$pbas;
+	    $areatol[$narea] = assign($_,63,68,0)/$pbas;
+	} elsif (/^02/) {
+	    $header = 2;
+	    $nbus++;
+	    $busidx[$nbus] = assign($_,3,6,0);
+	    $busname[$nbus] = substr($_,6,6);
+	    $busname[$nbus] =~ s/(\s*)$//;
+	    $kzo[$nbus] = assign($_,13,14,1);
+	    $kvb[$nbus] = assign($_,15,20,1);
+	    $kvbase{$busidx[$nbus]} = $kvb[$nbus];
+	    $pload[$nbus] = assign($_,21,26,0)/$pbas;
+	    $qload[$nbus] = assign($_,27,32,0)/$pbas;
+	    $shur[$nbus] = assign($_,33,38,0);
+	    $shux[$nbus] = assign($_,39,44,0);
+	    $busvol[$nbus] = assign($_,45,50,1)/$kvb[$nbus];
+	    $pgen[$nbus] = assign($_,51,56,0)/$pbas;
+	    $qmi[$nbus] = assign($_,63,69,0)/$pbas;
+	    $qma[$nbus] = assign($_,57,62,0)/$pbas;
+	    $bustype = assign($_,70,70,3);
+	    $busang[$nbus] = 3.14159265358979*assign($_,71,77,1)/180;
+	    if ($bustype == 1) {
+		$nsw++;
+		$swidx[$nsw] = $nbus;
+	    } elsif ($bustype == 2) {
+		$npv++;
+		$pvidx[$npv] = $nbus;
+	    }
+	    if ($shur[$nbus] != 0 || $shux[$nbus] != 0) {
+		$nsh++;
+		$shidx[$nsh] = $nbus;
+	    }
+	    if ($pload[$nbus] != 0 || $qload[$nbus] != 0) {
+		$npq++;
+		$pqidx[$npq] = $nbus;
+	    }
+	} elsif (/^03/) {
+	    $header = 3;
+	    $nline++;
+	    $busfr[$nline] = assign($_,3,6,0);
+	    $bustt[$nline] = assign($_,15,18,0);
+	    $rest[$nline] = assign($_,30,35,0);
+	    $reat[$nline] = assign($_,36,41,0);
+	    $susc[$nline] = assign($_,42,47,0);
+	    if ($ovld == 0) {
+		$rateA[$nline] = assign($_,48,53,0)*
+		    $kvbase{$busfr[$nline]}*sqrt(3)/$pbas;
+		$rateS[$nline] = 0;
+	    } else {
+		$rateA[$nline] = 0;
+		$rateS[$nline] = assign($_,48,53,0)/$pbas;
+	    }
+	    $tap[$nline] = evaltap(assign($_,54,59,0),
+				   assign($_,60,65,0),
+				   $kvbase{$busfr[$nline]},
+				   $kvbase{$bustt[$nline]});
+	    $phs[$nline] = evalphs(assign($_,66,71,0));
+	} elsif (/^04/) {
+	    # rectifier data
+	    $header = 4;
+	    $nhvdc++;
+	    $rbus[$nhvdc] = assign($_,3,6,0);
+	    $rnum[$nhvdc] = assign($_,15,18,0);
+	    $rKV[$nhvdc] = assign($_,19,24,0);
+	    $alpha[$nhvdc] = assign($_,37,42,0);
+	    $rdc[$nhvdc] = assign($_,43,48,0);
+	} elsif (/^00/) {
+	    if ($header == 1) {
+		# nothing to do for now...
+	    } elsif ($header == 2) {
+		# nothing to do for now...
+	    } elsif ($header == 3) {
+		# nothing to do for now...
+	    } elsif ($header == 4) {
+		# inverter data
+		$ibus[$nhvdc] = assign($_,3,6,0);
+		$inum[$nhvdc] = assign($_,15,18,0);
+		$iKV[$nhvdc] = assign($_,19,24,0);
+		$gamma[$nhvdc] = assign($_,37,42,0);
+		$pdes[$nhvdc] = assign($_,43,48,0);
+		$vdes[$nhvdc] = assign($_,49,54,0);
+	    }
+	}
+    } else {
+	@data = split ',' , $_;
+	if ($data[0] eq "92") {
+	    $header = 92;
+	    $ntitle++;
+	    $title[$ntitle] = substr($_,5,-1);
+	} elsif ($data[0] eq "01") {
+	    $header = 1;
+	    $narea++;
+	    $areanum[$narea] = $data[2];
+	    $areaexp[$narea] = $data[3]/$pbas;
+	    $areatol[$narea] = $data[4]/$pbas;
+	} elsif ($data[0] eq "02") {
+	    $header = 2;
+	    @data = split ',' , $_;
+	    $busidx[$nbus] = $data[1];
+	    $busname[$nbus] = $data[2];
+	    $kzo[$nbus] = $data[3];
+	    $kvb[$nbus] = $data[5];
+	    $kvbase{$busidx[$nbus]} = $kvb[$nbus];
+	    $pload[$nbus] = $data[10]/$pbas;
+	    $qload[$nbus] = $data[11]/$pbas;
+	    $shur[$nbus] = $data[12];
+	    $shux[$nbus] = $data[13];
+	    $busvol[$nbus] = $data[11]/$kvb[$nbus];
+	    $bustype = $data[4];
+	    $busang[$nbus] = 3.14159265358979*assign($_,71,77,1)/180;
+	    if ($bustype == 1) {
+		$nsw++;
+		$swidx[$nsw] = $nbus;
+	    } elsif ($bustype == 2) {
+		$npv++;
+		$pvidx[$npv] = $nbus;
+	    }
+	    if ($shur[$nbus] != 0 || $shux[$nbus] != 0) {
+		$nsh++;
+		$shidx[$nsh] = $nbus;
+	    }
+	    if ($pload[$nbus] != 0 || $qload[$nbus] != 0) {
+		$npq++;
+		$pqidx[$npq] = $nbus;
+	    }
+	} elsif ($data[0] eq "03") {
+	    $header = 3;
+	    $nline++;
+	    $busfr[$nline] = $data[1];
+	    $bustt[$nline] = $data[2];
+	    $rest[$nline] = $data[4];
+	    $reat[$nline] = $data[5];
+	    $susc[$nline] = $data[6];
+	    if ($ovld == 0) {
+		$rateA[$nline] = $data[7]*
+		    $kvbase{$busfr[$nline]}*sqrt(3)/$pbas;
+		$rateS[$nline] = 0;
+	    } else {
+		$rateA[$nline] = 0;
+		$rateS[$nline] = $data[7]/$pbas;
+	    }
+	    $tap[$nline] = evaltap($data[8],$data[9],
+				   $kvbase{$busfr[$nline]},
+				   $kvbase{$bustt[$nline]});
+	    $phs[$nline] = evalphs($data[10]);
+	} elsif ($data[0] eq "04") {
+	    $header = 4;
+	    # rectifier data
+	    $nhvdc++;
+	    $rbus[$nhvdc] = $data[1];
+	    $rnum[$nhvdc] = $data[2];
+	    $rKV[$nhvdc] = $data[3];
+	    $alpha[$nhvdc] = $data[4];
+	    $rdc[$nhvdc] = $data[5];
+	} elsif ($data[0] eq "00") {
+	    if ($header == 1) {
+		# nothing to do for now...
+	    } elsif ($header == 2) {
+		$pgen[$nbus] = $data[1]/$pbas;
+		$qmi[$nbus] = $data[2]/$pbas;
+		$qma[$nbus] = $data[3]/$pbas;
+	    } elsif ($header == 3) {
+		# nothing to do for now...
+	    } elsif ($header == 4) {
+		# inverter data
+		$ibus[$nhvdc] = $data[1];
+		$inum[$nhvdc] = $data[2];
+		$iKV[$nhvdc] = $data[3];
+		$gamma[$nhvdc] = $data[4];
+		$pdes[$nhvdc] = $data[5];
+		$vdes[$nhvdc] = $data[6];
+	    }
+	}
+    }
+}
+
+# -----------------------------------------------------------------------
+# close data file
+# -----------------------------------------------------------------------
+close(IN) || die "cannot close $ARGV[0]: $!\n";
+
+# -----------------------------------------------------------------------
+# open output data file
+# -----------------------------------------------------------------------
+print "Writing PSAT file \"$ARGV[1]\"...\n";
+carret();
+open(OUT,">$ARGV[1]") || die "cannot open $ARGV[1]: $!\n";
+
+# -----------------------------------------------------------------------
+# write output data file
+# -----------------------------------------------------------------------
+print OUT "% File generated by PSAT from CYME data file.\n";
+print OUT "% "."-" x 78 . "\n";
+print OUT "% Author:   Federico Milano\n";
+print OUT "% E-mail:   Federico.Milano\@uclm.es\n";
+print OUT "% "."-" x 78 . "\n";
+print OUT "% Generic CYMEFLOW data format "."$ARGV[0]"."\n";
+for ($i = 0; $i <= $ntitle; $i++) { print OUT "% $title[$i]\n"; }
+
+# -----------------------------------------------------------------------
+# write Bus.con
+# -----------------------------------------------------------------------
+if ($nbus >= 0) {
+    $format = "%4d  %6.2f  1   0   1  %2d;\n";
+    print OUT "Bus.con = [ ...\n";
+    for ($i = 0; $i <= $nbus; $i++) {
+	printf OUT $format,$busidx[$i],$kvb[$i],$kzo[$i];
+    }
+    print OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write SW.con
+# -----------------------------------------------------------------------
+if ($nsw >= 0) {
+    printf OUT "SW.con = [ ...\n";
+    $format = "%4d 100 %6.2f 1 0 %8.5f %8.5F 1.1 0.9 %8.5f 1];\n\n";
+    $h = $swidx[0];
+    printf OUT $format,$busidx[$h],$kvb[$h],$qma[$h],$qmi[$h],$pgen[$h];
+}
+
+# -----------------------------------------------------------------------
+# write PV.con
+# -----------------------------------------------------------------------
+if ($npv >= 0) {
+    printf OUT "PV.con = [ ...\n";
+    $format = "%4d 100 %6.2f %8.5f 1 %8.5f %8.5f 1.1 0.9 1;\n";
+    for ($i = 0; $i <= $npv; $i++) {
+	$h = $pvidx[$i];
+	printf OUT $format,$busidx[$h],$kvb[$h],$pgen[$h],$qma[$h],$qmi[$h];
+    }
+    printf OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write PQ.con
+# -----------------------------------------------------------------------
+if ($npq >= 0) {
+    printf OUT "PQ.con = [ ...\n";
+    $format = "%4d 100 %6.2f %8.5f %8.5f 1.1 0.9 1;\n";
+    for ($i = 0; $i <= $npq; $i++) {
+	$h = $pqidx[$i];
+	printf OUT $format,$busidx[$h],$kvb[$h],$pload[$h],$qload[$h];
+    }
+    printf OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write Shunt.con
+# -----------------------------------------------------------------------
+if ($nsh >= 0) {
+    printf OUT "Shunt.con = [ ...\n";
+    $format = "%4d 100 %6.2f 60 %8.5f %8.5f;\n";
+    for ($i = 0; $i <= $nsh; $i++) {
+	$h = $shidx[$i];
+	printf OUT $format,$busidx[$h],$kvb[$h],$shur[$h],$shux[$h];
+    }
+    printf OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write Line.con
+# -----------------------------------------------------------------------
+if ($nline >= 0) {
+    print OUT "Line.con = [ ...\n";
+    $format = "%4d %4d 100 %6.2f 60 0 %8.4f " .
+	"%8.5f " x 5 . "%8.3f 0 %8.3f;\n";
+    for ($i = 0; $i <= $nline; $i++) {
+	$k = $kvbase{$busfr[$i]}/$kvbase{$bustt[$i]};
+	if ($k == 1) { $k = 0; }
+	printf OUT $format,$busfr[$i],$bustt[$i],
+	$kvbase{$busfr[$i]},$k,$rest[$i],$reat[$i],$susc[$i],
+	$tap[$i],$phs[$i],$rateA[$i],$rateS[$i];
+    }
+    printf OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write Area.con
+# -----------------------------------------------------------------------
+if ($narea >= 0) {
+    printf OUT "Area.con = [ ...\n";
+    $format = "%4d %4d 100 %8.5f %8.5f;\n";
+    for ($i = 0; $i <= $narea; $i++) {
+	printf OUT $format,$areanum[$i],$busidx[$swidx[0]],
+	$areaexp[$i],$areatol[$i];
+    }
+    printf OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write bus names
+# -----------------------------------------------------------------------
+$nbus >= 0 && print OUT "Bus.names = { ...\n";
+$h = ($nbus+1) % 5;
+if ($h == 0) {$h = 5;}
+if (($nbus+1) > 5) {
+    for ($i = 0; $i <= $nbus-$h; $i+=5) {
+	print OUT "  '$busname[$i]'; '$busname[$i+1]'; " .
+	    "'$busname[$i+2]'; '$busname[$i+3]'; '$busname[$i+4]';\n";
+    }
+}
+print OUT "  ";
+for ($i = $nbus-$h+1; $i <= $nbus-1; $i++) {
+    print OUT "'$busname[$i]'; ";
+}
+print OUT "'$busname[$nbus]'};\n\n";
+
+# -----------------------------------------------------------------------
+# close output data file
+# -----------------------------------------------------------------------
+close(OUT) || die "cannot close $ARGV[1]: $!\n";
+print "Conversion completed.\n";
+
+# -----------------------------------------------------------------------
+# function for formatting data and/or assigning default values
+# -----------------------------------------------------------------------
+sub assign {
+    my $param;
+    $param = substr($_[0],$_[1]-1,$_[2]-$_[1]+1);
+    $param =~ s/\s*//g;
+    unless ($param) {$param = "0";}
+    unless ($param =~ /[1-9]/) {$param = $_[3];}
+    return $param;
+}
+
+# -----------------------------------------------------------------------
+# function for writing a separator
+# -----------------------------------------------------------------------
+sub carret { $verbose && print "-" x 50 . "\n"; }
+
+# -----------------------------------------------------------------------
+# function for determing the transformer tap ratio
+# -----------------------------------------------------------------------
+sub evaltap {
+    if (!$_[0]) {$_[0] = $_[2];}
+    if (!$_[1]) {$_[1] = $_[3];}
+    return (($_[0]/$_[2])/($_[1]/$_[3]));
+}
+
+# -----------------------------------------------------------------------
+# function for determing the transformer phase shifter
+# -----------------------------------------------------------------------
+sub evalphs {
+    if (!$_[0]) {$_[0] = 0;}
+    return $_[0];
+}

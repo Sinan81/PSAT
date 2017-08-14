@@ -1,0 +1,526 @@
+#!/usr/bin/perl -w
+# PWRWORLD2PSAT converts PowerWorld data file into PSAT data file
+#
+# PWRWORLD2PSAT <OPTIONS> FILEINPUT <FILEOUTPUT>
+#
+# Author:  Federico Milano
+# Date:    30-May-2005
+# Version: 1.0.0
+#
+#E-mail:    fmilano@thunderbox.uwaterloo.ca
+#Web-site:  http://thunderbox.uwaterloo.ca/~fmilano
+
+use strict;
+
+# -----------------------------------------------------------------------
+# variable declaration
+# -----------------------------------------------------------------------
+my $tab = 0;
+my %busname;
+my %busnumb;
+my %index;
+my @list;
+my (@idxpv, @idxsw, @idxpq, @idxsh);
+my $nargin;
+my $verbose = 0;
+my $helpmsg = 0;
+my ($i,$h,$k,$j);
+my $format;
+my $n = 0;
+my $npv = -1;
+my $nsw = -1;
+my $npq = -1;
+my $npl = -1;
+my $nsupply = -1;
+my $nsupply2 = -1;
+my $nsh = -1;
+my $ntw = -1;
+my $ngen = 1;
+my $pbas = 100;
+my $nbus = -1;
+my $nline = -1;
+my $narea = -1;
+my $flag_bus = 0;
+my $flag_line = 0;
+my $flag_area = 0;
+my $flag_trsf = 0;
+my $flag = 1;
+my $value;
+my $add;
+my $unit;
+my $length;
+my $zn;
+my @data;
+my (@busidx,@vn,@ein,@ang,@area,@zone,@vmax,@vmin); 
+my (@pqidx,@sa0,@sr0); 
+my (@plidx,@ia0,@ir0,@za0,@zr0); 
+my ($slack,$swbase,$swpgen,$swqmax,$swqmin,$swvolt); 
+my (@pvidx,@pvbase,@pgen,@qmax,@qmin,@volt); 
+my (@supply,@subase,@pmax,@pmin,@c0,@c1,@c2); 
+my (@busfr,@busto,@rest,@reat,@susc,@tap,@phi,@iijmax,@pijmax,@sijmax,@kvbase,@kt); 
+my (@shidx,@kvsh,@bsh,@gsh);
+my (@r12,@r23,@r13,@x12,@x23,@x13,@twbus1,@twbus2,@twbus3);
+my (@twkv1,@twkv2,@twkv3,@twtap,@twbase);
+
+# -----------------------------------------------------------------------
+# check inputs
+# -----------------------------------------------------------------------
+$nargin = @ARGV;
+$nargin || die "Error: No input data file.\n";
+my $title1 = 'Generic PowerWorld Data Format File '.$ARGV[0];
+my $title2 = '   ';
+
+# -----------------------------------------------------------------------
+# check options
+# -----------------------------------------------------------------------
+while ($ARGV[0] =~ /^-/) {
+    if ($ARGV[0] =~ /v/) {$verbose = 1;}
+    if ($ARGV[0] =~ /h/) {$helpmsg = 1;}
+    shift(@ARGV);
+    $nargin--;
+    if ($nargin == 0) { 
+	last;
+    }
+}
+
+# -----------------------------------------------------------------------
+# help (if requested)
+# -----------------------------------------------------------------------
+if ($helpmsg) {
+    print "\nPWRWORLD2PSAT converts PowerWorld data files into PSAT data files.\n\n";
+    print "psse2psat <options> fileinput <fileoutput>\n";
+    print "  -v   verbose\n";
+    print "  -h   print this help and exit\n\n";
+    print "Author:   Federico Milano\n";
+    print "Date:     07-June-2005\n";
+    print "Version:  1.0.0\n\n";
+    print "E-mail:   fmilano\@thunderbox.uwaterloo.ca\n";
+    print "Web-site: http://thunderbox.uwaterloo.ca/~fmilano\n";
+    die "\n";
+}
+
+# -----------------------------------------------------------------------
+# define output file name (if necessary)
+# -----------------------------------------------------------------------
+if ($nargin == 1) {
+    $ARGV[1] = $ARGV[0];
+    $ARGV[1] =~ s/^d*_*/d_/;
+    $ARGV[1] =~ s/[^\w\.]/_/g;
+    $ARGV[1] =~ s/\..+$/.m/;
+} elsif ($nargin == 0) {
+    die "Error: Input file name is missing.\n";
+}
+
+# -----------------------------------------------------------------------
+# open AUX data file
+# -----------------------------------------------------------------------
+print "Opening PowerWorld file \"$ARGV[0]\"...\n";
+carret();
+open(IN,$ARGV[0]) || die "cannot open $ARGV[0]: $!\n";
+
+# -----------------------------------------------------------------------
+# scan input data file
+# -----------------------------------------------------------------------
+
+while (<IN>) {
+    chomp;
+    unless (m/^DATA/) {next;}
+    
+# read BUS data
+
+    if (m/^DATA \(BUS, \[/) {
+	%index = scanfile("BUS");
+	unless ($index{"BusName"}) {next;} 
+	while (<IN>) {
+	    chomp;
+	    if (m/^\}/) {last;}
+	    @data = splitdata($_);
+	    $nbus++;
+	    $busidx[$nbus] = $data[$index{"BusNum"}];
+	    $busname{$nbus} = $data[$index{"BusName"}];
+	    $busnumb{$busidx[$nbus]} = $nbus;
+	    $vn[$nbus] = $data[$index{"BusNomVolt"}];
+	    $vmax[$nbus] = $data[$index{"BusVoltLimHigh"}];
+	    $vmin[$nbus] = $data[$index{"BusVoltLimLow"}];
+	    $ein[$nbus] = $data[$index{"BusPUVolt"}];
+	    $ang[$nbus] = 0.01745329251994*$data[$index{"BusAngle"}];
+	    $area[$nbus] = $data[$index{"AreaNum"}];
+	    $zone[$nbus] = $data[$index{"ZoneNum"}];
+	    if ($data[$index{"BusSlack"}] eq 'YES') {
+		$slack = $data[$index{"BusNum"}];
+	    }
+	}
+    }
+
+# read LOAD data
+
+    if (m/^DATA \(LOAD, \[/) {
+	%index = scanfile("LOAD");
+	unless ($index{"LoadSMW"}) {next;} 
+	while (<IN>) {
+	    chomp;
+	    if (m/^\}/) {last;}
+	    @data = splitdata($_);
+	    if ($data[$index{"LoadStatus"}] ne "Closed") {next;}
+	    if ($data[$index{"LoadSMW"}] != 0 || 
+		$data[$index{"LoadSMVR"}] != 0) {
+		$npq++;
+		$pqidx[$npq] = $data[$index{"BusNum"}];
+		$sa0[$npq] = $data[$index{"LoadSMW"}]/100;
+		$sr0[$npq] = $data[$index{"LoadSMVR"}]/100;
+	    }
+	    if ($data[$index{"LoadIMW"}] != 0 || 
+		$data[$index{"LoadIMVR"}] != 0 || 
+		$data[$index{"LoadZMW"}] != 0 || 
+		$data[$index{"LoadZMVR"}] != 0 ) {
+		$npl++;
+		$plidx[$npl] = $data[$index{"BusNum"}];
+		$ia0[$npl] = $data[$index{"LoadIMW"}]/100;
+		$ir0[$npl] = $data[$index{"LoadIMVR"}]/100;
+		$za0[$npl] = $data[$index{"LoadZMW"}]/100;
+		$zr0[$npl] = $data[$index{"LoadZMVR"}]/100;
+	    }
+	}
+    }
+
+# read GEN data
+
+    if (m/^DATA \(GEN, \[/) {
+	%index = scanfile("GEN");
+	while (<IN>) {
+	    chomp;
+	    if (m/^\}/) {last;}
+	    if (m/<SUBDATA BidCurve>/) {
+		while (<IN>) {
+		    if (m/<\/SUBDATA>/) {last;}		    
+		}
+		next;
+	    }
+	    @data = splitdata($_);
+	    if ($index{"GenMW"}) {
+		if ($data[$index{"GenStatus"}] ne "Closed") {next;}
+		if ($data[$index{"BusNum"}] == $slack) {
+		    $nsw++;
+		    $swbase = $data[$index{"GenMVABase"}];
+		    $swpgen = $data[$index{"GenMW"}]/$data[$index{"GenMVABase"}];
+		    $swvolt = $data[$index{"GenVoltSet"}];
+		    $swqmin = $data[$index{"GenMVRMin"}]/$data[$index{"GenMVABase"}];
+		    $swqmax = $data[$index{"GenMVRMax"}]/$data[$index{"GenMVABase"}];
+		} else {
+		    $npv++;
+		    $pvidx[$npv] = $data[$index{"BusNum"}];
+		    $pvbase[$npv] = $data[$index{"GenMVABase"}];
+		    $pgen[$npv] = $data[$index{"GenMW"}]/$data[$index{"GenMVABase"}];
+		    $volt[$npv] = $data[$index{"GenVoltSet"}];
+		    $qmin[$npv] = $data[$index{"GenMVRMin"}]/$data[$index{"GenMVABase"}];
+		    $qmax[$npv] = $data[$index{"GenMVRMax"}]/$data[$index{"GenMVABase"}];
+		}
+		$nsupply++;
+		$supply[$nsupply] = $data[$index{"BusNum"}];
+		$subase[$nsupply] = $data[$index{"GenMVABase"}];
+		$pmin[$nsupply] = $data[$index{"GenMWMin"}]/$data[$index{"GenMVABase"}];
+		$pmax[$nsupply] = $data[$index{"GenMWMax"}]/$data[$index{"GenMVABase"}];
+		if ($index{"GenIOA"}) {$c0[$nsupply] = $data[$index{"GenIOA"}];}
+		if ($index{"GenIOB"}) {$c1[$nsupply] = $data[$index{"GenIOB"}];}
+		if ($index{"GenIOC"}) {$c2[$nsupply] = $data[$index{"GenIOC"}];}
+	    } elsif ($index{"GenIOA"}) {
+		$nsupply2++;
+		$c0[$nsupply2] = $data[$index{"GenIOA"}];
+		$c1[$nsupply2] = $data[$index{"GenIOB"}];
+		$c2[$nsupply2] = $data[$index{"GenIOC"}];
+	    }
+	}
+    }
+
+# read SHUNT data
+
+    if (m/^DATA \(SHUNT, \[/) {
+    %index = scanfile("SHUNT");
+    if ($index{"Found"}) {
+	while (<IN>) {
+	    chomp;
+	    if (m/^\}/) {last;}
+	    if ($data[$index{"SSStatus"}] ne "Closed") {next;}
+	    @data = splitdata($_);
+	    if ($data[$index{"SSCMode"}] eq "Fixed") {
+		$nsh++;
+		$shidx[$nsh] = $data[$index{"BusNum"}];
+		$kvsh[$nsh] = $vn[$busnumb{$data[$index{"BusNum"}]}];
+		$gsh[$nsh] = 0;
+		$bsh[$nsh] = $data[$index{"SSNMVR"}]/100;
+	    }
+	}
+    }
+}
+
+# read BRANCH data
+
+    if (m/^DATA \(BRANCH, \[/) {
+	%index = scanfile("BRANCH");
+	unless ($index{"LineR"}) {next;} 
+	while (<IN>) {
+	    chomp;
+	    if (m/^\}/) {last;}
+	    @data = splitdata($_);
+	    if ($data[$index{"LineStatus"}] ne "Closed") {next;}
+	    $nline++;
+	    $busfr[$nline] = $data[$index{"BusNum"}];
+	    $busto[$nline] = $data[$index{"BusNum:1"}];
+	    $kvbase[$nline] = $vn[$busnumb{$data[$index{"BusNum"}]}];
+	    $kt[$nline] = $vn[$busnumb{$data[$index{"BusNum"}]}] / 
+		$vn[$busnumb{$data[$index{"BusNum:1"}]}];
+	    $rest[$nline] = $data[$index{"LineR"}];
+	    $reat[$nline] = $data[$index{"LineX"}];
+	    $susc[$nline] = $data[$index{"LineC"}];
+	    $tap[$nline] = $data[$index{"LineTap"}];
+	    $phi[$nline] = 0.01745329251994*$data[$index{"LinePhase"}];
+	    $iijmax[$nline] = $data[$index{"LineAMVA"}]/100;
+	    if ($index{"LineBMVA"}) {
+		$pijmax[$nline] = $data[$index{"LineBMVA"}]/100;
+	    } else {
+		$pijmax[$nline] = 0;
+	    }
+	    if ($index{"LineCMVA"}) {
+		$sijmax[$nline] = $data[$index{"LineCMVA"}]/100;
+	    } else {
+		$sijmax[$nline] = 0;
+	    }
+	    if (1*$data[$index{"LineShuntMW"}] || 
+		1*$data[$index{"LineShuntMVR"}]) {
+		$nsh++;	
+		$shidx[$nsh] = $data[$index{"BusNum"}];
+		$kvsh[$nsh] = $vn[$busnumb{$data[$index{"BusNum"}]}];
+		$gsh[$nsh] = $data[$index{"LineShuntMW"}]/100;
+		$bsh[$nsh] = $data[$index{"LineShuntMVR"}]/100;
+	    } 
+	    if (1*$data[$index{"LineShuntMW:1"}] ||
+		1*$data[$index{"LineShuntMVR:1"}]) {
+		$nsh++;
+		$shidx[$nsh] = $data[$index{"BusNum:1"}];
+		$kvsh[$nsh] = $vn[$busnumb{$data[$index{"BusNum:1"}]}];
+		$gsh[$nsh] = $data[$index{"LineShuntMW:1"}]/100;
+		$bsh[$nsh] = $data[$index{"LineShuntMVR:1"}]/100;
+	    }     
+	}
+    }	
+}
+
+# -----------------------------------------------------------------------
+# close AUX data file
+# -----------------------------------------------------------------------
+close(IN) || die "cannot close $ARGV[0]: $!\n";
+
+# -----------------------------------------------------------------------
+# open output data file
+# -----------------------------------------------------------------------
+print "Writing PSAT file \"$ARGV[1]\"...\n";
+carret();
+open(OUT,">$ARGV[1]") || die "cannot open $ARGV[1]: $!\n";
+
+# -----------------------------------------------------------------------
+# write output data file
+# -----------------------------------------------------------------------
+print OUT "% File generated by PSAT from POWERWORLD data file.\n";
+print OUT "% "."-" x 78 . "\n";
+print OUT "% Author:   Federico Milano\n";
+print OUT "% E-mail:   fmilano\@thunderbox.uwaterloo.ca\n";
+print OUT "% Web-site: http://thunderbox.uwaterloo.ca/~fmilano\n";
+print OUT "% "."-" x 78 . "\n";
+print OUT "% $title1\n";
+print OUT "% $title2\n\n";
+
+# -----------------------------------------------------------------------
+# write Bus.con
+# -----------------------------------------------------------------------
+$format = "%4d %8.2f %8.5f %8.5f %4d %4d;\n";
+$nbus >= 0 && print OUT "Bus.con = [ ...\n";
+for ($i = 0; $i <= $nbus; $i++) {
+    printf OUT $format,$busidx[$i],$vn[$i],$ein[$i],$ang[$i],
+    $area[$i],$zone[$i];
+}
+$nbus >= 0 && printf OUT "  ];\n\n";
+
+# -----------------------------------------------------------------------
+# write SW.con
+# -----------------------------------------------------------------------
+$nsw >= 0 && print OUT "SW.con = [ ...\n";
+$format = "%4d $pbas %8.2f %8.5f 0 " . "%8.5f " x 5 . " 1];\n\n";
+$h = $busnumb{$slack};
+$nsw >= 0 && printf OUT $format,$slack,$vn[$h],
+    $swvolt,$swqmax,$swqmin,$vmax[$h],$vmin[$h],$swpgen;
+
+# -----------------------------------------------------------------------
+# write PV.con
+# -----------------------------------------------------------------------
+$npv >= 0 && print OUT "PV.con = [ ...\n";
+$format = "%4d %8.2f %8.2f " . "%8.5f " x 6 . " 1;\n";
+for ($i = 0; $i <= $npv; $i++) {
+    $h = $busnumb{$pvidx[$i]};
+    printf OUT $format,$pvidx[$i],$pvbase[$i],$vn[$h],
+    $pgen[$i],$volt[$i],$qmax[$i],$qmin[$i],$vmax[$h],$vmin[$h];
+}
+$npv >= 0 && printf OUT "  ];\n\n";
+
+# -----------------------------------------------------------------------
+# write Supply.con
+# -----------------------------------------------------------------------
+$nsupply >= 0 && print OUT "Supply.con = [ ...\n";
+$format = "%4d %8.2f 0 %8.5f %8.5f 0 %8.5f %8.5f %8.5f 0 0 0 0 0;\n";
+for ($i = 0; $i <= $nsupply; $i++) {
+    printf OUT $format,$supply[$i],$subase[$i],
+    $pmax[$i],$pmin[$i],$c0[$i],$c1[$i],$c2[$i];
+}
+$nsupply >= 0 && printf OUT "  ];\n\n";
+
+# -----------------------------------------------------------------------
+# write PQ.con
+# -----------------------------------------------------------------------
+$npq >= 0 && print OUT "PQ.con = [ ...\n";
+$format = "%4d $pbas %8.2f %8.5f %8.5f %8.5f %8.5f 0;\n";
+for ($i = 0; $i <= $npq; $i++) {
+    $h = $busnumb{$pqidx[$i]};
+    printf OUT $format,$pqidx[$i],$vn[$h],
+    $sa0[$i],$sr0[$i],$vmax[$h],$vmin[$h];
+}
+$npq >= 0 && printf OUT "  ];\n\n";
+
+# -----------------------------------------------------------------------
+# write Pl.con
+# -----------------------------------------------------------------------
+$npl >= 0 && print OUT "Pl.con = [ ...\n";
+$format = "%4d $pbas %8.2f 60 %8.5f %8.5f 0 %8.5f %8.5f 0 0'\n";
+for ($i = 0; $i <= $npl; $i++) {
+    $h = $busnumb{$plidx[$i]};
+    printf OUT $format, $plidx[$i],$vn[$h],
+    $za0[$i],$ia0[$i],$zr0[$i],$ir0[$i];
+}
+$npl >= 0 && printf OUT "  ];\n\n";
+
+# -----------------------------------------------------------------------
+# write Shunt.con
+# -----------------------------------------------------------------------
+$nsh >= 0 && print OUT "Shunt.con = [ ...\n";
+$format = "%4d $pbas %8.2f 60 %8.5f %8.5f;\n";
+for ($i = 0; $i <= $nsh; $i++) {
+    printf OUT $format, $shidx[$i],$kvsh[$i],$gsh[$i],$bsh[$i];
+}
+$h = $nsh;
+$nsh >= 0 && printf OUT "  ];\n\n";
+
+# -----------------------------------------------------------------------
+# write Line.con
+# -----------------------------------------------------------------------
+$nline >= 0 && print OUT "Line.con = [ ...\n";
+$format = "%4d %4d $pbas %8.2f 60 0 %7.4f " . "%8.5f " x 5 . "%8.3f %8.3f %8.3f;\n";
+for ($i = 0; $i <= $nline; $i++) {
+    printf OUT $format,$busfr[$i],$busto[$i],
+    $kvbase[$i],$kt[$i],$rest[$i],$reat[$i],$susc[$i],$tap[$i],
+    $phi[$i],$iijmax[$i],$pijmax[$i],$sijmax[$i];
+}
+$i = $nline;
+$nline >= 0 && printf OUT "  ];\n\n";
+
+# -----------------------------------------------------------------------
+# write bus names
+# -----------------------------------------------------------------------
+$nbus >= 0 && print OUT "Bus.names = { ...\n";
+$h = ($nbus+1) % 5;
+if ($h == 0) {$h = 5;}
+if (($nbus+1) > 5) {
+    for ($i = 0; $i <= $nbus-$h; $i+=5) {
+	print OUT "  '$busname{$i}'; '$busname{$i+1}'; " . 
+	    "'$busname{$i+2}'; '$busname{$i+3}'; '$busname{$i+4}';\n";
+    }
+}
+print OUT "  ";
+for ($i = $nbus-$h+1; $i <= $nbus-1; $i++) {
+    print OUT "'$busname{$i}'; ";
+}
+print OUT "'$busname{$nbus}'};\n\n";
+
+# -----------------------------------------------------------------------
+# close output data file
+# -----------------------------------------------------------------------
+close(OUT) || die "cannot close $ARGV[1]: $!\n";
+print "Conversion completed.\n";
+
+# -----------------------------------------------------------------------
+# function for formatting data and/or assigning default values
+# -----------------------------------------------------------------------
+sub assign {
+    my $param;
+    $param = substr($_[0],$_[1],$_[2]);
+    $param =~ s/\s*//g;
+    unless ($param) {$param = "0";}
+    #$param =~ s/^0*\.0*//;
+    unless ($param =~ /[1-9]/) {$param = $_[3];}
+    return $param;
+}
+
+# -----------------------------------------------------------------------
+# function for formatting data and/or assigning default values
+# -----------------------------------------------------------------------
+sub deblank {
+    my $name = $_[0];
+    $name =~ s/( *)$//;
+    return $name;
+}
+
+# -----------------------------------------------------------------------
+# function for writing a separator
+# -----------------------------------------------------------------------
+sub carret {
+    $verbose && print "-" x 50 . "\n";
+}
+
+# -----------------------------------------------------------------------
+# function for scanning the file up to the data entries
+# -----------------------------------------------------------------------
+sub scanfile {
+
+    my $tag = "DATA \\(" . $_[0] . ", \\[";
+    my @names;
+    my $numidx = -1;
+    my %index;
+
+    $_ =~ s/$tag//;
+    $_ =~ s/\]\)//;
+    $_ =~ s/\s*//g;
+    @names = split(",");
+    foreach (@names) {
+	$numidx++;
+	$index{$_} = $numidx;
+    }
+    while (<IN>) {		
+	if (m/^\{/) {last;}
+	$_ =~ s/$tag//;
+	$_ =~ s/\]\)//;
+	$_ =~ s/\s*//g;
+	@names = split(",");
+	foreach (@names) {
+	    $numidx++;
+	    $index{$_} = $numidx;
+	}
+    }
+    return %index;
+}
+
+# -----------------------------------------------------------------------
+# function splitting data
+# -----------------------------------------------------------------------
+sub splitdata {
+    my $nn = 0;
+    my @localdata;
+
+    $nn = 0;
+    while ($_[0]) {
+	$_[0] =~ s/\s*-?\d+[\.,]?\d*\s*|\s*\".*?\"\s*//;
+	$localdata[$nn] = $&;
+	$localdata[$nn] =~ s/^\s*\"?//;
+	$localdata[$nn] =~ s/,/\./;
+	$localdata[$nn] =~ s/\s*\"?\s*$//;
+	$nn++;
+	if ($nn > 100) {die "Bad input string (infinite regexp loop...)";}
+    }
+    return @localdata;
+}

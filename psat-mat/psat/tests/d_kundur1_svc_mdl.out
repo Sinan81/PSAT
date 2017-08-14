@@ -1,0 +1,40 @@
+DOME 2014.05.05(01)
+ 
+Copyright (C) 2010-2014 Federico Milano
+DOME comes with ABSOLUTELY NO WARRANTY
+ 
+Interpreter:  CPython 2.7.5 
+Platform:     linux2
+BLAS library: ATLAS (sequential)
+Usage:        command line
+Session:      Wed May  7 16:06:01 2014
+Mode:         single process
+ 
+System structure populated in 0.01396 s
+Parsing input file <.domerc>
+Parsing input file <d_kundur1_svc_mdl.m>
+Input data file parsed in 0.00494 s
+Writing output file <d_kundur1_svc_mdl_dome.dm>
+Writing output data file completed in 0.27382 s
+Setting up devices completed in 0.00361 s
+The system is interconnected
+
+Power Flow Analysis
+
+Solver:  standard Newton-Raphson
+Library: KLU
+Model:   Single slack bus
+
+Iter. 1    --> max. mismatch: 1.56680584
+Iter. 2    --> max. mismatch: 2.58201264
+Iter. 3    --> max. mismatch: 0.09703024
+Iter. 4    --> max. mismatch: 0.00027602
+Iter. 5    --> max. mismatch: 0.00000000
+Power flow analysis completed in 0.00129 s
+Post power flow operations completed in 0.00135 s
+Static report saved in file <d_kundur1_svc_mdl_pfa.txt>
+Report file written in 0.00202 s
+
+Total computing time: 0.30102 s
+Normal completion
+

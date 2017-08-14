@@ -1,0 +1,178 @@
+POWER FLOW REPORT
+ 
+DOME  2014.05.05(01)
+ 
+Author:  Federico Milano, (c) 2010-2014 Federico Milano
+e-mail:  federico.milano@ucd.ie
+website: faraday1.ucd.ie
+ 
+File:  /media/data/research/fmilano/Apps/psat/tests/d_kundur1_svc_mdl.m
+Date:  Wed May  7 16:06:02 2014
+
+AC NETWORK STATISTICS
+
+Buses         11          
+Lines         8           
+Transformers  4           
+Generators    9           
+Loads         2           
+
+SOLUTION STATISTICS
+
+Number of Iterations  5           
+System S rate  [MVA]  100         
+Max. P mismatch [pu]  1.2158e-14  
+Max. Q mismatch [pu]  2.8058e-14  
+
+POWER FLOW RESULTS
+
+Bus          V            Vn           phase        P gen        Q gen        P load       Q load       
+             [pu]         [kV]         [rad]        [pu]         [pu]         [pu]         [pu]         
+
+Bus 01        1.03         20           0.30743      7            1.4801       0            0           
+Bus 02        1.01         20           0.13869      7            1.4547       0            0           
+Bus 03        1.03         20          -0.11868      7.1539       1.3604       0            0           
+Bus 04        1.01         20          -0.29314      7            1.0806       0            0           
+Bus 05        1.0124       230          0.19532      0           -0            0            0           
+Bus 06        0.99274      230          0.02207      0            0            0            0           
+Bus 07        0.98727      230         -0.11987     -0           -0            9.67        -1           
+Bus 08        1.03         230         -0.34265      0            2.0381       0            0           
+Bus 09        0.9989       230         -0.55053     -0           -0            17.67       -2.5         
+Bus 10        0.99887      230         -0.40904     -0           -0            0            0           
+Bus 11        1.0146       230         -0.23302     -0           -0            0            0           
+
+STATE VARIABLES
+
+Name         Units        Base         Value        
+
+delta Syn6b 1 rad           1            1.0851      
+omega Syn6b 1 pu(Hz)        60           1           
+e1d Syn6b 1  pu(kV)        20           0.46211     
+e1q Syn6b 1  pu(kV)        20           0.93061     
+e2q Syn6b 1  pu(kV)        20           0.89589     
+e2d Syn6b 1  pu(kV)        20           0.61776     
+delta Syn6b 2 rad           1            0.93364     
+omega Syn6b 2 pu(Hz)        60           1           
+e1d Syn6b 2  pu(kV)        20           0.46106     
+e1q Syn6b 2  pu(kV)        20           0.91002     
+e2q Syn6b 2  pu(kV)        20           0.87383     
+e2d Syn6b 2  pu(kV)        20           0.61635     
+delta Syn6b 3 rad           1            0.67834     
+omega Syn6b 3 pu(Hz)        60           1           
+e1d Syn6b 3  pu(kV)        20           0.47111     
+e1q Syn6b 3  pu(kV)        20           0.92033     
+e2q Syn6b 3  pu(kV)        20           0.88453     
+e2d Syn6b 3  pu(kV)        20           0.62979     
+delta Syn6b 4 rad           1            0.52982     
+omega Syn6b 4 pu(Hz)        60           1           
+e1d Syn6b 4  pu(kV)        20           0.47349     
+e1q Syn6b 4  pu(kV)        20           0.8846      
+e2q Syn6b 4  pu(kV)        20           0.8493      
+e2d Syn6b 4  pu(kV)        20           0.63298     
+vm Avr1 1    pu(kV)        20           1.03        
+vf Avr1 1    pu(kV)        20           1.8934      
+vr1 Avr1 1   pu(kV)        20           1.9746      
+vr2 Avr1 1   -             1           -0.13149     
+vm Avr1 2    pu(kV)        20           1.01        
+vf Avr1 2    pu(kV)        20           1.8996      
+vr1 Avr1 2   pu(kV)        20           1.9816      
+vr2 Avr1 2   -             1           -0.13192     
+vm Avr1 3    pu(kV)        20           1.01        
+vf Avr1 3    pu(kV)        20           1.8497      
+vr1 Avr1 3   pu(kV)        20           1.9254      
+vr2 Avr1 3   -             1           -0.12845     
+vm Avr1 4    pu(kV)        20           1.03        
+vf Avr1 4    pu(kV)        20           1.8991      
+vr1 Avr1 4   pu(kV)        20           1.981       
+vr2 Avr1 4   -             1           -0.13188     
+
+ALGEBRAIC VARIABLES
+
+Name         Units        Base         Value        
+
+q PVgen 1    pu(MVAr)      100          1.4801      
+q PVgen 2    pu(MVAr)      100          1.4547      
+q PVgen 3    pu(MVAr)      100          2.0381      
+q PVgen 4    pu(MVAr)      100          1.0806      
+q Slack 1    pu(MVAr)      100          1.3604      
+kg Slack 1   -             1            7.1539      
+p Syn6b 1    pu(MW)        100          7           
+q Syn6b 1    pu(MVAr)      100          1.4801      
+pm Syn6b 1   pu(MW)        100          7.0134      
+vf Syn6b 1   pu(kV)        20           1.8934      
+Id Syn6b 1   pu(kA)        2.8868       5.7922      
+Iq Syn6b 1   pu(kA)        2.8868       3.8344      
+vd Syn6b 1   pu(kV)        20           0.72267     
+vq Syn6b 1   pu(kV)        20           0.73393     
+psid Syn6b 1 pu(kWb)       0.05305      0.735       
+psiq Syn6b 1 pu(kWb)       0.05305     -0.72428     
+p Syn6b 2    pu(MW)        100          7           
+q Syn6b 2    pu(MVAr)      100          1.4547      
+pm Syn6b 2   pu(MW)        100          7.0139      
+vf Syn6b 2   pu(kV)        20           1.8996      
+Id Syn6b 2   pu(kA)        2.8868       5.9559      
+Iq Syn6b 2   pu(kA)        2.8868       3.8256      
+vd Syn6b 2   pu(kV)        20           0.72096     
+vq Syn6b 2   pu(kV)        20           0.70733     
+psid Syn6b 2 pu(kWb)       0.05305      0.70839     
+psiq Syn6b 2 pu(kWb)       0.05305     -0.72262     
+p Syn6b 3    pu(MW)        100          7.1539      
+q Syn6b 3    pu(MVAr)      100          1.3604      
+pm Syn6b 3   pu(MW)        100          7.1678      
+vf Syn6b 3   pu(kV)        20           1.8991      
+Id Syn6b 3   pu(kA)        2.8868       5.891       
+Iq Syn6b 3   pu(kA)        2.8868       3.909       
+vd Syn6b 3   pu(kV)        20           0.73674     
+vq Syn6b 3   pu(kV)        20           0.71981     
+psid Syn6b 3 pu(kWb)       0.05305      0.72089     
+psiq Syn6b 3 pu(kWb)       0.05305     -0.73837     
+p Syn6b 4    pu(MW)        100          7           
+q Syn6b 4    pu(MVAr)      100          1.0806      
+pm Syn6b 4   pu(MW)        100          7.0137      
+vf Syn6b 4   pu(kV)        20           1.8497      
+Id Syn6b 4   pu(kA)        2.8868       5.8089      
+Iq Syn6b 4   pu(kA)        2.8868       3.9288      
+vd Syn6b 4   pu(kV)        20           0.7405      
+vq Syn6b 4   pu(kV)        20           0.68685     
+psid Syn6b 4 pu(kWb)       0.05305      0.68794     
+psiq Syn6b 4 pu(kWb)       0.05305     -0.74211     
+delta COI 1  rad           1            0.81192     
+omega COI 1  pu(Hz)        1            1           
+vref Avr1 1  pu(kV)        20           1.1287      
+vref Avr1 2  pu(kV)        20           1.1091      
+vref Avr1 3  pu(kV)        20           1.1063      
+vref Avr1 4  pu(kV)        20           1.1291      
+
+LINE FLOWS
+
+From Bus     To Bus       Line         Pij Flow     Pji Flow     Qij Flow     Qji Flow     P Loss       Q Loss       
+                                       [pu]         [pu]         [pu]         [pu]         [pu]         [pu]         
+
+Bus 05       Bus 06       Line 5-6      7           -6.8793       0.67588      0.48719      0.12071      1.1631      
+Bus 06       Bus 07       Line 6-7      13.879      -13.684       0.13232      1.8054       0.19548      1.9377      
+Bus 09       Bus 08       Line 9-8     -1.9193       1.96         0.06284      0.24553      0.04074      0.30837     
+Bus 07       Bus 08       Line 7-8      2.0069      -1.96        -0.40268      0.77354      0.04688      0.37086     
+Bus 11       Bus 10       Line 11-10    7.1539      -7.0289       0.52736      0.6785       0.12502      1.2059      
+Bus 10       Bus 09       Line 10-9     14.029      -13.831      -0.41756      2.3743       0.19742      1.9568      
+Bus 09       Bus 08       Line 9-8     -1.9193       1.96         0.06284      0.24553      0.04074      0.30837     
+Bus 07       Bus 08       Line 7-8      2.0069      -1.96        -0.40268      0.77354      0.04688      0.37086     
+Bus 01       Bus 05       Traf 1-5      7           -7            1.4801      -0.67588      0            0.8042      
+Bus 02       Bus 06       Traf 2-6      7           -7            1.4547      -0.61951      0            0.83514     
+Bus 04       Bus 10       Traf 4-10     7           -7            1.0806      -0.26094      0            0.81965     
+Bus 03       Bus 11       Traf 3-11     7.1539      -7.1539       1.3604      -0.52736      0            0.83308     
+
+TOTAL GENERATION
+
+REAL POWER [pu]  28.154      
+REACTIVE POWER [pu]  7.4139      
+
+TOTAL LOAD
+
+REAL POWER [pu]  27.34       
+REACTIVE POWER [pu] -3.5         
+
+TOTAL LOSSES
+
+REAL POWER [pu]  0.81388     
+REACTIVE POWER [pu]  10.914      
+

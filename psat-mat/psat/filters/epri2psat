@@ -1,0 +1,439 @@
+#!/usr/bin/perl -w
+# EPRI2PSAT converts EPRI/WSCC data file into PSAT data file
+#
+# EPRI2PSAT <OPTIONS> FILEINPUT <FILEOUTPUT>
+#
+# Author:  Federico Milano
+# Date:    14-Feb-2006
+# Version: 1.0.0
+#
+#E-mail:    fmilano@thunderbox.uwaterloo.ca
+#Web-site:  http://thunderbox.uwaterloo.ca/~fmilano
+
+use strict;
+
+# -----------------------------------------------------------------------
+# variable declaration
+# -----------------------------------------------------------------------
+my $nargin = 0;
+my $verbose = 0;
+my $helpmsg = 0;
+my ($i,$k);
+my $h = 1;
+my $format;
+my $n = 0;
+my $npv = -1;
+my $nsw = -1;
+my $npq = -1;
+my $nsh = -1;
+my $ntitle = 0;
+my (@idxpv, $idxsw, @idxpq, @idxsh);
+my $pbas = 100;
+my $freq = 60;
+my @title;
+my $blanks = " " x 100;
+my $iter = 20;
+my $toler = 0.0001;
+my $nbus = -1;
+my $nline = -1;
+my $narea = -1;
+my ($name,$value1,$value2);
+my $check = 0;
+my ($swname,$swkv,$swang,$swein);
+my (@ein,@ang,@pag,@pma,@qmi,@qma,@psh,@pac,@prc,@qsh,@kvb,@kzone,@vmi);    
+my %kvbase;
+my (@busname,@busfr,@busto);
+my (@kv1,@kv2,@rest,@reat,@susc,@tfas,@phsf,@imax,@smax);	    
+
+# -----------------------------------------------------------------------
+# check inputs
+# -----------------------------------------------------------------------
+$nargin = @ARGV;
+$nargin || die "Error: No input data file.\n";
+$title[$ntitle] = "Generic EPRI Data Format File ".$ARGV[0]."\n";
+
+# -----------------------------------------------------------------------
+# check options
+# -----------------------------------------------------------------------
+while ($ARGV[0] =~ /^-/) {
+    if ($ARGV[0] =~ /v/) {$verbose = 1;}
+    if ($ARGV[0] =~ /h/) {$helpmsg = 1;}
+    shift(@ARGV);
+    $nargin--;
+    if ($nargin == 0) { 
+	last;
+    }
+}
+
+# -----------------------------------------------------------------------
+# help (if requested)
+# -----------------------------------------------------------------------
+if ($helpmsg) {
+    print "\nEPRI2PSAT converts EPRI data files into PSAT data files.\n\n";
+    print "ieee2psat <options> fileinput <fileoutput>\n";
+    print "  -v   verbose\n";
+    print "  -h   print this help and exit\n\n";
+    print "Author:   Federico Milano\n";
+    print "Date:     14-Feb-2006\n";
+    print "Version:  1.0.0\n\n";
+    print "E-mail:   fmilano\@thunderbox.uwaterloo.ca\n";
+    print "Web-site: http://thunderbox.uwaterloo.ca/~fmilano\n";
+    die "\n";
+}
+
+# -----------------------------------------------------------------------
+# define output file name (if necessary)
+# -----------------------------------------------------------------------
+if ($nargin == 1) {
+    $ARGV[1] = $ARGV[0];
+    $ARGV[1] =~ s/^d*_*/d_/;
+    $ARGV[1] =~ s/[^\w\.]/_/g;
+    $ARGV[1] =~ s/\..+$/.m/;
+} elsif ($nargin == 0) {
+    die "Error: Input file name is missing.\n";
+}
+
+# -----------------------------------------------------------------------
+# open input data file
+# -----------------------------------------------------------------------
+print "Opening EPRI file \"$ARGV[0]\"...\n";
+carret();
+open(IN,$ARGV[0]) || die "cannot open $ARGV[0]: $!\n";
+
+# -----------------------------------------------------------------------
+# find header
+# -----------------------------------------------------------------------
+while (<IN>) {
+    chomp;
+    if (/^HDG/) {
+	print "EPRI data file is in WSCC/ETMSP format\n";
+	next;
+    } elsif (/^CASEID/) {
+	print "EPRI data file is in BPA/China format\n";
+	$ntitle++;
+	$title[$ntitle] = $_;
+	last;
+    } elsif (/^[C|\.]/) {
+	next;
+    } elsif (/^[BAS|\/NETWORK_DATA\\]/) {
+	last;
+    } elsif (/^\//) {
+	next;
+    } else {
+	$ntitle++;
+	$title[$ntitle] = $_;
+    }
+}
+unless ($ntitle) {die "The data are not in the correct format.";}
+
+# -----------------------------------------------------------------------
+# scan data
+# -----------------------------------------------------------------------
+while (<IN>) {
+    chomp;
+    $_ = $_ . $blanks;
+    if (/^[C|\.]/) { # this a comment line ...
+	next;
+    } elsif (/^-999/) { # end of bus data in BPS/China format ...
+	next;	
+    } elsif (/^B/) { # bus data	
+	
+	# skip DC bus and control data
+	if (/^BD/) { next; } 
+	if (/^BZ/) { next; } 
+	
+	$nbus++;
+	$busname[$nbus] = substr($_,6,8);
+	$busname[$nbus] =~ s/(\s*)$//;
+	$kvb[$nbus] = getval($_,15,18,1);
+	$kvbase{$busname[$nbus]} = $nbus;
+	$kzone[$nbus] = getval($_,19,20,1);
+	$pac[$nbus] = getval($_,21,25,0)/$pbas;
+	$prc[$nbus] = getval($_,26,30,0)/$pbas;
+	$psh[$nbus] = getval($_,31,34,0)/$pbas;
+	$qsh[$nbus] = getval($_,35,38,0)/$pbas;
+	$pma[$nbus] = getval($_,39,42,0)/$pbas;
+	$pag[$nbus] = getval($_,43,47,0)/$pbas;
+	$qma[$nbus] = getval($_,48,52,0)/$pbas;
+	$qmi[$nbus] = getval($_,53,57,0)/$pbas;
+	$ein[$nbus] = assign($_,58,61,1,10,1000);
+	$vmi[$nbus] = assign($_,62,65,1,10,1000);
+
+	#RemoteBusName(Bus_n,1) = getv(sline,66,73);
+	#RemoteBuskV(Bus_n,1) = getv(sline,74,77);
+	#Qperc(Bus_n,1) = getv(sline,78,80);
+	
+	if ($psh[$nbus] != 0 || $qsh[$nbus] != 0) {
+	    $nsh++;
+	    $idxsh[$nsh] = $nbus;	    
+	}
+
+	if ($pac[$nbus] != 0 || $prc[$nbus] != 0) {
+	    $npq++;
+	    $idxpq[$npq] = $nbus;	    
+	}
+	
+	if (/^BQ/) { # PV generator with Q limits
+	    $npv++;
+	    $idxpv[$npv] = $nbus;
+	} elsif (/^BE/) { # PV generator without Q limits
+	    $npv++;
+	    $idxpv[$npv] = $nbus;
+	} elsif (/^BV/) { # PQ generator with V limits
+	    next;
+	} elsif (/^BG/) { # PQ generator with Q limits
+	    next;
+	} elsif (/^BC/) { # PV load with remotr V control
+	    next;
+	} elsif (/^BT/) { # PQ load with LTC controlled V
+	    next;
+	} elsif (/^BS/) { # Slack bus
+	    $nsw++;
+	    $idxsw = $nbus;
+	    $swkv = $kvb[$nbus];
+	    $swein = $ein[$nbus];
+	    $swang = 0.00;
+	}
+	$verbose && printf("Found Bus  %4d:  $busname[$nbus]\n",$nbus+1);
+
+    } elsif (/^L/) { # line data
+
+	# skip DC line data
+	if (/^LD/) { next; } 
+ 
+	$nline++;
+	$name = substr($_,6,8);
+	$name =~ s/(\s*)$//;
+	$busfr[$nline] = $kvbase{$name}+1;
+	$name = substr($_,19,8);
+	$name =~ s/(\s*)$//;
+	$busto[$nline] = $kvbase{$name}+1;
+	$kv1[$nline] = getval($_,15,18,1);
+	$kv2[$nline] = getval($_,28,31,1);
+	$rest[$nline] = assign($_,39,44,0,10,100000);
+	$reat[$nline] = assign($_,45,50,0,10,100000);	    
+	$susc[$nline] = assign($_,57,62,0,10,100000)*2;
+	$tfas[$nline] = 0;
+	$phsf[$nline] = 0;
+	$imax[$nline] = sqrt(3)*$kv1[$nline] * 
+	    assign($_,34,37,0,100000,100000)/$pbas/1000;
+	$smax[$nline] = 0;
+
+	$verbose && printf("Found Line %4d: %4d -> %4d\n",
+			   $nline+1,$busfr[$nline],$busto[$nline]);
+	
+    } elsif (/^T/) { # transformer data
+
+	$nline++;
+	$name = substr($_,6,8);
+	$name =~ s/(\s*)$//;
+	$busfr[$nline] = $kvbase{$name}+1;
+	$name = substr($_,19,8);
+	$name =~ s/(\s*)$//;
+	$busto[$nline] = $kvbase{$name}+1;
+	$kv1[$nline] = getval($_,15,18,1);
+	$kv2[$nline] = getval($_,28,31,1);
+	$rest[$nline] = assign($_,39,44,0,10,100000);
+	$reat[$nline] = assign($_,45,50,0,10,100000);	    
+	$susc[$nline] = assign($_,57,62,0,10,100000);
+	$imax[$nline] = 0;
+	$smax[$nline] = assign($_,34,38,0,100000,100000)/$pbas;
+	$value1 = assign($_,63,67,1,1000,100);
+	$value2 = assign($_,68,72,1,1000,100);
+	$tfas[$nline] = ($value1/$kv1[$nline])/($value2/$kv2[$nline]);
+	$phsf[$nline] = 0;
+	
+    } elsif (/^RT/) { # regulating transformer data
+
+	next;
+
+    } elsif (/^SOL/) { # slack data 
+
+	$nsw++;
+	$swname = substr($_,30,8);
+	$swname =~ s/(\s*)$//;
+	$idxsw = $kvbase{$swname};
+	$swkv = getval($_,39,45,$kvb[$idxsw]);
+	$swein = $ein[$idxsw];
+	$swang = getval($_,46,55,0);
+
+    } elsif (/^ZZ/) { # end of data
+
+	next;
+
+    } elsif (/^END/) { # end of file
+
+	last;
+
+    }
+
+}
+
+# -----------------------------------------------------------------------
+# close input data file
+# -----------------------------------------------------------------------
+close(IN) || die "cannot close $ARGV[0]: $!\n";
+
+# -----------------------------------------------------------------------
+# open output data file
+# -----------------------------------------------------------------------
+print "Writing PSAT file \"$ARGV[1]\"...\n";
+carret();
+open(OUT,">$ARGV[1]") || die "cannot open $ARGV[1]: $!\n";
+
+# -----------------------------------------------------------------------
+# write output data file
+# -----------------------------------------------------------------------
+print OUT "% File generated by PSAT from EPRI data file.\n";
+print OUT "% "."-" x 78 . "\n";
+print OUT "% Author:   Federico Milano\n";
+print OUT "% E-mail:   fmilano\@thunderbox.uwaterloo.ca\n";
+print OUT "% Web-site: http://thunderbox.uwaterloo.ca/~fmilano\n";
+print OUT "% "."-" x 78 . "\n";
+for ($i = 0; $i <= $ntitle; $i++) { print OUT "% $title[$i]\n"; }
+
+# -----------------------------------------------------------------------
+# write Bus.con
+# -----------------------------------------------------------------------
+if ($nbus >= 0) {
+    $format = "%4d %6.2f %8.5f 0 1 %2d;\n";
+    printf OUT "Bus.con = [ ...\n";
+    for ($i = 0; $i <= $nbus; $i++) {
+	printf OUT $format,$i+1,$kvb[$i],$ein[$i],$kzone[$i];
+    }
+    printf OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write SW.con
+# -----------------------------------------------------------------------
+if ($nsw >= 0) {
+    printf OUT "SW.con = [ ...\n";
+    $format = "%4d 100 %6.2f " . "%8.5f " x 4 . "1.1 0.9 %8.5f 1;\n";
+    $h = $idxsw;
+    printf OUT $format,$h+1,$kvb[$h],$swein,$swang,$qma[$h],$qmi[$h],$pag[$h];
+    printf OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write PV.con
+# -----------------------------------------------------------------------
+if ($npv >= 0) {
+    printf OUT "PV.con = [ ...\n";
+    $format = "%4d 100 %6.2f " . "%8.5f " x 4 . "1.1 0.9 1;\n";
+    for ($i = 0; $i <= $npv; $i++) {
+	$h = $idxpv[$i];
+	if ($h == $idxsw) { next; }
+	printf OUT $format,$h+1,$kvb[$h],$pag[$h],$ein[$h],$qma[$h],$qmi[$h];
+    }
+    printf OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write PQ.con
+# -----------------------------------------------------------------------
+if ($npq >= 0) {
+    printf OUT "PQ.con = [ ...\n";
+    $format = "%4d 100 %6.2f %8.5f %8.5f 1.1 0.9 1;\n";
+    for ($i = 0; $i <= $npq; $i++) {
+	$h = $idxpq[$i];
+	printf OUT $format,$h+1,$kvb[$h],$pac[$h],$prc[$h];
+    }
+    printf OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write Shunt.con
+# -----------------------------------------------------------------------
+if ($nsh >= 0) {
+    printf OUT "Shunt.con = [ ...\n";
+    $format = "%4d 100 %8.2f 60 %8.5f %8.5f;\n";
+    for ($i = 0; $i <= $nsh; $i++) {
+	$h = $idxsh[$i];
+	printf OUT $format,$h+1,$kvb[$h],$psh[$h],$qsh[$h];
+    }
+    printf OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write Line.con
+# -----------------------------------------------------------------------
+if ($nline >= 0) {
+    printf OUT "Line.con = [ ...\n";
+    $format = "%4d %4d 100 %8.2f 60 0 %8.7f " . 
+	"%8.5f " x 6 . "0 %8.5f;\n";
+    for ($i = 0; $i <= $nline; $i++) {
+	$k = $kv1[$i]/$kv2[$i];
+	if ($k == 1) {$k = 0;}
+	printf OUT $format,$busfr[$i],$busto[$i],
+	$kv1[$i],$k,$rest[$i],$reat[$i],$susc[$i],
+	$tfas[$i],$phsf[$i],$imax[$i],$smax[$i];
+    }
+    printf OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write bus names
+# -----------------------------------------------------------------------
+$nbus >= 0 && print OUT "Bus.names = { ...\n";
+$h = ($nbus+1) % 5;
+if ($h == 0) {$h = 5;}
+if (($nbus+1) > 5) {
+    for ($i = 0; $i <= $nbus-$h; $i+=5) {
+	print OUT "  '$busname[$i]'; '$busname[$i+1]'; " . 
+	    "'$busname[$i+2]'; '$busname[$i+3]'; '$busname[$i+4]';\n";
+    }
+}
+print OUT "  ";
+for ($i = $nbus-$h+1; $i <= $nbus-1; $i++) {
+    print OUT "'$busname[$i]'; ";
+}
+print OUT "'$busname[$nbus]'};\n\n";
+
+# -----------------------------------------------------------------------
+# close output data file
+# -----------------------------------------------------------------------
+close(OUT) || die "cannot close $ARGV[1]: $!\n";
+print "Conversion completed.\n";
+
+# -----------------------------------------------------------------------
+# function for formatting data and/or assigning default values
+# -----------------------------------------------------------------------
+sub assign {
+    my $param;
+    $param = substr($_[0],$_[1]-1,$_[2]-$_[1]+1);
+    $param =~ s/^\./0\./;
+    $param =~ s/^-/-0\./;
+    $param =~ s/\s*//g;
+    unless ($param) {$param = "0";}
+    unless ($param =~ /[1-9]/) {$param = $_[3];}
+    if (abs($param) >= $_[4]) {$param /= $_[5];}
+    return $param;
+}
+
+# -----------------------------------------------------------------------
+# function for formatting data and/or assigning default values
+# -----------------------------------------------------------------------
+sub getval {
+    my $param;
+    $param = substr($_[0],$_[1]-1,$_[2]-$_[1]+1);
+    unless ($param) {$param = "0";}
+    unless ($param =~ /[1-9]/) {$param = $_[3];}
+    return $param;
+}
+
+# -----------------------------------------------------------------------
+# function for formatting data and/or assigning default values
+# -----------------------------------------------------------------------
+sub deblank {
+    my $name = $_[0];
+    $name =~ s/( *)$//;
+    return $name;
+}
+
+# -----------------------------------------------------------------------
+# function for writing a separator
+# -----------------------------------------------------------------------
+sub carret {
+    $verbose && print "-" x 50 . "\n";
+}

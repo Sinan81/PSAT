@@ -1,0 +1,279 @@
+#!/usr/bin/perl -w
+# VST2PSAT converts VST data file into PSAT data file
+#
+# VST2PSAT <OPTIONS> FILEINPUT <FILEOUTPUT>
+#
+# Author:  Federico Milano
+# Date:    05-Dec-2006
+# Version: 1.0.0
+# 
+# E-mail:    fmilano@thunderbox.uwaterloo.ca
+# Web-site:  http://thunderbox.uwaterloo.ca/~fmilano
+
+use strict;
+
+# -----------------------------------------------------------------------
+# variable declaration
+# -----------------------------------------------------------------------
+my $nargin = 0;
+my $verbose = 0;
+my $helpmsg = 0;
+my ($i,$h);
+
+my $nbus = -1;
+my $nsw = -1;
+my $npv = -1;
+my $npq = -1;
+my $nsh = -1;
+my $nline = -1;
+
+my $title1;
+my $format;
+
+my $busty;
+my (@busidx,@busnum,@busname,@busvol,@busang,@pgen,@qgen,@pcap,@qcap);
+my (@swidx,@pvidx,@pqidx,@shidx);
+my (@busfr,@busto,@rline,@xline,@linekt);
+
+# -----------------------------------------------------------------------
+# check inputs
+# -----------------------------------------------------------------------
+$nargin = @ARGV;
+$nargin || die "Error: No input data file.\n";
+
+# -----------------------------------------------------------------------
+# check options
+# -----------------------------------------------------------------------
+while ($ARGV[0] =~ /^-/) {
+    if ($ARGV[0] =~ /v/) {$verbose = 1;}
+    if ($ARGV[0] =~ /h/) {$helpmsg = 1;}
+    shift(@ARGV);
+    $nargin--;
+    if ($nargin == 0) { 
+	last;
+    }
+}
+$title1 = 'Generic VST data format '.$ARGV[0];
+
+# -----------------------------------------------------------------------
+# help (if requested)
+# -----------------------------------------------------------------------
+if ($helpmsg) {
+    print "\nVST2PSAT converts VST data files into PSAT data files.\n\n";
+    print "vst2psat <options> fileinput <fileoutput>\n";
+    print "  -v   verbose\n";
+    print "  -h   print this help and exit\n\n";
+    print "Date:     05-Dec-2006\n";
+    print "Version:  1.0.0\n\n";
+    print "Author:   Federico Milano\n";
+    print "E-mail:   fmilano\@thunderbox.uwaterloo.ca\n";
+    die "\n";
+}
+
+# -----------------------------------------------------------------------
+# define output file name (if necessary)
+# -----------------------------------------------------------------------
+if ($nargin == 1) {
+    $ARGV[1] = $ARGV[0];
+    $ARGV[1] =~ s/^d*_*/d_/;
+    $ARGV[1] =~ s/[^\w\.]/_/g;
+    $ARGV[1] =~ s/\..+$/.m/;
+} elsif ($nargin == 0) {
+    die "Error: Input file name is missing.\n";
+}
+
+# -----------------------------------------------------------------------
+# open input data file
+# -----------------------------------------------------------------------
+print "Opening VST data file \"$ARGV[0]\"...\n";
+open(IN,$ARGV[0]) || die "cannot open $ARGV[0]: $!\n";
+
+# read number of buses
+$_ = <IN>;
+chomp;
+$nbus = $_ - 1;
+
+# initialization
+$busidx[$nbus] = 0;
+$busnum[$nbus] = 0;
+$busname[$nbus] = " "; 
+$pgen[$nbus] = 0;
+$qgen[$nbus] = 0;
+$pcap[$nbus] = 0; 
+$qcap[$nbus] = 0; 
+$busvol[$nbus] = 0;
+$busang[$nbus] = 0;
+
+$nbus = -1;
+
+# read bus data
+while (<IN>) {
+
+    if (/^-999/) {last;}
+    chomp;
+
+    $nbus++;
+    $busidx[$nbus] = substr($_,0,5);
+    $busnum[$nbus] = substr($_,6,5);
+    $busname[$nbus] = substr($_,12,12);
+    $busty = substr($_,25,1);
+
+    $pgen[$nbus] = substr($_,26,10);
+    $qgen[$nbus] = substr($_,36,10);
+    $pcap[$nbus] = substr($_,46,9); 
+    $qcap[$nbus] = substr($_,55,9); 
+    $busvol[$nbus] = substr($_,64,9);
+    $busang[$nbus] = substr($_,73,9);
+
+    if ($busty == 3) { # slack bus
+	$nsw++;
+	$swidx[$nsw] = $nbus;
+    } elsif ($busty == 2) { # PV bus
+	$npv++;
+	$pvidx[$npv] = $nbus;
+    } elsif ($pgen[$nbus] != 0 || $qgen[$nbus] != 0) {
+	$npq++;	
+	$pqidx[$npq] = $nbus;
+    }
+    if ($pcap[$nbus] != 0 || $qcap[$nbus] != 0) {
+	$nsh++;
+	$shidx[$nsh] = $nbus;
+    }
+}
+
+# read number of lines
+$_ = <IN>;
+chomp;
+$nline = $_ - 1;
+
+# initialization
+$busfr[$nline] = 0;
+$busto[$nline] = 0;
+$linekt[$nline] = 0;
+$rline[$nline] = 0;
+$xline[$nline] = 0;
+
+$nline = -1;
+
+# read line data
+while (<IN>) {
+
+    if (/^-999/) {last;}
+    chomp;
+    $nline++;
+    $busfr[$nline] = $busnum[substr($_,0,5)-1];
+    $busto[$nline] = $busnum[substr($_,6,5)-1];
+    $linekt[$nline] = substr($_,12,1);
+    $rline[$nline]  = substr($_,13,11);
+    $xline[$nline]  = substr($_,24,11);
+
+}
+
+# -----------------------------------------------------------------------
+# close data file
+# -----------------------------------------------------------------------
+close(IN) || die "cannot close $ARGV[0]: $!\n";
+
+# -----------------------------------------------------------------------
+# open output data file
+# -----------------------------------------------------------------------
+print "Writing PSAT file \"$ARGV[1]\"...\n";
+open(OUT,">$ARGV[1]") || die "cannot open $ARGV[1]: $!\n";
+
+# -----------------------------------------------------------------------
+# write output data file
+# -----------------------------------------------------------------------
+print OUT "% File generated by PSAT from VST data file.\n";
+print OUT "% "."-" x 78 . "\n";
+print OUT "% Author:   Federico Milano\n";
+print OUT "% E-mail:   fmilano\@thunderbox.uwaterloo.ca\n";
+print OUT "% "."-" x 78 . "\n";
+print OUT "% $title1\n\n";
+
+# -----------------------------------------------------------------------
+# write Bus.con
+# -----------------------------------------------------------------------
+$format = "%5d 1.00 %8.5f  %8.5f  1  1;\n";
+$nbus >= 0 && print OUT "Bus.con = [ ...\n";
+for ($i = 0; $i <= $nbus; $i++) {
+    printf OUT $format,$busnum[$i],$busvol[$i],$busang[$i];
+}
+$nbus >= 0 && print OUT "  ];\n\n";
+
+# -----------------------------------------------------------------------
+# write SW.con
+# -----------------------------------------------------------------------
+if ($nsw >= 0) {
+    print OUT "SW.con = [ ...\n";
+    $format = "%4d 100 1 %8.5f %8.5f 999 -999 1.1 0.9 %8.5f  1];\n\n";
+    $h = $swidx[0];
+    printf OUT $format,$busnum[$h],$busvol[$h],$busang[$h],$pgen[$h];
+}
+ 
+# -----------------------------------------------------------------------
+# write PV.con
+# -----------------------------------------------------------------------
+$npv >= 0 && print OUT "PV.con = [ ...\n";
+$format = "%4d 100 1 %8.5f %8.5f 999 -999 1.1 0.9  1;\n";
+for ($i = 0; $i <= $npv; $i++) {
+    $h = $pvidx[$i];
+    printf OUT $format,$busnum[$h],$pgen[$h],$busvol[$h];
+}
+$npv >= 0 && print OUT "  ];\n\n";
+
+# -----------------------------------------------------------------------
+# write PQ.con
+# -----------------------------------------------------------------------
+$npq >= 0 && print OUT "PQ.con = [ ...\n";
+$format = "%4d 100 1 %8.5f %8.5f 1.1 0.9 1;\n";
+for ($i = 0; $i <= $npq; $i++) {
+    $h = $pqidx[$i];
+    printf OUT $format,$busnum[$h],-$pgen[$h],-$qgen[$h];
+}
+$npq >= 0 && print OUT "  ];\n\n";
+
+# -----------------------------------------------------------------------
+# write Shunt.con
+# -----------------------------------------------------------------------
+$nsh >= 0 && print OUT "Shunt.con = [ ...\n";
+$format = "%4d 100 1 60 %8.5f %8.5f;\n";
+for ($i = 0; $i <= $nsh; $i++) {
+    $h = $shidx[$i];
+    printf OUT $format,$busnum[$h],$pcap[$h],$qcap[$h];
+}
+$nsh >= 0 && print OUT "  ];\n\n";
+
+# -----------------------------------------------------------------------
+# write Line.con
+# -----------------------------------------------------------------------
+$nline >= 0 && print OUT "Line.con = [ ...\n";
+$format = "%4d %4d 100 1 60 0 %2d %8.5f %8.5f 0 0 0 0 0 0;\n";
+for ($i = 0; $i <= $nline; $i++) {
+    printf OUT $format,$busfr[$i],$busto[$i],
+    $linekt[$i],$rline[$i],$xline[$i];
+}
+$nline >= 0 && print OUT "  ];\n\n";
+
+# -----------------------------------------------------------------------
+# write bus names
+# -----------------------------------------------------------------------
+$nbus >= 0 && print OUT "Bus.names = { ...\n";
+$h = ($nbus+1) % 5;
+if ($h == 0) {$h = 5;}
+if (($nbus+1) > 5) {
+    for ($i = 0; $i <= $nbus-$h; $i+=5) {
+	print OUT "  '$busname[$i]'; '$busname[$i+1]'; " . 
+	    "'$busname[$i+2]'; '$busname[$i+3]'; '$busname[$i+4]';\n";
+    }
+}
+print OUT "  ";
+for ($i = $nbus-$h+1; $i <= $nbus-1; $i++) {
+    print OUT "'$busname[$i]'; ";
+}
+print OUT "'$busname[$nbus]'};\n\n";
+
+# -----------------------------------------------------------------------
+# close output data file
+# -----------------------------------------------------------------------
+close(OUT) || die "cannot close $ARGV[1]: $!\n";
+print "Conversion completed.\n";

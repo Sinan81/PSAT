@@ -1,0 +1,19 @@
+function a = init(a)
+
+a.con = [];
+a.n = 0;
+a.svc = [];
+a.statcom = [];
+a.sssc = [];
+a.tcsc = [];
+a.upfc = [];
+a.dfig = [];
+a.idx = [];
+a.type = [];
+a.v1 = [];
+a.v2 = [];
+a.v3 = [];
+a.Vs = [];
+a.kr = [];
+a.z = [];
+a.u = [];
