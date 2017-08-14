@@ -1,0 +1,4366 @@
+Library {
+  Name			  "fm_lib"
+  Version		  6.0
+  SavedCharacterEncoding  "UTF-8"
+  LibraryType		  "BlockLibrary"
+  SaveDefaultBlockParams  on
+  ScopeRefreshTime	  0.035000
+  OverrideScopeRefreshTime on
+  DisableAllScopes	  off
+  Created		  "Sat Jan 13 13:20:27 2001"
+  Creator		  "fmilano"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "federico"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Thu Jan 03 17:55:33 2013"
+  ModelVersionFormat	  "1.%<AutoIncrement:1192>"
+  ConfigurationManager	  "none"
+  SampleTimeColors	  off
+  LibraryLinkDisplay	  "none"
+  WideLines		  off
+  ShowLineDimensions	  off
+  ShowPortDataTypes	  off
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  ShowStorageClass	  off
+  ShowTestPointIcons	  on
+  ShowViewerIcons	  on
+  SortedOrder		  off
+  ExecutionContextIcon	  off
+  ShowLinearizationAnnotations on
+  BlockNameDataTip	  off
+  BlockParametersDataTip  off
+  BlockDescriptionStringDataTip	off
+  ToolBar		  off
+  StatusBar		  off
+  BrowserShowLibraryLinks off
+  BrowserLookUnderMasks	  off
+  SimulationMode	  "normal"
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "MATLABWorkspace"
+  RecordCoverage	  off
+  CovSaveName		  "covdata"
+  CovMetricSettings	  "dw"
+  CovNameIncrementing	  off
+  CovHtmlReporting	  on
+  covSaveCumulativeToWorkspaceVar on
+  CovSaveSingleToWorkspaceVar on
+  CovCumulativeReport	  off
+  CovReportOnPause	  on
+  ExtModeBatchMode	  off
+  ExtModeEnableFloating	  on
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigDurationFloating "auto"
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock off
+  ShowModelReferenceBlockVersion off
+  ShowModelReferenceBlockIO off
+  BlockDefaults {
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+    Orientation		    "right"
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      Constant
+      Value		      "1"
+      VectorParams1D	      on
+      SampleTime	      "inf"
+  OutDataTypeMode   "Inherit from 'Constant value'"
+  OutDataType   "fixdt(1,16,0)"
+  ConRadixGroup   "Use specified scaling"
+  OutScaling   "[]"
+    }
+    Block {
+      BlockType		      EnablePort
+      StatesWhenEnabling      "held"
+      ShowOutputPort	      off
+      ZeroCross		      on
+    }
+    Block {
+      BlockType		      From
+      IconDisplay	      "Tag"
+    }
+    Block {
+      BlockType		      Goto
+      IconDisplay	      "Tag"
+      TagVisibility	      "local"
+    }
+    Block {
+      BlockType		      Inport
+      Port		      "1"
+      BusOutputAsStruct	      off
+      PortDimensions	      "-1"
+      SampleTime	      "-1"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      LatchInput off
+      Interpolate	      on
+  DataType   "auto"
+  OutDataType   "fixdt(1,16,0)"
+  OutScaling   "[]"
+  UseBusObject   off
+  BusObject   "BusObject"
+    }
+    Block {
+      BlockType		      Outport
+      Port		      "1"
+      BusOutputAsStruct	      off
+      PortDimensions	      "-1"
+      SampleTime	      "-1"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      OutputWhenDisabled      "held"
+      InitialOutput	      "[]"
+  DataType   "auto"
+  OutDataType   "fixdt(1,16,0)"
+  OutScaling   "[]"
+  UseBusObject   off
+  BusObject   "BusObject"
+    }
+    Block {
+      BlockType		      PMComponent
+      SubClassName	      "unknown"
+    }
+    Block {
+      BlockType		      PMIOPort
+    }
+    Block {
+      BlockType		      SubSystem
+      ShowPortLabels	      "on"
+      Permissions	      "ReadWrite"
+      PermitHierarchicalResolution "All"
+      TreatAsAtomicUnit	      off
+      SystemSampleTime	      "-1"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      SimViewingDevice	      off
+      DataTypeOverride	      "UseLocalSettings"
+      MinMaxOverflowLogging   "UseLocalSettings"
+    }
+    Block {
+      BlockType		      Terminator
+    }
+  }
+  System {
+    Name		    "fm_lib"
+    Location		    [168, 203, 569, 449]
+    Open		    off
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    200
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "A4"
+    PaperUnits		    "inches"
+    ZoomFactor		    "100"
+    ReportName		    "simulink-default.rpt"
+    Block {
+      BlockType		      SubSystem
+      Name		      "Connections"
+      Tag		      "PSATfolder"
+      Description	      "Connections"
+      Ports		      []
+      Position		      [42, 17, 104, 76]
+      ShowName		      off
+      FontSize		      12
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      MaskInitialization      "x = fm_draw('connections');"
+      MaskDisplay	      "image(x)"
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      System {
+	Name			"Connections"
+	Location		[182, 308, 601, 557]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Bus1"
+	  Tag			  "PSATblock"
+	  Description		  "Connection"
+	  Ports			  [0, 0, 0, 0, 0, 2, 1]
+	  Position		  [55, 80, 110, 85]
+	  Orientation		  "down"
+	  BackgroundColor	  "black"
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0|__newl1"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Bus"
+	  MaskDescription	  "Bus block."
+	  MaskPromptString	  "Number of inputs:|Number of outputs:|Voltage Rating [kV]|Voltage initial guess [p.u.  rad]|Area"
+	  " number|Region number"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit"
+	  MaskVariables		  "in=@1;out=@2;p2q=@3;p3_4q=@4;p5q=@5;p6q=@6;"
+	  MaskTunableValueString  "on,on,on,on,on,on"
+	  MaskCallbackString	  "||||fm_block|"
+	  MaskEnableString	  "on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on"
+	  MaskInitialization	  "fm_inout\n\n"
+	  MaskSelfModifiable	  on
+	  MaskDisplay		  "plot([0 1 1 0 0],[0 0 1 1 0])"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "2|1|400|[1.00  0.00]|1|1"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Bus2"
+	  Tag			  "PSATblock"
+	  Description		  "Connection"
+	  Ports			  [0, 0, 0, 0, 0, 3, 2]
+	  Position		  [55, 121, 60, 189]
+	  BackgroundColor	  "black"
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0|__newl1|__newl2"
+	  RConnTagsString	  "__newr0|__newr1"
+	  MaskType		  "Bus"
+	  MaskDescription	  "Bus block"
+	  MaskPromptString	  "Number of inputs:|Number of outputs:|Voltage Rating [kV]|Voltage initial guess [p.u.   rad]|Are"
+	  "a number|Region number"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit"
+	  MaskVariables		  "in=@1;out=@2;p2q=@3;p3_4q=@4;p5q=@5;p6q=@6;"
+	  MaskTunableValueString  "on,on,on,on,on,on"
+	  MaskCallbackString	  "||||fm_block|"
+	  MaskEnableString	  "on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on"
+	  MaskInitialization	  "fm_inout\n\n"
+	  MaskSelfModifiable	  on
+	  MaskDisplay		  "plot([0 1 1 0 0],[0 0 1 1 0])"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "3|2|400|[1.00   0.00]|1|1"
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Bus3"
+	  Tag			  "PSATblock"
+	  Description		  "Connection"
+	  Ports			  [0, 1, 0, 0, 0, 3, 2]
+	  Position		  [115, 112, 120, 188]
+	  BackgroundColor	  "black"
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  MaskType		  "Bus"
+	  MaskDescription	  "Bus block."
+	  MaskPromptString	  "Number of inputs:|Number of outputs:|Voltage Rating [kV]|Voltage initial guess [p.u.  rad]|Area"
+	  " number|Region number|Input Signals   |Output Signals"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit,popup(0|1|2|3),popup(0|1|2|3)"
+	  MaskVariables		  "in=@1;out=@2;p2q=@3;p3_4q=@4;p5q=@5;p6q=@6;ins=@7;ous=@8;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "|||||||"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "fm_inout"
+	  MaskDisplay		  "plot([0 1 1 0 0],[0 0 1 1 0])"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "3|2|400|[1.00  0.00]|1|1|0|1"
+	  System {
+	    Name		    "Bus3"
+	    Location		    [62, 362, 518, 664]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Constant
+	      Name		      "g1"
+	      Position		      [130, 20, 155, 50]
+	    }
+	    Block {
+	      BlockType		      PMComponent
+	      Name		      "pmc"
+	      Ports		      [0, 0, 0, 0, 0, 2, 3]
+	      Position		      [130, 73, 230, 277]
+	      PhysicalDomain	      "psatdomain"
+	      LeftPortType	      "p1"
+	      RightPortType	      "p1"
+	      LConnTagsString	      "__newl0|__newl1"
+	      RConnTagsString	      "__newr0|__newr1|__newr2"
+	    }
+	    Block {
+	      BlockType		      PMIOPort
+	      Name		      "pmc_out_0"
+	      Tag		      "PMCPort"
+	      Position		      [275, 96, 305, 114]
+	      Orientation	      "left"
+	      Port		      "1"
+	      Side		      "Left"
+	    }
+	    Block {
+	      BlockType		      PMIOPort
+	      Name		      "pmc_in_0"
+	      Tag		      "PMCPort"
+	      Position		      [65, 116, 95, 134]
+	      Port		      "2"
+	      Side		      "Right"
+	    }
+	    Block {
+	      BlockType		      PMIOPort
+	      Name		      "pmc_in_1"
+	      Position		      [65, 216, 95, 234]
+	      Port		      "3"
+	      Side		      "Right"
+	    }
+	    Block {
+	      BlockType		      PMIOPort
+	      Name		      "pmc_out_1"
+	      Position		      [275, 166, 305, 184]
+	      Orientation	      "left"
+	      Port		      "4"
+	      Side		      "Left"
+	    }
+	    Block {
+	      BlockType		      PMIOPort
+	      Name		      "pmc_out_2"
+	      Position		      [275, 236, 305, 254]
+	      Orientation	      "left"
+	      Port		      "5"
+	      Side		      "Left"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "out_1"
+	      Position		      [185, 25, 205, 45]
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      LineType		      "Connection"
+	      SrcBlock		      "pmc_in_0"
+	      SrcPort		      RConn1
+	      DstBlock		      "pmc"
+	      DstPort		      LConn1
+	    }
+	    Line {
+	      LineType		      "Connection"
+	      SrcBlock		      "pmc"
+	      SrcPort		      RConn1
+	      DstBlock		      "pmc_out_0"
+	      DstPort		      RConn1
+	    }
+	    Line {
+	      SrcBlock		      "g1"
+	      SrcPort		      1
+	      DstBlock		      "out_1"
+	      DstPort		      1
+	    }
+	    Line {
+	      LineType		      "Connection"
+	      SrcBlock		      "pmc_in_1"
+	      SrcPort		      RConn1
+	      DstBlock		      "pmc"
+	      DstPort		      LConn2
+	    }
+	    Line {
+	      LineType		      "Connection"
+	      SrcBlock		      "pmc"
+	      SrcPort		      RConn2
+	      Points		      [0, 0]
+	      DstBlock		      "pmc_out_1"
+	      DstPort		      RConn1
+	    }
+	    Line {
+	      LineType		      "Connection"
+	      SrcBlock		      "pmc"
+	      SrcPort		      RConn3
+	      DstBlock		      "pmc_out_2"
+	      DstPort		      RConn1
+	    }
+	    Annotation {
+	      Name		      "Tap Changer Under Load "
+	      Position		      [164, 45]
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "From Bus2"
+	  Tag			  "PSATblock"
+	  Description		  "Connection"
+	  Position		  [325, 71, 365, 99]
+	  CloseFcn		  "tagdialog Close"
+	  GotoTag		  "A"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto Bus1"
+	  Tag			  "PSATblock"
+	  Description		  "Connection"
+	  Position		  [250, 70, 290, 100]
+	  GotoTag		  "A"
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Link1"
+	  Tag			  "PSATblock"
+	  Description		  "Connection"
+	  Ports			  [0, 0, 1, 0, 0, 1, 1]
+	  Position		  [178, 80, 212, 110]
+	  Orientation		  "down"
+	  ShowName		  off
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  MaskType		  "Link"
+	  MaskDescription	  "Link block"
+	  MaskInitialization	  "rot = strcmp(get_param(gcb,'NamePlacement'),'normal');\n"
+	  MaskSelfModifiable	  on
+	  MaskDisplay		  "plot([0.45 0],[0.5 0.5],[1 0.55],[0.5 0.5])\ncolor('green')\nplot([0.45 0.55 0.55 0.45 0.45],[0.45 "
+	  "0.45 0.55 0.55 0.45],[0.5 0.5],rot*0.45+[0.1 0.45])\nplot([0.45 0.55 0.55 0.45 0.45],rot*0.9+[0 0 0.1 0.1 0],1-rot,"
+	  "1-rot)\n"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  System {
+	    Name		    "Link1"
+	    Location		    [716, 243, 980, 409]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      EnablePort
+	      Name		      "Enable"
+	      Ports		      []
+	      Position		      [125, 115, 145, 135]
+	    }
+	    Block {
+	      BlockType		      PMComponent
+	      Name		      "Atomic Subsystem"
+	      Ports		      [0, 0, 0, 0, 0, 1, 1]
+	      Position		      [80, 54, 180, 96]
+	      ShowName		      off
+	      PhysicalDomain	      "psatdomain"
+	      LeftPortType	      "p1"
+	      RightPortType	      "p1"
+	      LConnTagsString	      "__newl0"
+	      RConnTagsString	      "__newr0"
+	    }
+	    Block {
+	      BlockType		      PMIOPort
+	      Name		      "Connection\nPort"
+	      Tag		      "PMCPort"
+	      Position		      [15, 66, 45, 84]
+	      ShowName		      off
+	      Port		      "1"
+	      Side		      "Left"
+	    }
+	    Block {
+	      BlockType		      PMIOPort
+	      Name		      "Connection\nPort1"
+	      Tag		      "PMCPort"
+	      Position		      [220, 66, 250, 84]
+	      Orientation	      "left"
+	      ShowName		      off
+	      Port		      "2"
+	      Side		      "Right"
+	    }
+	    Line {
+	      LineType		      "Connection"
+	      SrcBlock		      "Connection\nPort"
+	      SrcPort		      RConn1
+	      DstBlock		      "Atomic Subsystem"
+	      DstPort		      LConn1
+	    }
+	    Line {
+	      LineType		      "Connection"
+	      SrcBlock		      "Atomic Subsystem"
+	      SrcPort		      RConn1
+	      DstBlock		      "Connection\nPort1"
+	      DstPort		      RConn1
+	    }
+	    Annotation {
+	      Name		      "Link"
+	      Position		      [130, 26]
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Link2"
+	  Tag			  "PSATblock"
+	  Description		  "Connection"
+	  Ports			  [0, 1, 0, 0, 0, 1, 1]
+	  Position		  [170, 146, 210, 184]
+	  ShowName		  off
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  MaskType		  "Link2"
+	  MaskDescription	  "Link block."
+	  MaskDisplay		  "plot([0 0.45],[0.5 0.5],[0.5 0.5],[0 0.4],[0.5 1],[0 0])\ncolor('green')\nplot([0.5 0.5],[0.6 1],[0"
+	  ".5 0.9],[1 1])\nplot([0.9 0.985 0.985 0.9 0.9],[0.1 0.1 -0.1 -0.1 0.1]+1)\nplot([0.45 0.55 0.55 0.45 0.45],[0.6 0.6"
+	  " 0.4 0.4 0.6])\nplot(0, -0.5,0,1.5)\n\n"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  System {
+	    Name		    "Link2"
+	    Location		    [61, 338, 517, 640]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Constant
+	      Name		      "g1"
+	      Position		      [130, 20, 155, 50]
+	    }
+	    Block {
+	      BlockType		      PMComponent
+	      Name		      "pmc"
+	      Ports		      [0, 0, 0, 0, 0, 1, 1]
+	      Position		      [130, 73, 230, 277]
+	      PhysicalDomain	      "psatdomain"
+	      LeftPortType	      "p1"
+	      RightPortType	      "p1"
+	      LConnTagsString	      "__newl0"
+	      RConnTagsString	      "__newr0"
+	    }
+	    Block {
+	      BlockType		      PMIOPort
+	      Name		      "pmc_out_0"
+	      Tag		      "PMCPort"
+	      Position		      [275, 166, 305, 184]
+	      Orientation	      "left"
+	      Port		      "1"
+	      Side		      "Left"
+	    }
+	    Block {
+	      BlockType		      PMIOPort
+	      Name		      "pmc_in_0"
+	      Tag		      "PMCPort"
+	      Position		      [65, 166, 95, 184]
+	      Port		      "2"
+	      Side		      "Right"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "out_1"
+	      Position		      [185, 25, 205, 45]
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      SrcBlock		      "g1"
+	      SrcPort		      1
+	      DstBlock		      "out_1"
+	      DstPort		      1
+	    }
+	    Line {
+	      LineType		      "Connection"
+	      SrcBlock		      "pmc"
+	      SrcPort		      RConn1
+	      DstBlock		      "pmc_out_0"
+	      DstPort		      RConn1
+	    }
+	    Line {
+	      LineType		      "Connection"
+	      SrcBlock		      "pmc_in_0"
+	      SrcPort		      RConn1
+	      DstBlock		      "pmc"
+	      DstPort		      LConn1
+	    }
+	    Annotation {
+	      Name		      "Tap Changer Under Load "
+	      Position		      [164, 45]
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Varname"
+	  Tag			  "PSATblock"
+	  Description		  "OPF & CPF"
+	  Ports			  []
+	  Position		  [273, 145, 358, 182]
+	  ShowName		  off
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  MaskType		  "Varname"
+	  MaskDescription	  "This block defines the indexes of the variables to be plotted."
+	  MaskPromptString	  "Plot variable list"
+	  MaskStyleString	  "edit"
+	  MaskVariables		  "pxq=@1;"
+	  MaskTunableValueString  "on"
+	  MaskEnableString	  "on"
+	  MaskVisibilityString	  "on"
+	  MaskToolTipString	  "on"
+	  MaskDisplay		  "plot([-2 22 22 -2 -2],[-1.1 -1.1 1.1 1.1 -1.1])\ncolor('blue')\ntext(0,0.1,'Plot variable list')"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[]"
+	  System {
+	    Name		    "Varname"
+	    Location		    [477, 86, 744, 293]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Annotation {
+	      Position		      [139, 85]
+	    }
+	  }
+	}
+	Annotation {
+	  Name			  "Buses & Connections"
+	  Position		  [215, 32]
+	  ForegroundColor	  "blue"
+	  FontSize		  12
+	}
+	Annotation {
+	  Name			  "Link"
+	  Position		  [166, 118]
+	}
+	Annotation {
+	  Name			  "Link2"
+	  Position		  [196, 197]
+	}
+	Annotation {
+	  Name			  "Varname"
+	  Position		  [317, 197]
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Controls"
+      Tag		      "PSATfolder"
+      Description	      "Controls"
+      Ports		      []
+      Position		      [223, 95, 276, 147]
+      ShowName		      off
+      FontSize		      12
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      MaskInitialization      "x = fm_draw('controls');"
+      MaskDisplay	      "image(x)"
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      System {
+	Name			"Controls"
+	Location		[710, 337, 1059, 608]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Cac"
+	  Tag			  "PSATblock"
+	  Description		  "Controls"
+	  Ports			  [1, 2]
+	  Position		  [265, 129, 310, 156]
+	  ShowName		  off
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  MaskType		  "Cac"
+	  MaskDescription	  "This block defines a Central Area Controller"
+	  MaskPromptString	  "Number of connected clusters|Integral gain constant KI|Proportional gain constant KP|Control si"
+	  "gnal limits q_max, q_min|Connected"
+	  MaskStyleString	  "popup(1|2|3|4|5|6|7|8|9|10|11|12),edit,edit,edit,checkbox"
+	  MaskVariables		  "p4q=@1;p6q=@2;p7q=@3;p8_9q=@4;p10q=@5;"
+	  MaskTunableValueString  "on,on,on,on,on"
+	  MaskCallbackString	  "||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on"
+	  MaskInitialization	  "fm_inout\n[x,y] = fm_draw('C');"
+	  MaskDisplay		  "plot([1 0 0 1 1],[1 1 0 0 1])\ncolor('red')\nplot([0.35 0.5 0.65],[0.2 0.8 0.2],[0.4 0.6],[0.4 0.4]"
+	  ")\nplot(0.1+0.2*x,0.5+0.6*y,0.7+0.2*x,0.5+0.6*y)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "2|0.02|1|[1.1  0.9]|on"
+	  System {
+	    Name		    "Cac"
+	    Location		    [381, 229, 701, 459]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "In1"
+	      Position		      [130, 150, 150, 170]
+	      ShowName		      off
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Constant
+	      Name		      "Constant"
+	      Position		      [55, 85, 85, 115]
+	      ShowName		      off
+	    }
+	    Block {
+	      BlockType		      Constant
+	      Name		      "Constant1"
+	      Position		      [170, 85, 200, 115]
+	      ShowName		      off
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      "Terminator4"
+	      Position		      [180, 150, 200, 170]
+	      ShowName		      off
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Out1"
+	      Position		      [125, 93, 155, 107]
+	      ShowName		      off
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Out2"
+	      Position		      [240, 93, 270, 107]
+	      ShowName		      off
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      SrcBlock		      "Constant1"
+	      SrcPort		      1
+	      DstBlock		      "Out2"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "In1"
+	      SrcPort		      1
+	      DstBlock		      "Terminator4"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Constant"
+	      SrcPort		      1
+	      DstBlock		      "Out1"
+	      DstPort		      1
+	    }
+	    Annotation {
+	      Name		      "Central Area Control"
+	      Position		      [164, 45]
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Cluster"
+	  Tag			  "PSATblock"
+	  Description		  "Controls"
+	  Ports			  [1, 1]
+	  Position		  [265, 61, 295, 89]
+	  ShowName		  off
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  MaskType		  "Cluster"
+	  MaskDescription	  "This block defines Cluster Controler (Secondary Voltage Regulator)."
+	  MaskPromptString	  "Integral time constant T [s]|Equivalent reactance Xtg [p.u.]|Equivalent reactance Xeq [p.u.]|Ou"
+	  "tput signal limits Vs_max, Vs_min|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p4q=@1;p5q=@2;p6q=@3;p8_9q=@4;p10q=@5;"
+	  MaskTunableValueString  "on,on,on,on,on"
+	  MaskCallbackString	  "||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('C');"
+	  MaskDisplay		  "plot([1 0 0 1 1],[1 1 0 0 1])\ncolor('red')\nplot(0.1+0.3*x,0.5+0.6*y,0.6+0.3*x,0.5+0.6*y)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "5|0|1|[0.15  -0.2]|on"
+	  System {
+	    Name		    "Cluster"
+	    Location		    [381, 229, 648, 436]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "In1"
+	      Position		      [110, 150, 130, 170]
+	      ShowName		      off
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Constant
+	      Name		      "Constant"
+	      Position		      [90, 80, 120, 110]
+	      ShowName		      off
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      "Terminator4"
+	      Position		      [160, 150, 180, 170]
+	      ShowName		      off
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Out1"
+	      Position		      [160, 88, 190, 102]
+	      ShowName		      off
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      SrcBlock		      "In1"
+	      SrcPort		      1
+	      DstBlock		      "Terminator4"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Constant"
+	      SrcPort		      1
+	      DstBlock		      "Out1"
+	      DstPort		      1
+	    }
+	    Annotation {
+	      Name		      "Cluster Controller"
+	      Position		      [139, 45]
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Exc"
+	  Tag			  "PSATblock"
+	  Description		  "Controls"
+	  Ports			  [2, 1]
+	  Position		  [160, 64, 205, 91]
+	  ShowName		  off
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  MaskType		  "Exc"
+	  MaskDescription	  "This block defines an Automatic Voltage Regulator."
+	  MaskHelp		  "This block defines an Automatic Voltage Regulator.\nThere are three kind of regulators:\n\nType 1:\n\n"
+	  "     IEEE Model 1\n\nType 2:\n\n     IEEE Model 2\n\nType 3:\n \n     IEEE Model 3"
+	  MaskPromptString	  "Automatic Voltage Regulator Type|Maximum Regulator Voltage [p.u.]|Minimum Regulator Voltage [p."
+	  "u.]|Regulator Gain m0 [p.u./p.u.]|First Regulator Pole T1 [s]|First Regulator Zero T2 [s]|Second Regulator Pole T3 "
+	  "[s]|Second Regulator Zero T4 [s]|Time Constant of the Field Circuit Td [s]|Time Delay of the Measurement System Tr "
+	  "[s]|Coefficient of the Ceiling Function (A B)|Number of input signals|Connected"
+	  MaskStyleString	  "popup(1|2|3),edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,popup(0|1|2|3),checkbox"
+	  MaskVariables		  "p2q=@1;p3q=@2;p4q=@3;p5q=@4;p6q=@5;p7q=@6;p8q=@7;p9q=@8;p10q=@9;p11q=@10;p12_13q=@11;in=@12;p14q="
+	  "@13;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "fm_block||||||||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "fm_inout\n[x,y] = fm_draw('R');"
+	  MaskDisplay		  "plot([-1.8 4.1 4.1 -1.8 -1.8],[-1.5 -1.5 1.5 1.5 -1.5])\ncolor('red')\nplot([-1.3 -0.5],[-1 1],[-0."
+	  "5 0.3],[1 -1],[-0.9 -0.1],[0.0 0.0])\nplot(2.8+1.3*x,2*y,1.5+[-1.3 -0.5],[1 -1],1.5+[-0.5 0.3],[-1 1])\n"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "1|5.00|-5.00|400|0.10|0.45|1.00|0.01|1.00|0.001|[0.0006  0.9]|2|on"
+	  System {
+	    Name		    "Exc"
+	    Location		    [158, 247, 492, 439]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "in_1"
+	      Position		      [25, 25, 45, 45]
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "in_2"
+	      Position		      [25, 75, 45, 95]
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Constant
+	      Name		      "Constant"
+	      Position		      [170, 100, 200, 130]
+	      ShowName		      off
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      "t1"
+	      Position		      [80, 20, 105, 50]
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      "t2"
+	      Position		      [80, 70, 105, 100]
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Out1"
+	      Position		      [240, 105, 260, 125]
+	      ShowName		      off
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      SrcBlock		      "Constant"
+	      SrcPort		      1
+	      DstBlock		      "Out1"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "in_1"
+	      SrcPort		      1
+	      DstBlock		      "t1"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "in_2"
+	      SrcPort		      1
+	      DstBlock		      "t2"
+	      DstPort		      1
+	    }
+	    Annotation {
+	      Name		      "Automatic Voltage Regulator"
+	      Position		      [234, 30]
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Oxl"
+	  Tag			  "PSATblock"
+	  Description		  "Controls"
+	  Ports			  [0, 1]
+	  Position		  [160, 132, 205, 158]
+	  ShowName		  off
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  MaskType		  "Oxl"
+	  MaskDescription	  "This block defines a breaker."
+	  MaskPromptString	  "Integrator time constant T0 [s]|Use generator Xd and Xq|d-axis estimated reactance Xd [p.u.]|q-"
+	  "axis estimated reactance Xq [p.u.]|Maximum Field Current [p.u.]|Maximum output signal [p.u.]|Connected"
+	  MaskStyleString	  "edit,checkbox,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p2q=@1;p3q=@2;p4q=@3;p5q=@4;p6q=@5;p7q=@6;p8q=@7;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on"
+	  MaskCallbackString	  "|fm_block|||||fm_block"
+	  MaskEnableString	  "on,on,off,off,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('O');"
+	  MaskDisplay		  "plot([-1.8 4.1 4.1 -1.8 -1.8],[-1.5 -1.5 1.5 1.5 -1.5])\ncolor('red')\nplot(1.8+[-1.3 0],[1 -1],1.8"
+	  "+[-1.3 0],[-1 1])\nplot(1.5*x-1.2,2*y,[2.3 2.3],[1 -1],[2.3 3.6],[-1 -1])\n"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "10|on|0.2|0.18|2.7|0.05|on"
+	  System {
+	    Name		    "Oxl"
+	    Location		    [287, 280, 621, 472]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Constant
+	      Name		      "Constant"
+	      Position		      [120, 105, 150, 135]
+	      ShowName		      off
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Out1"
+	      Position		      [190, 110, 210, 130]
+	      ShowName		      off
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      SrcBlock		      "Constant"
+	      SrcPort		      1
+	      DstBlock		      "Out1"
+	      DstPort		      1
+	    }
+	    Annotation {
+	      Name		      "Overexcitation\nLimiter"
+	      Position		      [164, 45]
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Pod"
+	  Tag			  "PSATblock"
+	  Description		  "Controls"
+	  Ports			  [1, 1]
+	  Position		  [200, 217, 245, 243]
+	  ShowName		  off
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  MaskType		  "Pod"
+	  MaskDescription	  "This block defines a Suplementary Stabilizing Control Loop."
+	  MaskPromptString	  "Input signal: |Vmax and Vmin Stabilizer Output [p.u., p.u.]|Gain Kw and time constant Tw  [p.u."
+	  "/p.u., s]|Lead-Lag time constants T1 and T2 [s, s]|Lead-Lag time constants T3 and T4 [s, s]|Connected"
+	  MaskStyleString	  "popup(Bus_V|Line_P_from_bus|Line_P_to_bus|Line_I_from_bus|Line_I_to_bus|Line_Q_from_bus|Line_Q_t"
+	  "o_bus),edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p3q=@1;p5_6q=@2;p7_8q=@3;p9_10q=@4;p11_12q=@5;p13q=@6;"
+	  MaskTunableValueString  "on,on,on,on,on,on"
+	  MaskCallbackString	  "fm_block|||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on"
+	  MaskInitialization	  "[xP,yP] = fm_draw('P');\n[xO,yO] = fm_draw('O');\n[xD,yD] = fm_draw('D');"
+	  MaskDisplay		  "plot([-1.8 4.8 4.8 -1.8 -1.8],[-1.5 -1.5 1.5 1.5 -1.5])\ncolor('red')\nplot(1.5*xP-0.7,2*yP,0.7+1.5"
+	  "*xO,2*yO,3.5+1.5*xD,2*yD)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "Bus_V|[0.2 -0.2]|[-0.1 5]|[0.4 0.2]|[0.4 0.2]|on"
+	  System {
+	    Name		    "Pod"
+	    Location		    [32, 214, 364, 386]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "In1"
+	      Position		      [125, 110, 145, 130]
+	      ShowName		      off
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Constant
+	      Name		      "Constant"
+	      Position		      [115, 60, 145, 90]
+	      ShowName		      off
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      "Terminator4"
+	      Position		      [175, 110, 195, 130]
+	      ShowName		      off
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Out1"
+	      Position		      [185, 65, 205, 85]
+	      ShowName		      off
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      SrcBlock		      "In1"
+	      SrcPort		      1
+	      DstBlock		      "Terminator4"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Constant"
+	      SrcPort		      1
+	      Points		      [0, 0]
+	      DstBlock		      "Out1"
+	      DstPort		      1
+	    }
+	    Annotation {
+	      Name		      "Suplementary Stabilizing Control Loop for SVCs"
+	      Position		      [162, 17]
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Pss"
+	  Tag			  "PSATblock"
+	  Description		  "Controls"
+	  Ports			  [0, 1]
+	  Position		  [50, 132, 90, 158]
+	  ShowName		  off
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  MaskType		  "Pss"
+	  MaskDescription	  "This block defines a Power System Stabilizer."
+	  MaskPromptString	  "PSS model|Input Signal|Max and Min Stabilizer Output [p.u.]|Gain Kw and time constant Tw  [p.u."
+	  "/p.u., s]|Electrical power gain Kp and voltage gain Kv [p.u./p.u., p.u./p.u.]|Lead-Lag time constants T1, T2, T3, T"
+	  "4 [s, s, s, s]|Gain Ka and time constant Ta [p.u./p.u., s]|Additional signal limits Va_max, Va_thr, V3_max and V3_m"
+	  "in [p.u., p.u., p.u., p.u.]|Threshold limits E_thr and w_thr [p.u., p.u.]|Allow switch S2|Connected"
+	  MaskStyleString	  "popup(1|2|3|4|5),popup(omega|power|voltage),edit,edit,edit,edit,edit,edit,edit,checkbox,checkbox"
+	  MaskVariables		  "p2q=@1;p3q=@2;p4_5q=@3;p6_7q=@4;p14_15q=@5;p8_9_10_11q=@6;p12_13q=@7;p16_17_18_19q=@8;p20_21q=@9;"
+	  "p22q=@10;p23q=@11;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "fm_block||||||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,off,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "[xs,ys] = fm_draw('S');\n[xp,yp] = fm_draw('P');"
+	  MaskDisplay		  "plot([-1.8 4.1 4.1 -1.8 -1.8],[-1.5 -1.5 1.5 1.5 -1.5])\ncolor('red')\nplot(1.5*xp-0.7,2*yp,1.2+1.5"
+	  "*xs,2*ys,2.8+1.5*xs,2*ys)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "4|omega|[0.05 -0.05]|[50  0.5]|20  5|[0.1 0.05 0.01 0.005]|[25 0.5]|[0.045  0.045  0.045  -0.045"
+	  "]|[1.000  0.95]|off|on"
+	  System {
+	    Name		    "Pss"
+	    Location		    [67, 205, 401, 397]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Constant
+	      Name		      "Constant"
+	      Position		      [120, 100, 150, 130]
+	      ShowName		      off
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Out1"
+	      Position		      [190, 105, 210, 125]
+	      ShowName		      off
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      SrcBlock		      "Constant"
+	      SrcPort		      1
+	      DstBlock		      "Out1"
+	      DstPort		      1
+	    }
+	    Annotation {
+	      Name		      "Power System Stabilizer"
+	      Position		      [164, 45]
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Tg"
+	  Tag			  "PSATblock"
+	  Description		  "Controls"
+	  Ports			  [0, 1]
+	  Position		  [55, 66, 95, 94]
+	  ShowName		  off
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  MaskType		  "Tg"
+	  MaskDescription	  "This block defines  a Turbine Governor."
+	  MaskPromptString	  "Turbine governor type|Reference speed [p.u.]|Pilot valve droop [p.u./p.u.]|Maximum torque [p.u."
+	  "]|Minimum torque [p.u.]|Maximum gate opening rate vmax [p.u.]|Minimum gate opening rate vmin [p.u.]|Pilot valve tim"
+	  "e constant Tp[s]|Dashpot time constant Tr[s]|Permanent speed droop sigma[p.u./p.u.]|Temporary speed droop delta[p.u"
+	  "./p.u.]|Water starting time Tw[s]|Patical derivative of turbine flow rate with respect to tubine head a11|Patical d"
+	  "erivative of turbine flow rate with respect to gate position a13|Patical derivative of turbine torque with respect "
+	  "to tubine head a21|Patical derivative of turbine torque with respect to gate position a23|Proportional droop Kp [p."
+	  "u./p.u.]|Integral droop Ki [p.u./p.u.]|Connected"
+	  MaskStyleString	  "popup(1|2|3|4|5|6),edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,ed"
+	  "it,edit,checkbox"
+	  MaskVariables		  "p2q=@1;p3q=@2;p4q=@3;p5q=@4;p6q=@5;p7q=@6;p8q=@7;p9q=@8;p10q=@9;p11q=@10;p12q=@11;p13q=@12;p14q=@"
+	  "13;p15q=@14;p16q=@15;p17q=@16;p18q=@17;p19q=@18;p20q=@19;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "fm_block||||||||||||||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('G');"
+	  MaskDisplay		  "plot([-1.8 2.8 2.8 -1.8 -1.8],[-1.5 -1.5 1.5 1.5 -1.5])\ncolor('red')\nplot([-0.5 -0.5],[-1 1],[-1."
+	  "3 0.3],[1 1])\nplot(1.4+x,y)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "4|1.00|0.2|1.0|0.0|0.10|-0.10|0.04|5.0|0.04|0.3|1.0|0.5|1.0|1.5|1.0|1.163|0.105|on"
+	  System {
+	    Name		    "Tg"
+	    Location		    [154, 243, 488, 435]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Constant
+	      Name		      "Constant"
+	      Position		      [115, 100, 145, 130]
+	      ShowName		      off
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Out1"
+	      Position		      [185, 105, 205, 125]
+	      ShowName		      off
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      SrcBlock		      "Constant"
+	      SrcPort		      1
+	      DstBlock		      "Out1"
+	      DstPort		      1
+	    }
+	    Annotation {
+	      Name		      "Turbine Governor"
+	      Position		      [164, 45]
+	    }
+	  }
+	}
+	Annotation {
+	  Name			  "Controls"
+	  Position		  [175, 28]
+	  ForegroundColor	  "blue"
+	  FontSize		  12
+	}
+	Annotation {
+	  Name			  "Turbine\nGovernor"
+	  Position		  [69, 107]
+	}
+	Annotation {
+	  Name			  "Automatic Voltage\nRegulator"
+	  Position		  [181, 106]
+	}
+	Annotation {
+	  Name			  "Cluster \nController"
+	  Position		  [283, 107]
+	}
+	Annotation {
+	  Name			  "Central Area\nController"
+	  Position		  [281, 180]
+	}
+	Annotation {
+	  Name			  "Over Excitation \nLimiter"
+	  Position		  [181, 179]
+	}
+	Annotation {
+	  Name			  "Power System\nStabilizer"
+	  Position		  [68, 180]
+	}
+	Annotation {
+	  Name			  "Power Oscillation\nDamper"
+	  Position		  [141, 228]
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "FACTS"
+      Tag		      "PSATfolder"
+      Description	      "FACTS"
+      Ports		      []
+      Position		      [54, 163, 101, 212]
+      ShowName		      off
+      FontSize		      12
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      MaskInitialization      "x = fm_draw('facts');"
+      MaskDisplay	      "image(x)"
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      System {
+	Name			"FACTS"
+	Location		[1994, 281, 2404, 672]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Hvdc"
+	  Tag			  "PSATblock"
+	  Description		  "FACTS"
+	  Ports			  [0, 0, 0, 0, 0, 1, 1]
+	  Position		  [135, 179, 355, 221]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Hvdc"
+	  MaskDescription	  "This block defines a HVDC connection."
+	  MaskPromptString	  "Power and Frequency Ratings [MVA,  Hz]|Voltage Rating at Terminal Buses [kV, kV]|DC Ratings (Vn"
+	  "_dc, In_dc) [kV, kA]|Transformer Reactances (Xcr  Xci) [p.u.  p.u.]|Tap Ratios (Ar Ai) [p.u./p.u.  p.u./p.u.]|PI Re"
+	  "gulator Constants (Ki, Kp)|DC Line Parameters (Rdc Ldc) [p.u.  p.u.]|Rectifier Angle Limits (a_max, a_min) [deg  de"
+	  "g]|Inverter Angle Limits (g_max, g_min) [deg  deg]|Reference Current Limits (I0rmax I0rmin I0imax I0imin) [p.u.]|Co"
+	  "ntrol type|Current, active power and dc voltage orders [p.u.  p.u.  p.u.]|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,popup(Current_control|Power_control|Voltage_co"
+	  "ntrol),edit,checkbox"
+	  MaskVariables		  "p3_6q=@1;p4_5q=@2;p7_8q=@3;p9_10q=@4;p11_12q=@5;p13_14q=@6;p15_16q=@7;p17_18q=@8;p19_20q=@9;p21_2"
+	  "2_23_24q=@10;p25q=@11;p26_27_28q=@12;p29q=@13;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "||||||||||fm_block||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');"
+	  MaskDisplay		  "plot(0.7+[0 4 4 0 0],[-2 -2 2 2 -2])\nplot(9.7+[0 4 4 0 0],[-2 -2 2 2 -2])\nplot([4.7 9.7],[-1.25 -"
+	  "1.25],[4.7 9.7],[1.25 1.25])\n\nplot(x-2,y,x-0.6,y,x+15,y,x+16.4,y)\ncolor('green')\nplot(-2+[-1 -1.3],[0 0],-2+[2."
+	  "4 2.7],[0 0])\nplot(-2+[-0.8 0.7],[-1.2 1.2],-2+[0.5 0.7],[1.1 1.2],-2+[0.7 0.7],[1.0 1.2])\nplot(15+[-1 -1.3],[0 0"
+	  "],15+[2.4 2.7],[0 0])\nplot(16.4+[-0.8 0.7],[-1.2 1.2],16.4+[0.5 0.7],[1.1 1.2],16.4+[0.7 0.7],[1.0 1.2])\n\ncolor("
+	  "'magenta')\ntext(1.1,1.2,'R')\ntext(10.1,1.2,'I')\nplot(0.7+[1 3 2 1],[-0.9 -0.9 0.9 -0.9])\nplot(9.7+[1 3 2 1],[-0"
+	  ".9 -0.9 0.9 -0.9])\nplot(0.7+[2 2],[0.9 1.25],0.7+[2 2],[-0.9 -1.25],0.7+[1.2 2.8],[0.9 0.9])\nplot(9.7+[2 2],[0.9 "
+	  "1.25],9.7+[2 2],[-0.9 -1.25],9.7+[1.2 2.8],[0.9 0.9])\nplot(0.7+[2 2.5],[0.9 1.25],9.7+[2 2.5],[0.9 1.25])\n"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[1000  60]|[400  400]|[400  2.5]|[0.1345   0.1257]|[1.25  1.25]|[20  25]|[0.0625  0.200]|[120  5"
+	  "]|[40  18]|[1.0   0.1  0.9  0.0]|Current_control|[0.5  0.6  1.0]|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Sssc"
+	  Tag			  "PSATblock"
+	  Description		  "FACTS"
+	  Ports			  [0, 0, 0, 0, 0, 1, 1]
+	  Position		  [330, 160, 370, 340]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Sssc"
+	  MaskDescription	  "This block describes a SSSC component."
+	  MaskHelp		  "Tree control methodology are available:\n\nType 1, Magnitude control: m controls AC voltage by mean of"
+	  " a lead-lag transfer function, whereas alpha controls DC voltage by mean of a PI regulator.\n\nType 2, Phase contro"
+	  "l: alpha controls AC voltage by mean of a PI regulator along with a lead-lag transfer function, whereas m is kept a"
+	  "t 0.9.\n\nType 3, Phase control: alpha controls AC voltage by mean of a two poles and one zero transfer function, w"
+	  "hereas m is kept at 0.9. In this case parameters Kp and Ki are respectively the gain and the time constant of the l"
+	  "ow pass filter."
+	  MaskPromptString	  "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Operation mode: |Scheduling strategy:  |Perc"
+	  "entage of series compensation Cp [%]|Regulator time constant Tr [s]|Max and Min voltage [p.u.  p.u.]|Porportional a"
+	  "nd integral gains KP and KI |Connected"
+	  MaskStyleString	  "edit,popup(constant_voltage|constant_reactance|constant_power),popup(constant_line_power|constan"
+	  "t_angle),edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p3_4_5q=@1;p2q=@2;p10q=@3;p6q=@4;p7q=@5;p8_9q=@6;p11_12q=@7;p13q=@8;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "|fm_block||||||fm_block"
+	  MaskEnableString	  "on,on,off,on,on,on,off,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');\n[xc,yc] = fm_draw('cap');\n[xa,ya] = fm_draw('acdc2');"
+	  MaskDisplay		  "plot([0.3 0.3 -0.95 -0.95 0.3],[-1.7 2.7 2.7 -1.7 -1.7])\nplot([-0.75 -0.75 -0.4],[-1.7 -5 -5],[0.1"
+	  " 0.1 -0.25],[-1.7 -5 -5],[-0.4 -0.4],[-4 -6])\nplot(-0.15+0.1*xc,-5+yc)\nplot([-0.325 -0.325],[2.7 3.5],[-0.575 -0."
+	  "95],[5.9 5.9],[-0.075 0.3],[5.9 5.9],0,17.8)\nplot(0.25*x-0.325,4.5+y,0.25*x-0.325,5.9+y)\n\ncolor('magenta')\nplot"
+	  "(xa,ya)\n"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  230  60]|constant_voltage|constant_line_power|25|0.1|[1.15  0.85]|[10 50]|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Statcom"
+	  Tag			  "PSATblock"
+	  Description		  "FACTS"
+	  Ports			  [0, 0, 0, 0, 0, 1]
+	  Position		  [49, 240, 91, 340]
+	  Orientation		  "down"
+	  NamePlacement		  "alternate"
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  MaskType		  "Statcom"
+	  MaskDescription	  "This block describes a StatCom component."
+	  MaskHelp		  "Tree control methodology are available:\n\nType 1, Magnitude control: m controls AC voltage by mean of"
+	  " a lead-lag transfer function, whereas alpha controls DC voltage by mean of a PI regulator.\n\nType 2, Phase contro"
+	  "l: alpha controls AC voltage by mean of a PI regulator along with a lead-lag transfer function, whereas m is kept a"
+	  "t 0.9.\n\nType 3, Phase control: alpha controls AC voltage by mean of a two poles and one zero transfer function, w"
+	  "hereas m is kept at 0.9. In this case parameters Kp and Ki are respectively the gain and the time constant of the l"
+	  "ow pass filter."
+	  MaskPromptString	  "Power, voltage and frequency ratings [MVA, kV, Hz]|Gain and time constant of the current contro"
+	  "l Kr, Tr [p.u./p.u.  s]|Max and Min Current [p.u. p.u.]|Connected"
+	  MaskStyleString	  "edit,edit,edit,checkbox"
+	  MaskVariables		  "p2_3_4q=@1;p5_6q=@2;p7_8q=@3;p9q=@4;"
+	  MaskTunableValueString  "on,on,on,on"
+	  MaskCallbackString	  "|||fm_block"
+	  MaskEnableString	  "on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');\n[xc,yc] = fm_draw('cap');\n[xa,ya] = fm_draw('acdc2');\n"
+	  MaskDisplay		  "plot([9.2 4.8 4.8 9.2 9.2],[0.3 0.3 -0.95 -0.95 0.3])\nplot([9.2 12.5  12.5],[-0.75 -0.75 -0.4],[9."
+	  "2 12.5  12.5],[0.1 0.1 -0.25],[11.5 13.5],[-0.4 -0.4])\nplot(12.5-yc,-0.15+0.1*xc)\nplot([4.8 4],[-0.325 -0.325],[0"
+	  ".6 0],[-0.325 -0.325])\nplot(3-y,0.25*x-0.325,1.6-y,0.25*x-0.325)\ncolor('magenta'), plot(7.5-ya,xa)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  230  60]|[50  0.1]|[1.2  0.8]|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Svc"
+	  Tag			  "PSATblock"
+	  Description		  "FACTS"
+	  Ports			  [0, 0, 0, 0, 0, 1]
+	  Position		  [59, 75, 81, 125]
+	  Orientation		  "down"
+	  NamePlacement		  "alternate"
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  MaskType		  "Svc"
+	  MaskDescription	  "This block describes an SVC component."
+	  MaskPromptString	  "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Model Type|Regulator Time Constant Tr [s]|Re"
+	  "gulator Gain Kr [p.u./p.u.]|Reference Voltage [p.u.]|B_max and B_min [p.u.  p.u.]|Integral deviation Kd and transie"
+	  "nt time constant T1 [p.u. s]|Measurement gain and time delay Km, Tm [p.u. s]|Inductive and capacitive reactances Xl"
+	  " and Xc [p.u. p.u.]|Connected"
+	  MaskStyleString	  "edit,popup(1|2),edit,edit,edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p2_3_4q=@1;p5q=@2;p6q=@3;p7q=@4;p8q=@5;p9_10q=@6;p11_12q=@7;p13_14q=@8;p15_16q=@9;p17q=@10;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "|fm_block||||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,off,off,off,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "[xi,yi] = fm_draw('ind');\n[xc,yc] = fm_draw('cap');\n[xa,ya] = fm_draw('acdc');"
+	  MaskDisplay		  "plot([1 0.8],[0.5 0.5],[0 0.2],[0.5 0.5],[0.8 0.8 0.2 0.2 0.8],[0 1 1 0 0]), plot([1 1],[-0.1 1.1],"
+	  "[1.05 1.05],[0.1 0.9],[1.1 1.1],[0.3 0.7]), color('green'), plot([0.1 0.3 0.7 0.9],[-0.4 -0.4 1.4 1.4])"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100   230   60]|1|10|100|1.00|[1.00   -1.00]|[0.001  0.000]|[1.000  0.01]|[0.20   0.10]|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Svc2"
+	  Tag			  "PSATblock"
+	  Description		  "FACTS"
+	  Ports			  [0, 0, 0, 0, 0, 1]
+	  Position		  [120, 75, 150, 135]
+	  Orientation		  "down"
+	  NamePlacement		  "alternate"
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  MaskType		  "Svc"
+	  MaskDescription	  "This block describes an SVC component."
+	  MaskPromptString	  "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Model Type|Regulator Time Constant T2 [s]|Re"
+	  "gulator Gain K [p.u./p.u.]|Reference Voltage [p.u.]|Alpha_max and Alpha_min [rad rad]|Integral deviation Kd and tra"
+	  "nsient time constant T1 [p.u. s]|Measurement gain and time delay Km, Tm [p.u. s]|Inductive and capacitive reactance"
+	  "s Xl and Xc [p.u. p.u.]|Connected"
+	  MaskStyleString	  "edit,popup(1|2),edit,edit,edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p2_3_4q=@1;p5q=@2;p6q=@3;p7q=@4;p8q=@5;p9_10q=@6;p11_12q=@7;p13_14q=@8;p15_16q=@9;p17q=@10;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "|fm_block||||||||"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "[xi,yi] = fm_draw('ind');\n[xc,yc] = fm_draw('cap');\n[xa,ya] = fm_draw('acdc');"
+	  MaskDisplay		  "plot([-1.6 -1.8 -1.8],[0.5 0.5 4],[0.2 0.2],[0.5 4],[-0.9 -0.9],[3 5],[0 0.2],[0.5 0.5],[-0.65 -0.8"
+	  "5],[0.5 0.5],[-1.8 -0.9],[4 4],[0.2 -0.8],[4 4],[0.2 0.4],[1.9 1.9],[-1.8 -2],[1.9 1.9],[0.4 0.4],[2.9 0.9],[0.5 0."
+	  "5],[2.5 1.3],[0.6 0.6],[2.1 1.7]), plot(-0.7+0.1*xc,4+yc,-1.15+0.175+0.125*yi,0.5+0.5*xi,-1.15-0.325+0.125*yi,0.5+0"
+	  ".5*xi,-1.15-0.075+0.125*yi,0.5+0.5*xi), color('magenta'), plot(xa,ya)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100   230   60]|2|10|100|1.00|[1.00   -1.00] |[0.001  0.000]|[1.000  0.01]|[0.20   0.10]|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Tcsc"
+	  Tag			  "PSATblock"
+	  Description		  "FACTS"
+	  Ports			  [0, 0, 0, 0, 0, 1, 1]
+	  Position		  [210, 78, 265, 102]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Tcsc"
+	  MaskDescription	  "This block describes a TCSC component."
+	  MaskPromptString	  "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Model type:|Operation mode:|Scheduling strat"
+	  "egy:|Percentage of series compensation [%]|Regulator time constant Tr [s]|Xc_max and Xc_min [p.u.  p.u.]|Proportion"
+	  "al and Integral gains Kp and Ki |XL and XC [p.u.  p.u.]|Gain for stabilizing signal Kr [p.u./p.u.]|Connected"
+	  MaskStyleString	  "edit,popup(Xc|Alpha),popup(constant_admittance|constant_power_flow),popup(constant_line_power|co"
+	  "nstant_angle),edit,edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p5_6_7q=@1;p2q=@2;p3q=@3;p4q=@4;p8q=@5;p9q=@6;p10_11q=@7;p12_13q=@8;p14_15q=@9;p16q=@10;p17q=@11;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "|fm_block|||||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,off,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "[xi,yi] = fm_draw('ind');\n[xc,yc] = fm_draw('cap');\n[xa,ya] = fm_draw('acdc');"
+	  MaskDisplay		  "plot([1 0.8],[0.5 0.5],[0 0.2],[0.5 0.5],[0.8 0.8 0.2 0.2 0.8],[0 1 1 0 0]), color('green'), plot(["
+	  "0.1 0.3 0.7 0.9],[-0.4 -0.4 1.4 1.4])"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100   230   60]|Xc|constant_power_flow|constant_line_power|10|0.5|[0.5   -0.5 ]|[5 1]|[0.2  0.1"
+	  "]|10|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Tcsc1"
+	  Tag			  "PSATblock"
+	  Description		  "FACTS"
+	  Ports			  [0, 0, 0, 0, 0, 1, 1]
+	  Position		  [300, 75, 365, 105]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Tcsc"
+	  MaskDescription	  "This block describes a TCSC component."
+	  MaskPromptString	  "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Model type:|Operation mode:|Scheduling strat"
+	  "egy:|Percentage of series compensation [%]|Regulator time constant Tr [s]|Alpha_max and Alpha_min [rad  rad]|Propor"
+	  "tional and Integral gains Kp and Ki |XL and XC [p.u.  p.u.]|Gain for stabilizing signal Kr [p.u./p.u.]|Connected"
+	  MaskStyleString	  "edit,popup(Xc|Alpha),popup(constant_admittance|constant_power_flow),popup(constant_line_power|co"
+	  "nstant_angle),edit,edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p5_6_7q=@1;p2q=@2;p3q=@3;p4q=@4;p8q=@5;p9q=@6;p10_11q=@7;p12_13q=@8;p14_15q=@9;p16q=@10;p17q=@11;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "|fm_block|||||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "[xi,yi] = fm_draw('ind');\n[xc,yc] = fm_draw('cap');\n[xa,ya] = fm_draw('acdc');"
+	  MaskDisplay		  "plot([-1.6 -1.8 -1.8],[0.5 0.5 4],[0.2 0.2],[0.5 4],[-0.9 -0.9],[3 5],[0 0.2],[0.5 0.5],[-0.65 -0.8"
+	  "5],[0.5 0.5],[-1.8 -0.9],[4 4],[0.2 -0.8],[4 4],[0.2 0.4],[1.9 1.9],[-1.8 -2],[1.9 1.9]), plot(-0.7+0.1*xc,4+yc,-1."
+	  "15+0.175+0.125*yi,0.5+0.5*xi,-1.15-0.325+0.125*yi,0.5+0.5*xi,-1.15-0.075+0.125*yi,0.5+0.5*xi), \ncolor('magenta'), "
+	  "plot(xa,ya)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100   230   60]|Alpha|constant_power_flow|constant_line_power|10|0.5|[0.5   -0.5 ]|[5 1]|[0.2  "
+	  "0.1]|10|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Upfc"
+	  Tag			  "PSATblock"
+	  Description		  "FACTS"
+	  Ports			  [0, 0, 0, 0, 0, 1, 1]
+	  Position		  [160, 187, 275, 333]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Upfc"
+	  MaskDescription	  "This block describes a UPFC component."
+	  MaskHelp		  "Tree control methodology are available:\n\nType 1, Magnitude control: m controls AC voltage by mean of"
+	  " a lead-lag transfer function, whereas alpha controls DC voltage by mean of a PI regulator.\n\nType 2, Phase contro"
+	  "l: alpha controls AC voltage by mean of a PI regulator along with a lead-lag transfer function, whereas m is kept a"
+	  "t 0.9.\n\nType 3, Phase control: alpha controls AC voltage by mean of a two poles and one zero transfer function, w"
+	  "hereas m is kept at 0.9. In this case parameters Kp and Ki are respectively the gain and the time constant of the l"
+	  "ow pass filter."
+	  MaskPromptString	  "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Operation mode: |Percentage of series compen"
+	  "sation Cp [%]|Gain and time constant Kr and Tr [p.u./p.u. s]|Max and min Vp [p.u. p.u.]|Max and min Vq [p.u. p.u.]|"
+	  "Max and min Iq [p.u. p.u.]|Stabilizing Vp signal (series voltage)|Stabilizing Vq signal (quadrature voltage)|Stabil"
+	  "izing Iq signal (quadrature current)|Connected"
+	  MaskStyleString	  "edit,popup(constant_voltage|constant_reactance),edit,edit,edit,edit,edit,checkbox,checkbox,check"
+	  "box,checkbox"
+	  MaskVariables		  "p3_4_5q=@1;p2q=@2;p6q=@3;p7_8q=@4;p9_10q=@5;p11_12q=@6;p13_14q=@7;p15q=@8;p16q=@9;p17q=@10;p18q=@"
+	  "11;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "||||||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');\n[xc,yc] = fm_draw('ind');\n[xa,ya] = fm_draw('acdc2');"
+	  MaskDisplay		  "plot([0.3 0.3 -0.95 -0.95 0.3],[-1.7 2.7 2.7 -1.7 -1.7])\nplot(-2+[0.3 0.3 -0.95 -0.95 0.3],[-1.7 2"
+	  ".7 2.7 -1.7 -1.7])\nplot([-2.325 -2.325],[2.7 3.5],[-2.325 -2.325],[6.9 7.5])\nplot(0.25*x-2.325,4.5+y,0.25*x-2.325"
+	  ",5.9+y)\nplot([-0.325 -0.325],[2.7 5.1],[-0.575 -2.95],[7.5 7.5],[-0.075 0.3],[7.5 7.5],0,16.7)\nplot(0.25*x-0.325,"
+	  "6.1+y,0.25*x-0.325,7.5+y)\nplot([-0.95 -1.7],[2.2 2.2],[-0.95 -1.7],[-1.2 -1.2])\nplot([-1.325+0.175  -1.325-0.175]"
+	  ",[0.75 0.75],[-1.325 -1.325],[2.2 0.75],[-1.325 -1.325],[0.35 -1.2])\nplot(-1.325+0.175*yc,0.1+0.25*xc)\n\ncolor('m"
+	  "agenta')\nplot(xa,ya)\nplot(xa-2,ya)\n"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  230  60]|constant_voltage|25|[50 0.1]|[1.15 0.85]|[1.15 0.85]|[1.1 0.9]|on|on|on|on"
+	}
+	Annotation {
+	  Name			  "Flexible AC Transmission Systems"
+	  Position		  [208, 35]
+	  ForegroundColor	  "blue"
+	  FontSize		  12
+	}
+	Annotation {
+	  Name			  "TCSC (model 2)"
+	  Position		  [333, 124]
+	}
+	Annotation {
+	  Name			  "TCSC\n(model 1)"
+	  Position		  [237, 122]
+	}
+	Annotation {
+	  Name			  "SVC\n(model 1)"
+	  Position		  [72, 148]
+	}
+	Annotation {
+	  Name			  "SVC\n(model 2)"
+	  Position		  [167, 131]
+	}
+	Annotation {
+	  Name			  "HVDC\nTransmission\nLine"
+	  Position		  [74, 199]
+	}
+	Annotation {
+	  Name			  "StatCom"
+	  Position		  [71, 352]
+	}
+	Annotation {
+	  Name			  "UPFC"
+	  Position		  [218, 350]
+	}
+	Annotation {
+	  Name			  "SSSC"
+	  Position		  [352, 353]
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Faults & \nBreakers"
+      Tag		      "PSATfolder"
+      Description	      "Switches"
+      Ports		      []
+      Position		      [301, 22, 351, 70]
+      ShowName		      off
+      FontSize		      12
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      MaskInitialization      "x = fm_draw('fault');"
+      MaskDisplay	      "image(x)"
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      System {
+	Name			"Faults & \nBreakers"
+	Location		[1363, 461, 1639, 611]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Breaker"
+	  Tag			  "PSATblock"
+	  Description		  "Faults & Breakers"
+	  Ports			  [0, 0, 0, 0, 0, 1, 1]
+	  Position		  [190, 75, 210, 95]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Breaker"
+	  MaskDescription	  "This block defines a transmission line breaker."
+	  MaskPromptString	  "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Initially close|First intervention time [s]|"
+	  "Second intervention time [s]|Apply first intervention|Apply second intervention"
+	  MaskStyleString	  "edit,checkbox,edit,edit,checkbox,checkbox"
+	  MaskVariables		  "p3_4_5q=@1;p6q=@2;p7q=@3;p8q=@4;p9q=@5;p10q=@6;"
+	  MaskTunableValueString  "on,on,on,on,on,on"
+	  MaskCallbackString	  "|fm_block||||"
+	  MaskEnableString	  "on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on"
+	  MaskDisplay		  "plot([1 2 2 1 1],[-1 -1 1 1 -1]),color('red'),plot([1 2],[-1 1],[2 1],[-1 1])"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  400  60]|on|0.00|0.00|on|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Fault"
+	  Tag			  "PSATblock"
+	  Description		  "Faults & Breakers"
+	  Ports			  [0, 0, 0, 0, 0, 1]
+	  Position		  [53, 80, 77, 120]
+	  Orientation		  "down"
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  MaskType		  "Fault"
+	  MaskDescription	  "This block defines a three phase fault."
+	  MaskPromptString	  "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Fault Time [s]|Fault Clearing Time [s]|Fault"
+	  " Resistance [p.u.]|Fault Reactance [p.u.]"
+	  MaskStyleString	  "edit,edit,edit,edit,edit"
+	  MaskVariables		  "p2_3_4q=@1;p5q=@2;p6q=@3;p7q=@4;p8q=@5;"
+	  MaskTunableValueString  "on,on,on,on,on"
+	  MaskCallbackString	  "||||"
+	  MaskEnableString	  "on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on"
+	  MaskDisplay		  "plot([-2 2],[1 1])\ncolor('yellow')\nplot([1 -1],[1 -0.2],[-1 1],[-0.2 0.2],[1 -1],[0.2 -1],[-1 -1]"
+	  ",[-1 -0.7],[-1 -0.2],[-1 -0.8])"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  400  60]|0.00|0.250|1e-3|1e-3"
+	}
+	Annotation {
+	  Name			  "Faults & Operations"
+	  Position		  [145, 32]
+	  ForegroundColor	  "blue"
+	  FontSize		  12
+	}
+	Annotation {
+	  Name			  "Breaker"
+	  Position		  [198, 113]
+	}
+	Annotation {
+	  Name			  "Fault"
+	  Position		  [98, 95]
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Loads"
+      Tag		      "PSATfolder"
+      Description	      "Loads"
+      Ports		      []
+      Position		      [41, 96, 102, 143]
+      ShowName		      off
+      FontSize		      12
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      MaskInitialization      "x = fm_draw('loads');"
+      MaskDisplay	      "image(x)"
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      System {
+	Name			"Loads"
+	Location		[473, 447, 880, 719]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Exload"
+	  Tag			  "PSATblock"
+	  Description		  "Loads"
+	  Ports			  [0, 0, 0, 0, 0, 1]
+	  Position		  [135, 156, 165, 184]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  MaskType		  "Exload"
+	  MaskDescription	  "This block defines Exponential Recovery Loads."
+	  MaskPromptString	  "Power ratings [MVA]|Active and reactive power percentages [%, %]|Time constants for the real an"
+	  "d reactive power dynamics Tp, Tq [s, s]|Real power exponents Alpha_S, Alpha_T|Reactive power exponents Beta_S, Beta"
+	  "_T|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p2q=@1;p3_4q=@2;p5_6q=@3;p7_8q=@4;p9_10q=@5;p11q=@6;"
+	  MaskTunableValueString  "on,on,on,on,on,on"
+	  MaskCallbackString	  "|||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('R');"
+	  MaskDisplay		  "plot([1 0 0 1 1],[1 1 0 0 1])\ncolor('blue')\nplot(0.7+0.3*x,0.6*y+0.5,[0.4 0.1 0.1 0.4],[0.8 0.8 0"
+	  ".2 0.2],[0.1 0.25],[0.5 0.5])"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "100|[100 100]|[1  1]|[2   1.5]|[2  1.5]|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Fl"
+	  Tag			  "PSATblock"
+	  Description		  "Loads"
+	  Ports			  [0, 0, 0, 0, 0, 1]
+	  Position		  [50, 155, 80, 185]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  MaskType		  "Fl"
+	  MaskDescription	  "This block defines a general exponential voltage \nfrequency dependent load"
+	  MaskPromptString	  "Active power percentage Kp [%]|Active power voltage and frequency exponents ap, bp|Reactive pow"
+	  "er percentage Kq [%]|Reactive power voltage and frequency exponents aq, bq|Frequency filter time constant Tf [s]|Co"
+	  "nnected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p2q=@1;p3_4q=@2;p5q=@3;p6_7q=@4;p8q=@5;p9q=@6;"
+	  MaskTunableValueString  "on,on,on,on,on,on"
+	  MaskCallbackString	  "|||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on"
+	  MaskDisplay		  "plot([-1 -1 1 1 -1],[-1 1 1 -1 -1])\ncolor('blue')\nplot([-0.2 -0.15 0 0 0.15 0.2],[-0.45 -0.5 -0.4"
+	  " 0.35 0.45 0.35],[-0.1 0.15],[0.05 0.05])"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "100|[2  0]|100|[2  0]|0.01|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Jimma"
+	  Tag			  "PSATblock"
+	  Description		  "Loads"
+	  Ports			  [0, 0, 0, 0, 0, 1]
+	  Position		  [225, 156, 255, 184]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  MaskType		  "Jimma"
+	  MaskDescription	  "This block defines a Jimma's Load."
+	  MaskPromptString	  "Power, voltage and frequency ratings [MVA, kV, Hz]|Percentage of resistance, active current and"
+	  " active power [% % %]|Percentage of reactance, reactive current and reactive power [% % %]|High-pass filter time co"
+	  "nstant Tf [s]|Coefficient of voltage time derivative KV [1/s]|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p2_3_4q=@1;p6_7_8q=@2;p9_10_11q=@3;p5q=@4;p12q=@5;p13q=@6;"
+	  MaskTunableValueString  "on,on,on,on,on,on"
+	  MaskCallbackString	  "|||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('J');"
+	  MaskDisplay		  "plot([-1 -1 1 1 -1],[-1 1 1 -1 -1]);\ncolor('blue')\nplot(x,y)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  230  60]|[33 33 34]|[33 33 34]|0.01|100|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Mixload"
+	  Tag			  "PSATblock"
+	  Description		  "Loads"
+	  Ports			  [0, 0, 0, 0, 0, 1]
+	  Position		  [300, 156, 330, 184]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  MaskType		  "Mixload"
+	  MaskDescription	  "This block defines a mixed load."
+	  MaskPromptString	  "Power, voltage and frequency ratings [MVA, kV, Hz]|Percentage of active and reactive power Kpv "
+	  "and Kqv [% %]|Frequency coefficients Kpf and Kqf|Voltage exponents alpha and beta|Time constant of dV/dt Tpv and Tq"
+	  "v [s s]|Filter time constants Tfv and Tft [s s]|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p2_3_4q=@1;p6_10q=@2;p5_9q=@3;p7_11q=@4;p8_12q=@5;p13_14q=@6;p15q=@7;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on"
+	  MaskCallbackString	  "||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on"
+	  MaskDisplay		  "plot([-1 -1 2.4 2.4 -1],[-1 1 1 -1 -1])\ncolor('blue')\nplot([-0.35 -0.35 0 0.35 0.35],[-0.35 0.35 "
+	  "0.05 0.35 -0.35])\nplot([0.7 0.7],[-0.35 0.35])\nplot([1.05 1.75],[-0.35 0.35],[1.05 1.75],[0.35 -0.35])\n"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  230  60]|[100 100]|[0  0]|[0  0]|[0.1  0.1]|[0.01  0.01]|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Mn"
+	  Tag			  "PSATblock"
+	  Description		  "Loads"
+	  Ports			  [0, 0, 0, 0, 0, 1]
+	  Position		  [100, 65, 130, 95]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  MaskType		  "Mn"
+	  MaskDescription	  "This block defines a general exponential voltage load."
+	  MaskPromptString	  "Power and voltage ratings [MVA, kV]|Percentage of active and reactive powers [%, %]|Voltage exp"
+	  "onents for the active and reactive powers|Initialize after power flow|Connected"
+	  MaskStyleString	  "edit,edit,edit,checkbox,checkbox"
+	  MaskVariables		  "p2_3q=@1;p4_5q=@2;p6_7q=@3;p8q=@4;p9q=@5;"
+	  MaskTunableValueString  "on,on,on,on,on"
+	  MaskCallbackString	  "|||fm_block|fm_block"
+	  MaskEnableString	  "on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on"
+	  MaskDisplay		  "plot([-1 -1 1 1 -1],[-1 1 1 -1 -1])\ncolor('blue')\nplot([-0.35 -0.35 0 0.35 0.35],[-0.35 0.35 0.05"
+	  " 0.35 -0.35])"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100 400]|[80  60]|[2.00 2.00]|on|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Pl"
+	  Tag			  "PSATblock"
+	  Description		  "Loads"
+	  Ports			  [0, 0, 0, 0, 0, 1]
+	  Position		  [185, 66, 215, 94]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  MaskType		  "Pl"
+	  MaskDescription	  "This block defines a ZIP load."
+	  MaskPromptString	  "Power, voltage and frequency ratings [MVA, kV, Hz]|Percentage of resistance, active current and"
+	  " active power [%, %, %]|Percentage of reactance, reactive current and reactive power [%, %, %]|Initialize after pow"
+	  "er flow|Connected"
+	  MaskStyleString	  "edit,edit,edit,checkbox,checkbox"
+	  MaskVariables		  "p2_3_4q=@1;p5_6_7q=@2;p8_9_10q=@3;p11q=@4;p12q=@5;"
+	  MaskTunableValueString  "on,on,on,on,on"
+	  MaskCallbackString	  "|||fm_block|fm_block"
+	  MaskEnableString	  "on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on"
+	  MaskDisplay		  "plot([-1 -1 1 1 -1],[-1 1 1 -1 -1])\ncolor('blue')\nplot([0 0],[-0.3 0.3],[-0.3 -0.7 -0.3 -0.7],[-0"
+	  ".3 -0.3 0.3 0.3])\nplot([0.3 0.3 0.6 0.7 0.7 0.6 0.3],[-0.3 0.3 0.3 0.2 0.1 0 0])"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100 400 60]|[33 33 33]|[33 33 33]|on|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Thload"
+	  Tag			  "PSATblock"
+	  Description		  "Loads"
+	  Ports			  [0, 0, 0, 0, 0, 1]
+	  Position		  [265, 66, 295, 94]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  MaskType		  "Thload"
+	  MaskDescription	  "This block defines a thermostatically controlled load"
+	  MaskPromptString	  "% of load to be used as thermostatically controlled load [%]|Gain of proportional controller Kp"
+	  "|Gain of integral controller Ki|Time constant of integral controller Ti [s]|Thermostatically controlled load time c"
+	  "onstant T1 [s]|Ambient temperature Ta [F]|Reference temperature Tref [F]|Ceiling conductance ouput KL|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p2q=@1;p3q=@2;p4q=@3;p5q=@4;p6q=@5;p7q=@6;p8q=@7;p11q=@8;p12q=@9;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "||||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on"
+	  MaskDisplay		  "plot([-1 -1 1 1 -1],[-1 1 1 -1 -1])\ncolor('blue')\nplot([-0.5 -0.5 -0.25 -0.25 -0.5],[0.4 0.15 0.1"
+	  "5 0.4 0.4])\nplot([-0.05 -0.05 0.5],[-0.4 0.4 0.4],[-0.05 0.3],[0.05 0.05])"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "50|100|25|10|1200|10|70|2|on"
+	}
+	Annotation {
+	  Name			  "Loads"
+	  Position		  [210, 29]
+	  ForegroundColor	  "blue"
+	  FontSize		  12
+	}
+	Annotation {
+	  Name			  "Voltage \nDependent \nLoad"
+	  Position		  [116, 120]
+	}
+	Annotation {
+	  Name			  "ZIP Load"
+	  Position		  [200, 105]
+	}
+	Annotation {
+	  Name			  "Thermostatically\nControlled\nLoad"
+	  Position		  [278, 119]
+	}
+	Annotation {
+	  Name			  "Frequency\nDependent \nLoad"
+	  Position		  [63, 207]
+	}
+	Annotation {
+	  Name			  "Exponential \nRecovery\nLoad"
+	  Position		  [152, 207]
+	}
+	Annotation {
+	  Name			  "Jimma's\nLoad"
+	  Position		  [237, 204]
+	}
+	Annotation {
+	  Name			  "Mixed\nLoad"
+	  Position		  [314, 203]
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Machines"
+      Tag		      "PSATfolder"
+      Description	      "Machines"
+      Ports		      []
+      Position		      [131, 95, 186, 150]
+      ShowName		      off
+      FontSize		      12
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      MaskInitialization      "x = fm_draw('machines');"
+      MaskDisplay	      "image(x)"
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      System {
+	Name			"Machines"
+	Location		[725, 199, 1016, 369]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Ind"
+	  Tag			  "PSATblock"
+	  Description		  "Machines"
+	  Ports			  [0, 0, 0, 0, 0, 1]
+	  Position		  [185, 64, 220, 96]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  MaskType		  "Ind"
+	  MaskDescription	  "This block defines an asynchronous machine.\n\nOrder 1:  mechanical equation\nOrder 3:  single c"
+	  "age\nOrder 5:  double cage"
+	  MaskPromptString	  "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Dynamic Order|Start up|Stator Resistance Rs "
+	  "[p.u.]|Stator Reactance Xs [p.u.] |First Cage Resitance Rr1 and Reactance  Xr1 [p.u. p.u.]|Second Cage Resistance R"
+	  "r2 and Reactance Xr2 [p.u.  p.u.]|Magnetization Reactance Xm [p.u.]|Inertia Constant Hm [kWs/kVA]|Mechanical Torque"
+	  " coefficients [a, b, c] [p.u.  p.u.  p.u.]|Start up time|Allow working as brake|Connected"
+	  MaskStyleString	  "edit,popup(1|3|5),checkbox,edit,edit,edit,edit,edit,edit,edit,edit,checkbox,checkbox"
+	  MaskVariables		  "p2_3_4q=@1;p5q=@2;p6q=@3;p7q=@4;p8q=@5;p9_10q=@6;p11_12q=@7;p13q=@8;p14q=@9;p15_16_17q=@10;p18q=@"
+	  "11;p19q=@12;p20q=@13;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "|fm_block|||||||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,off,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');\n[xs,ys] = fm_draw('sinus');"
+	  MaskDisplay		  "plot(x+1.4,y,0.12*xs+1,0.15*ys-0.6)\ncolor('blue')\nplot([1 1 1.4 1.8 1.8],[-0.05 0.7 0.4 0.7 -0.05"
+	  "])"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100   25   60]|3|off|0.01   |0.15|[0.05  0.15]|[0.001  0.04]|5.00|3.00|[1.00  0.00  0.00]|0|off"
+	  "|on"
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Syn"
+	  Tag			  "PSATblock"
+	  Description		  "Machines"
+	  Ports			  [0, 0, 0, 0, 0, 0, 1]
+	  Position		  [70, 63, 105, 97]
+	  ShowName		  off
+	  FontSize		  12
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  MaskType		  "Syn"
+	  MaskDescription	  "This block defines  a fourth order synchronous machine."
+	  MaskPromptString	  "Power, voltage and frequency ratings [MVA, kV, Hz]|Machine Dynamic Order|resistance ra and leak"
+	  "age reactance xl [p.u. p.u.]|d-axis reactances Xd, X'd X\"d [p.u.,p.u.,p.u.]|d-axis open circuit time constants T'd"
+	  "0 and T\"d0 [s, s]|q-axis reactances Xq, X'q, X\"q [p.u.  p.u.  p.u.]|q-axis open circuit time constants T'q0 and T"
+	  "\"q0 [s s]|Inertia (M = 2H) and Damping [s, p.u.]|Speed and active power additional signals Kw and Kp [p.u., p.u.]|"
+	  "Percentage of active and reactive powers at bus [p.u. p.u.]|d-axis additional circuit leakage time constant Taa [s]"
+	  " |Saturation coefficients S(1.0) and S(1.2)|Number of input signals|COI number|Connected"
+	  MaskStyleString	  "edit,popup(8|6|5.3|5.2|5.1|4|3|2),edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,popup(0|1|2)"
+	  ",edit,checkbox"
+	  MaskVariables		  "p2_3_4q=@1;p5q=@2;p7_6q=@3;p8_9_10q=@4;p11_12q=@5;p13_14_15q=@6;p16_17q=@7;p18_19q=@8;p20_21q=@9;"
+	  "p22_23q=@10;p24q=@11;p25_26q=@12;in=@13;p27q=@14;p28q=@15;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "|fm_block|||||||||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "fm_inout\n[x,y] = fm_draw('circle');\n[xg,yg] = fm_draw('G');\n[xs,ys] = fm_draw('sinus');\n"
+	  MaskDisplay		  "plot(x+1.4,y,0.12*xs+1,0.15*ys-0.6)\ncolor('blue')\nplot(1.4+0.45*xg,0.3+0.45*yg)\n"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[370  20   50]|6|[0.001  0.05]|[1.90  0.302  0.204]|[8.00  0.04]|[1.70  0.50  0.30]|[0.80  0.02]"
+	  "|[10.00  0.00]|[0.00  0.00]|[1.00  1.00]|0.002|[0 0]|0|1|on"
+	  System {
+	    Name		    "Syn"
+	    Location		    [412, 233, 746, 425]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      PMComponent
+	      Name		      "Atomic Subsystem"
+	      Ports		      [0, 0, 0, 0, 0, 0, 1]
+	      Position		      [140, 89, 240, 131]
+	      ShowName		      off
+	      PhysicalDomain	      "psatdomain"
+	      LeftPortType	      "p1"
+	      RightPortType	      "p1"
+	      RConnTagsString	      "__newr0"
+	    }
+	    Block {
+	      BlockType		      PMIOPort
+	      Name		      "Connection\nPort1"
+	      Tag		      "PMCPort"
+	      Position		      [280, 101, 310, 119]
+	      Orientation	      "left"
+	      ShowName		      off
+	      Port		      "1"
+	      Side		      "Right"
+	    }
+	    Line {
+	      LineType		      "Connection"
+	      SrcBlock		      "Atomic Subsystem"
+	      SrcPort		      RConn1
+	      DstBlock		      "Connection\nPort1"
+	      DstPort		      RConn1
+	    }
+	    Annotation {
+	      Name		      "Synchronous Machine"
+	      Position		      [164, 45]
+	    }
+	  }
+	}
+	Annotation {
+	  Name			  "Electrical Machines"
+	  Position		  [142, 32]
+	  ForegroundColor	  "blue"
+	  FontSize		  12
+	}
+	Annotation {
+	  Name			  "Synchronous\nMachine"
+	  Position		  [89, 113]
+	}
+	Annotation {
+	  Name			  "Induction\nMachine"
+	  Position		  [199, 116]
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Measurements"
+      Tag		      "PSATfolder"
+      Description	      "Switches"
+      Ports		      []
+      Position		      [301, 170, 361, 217]
+      ShowName		      off
+      FontSize		      12
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      MaskInitialization      "x = fm_draw('measures');"
+      MaskDisplay	      "image(x)"
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      System {
+	Name			"Measurements"
+	Location		[308, 234, 584, 384]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Busfreq"
+	  Tag			  "PSATblock"
+	  Description		  "Measurements"
+	  Ports			  [0, 0, 0, 0, 0, 1]
+	  Position		  [60, 60, 90, 90]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  MaskType		  "Busfreq"
+	  MaskDescription	  "This block defines a bus frequency measurement."
+	  MaskPromptString	  "Frequency deviation filter time constant Tf [s]|Frequency filter time constant Tw [s]|Connected"
+	  MaskStyleString	  "edit,edit,checkbox"
+	  MaskVariables		  "p2q=@1;p3q=@2;p4q=@3;"
+	  MaskTunableValueString  "on,on,on"
+	  MaskCallbackString	  "||fm_block"
+	  MaskEnableString	  "on,on,on"
+	  MaskVisibilityString	  "on,on,on"
+	  MaskToolTipString	  "on,on,on"
+	  MaskDisplay		  "plot([-1 0 1 0 -1],[0 1 0 -1 0])\ncolor('yellow')\nplot([-0.2 -0.15 0 0 0.15 0.2],[-0.45 -0.5 -0.4 "
+	  "0.35 0.45 0.35],[-0.1 0.15],[0.05 0.05])"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "0.001|0.001|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Pmu"
+	  Tag			  "PSATblock"
+	  Description		  "Measurements"
+	  Ports			  [0, 0, 0, 0, 0, 1]
+	  Position		  [180, 59, 235, 91]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  MaskType		  "Pmu"
+	  MaskDescription	  "This block defines a phasor measurement unit (PMU)."
+	  MaskPromptString	  "Voltage and frequency rates [kV Hz]|Time constant of the voltage magnitude filter [s]|Time cons"
+	  "tant of the voltage phase filter [s]|Connected"
+	  MaskStyleString	  "edit,edit,edit,checkbox"
+	  MaskVariables		  "p2_3q=@1;p4q=@2;p5q=@3;p6q=@4;"
+	  MaskTunableValueString  "on,on,on,on"
+	  MaskCallbackString	  "|||fm_block"
+	  MaskEnableString	  "on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on"
+	  MaskInitialization	  "[xp,yp] = fm_draw('P');\n[xu,yu] = fm_draw('U');\n[xm,ym] = fm_draw('M');\n"
+	  MaskDisplay		  "plot([-1 0  4 5  4 0 -1],[0 1 1 0 -1 -1 0])\ncolor('yellow')\nplot(xp+0.5,yp,xu+3,yu,xm+2,ym)\n"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[230 60]|0.05|0.05|on"
+	}
+	Annotation {
+	  Name			  "Measurements"
+	  Position		  [135, 32]
+	  ForegroundColor	  "blue"
+	  FontSize		  12
+	}
+	Annotation {
+	  Name			  "Bus Frequency\nMeasurement"
+	  Position		  [74, 112]
+	}
+	Annotation {
+	  Name			  "Phasor\nMeasument Unit"
+	  Position		  [207, 112]
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "OPF & CPF"
+      Tag		      "PSATfolder"
+      Description	      "OPFandCPF"
+      Ports		      []
+      Position		      [225, 20, 278, 75]
+      ShowName		      off
+      FontSize		      12
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      MaskInitialization      "x = fm_draw('opfcpf');"
+      MaskDisplay	      "image(x)"
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      System {
+	Name			"OPF & CPF"
+	Location		[2177, 430, 2475, 766]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Demand"
+	  Tag			  "PSATblock"
+	  Description		  "OPF & CPF"
+	  Ports			  [0, 0, 0, 0, 0, 1]
+	  Position		  [200, 58, 230, 92]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  MaskType		  "Demand"
+	  MaskDescription	  "This block defines a constant power load for bifurcation and market studies."
+	  MaskPromptString	  "Power Rating [MVA]|Active Power [p.u.]|Reactive Power [p.u.]|Max and Min Power Demand [p.u.  p."
+	  "u.]|Cost = a + b*P + c*P^2 [$/h, $/MWh, $/(MW)^2 h]|Cost = a + b*Q + c*Q^2 [$/h, $/MVArh, $/(MVAr)^2 h]|Allow Unit "
+	  "Commitment|Tie Breaking Cost [$/h]|Up and down congestion costs [$/h $/h]|Number of Output Signals|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit,checkbox,edit,edit,popup(0|1),checkbox"
+	  MaskVariables		  "p2q=@1;p3q=@2;p4q=@3;p5_6q=@4;p8_9_10q=@5;p11_12_13q=@6;p14q=@7;p15q=@8;p16_17q=@9;out=@10;p18q=@"
+	  "11;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "||||||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "fm_inout;\n[xs,ys]=fm_draw('$');"
+	  MaskDisplay		  "plot([ 1.0000    -0.5   -0.5  1],[ 0    0.866    -0.866    0])\ncolor('blue')\nplot(0.6*xs,0.6*ys)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "100|0.80|0.60|[1.00  0.00]|[0.00  10.5  0.00]|[0.00  0.00  0.00]|off|0|[0 0]|0|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Rmpg"
+	  Tag			  "PSATblock"
+	  Description		  "OPF & CPF"
+	  Ports			  [0, 0, 0, 0, 0, 0, 1]
+	  Position		  [50, 154, 80, 186]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Rmpg"
+	  MaskDescription	  "This block defines ramping parameters for generators for market studies."
+	  MaskPromptString	  "Power Rating [MVA]|Ramp Up and Down Rates [p.u./h  p.u./h] |Minimum Up and Down Times [h  h] |N"
+	  "umbers of period up and down at initial time [h  h]|Start Up Cost [$]|Conneted"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p2q=@1;p3_4q=@2;p5_6q=@3;p7_8q=@4;p9q=@5;p10q=@6;"
+	  MaskTunableValueString  "on,on,on,on,on,on"
+	  MaskCallbackString	  "|||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');\n[xr,yr] = fm_draw('ramp');"
+	  MaskDisplay		  "plot(x,y)\ncolor('blue')\nplot(xr,yr)\n\n"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "100|[1.00  1.00]|[1 1]|[0 2]|10|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Rmpl"
+	  Tag			  "PSATblock"
+	  Description		  "OPF & CPF"
+	  Ports			  [0, 0, 0, 0, 0, 1]
+	  Position		  [45, 248, 75, 282]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  MaskType		  "Rmpl"
+	  MaskDescription	  "This block defines ramping parameters for loads for market studies."
+	  MaskPromptString	  "Power Rating [MVA]|Ramp Up and Down Rates  [p.u./h  p.u./h] |Minimum Up and Down Times [h  h]|N"
+	  "umber of period up and down at initial time [h  h]|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p2q=@1;p3_4q=@2;p5_6q=@3;p7_8q=@4;p9q=@5;"
+	  MaskTunableValueString  "on,on,on,on,on"
+	  MaskCallbackString	  "||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on"
+	  MaskInitialization	  "[xr,yr] = fm_draw('ramp');"
+	  MaskDisplay		  "plot([ 1.0000    -0.5   -0.5  1],[ 0    0.866    -0.866    0])\ncolor('blue')\nplot(0.7*xr, 0.6*yr)"
+	  "\n"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "100|[1.00  1.00]|[1 1]|[0 2]|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Rsrv"
+	  Tag			  "PSATblock"
+	  Description		  "OPF & CPF"
+	  Ports			  [0, 0, 0, 0, 0, 0, 1]
+	  Position		  [135, 155, 165, 185]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Rsrv"
+	  MaskDescription	  "This block defines generator reserve data."
+	  MaskPromptString	  "Power Rating [MVA]|Maximum and Minimum reserve Offer [p.u.  p.u.]|Reserve Offer Price [$/MWh]|C"
+	  "onnected"
+	  MaskStyleString	  "edit,edit,edit,checkbox"
+	  MaskVariables		  "p2q=@1;p3_4q=@2;p5q=@3;p6q=@4;"
+	  MaskTunableValueString  "on,on,on,on"
+	  MaskCallbackString	  "|||fm_block"
+	  MaskEnableString	  "on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');\n[xr,yr] = fm_draw('R');"
+	  MaskDisplay		  "plot(x,y)\ncolor('blue')\nplot(0.5*xr,yr)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "100|0.08   0.00|10.00|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Supply"
+	  Tag			  "PSATblock"
+	  Description		  "OPF & CPF"
+	  Ports			  [0, 0, 0, 0, 0, 0, 1]
+	  Position		  [55, 57, 90, 93]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Supply"
+	  MaskDescription	  "This block defines a PV bus for bifurcation and market studies:\n"
+	  MaskPromptString	  "Power Rating [MVA]|Active Power [p.u.]|Max and Min Power Supply [p.u.  p.u.]|Cost = a + b*P + c"
+	  "*P^2 [$/h, $/MWh, $/(MW)^2 h]|Cost = a + b*Q + c*Q^2 [$/h, $/MVArh, $/(MVAr)^2 h]|Allow Unit Commitment|Tie Breakin"
+	  "g Cost [$/h]|Loss participation factor|Reactive power limits Qmax and Qmin [p.u. p.u.]|Up and down congestion costs"
+	  " [$/h $/h]|Number of Input Signals|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,checkbox,edit,edit,edit,edit,popup(0|1|2),checkbox"
+	  MaskVariables		  "p2q=@1;p3q=@2;p4_5q=@3;p7_8_9q=@4;p10_11_12q=@5;p13q=@6;p14q=@7;p15q=@8;p16_17q=@9;p18_19q=@10;in"
+	  "=@11;p20q=@12;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "|||||||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "fm_inout;\n[x,y] = fm_draw('circle');\n[xs,ys] = fm_draw('$');"
+	  MaskDisplay		  "plot(x,y)\ncolor('blue')\nplot(xs,ys)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "100|0.80|[1.00 0.00]|[0.00  8.80  0.00]|[0.00  0.00  0.00]|off|0|1|[0  0]|[0 0]|0|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Vltn"
+	  Tag			  "PSATblock"
+	  Description		  "OPF & CPF"
+	  Ports			  [0, 0, 0, 0, 0, 0, 1]
+	  Position		  [215, 155, 245, 185]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Vltn"
+	  MaskDescription	  "This block defines penalty factors for generators for market studies."
+	  MaskPromptString	  "Power Rating [MVA]|Deficit Generation Penalty|Surplus Generation Penalty|Deficit 10 Minutes Res"
+	  "erve Penalty|Deficit Synch 10 Min Reserve Penalty|Deficit Total Reserve Penalty|Surplus Intertie Penalty |Deficit I"
+	  "ntertie Penalty|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p2q=@1;p3q=@2;p4q=@3;p5q=@4;p6q=@5;p7q=@6;p8q=@7;p9q=@8;p10q=@9;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "||||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');"
+	  MaskDisplay		  "plot(x,y)\ncolor('blue')\nplot([0.3 0 -0.3],[0.5 -0.5 0.5])\n"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "100|0.01|0.01|0.01|0.01|0.01|0.01|0.01|on"
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Ypdp"
+	  Tag			  "PSATblock"
+	  Description		  "OPF & CPF"
+	  Ports			  []
+	  Position		  [113, 230, 198, 267]
+	  ShowName		  off
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  MaskType		  "Ypdp"
+	  MaskDescription	  "This block defines the yearly power demand profile."
+	  MaskPromptString	  "Select Day Type:|Select Day of the Week:|Se|Mask Parameter 4:|Mask Parameter 5:|Mask Parameter "
+	  "6:|Mask Parameter 7:|Mask Parameter 8:|Mask Parameter 9:|Mask Parameter 10:|Mask Parameter 11:|Mask Parameter 12:|M"
+	  "ask Parameter 13:|Mask Parameter 14:"
+	  MaskStyleString	  "popup(winter_week_day|winter_week_end|summer_week_day|summer_week_end|spring_fall_week_day|sprin"
+	  "g_fall_week_end),popup(monday|tuesday|wednesday|thursday|friday|saturday|sunday),edit,edit,edit,edit,edit,edit,edit"
+	  ",edit,edit,edit,edit,edit"
+	  MaskVariables		  "p204q=@1;p205q=@2;p206q=@3;p1x24q=@4;p25x48q=@5;p49x72q=@6;p73x96q=@7;p97x120q=@8;p121x144q=@9;p1"
+	  "45x151q=@10;p152x164q=@11;p165x177q=@12;p178x190q=@13;p191x203q=@14;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "|||||||||||||"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskDisplay		  "plot([-2 22 22 -2 -2],[-1.1 -1.1 1.1 1.1 -1.1])\ncolor('blue')\nplot([0 0 20],[0.8 -0.8 -0.8])\ncol"
+	  "or('red')\nplot([0:19],[ 0.3941  0.5030   0.7220   0.3062   0.1122   0.4433   0.4668   0.0147   0.6641   0.7241   0"
+	  ".2816   0.2618   0.7085   0.7839   0.9862   0.4733   0.9028   0.4511   0.8045   0.8289]-0.2)\ntext(13,-0.25,'Fixed'"
+	  ")"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "winter_week_day|monday|1|[67 63 60 59 59 60 74 86 95 96 96 95 95 95 93 94 99 100 100 96 91 83 73"
+	  " 63]|[78 72 68 66 64 65 66 70 80 88 90 91 90 88 87 87 91 100 99 97 94 92 87 81]|[64 60 58 56 56 58 64 76 87 95 99 1"
+	  "00 99 100 100 97 96 96 93 92 92 93 87 72]|[74 70 66 65 64 62 62 66 81 86 91 93 93 92 91 91 92 94 95 95 100 93 88 80"
+	  "]|[63 62 60 58 59 65 72 85 95 99 100 99 93 92 90 88 90 92 96 98 96 90 80 70]|[75 73 69 66 65 65 68 74 83 89 92 94 9"
+	  "1 90 90 86 85 88 92 100 97 95 90 85]|[93 100 98 96 94 77 75]|[86 90 87 83 88 84 83 80 74 73 71 72 70]|[75 72 80 75 "
+	  "83 87 88 85 81 90 88 89 86]|[75 81 80 88 72 77 80 72 72 70 78 69 72]|[72 74 74 80 88 88 90 94 89 94 97 100 95]"
+	  System {
+	    Name		    "Ypdp"
+	    Location		    [477, 86, 744, 293]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Annotation {
+	      Position		      [139, 85]
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Ypdp1"
+	  Tag			  "PSATblock"
+	  Description		  "OPF & CPF"
+	  Ports			  []
+	  Position		  [113, 275, 198, 312]
+	  ShowName		  off
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  MaskType		  "Ypdp"
+	  MaskDescription	  "This block defines the power demand profile (custom length)."
+	  MaskPromptString	  "Percentage of load [%]"
+	  MaskStyleString	  "edit"
+	  MaskVariables		  "pxq=@1;"
+	  MaskTunableValueString  "on"
+	  MaskEnableString	  "on"
+	  MaskVisibilityString	  "on"
+	  MaskToolTipString	  "on"
+	  MaskDisplay		  "plot([-2 22 22 -2 -2],[-1.1 -1.1 1.1 1.1 -1.1])\ncolor('blue')\nplot([0 20],[-0.8 -0.8],[0 0],[-0.8"
+	  " 0.8])\ncolor('red')\nplot([0:19],[ 0.3941  0.5030   0.7220   0.3062   0.1122   0.4433   0.4668   0.0147   0.6641  "
+	  " 0.7241   0.2816   0.2618   0.7085   0.7839   0.9862   0.4733   0.9028   0.4511   0.8045   0.8289]-0.2)\ntext(10,-0"
+	  ".25,'Custom')"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[60 80 100 120 100]"
+	  System {
+	    Name		    "Ypdp1"
+	    Location		    [477, 86, 744, 293]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Annotation {
+	      Position		      [139, 85]
+	    }
+	  }
+	}
+	Annotation {
+	  Name			  "OPF & CPF Data"
+	  Position		  [150, 32]
+	  ForegroundColor	  "blue"
+	  FontSize		  12
+	}
+	Annotation {
+	  Name			  "Power Supply Bids \nand Generator Power \nDirections"
+	  Position		  [76, 118]
+	}
+	Annotation {
+	  Name			  "Power Demand Bids\nand Load Power\nDirections"
+	  Position		  [214, 118]
+	}
+	Annotation {
+	  Name			  "Generator\nRamping"
+	  Position		  [67, 207]
+	}
+	Annotation {
+	  Name			  "Load Ramping"
+	  Position		  [56, 296]
+	}
+	Annotation {
+	  Name			  "Violation\nPenalty Factors"
+	  Position		  [232, 205]
+	}
+	Annotation {
+	  Name			  "Generator\nReserve Bids"
+	  Position		  [150, 203]
+	}
+	Annotation {
+	  Position		  [208, 302]
+	}
+	Annotation {
+	  Name			  "Yearly Power\nDemand Profile"
+	  Position		  [250, 267]
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Others"
+      Tag		      "PSATfolder"
+      Description	      "Others"
+      Ports		      []
+      Position		      [226, 168, 276, 215]
+      ShowName		      off
+      FontSize		      12
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      MaskInitialization      "x = fm_draw('others');"
+      MaskDisplay	      "image(x)"
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      System {
+	Name			"Others"
+	Location		[48, 283, 389, 555]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Mass"
+	  Tag			  "PSATblock"
+	  Description		  "Sparse Dynamic Component"
+	  Ports			  [0, 1]
+	  Position		  [40, 165, 105, 195]
+	  ShowName		  off
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  MaskType		  "Mass"
+	  MaskDescription	  "This block defines a mechanical model for synchronous generator shaft.\n"
+	  MaskPromptString	  "HP, IP, LP and EX inertiae [1/s 1/s 1/s 1/s]|HP, IP, LP and EX damping [p.u. p.u. p.u. p.u.]|D1"
+	  "2, D23, D34 and D45 damping [p.u. p.u. p.u. p.u.]|K12, K23, K34 and K45 coefficients |Number of input signals|Conne"
+	  "cted"
+	  MaskStyleString	  "edit,edit,edit,edit,popup(0|1),checkbox"
+	  MaskVariables		  "p2_3_4_5q=@1;p6_7_8_9q=@2;p10_11_12_13q=@3;p14_15_16_17q=@4;in=@5;p18q=@6;"
+	  MaskTunableValueString  "on,on,on,on,on,on"
+	  MaskCallbackString	  "|||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on"
+	  MaskInitialization	  "fm_inout\n[x,y] = fm_draw('circle');\n[x1,y1] = fm_draw('semicircle');"
+	  MaskDisplay		  "plot(-x1,y1,3+x,y,[0 3],[1 1],[0 3],[-1 -1],[3 5],[0 0])"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[0.6695  1.4612  1.6307  0.0903]|[0.518  0.224  0.224  0.145]|[0.0518  0.0224  0.0224  0.0145]|["
+	  "33.07  28.59  44.68  21.98]|0|on"
+	  System {
+	    Name		    "Mass"
+	    Location		    [320, 260, 654, 452]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Constant
+	      Name		      "Constant"
+	      Position		      [110, 100, 140, 130]
+	      ShowName		      off
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Out1"
+	      Position		      [180, 105, 200, 125]
+	      ShowName		      off
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      SrcBlock		      "Constant"
+	      SrcPort		      1
+	      DstBlock		      "Out1"
+	      DstPort		      1
+	    }
+	    Annotation {
+	      Name		      "Dynamic Shaft"
+	      Position		      [164, 45]
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Sofc"
+	  Tag			  "PSATblock"
+	  Description		  "Sparse Dynamic Component"
+	  Ports			  [0, 0, 0, 0, 0, 0, 1]
+	  Position		  [50, 74, 95, 106]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Sofc"
+	  MaskDescription	  "This block defines a Solid Oxyde Fuel Cell:"
+	  MaskPromptString	  "DC Power and Voltage Rating [MW, kV]|Electrical and fuel processor response times (Te, Tf) [s, "
+	  "s]|Response times TH2, TH2O and TO2 [s, s, s]|Valve molar constants KH2, KH2O and KO2|Constant Kr, ohmic loss [Ohm]"
+	  " and hydrogen to oxygen ratio rH_O|Fuel optimization constants Uopt, Umax and Umin|Number of cells N0 and ideal sta"
+	  "ndard potential E0 [V]|Gas absolute temperature T [K]|Transformer reactance Xt [p.u.]|Gain and Time constant for Vo"
+	  "ltage Control Km, Tm [p.u.  s]|Max and Min tap ratio [p.u./p.u. p.u./p.u.]|Control Mode: [0] costant current; [1] c"
+	  "ostant power|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,popup(1|0),checkbox"
+	  MaskVariables		  "p2_3q=@1;p4_13q=@2;p5_8_10q=@3;p6_9_11q=@4;p7_17_12q=@5;p14_15_16q=@6;p18_19q=@7;p20q=@8;p26q=@9;"
+	  "p27_28q=@10;p29_30q=@11;p25q=@12;p31q=@13;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "||||||||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskDisplay		  "plot([0 1 1 0 0],[0 0 1 1 0])\nplot([0.1 0.1 0.3 0.3],[1 1.1 1.1 1])\nplot([0.9 0.9 0.7 0.7],[1 1.1"
+	  " 1.1 1])\ncolor('yellow')\nplot([0.85 0.75],[0.85 0.85],[0.15 0.25],[0.85 0.85],[0.8 0.8],[0.8 0.9])\ncolor('blue')"
+	  "\nplot([0.85 0.65 0.65 0.85 0.85],[0.3 0.3 0.7 0.7 0.3])\nplot([0.15 0.15],[0.3 0.7],[0.35 0.35],[0.3 0.7],[0.15 0."
+	  "35],[0.5 0.5])\nplot([0.55 0.45 0.45 0.55 0.55 0.45],[0.15 0.15 0.25 0.25 0.35 0.35])\n"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  333.8]|[0.8  5]|[26.1  78.3  2.91]|[8.43e-4  2.81e-4  2.52e-3]|[0.996e-6  0.126  1.145]|[0"
+	  ".85  0.9  0.8]|[384  1.18]|1273|0.1|[100  10]|[1.2  0.8]|0|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Spq"
+	  Tag			  "PSATblock"
+	  Description		  "Sparse Dynamic Component"
+	  Ports			  [0, 0, 0, 0, 0, 0, 1]
+	  Position		  [165, 162, 205, 198]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Spq"
+	  MaskDescription	  "This block defines a Solar Photo-Voltaic generator with constant PQ model."
+	  MaskPromptString	  "Active and Reactive Power Rating [MW, MVar]|Inverter response times (Tp, Tq) [s, s]|Connected"
+	  MaskStyleString	  "edit,edit,checkbox"
+	  MaskVariables		  "p2_3q=@1;p4_5q=@2;p6q=@3;"
+	  MaskTunableValueString  "on,on,on"
+	  MaskCallbackString	  "||fm_block"
+	  MaskEnableString	  "on,on,on"
+	  MaskVisibilityString	  "on,on,on"
+	  MaskToolTipString	  "on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');\n[xc,yc] = fm_draw('S');"
+	  MaskDisplay		  "plot(x,y,[-0.25 -0.25],[-0.25 0.25])\ncolor('blue')\nplot(xc,yc)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[60  80]|[15  15]|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Spv"
+	  Tag			  "PSATblock"
+	  Description		  "Sparse Dynamic Component"
+	  Ports			  [0, 0, 0, 0, 0, 0, 1]
+	  Position		  [260, 162, 300, 198]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Spv"
+	  MaskDescription	  "This block defines a Solar Photo-Voltaic generator.\nP_ref = const\nV_ref = const"
+	  MaskPromptString	  "Active Power and Voltage References [MW, p.u.]|Inverter response times (Tp, Tq) [s, s]|Voltage "
+	  "PI Controller Gains (kv, ki)|Connected"
+	  MaskStyleString	  "edit,edit,edit,checkbox"
+	  MaskVariables		  "p2_3q=@1;p4_5q=@2;p6_7q=@3;p8q=@4;"
+	  MaskTunableValueString  "on,on,on,on"
+	  MaskCallbackString	  "|||fm_block"
+	  MaskEnableString	  "on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');\n[x1,y1] = fm_draw('sunedge');\n[xp,yp] = fm_draw('G');"
+	  MaskDisplay		  "plot(1.1*x,1.1*y,[-0.25 -0.25],[-0.25 0.25])\nplot(1.5*x1,y1)\nplot(-1.5*x1,y1)\nplot(y1,1.5*x1)\np"
+	  "lot(y1,-1.5*x1)\ncolor('blue')\nplot(0.5*xp,0.5*yp)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[40  1.045]|[0.015  0.015]|[0.0868  50.9005]|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Ssr"
+	  Tag			  "PSATblock"
+	  Description		  "Sparse Dynamic Component"
+	  Ports			  [0, 0, 0, 0, 0, 0, 1]
+	  Position		  [155, 75, 305, 115]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "SSR"
+	  MaskDescription	  "This block defines  a fourth order synchronous machine with shaft dynamics and compensated line."
+	  MaskPromptString	  "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Machine reactances Xd, Xq [p.u. p.u.]|Armatu"
+	  "re parameters Xad, Ra [p.u. p.u.]|D-axis parameters Xf, Rf [p.u. p.u.]|Line parameters R, Xl, Xc [p.u. p.u. p.u.]|I"
+	  "nertiae M (HP, IP, LP, rotor, EX)|Dampings D (HP, IP, LP, rotor, EX)|Shaft coefficients K12, K23, K34, K45|Connecte"
+	  "d"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p2_3_4q=@1;p5_6q=@2;p8_7q=@3;p13_12q=@4;p9_10_11q=@5;p14_15_16_17_18q=@6;p19_20_21_22_23q=@7;p24_"
+	  "25_26_27q=@8;p28q=@9;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "||||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');\n[xg,yg] = fm_draw('G');\n[xs,ys] = fm_draw('sinus');"
+	  MaskDisplay		  "plot(0,-50,450,50,[0 30 30 38 53 68 83 98 113 120 120 150],[0 0 0 25 -25 25 -25 25 -25 0 0 0],[0 23"
+	  " 23 24 28 34 40 47 52 55 56 54 51 51 47 46 48 51 57 64 70 75 79 79 77 74 74 70 69 71 75 80 87 93 99 102 103 101 97 "
+	  "97 94 93 94 98 104 110 117 122 125 126 126 150]+150,[0 0 1 11 19 24 25 23 17 8 -2 -12 -18 -18 -9 1 11 19 24 25 23 1"
+	  "7 8 -2 -12 -18 -18 -9 1 11 19 24 25 23 17 8 -2 -12 -18 -18 -9 1 11 19 24 25 23 17 8 0 0 0],[0 60 60 57 55 57 60 60 "
+	  "57 55]+300,[0 0 8 16 25 16 8 -8 -16 -25],[90 90 90 150]+300,[25 -25 0 0])\nplot(-150+60*(x+1.4),40*y,-150+60*0.12*x"
+	  "s+60,40*0.15*ys-40*0.6)\ncolor('blue')\nplot(-150+60*0.45*(xg+1.4)+60*0.75,40*0.45*yg+40*0.3)\n"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100   230  60]|[1.79  1.71]|[1.66  0.015]|[1.70  0.01]|[0.0165  0.30  0.05]|[0.6695  1.4612  1."
+	  "6307  1.5228  0.0903]|[0.518  0.224  0.224  0.000  0.145]|[33.07  28.59  44.68  21.98]|on"
+	}
+	Annotation {
+	  Name			  "Other Models"
+	  Position		  [172, 32]
+	  ForegroundColor	  "blue"
+	  FontSize		  12
+	}
+	Annotation {
+	  Name			  "Subsynchronous \nResonance Model"
+	  Position		  [238, 131]
+	}
+	Annotation {
+	  Name			  "Solid Oxyde\nFuel Cell"
+	  Position		  [70, 130]
+	}
+	Annotation {
+	  Name			  "Dynamic Mass-Spring\nShaft Model"
+	  Position		  [76, 223]
+	}
+	Annotation {
+	  Name			  "Solar Photo-Voltaic\nGenerator (PQ)"
+	  Position		  [184, 222]
+	}
+	Annotation {
+	  Name			  "Solar Photo-Voltaic\nGenerator (PV)"
+	  Position		  [279, 222]
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Power Flow"
+      Tag		      "PSATfolder"
+      Description	      "PowerFlow"
+      Ports		      []
+      Position		      [131, 23, 192, 71]
+      ShowName		      off
+      FontSize		      12
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      MaskInitialization      "x = fm_draw('powerflow');"
+      MaskDisplay	      "image(x)"
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      System {
+	Name			"Power Flow"
+	Location		[692, 260, 1102, 746]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Area 1"
+	  Tag			  "PSATblock"
+	  Description		  "Power Flow"
+	  Ports			  []
+	  Position		  [45, 413, 106, 443]
+	  ShowName		  off
+	  CopyFcn		  "idnum(Areas,gcb,gcs)"
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  MaskType		  "Areas"
+	  MaskDescription	  "Area block."
+	  MaskPromptString	  "Output for slack bus connection|Area Id Number (must be unique)|Slack bus number (can be zero)|"
+	  "Power rating [MVA]|Power interchange export (>0 = out) [p.u.]|Power interchange tolerance [p.u.]|Annual growth rate"
+	  " [%]|Actual net interchange powers P and Q [p.u.]"
+	  MaskStyleString	  "popup(0|1),edit,edit,edit,edit,edit,edit,edit"
+	  MaskVariables		  "out=@1;p1q=@2;p2q=@3;p3q=@4;p4q=@5;p5q=@6;p6q=@7;p7_8q=@8;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "fm_block|fm_block||||||"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "fm_inout\n[xc,yc] = fm_draw('rounded');\n"
+	  MaskSelfModifiable	  on
+	  MaskDisplay		  "plot(xc,yc), color('blue'), text(-0.5,0.1,'Area 1')"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "0|1|0|100|0|0.01|0|[0  0]"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Auto"
+	  Tag			  "PSATblock"
+	  Description		  "Power Flow"
+	  Ports			  [0, 0, 0, 0, 0, 1, 1]
+	  Position		  [60, 351, 105, 379]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Line"
+	  MaskDescription	  "This block defines an auto-transformer."
+	  MaskPromptString	  "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Primary and secondary voltage ratio [kV/kV]|"
+	  "Resistance [p.u.]|Reactance [p.u.]|Imax, Pmax and Smax [p.u., p.u., p.u.]|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p3_4_5q=@1;p7q=@2;p8q=@3;p9q=@4;p13_14_15q=@5;p16q=@6;"
+	  MaskTunableValueString  "on,on,on,on,on,on"
+	  MaskCallbackString	  "|||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');\n[xq,yq] = fm_draw('quarter');"
+	  MaskDisplay		  "plot(x,y,1.75*xq,yq,[-1 -1.3],[0 0],[1.75 2.05],[0 0])\n"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  400 60]|1|0.01|0.20|[0.0  0.0  0.0]|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Line"
+	  Tag			  "PSATblock"
+	  Description		  "Power Flow"
+	  Ports			  [0, 0, 0, 0, 0, 1, 1]
+	  Position		  [140, 150, 200, 160]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Line"
+	  MaskDescription	  "This block defines a pi model for a tree phase line."
+	  MaskPromptString	  "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Length of line [km] (0 for p.u. parameters)|"
+	  "Resistance [p.u. (Ohms/km)]|Reactance [p.u. (H/km)]|Susceptance [p.u. (F/km)]|Imax, Pmax and Smax [p.u., p.u., p.u."
+	  "]|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p3_4_5q=@1;p6q=@2;p8q=@3;p9q=@4;p10q=@5;p13_14_15q=@6;p16q=@7;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on"
+	  MaskCallbackString	  "||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on"
+	  MaskInitialization	  "[xp,yp] = fm_draw('pi');"
+	  MaskDisplay		  "plot([-1  1  1 -1 -1],[-0.2 -0.2 0.2 0.2 -0.2])\ncolor('blue')\nplot(0.35*xp,0.2*yp)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  400  60]|0|0.01|0.10|1e-3|[0.0  0.0  0.0]|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Line1"
+	  Tag			  "PSATblock"
+	  Description		  "Power Flow"
+	  Ports			  [0, 0, 0, 0, 0, 1, 1]
+	  Position		  [135, 209, 205, 221]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Line"
+	  MaskDescription	  "This block defines a pi model for a tree phase cable."
+	  MaskPromptString	  "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Length of line [km] (0 for p.u. parameters)|"
+	  "Resistance [p.u. (Ohms/km)]|Reactance [p.u. (H/km)]|Susceptance [p.u. (F/km)]|Imax, Pmax and Smax [p.u., p.u., p.u."
+	  "]|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p3_4_5q=@1;p6q=@2;p8q=@3;p9q=@4;p10q=@5;p13_14_15q=@6;p16q=@7;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on"
+	  MaskCallbackString	  "||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');\n[x1,y1] = fm_draw('semicircle');"
+	  MaskDisplay		  "color('yellow')\nplot(10+0.433*x,0.5+0.433*y)\nplot(9.567+0.433*x,-0.25+0.433*y)\nplot(10.433+0.433"
+	  "*x,-0.25+0.433*y)\ncolor('black')\nplot(-x1,y1)\nplot(10+x,y,[0 10],[1 1],[0 10],[-1 -1])"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  400  60]|0|0.01|0.10|1e-3|[0.0  0.0  0.0]|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Lines"
+	  Tag			  "PSATblock"
+	  Description		  "Power Flow"
+	  Ports			  [0, 0, 0, 0, 0, 1, 1]
+	  Position		  [265, 350, 330, 360]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Lines"
+	  MaskDescription	  "This block defines a pi model for a tree phase line.\nThe line is NOT included in the admittance"
+	  " matrix."
+	  MaskPromptString	  "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Resistance, Reactance and Susceptance [p.u. "
+	  " p.u.  p.u.]|Connected"
+	  MaskStyleString	  "edit,edit,checkbox"
+	  MaskVariables		  "p3_4_5q=@1;p6_7_8q=@2;p9q=@3;"
+	  MaskTunableValueString  "on,on,on"
+	  MaskCallbackString	  "||fm_block"
+	  MaskEnableString	  "on,on,on"
+	  MaskVisibilityString	  "on,on,on"
+	  MaskToolTipString	  "on,on,on"
+	  MaskInitialization	  "[xp,yp] = fm_draw('L');"
+	  MaskDisplay		  "plot([-1  1  1 -1 -1],[-0.2 -0.2 0.2 0.2 -0.2])\ncolor('blue')\nplot(0.35*xp,0.2*yp)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  400  60]|[0.01  0.10  0.00]|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "PQ"
+	  Tag			  "PSATblock"
+	  Description		  "Power Flow"
+	  Ports			  [0, 0, 0, 0, 0, 1]
+	  Position		  [250, 66, 275, 94]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  MaskType		  "PQ"
+	  MaskDescription	  "This block defines a constant power load:\n\nP = Pcost.\nQ = Qcost."
+	  MaskPromptString	  "Power and Voltage Ratings [MVA, kV]|Active and Reactive Powers [p.u.  p.u.]|Maximum and Minimum"
+	  " Allowable Voltage [p.u.   p.u.]|Allow conversion to impendance for min or max voltage|Connected"
+	  MaskStyleString	  "edit,edit,edit,checkbox,checkbox"
+	  MaskVariables		  "p2_3q=@1;p4_5q=@2;p6_7q=@3;p8q=@4;p9q=@5;"
+	  MaskTunableValueString  "on,on,on,on,on"
+	  MaskCallbackString	  "|||fm_block|fm_block"
+	  MaskEnableString	  "on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on"
+	  MaskDisplay		  "plot([1 -0.5 -0.5 1],[0 0.866 -0.866 0])"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  400]|[0.80  0.60]|[1.2  0.8]|on|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "PQgen"
+	  Tag			  "PSATblock"
+	  Description		  "Power Flow"
+	  Ports			  [0, 0, 0, 0, 0, 0, 1]
+	  Position		  [170, 63, 205, 97]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "PQgen"
+	  MaskDescription	  "This block defines a PQ generator."
+	  MaskPromptString	  "Power and Voltage Ratings [MVA, kV]|Active and Reactive Powers [p.u.  p.u.]|Vmax and Vmin [p.u."
+	  "  p.u.]|Allow conversion to impedance|Connected"
+	  MaskStyleString	  "edit,edit,edit,checkbox,checkbox"
+	  MaskVariables		  "p2_3q=@1;p4_5q=@2;p6_7q=@3;p8q=@4;p9q=@5;"
+	  MaskTunableValueString  "on,on,on,on,on"
+	  MaskCallbackString	  "|||fm_block|fm_block"
+	  MaskEnableString	  "on,on,off,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');\n[xp,yp] = fm_draw('P');\n[xq,yq] = fm_draw('Q');"
+	  MaskDisplay		  "plot(x,y)\ncolor('blue')\nplot(0.3*xp-0.35,0.6*yp,0.4*xq+0.1,0.6*yq)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  400]|[0.8  0.6]|[1.1  0.9]|off|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "PV"
+	  Tag			  "PSATblock"
+	  Description		  "Power Flow"
+	  Ports			  [0, 0, 0, 0, 0, 0, 1]
+	  Position		  [105, 63, 140, 97]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "PV"
+	  MaskDescription	  "This block defines a PV bus for load flow studies:\n\nP = Pcost.\nV = Vdes."
+	  MaskPromptString	  "Power and Voltage Ratings [MVA, kV]|Active Power [p.u.]|Voltage Magnitude [p.u.]|Qmax and Qmin "
+	  "[p.u.  p.u.]|Vmax and Vmin [p.u.  p.u.]|Loss Participation Factor|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p2_3q=@1;p4q=@2;p5q=@3;p6_7q=@4;p8_9q=@5;p10q=@6;p11q=@7;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on"
+	  MaskCallbackString	  "||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');\n[xp,yp] = fm_draw('P');"
+	  MaskDisplay		  "plot(x,y)\ncolor('blue')\nplot(0.3*xp-0.35,0.6*yp,[0.1 0.3 0.5],[0.3 -0.3 0.3])\n"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  400]|0.8|1.00|[0.8  -0.2]|[1.1  0.9]|1|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Region 1"
+	  Tag			  "PSATblock"
+	  Description		  "Power Flow"
+	  Ports			  []
+	  Position		  [145, 413, 219, 442]
+	  ShowName		  off
+	  CopyFcn		  "idnum(Regions,gcb,gcs)"
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  MaskType		  "Regions"
+	  MaskDescription	  "Region block."
+	  MaskPromptString	  "Output for slack bus connection|Region Id Number (must be unique)|Slack bus number (can be zero"
+	  ")|Power rating [MVA]|Power interchange export (>0 = out) [p.u.]|Power interchange tolerance [p.u.]|Annual growth ra"
+	  "te [%]|Actual net interchange powers P and Q [p.u.]"
+	  MaskStyleString	  "popup(0|1),edit,edit,edit,edit,edit,edit,edit"
+	  MaskVariables		  "out=@1;p1q=@2;p2q=@3;p3q=@4;p4q=@5;p5q=@6;p6q=@7;p7_8q=@8;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "fm_block|fm_block||||||"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "fm_inout\n[xc,yc] = fm_draw('rounded');\n\n"
+	  MaskSelfModifiable	  on
+	  MaskDisplay		  "plot(xc,yc), color('blue'), text(-0.5,0.1,'Region 1')"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "0|1|0|100|0|0.01|0|[0  0]"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "SC"
+	  Tag			  "PSATblock"
+	  Description		  "Power Flow"
+	  Ports			  [0, 0, 0, 0, 0, 0, 1]
+	  Position		  [170, 335, 200, 365]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "PV"
+	  MaskDescription	  "This block defines a static synchronous compensator:\nP = 0\nV = Vdes"
+	  MaskPromptString	  "Power and Voltage Ratings [MVA, kV]|Voltage Magnitude [p.u.]|Qmax and Qmin [p.u.  p.u.]|Vmax an"
+	  "d Vmin [p.u.  p.u.]|Loss Participation Coefficient|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p2_3q=@1;p5q=@2;p6_7q=@3;p8_9q=@4;p10q=@5;p11q=@6;"
+	  MaskTunableValueString  "on,on,on,on,on,on"
+	  MaskCallbackString	  "|||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');\n[xc,yc] = fm_draw('C');"
+	  MaskDisplay		  "plot(x,y,[-0.25 -0.25],[-0.25 0.25])\ncolor('blue')\nplot(0.5*xc-0.25,yc)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  400]|1.00|[0.8  -0.2]|[1.1  0.9]|1|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Shunt"
+	  Tag			  "PSATblock"
+	  Description		  "Power Flow"
+	  Ports			  [0, 0, 0, 0, 0, 1]
+	  Position		  [329, 160, 341, 205]
+	  Orientation		  "down"
+	  NamePlacement		  "alternate"
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  MaskType		  "Shunt"
+	  MaskDescription	  "This block defines a constant admittance."
+	  MaskPromptString	  "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Conductance G and Susceptance B [p.u.  p.u.]"
+	  "|Connected"
+	  MaskStyleString	  "edit,edit,checkbox"
+	  MaskVariables		  "p2_3_4q=@1;p5_6q=@2;p7q=@3;"
+	  MaskTunableValueString  "on,on,on"
+	  MaskCallbackString	  "|fm_block|fm_block"
+	  MaskEnableString	  "on,on,on"
+	  MaskVisibilityString	  "on,on,on"
+	  MaskToolTipString	  "on,on,on"
+	  MaskInitialization	  "[xp,yp] = fm_draw('Y');"
+	  MaskDisplay		  "plot([-1 1 1 -1 -1],[0.2 0.2 -0.2 -0.2 0.2])\nplot([-1  -1.5],[0 0],[1 1.2],[0 0],[1.2 1.2],[-0.2 0"
+	  ".2],[1.35 1.35],[-0.125 0.125],[1.5 1.5],[-0.05 0.05])\ncolor('blue')\nplot(xp,0.3*yp)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  400 60]|[0.0  0.5]|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Shunt1"
+	  Tag			  "PSATblock"
+	  Description		  "Power Flow"
+	  Ports			  [0, 0, 0, 0, 0, 1]
+	  Position		  [247, 160, 283, 205]
+	  Orientation		  "down"
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  MaskType		  "Shunt"
+	  MaskDescription	  "This block defines a static condenser:\n\nQ = B * V^2\n\n(Negative values of B define an inducti"
+	  "ve load)."
+	  MaskPromptString	  "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Susceptance B [p.u.]|Connected"
+	  MaskStyleString	  "edit,edit,checkbox"
+	  MaskVariables		  "p2_3_4q=@1;p6q=@2;p7q=@3;"
+	  MaskTunableValueString  "on,on,on"
+	  MaskCallbackString	  "||fm_block"
+	  MaskEnableString	  "on,on,on"
+	  MaskVisibilityString	  "on,on,on"
+	  MaskToolTipString	  "on,on,on"
+	  MaskInitialization	  "fm_block"
+	  MaskDisplay		  "plot(-[0 60 60 55 53 55 60 60 55 53]/150,[0 0 8 16 25 16 8 -8 -16 -25]/50,-[80 80 80 150]/150,[25 -"
+	  "25 0 0]/50,[0 0],[-0.4 0.4],[0.075 0.075],[-0.25 0.25],[0.15 0.15],[-0.1 0.1])"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  400  60]|0.5|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Slack"
+	  Tag			  "PSATblock"
+	  Description		  "Power Flow"
+	  Ports			  [0, 0, 0, 0, 0, 0, 1]
+	  Position		  [35, 63, 70, 97]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "SW"
+	  MaskDescription	  "This block defines a V-theta bus:\n\nV = V_des\ntheta = theta_des"
+	  MaskPromptString	  "Power and Voltage Ratings [MVA, kV]|Voltage Magnitude [p.u.]|Reference Phase Angle [rad]|Qmax a"
+	  "nd Qmin [p.u.  p.u.]|Vmax and Vmin  [p.u.  p.u.]|Active Power Guess [p.u.]|Loss Participation Factor|Reference bus|"
+	  "Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit,edit,checkbox,checkbox"
+	  MaskVariables		  "p2_3q=@1;p4q=@2;p5q=@3;p6_7q=@4;p8_9q=@5;p10q=@6;p11q=@7;p12q=@8;p13q=@9;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "|||||||fm_block|fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');\n[xt,yt] = fm_draw('theta');\n"
+	  MaskDisplay		  "plot([0 1 1 0 0],[0 0 1 1 0]), color('blue'), plot([0 1],[0 1],[0 1],[1 0],[0.5 1 0.5 0 0.5],[0 0.5"
+	  " 1 0.5 0])"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  400]|1.00|0.00|[1.5  -1.5]|[1.1  0.9]|0.80|1|on|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Slack1"
+	  Tag			  "PSATblock"
+	  Description		  "Power Flow"
+	  Ports			  [0, 0, 0, 0, 0, 0, 1]
+	  Position		  [310, 62, 345, 98]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "blob"
+	  RightPortType		  "blob"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "SW"
+	  MaskDescription	  "This block defines a V-theta bus:\n\nV = V_des\ntheta = theta_des\n"
+	  MaskPromptString	  "Power and Voltage Ratings [MVA, kV]|Voltage Magnitude [p.u.]|Reference Phase Angle [rad]|Qmax a"
+	  "nd Qmin [p.u.  p.u.]|Vmax and Vmin  [p.u.  p.u.]|Active Power Guess [p.u.]|Loss Participation Factor|Reference bus|"
+	  "Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit,edit,checkbox,checkbox"
+	  MaskVariables		  "p2_3q=@1;p4q=@2;p5q=@3;p6_7q=@4;p8_9q=@5;p10q=@6;p11q=@7;p12q=@8;p13q=@9;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "|||||||fm_block|fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');\n[xt,yt] = fm_draw('theta');\n"
+	  MaskDisplay		  "plot(x,y)\ncolor('blue')\nplot([0.1 0.3 0.5]-0.6,[0.3 -0.3 0.3],0.45*xt+0.1,0.6*yt)\n"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  400]|1.00|0.00|[1.5  -1.5]|[1.1  0.9]|0.80|1|off|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Transf1"
+	  Tag			  "PSATblock"
+	  Description		  "Power Flow"
+	  Ports			  [0, 0, 0, 0, 0, 1, 1]
+	  Position		  [35, 142, 85, 168]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Line"
+	  MaskDescription	  "This block defines a transformer."
+	  MaskPromptString	  "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Primary and secondary voltage ratio [kV/kV]|"
+	  "Resistance [p.u.]|Reactance [p.u.]|Imax, Pmax and Smax [p.u., p.u., p.u.]|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p3_4_5q=@1;p7q=@2;p8q=@3;p9q=@4;p13_14_15q=@5;p16q=@6;"
+	  MaskTunableValueString  "on,on,on,on,on,on"
+	  MaskCallbackString	  "|||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');\n[x1,y1] = fm_draw('1');\n[x2,y2] = fm_draw('2');\n"
+	  MaskDisplay		  "plot(x,y,x+1.4,y,[-1 -1.3],[0 0],[2.4 2.7],[0 0])\ncolor('green')\nplot(-0.1+0.65*x1,0.65*y1)\nplot"
+	  "(1.5+0.65*x2,0.65*y2)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  400  60]|1|0.01|0.20|[0.0  0.0  0.0]|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Transf2"
+	  Tag			  "PSATblock"
+	  Description		  "Power Flow"
+	  Ports			  [0, 0, 0, 0, 0, 1, 1]
+	  Position		  [35, 200, 85, 230]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Line"
+	  MaskDescription	  "This block defines a transformer with constant tap ratio."
+	  MaskPromptString	  "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Primary and secondary voltage ratio [kV/kV]|"
+	  "Resistance [p.u.]|Reactance [p.u.]|Fixed tap ratio [p.u./p.u.]|Imax, Pmax and Smax  [p.u., p.u., p.u.]|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p3_4_5q=@1;p7q=@2;p8q=@3;p9q=@4;p11q=@5;p13_14_15q=@6;p16q=@7;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on"
+	  MaskCallbackString	  "||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');\n[x2,y2] = fm_draw('2');\n"
+	  MaskDisplay		  "plot(x,y,x+1.4,y,[-1 -1.3],[0 0],[2.4 2.7],[0 0])\ncolor('green')\nplot([-0.8 0.7],[-1.2 1.2],[0.5 "
+	  "0.7],[1.1 1.2],[0.7 0.7],[1.0 1.2])\nplot(1.5+0.65*x2,0.65*y2)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  400  60]|400/400|0.01|0.20|1.00|[0.0  0.0  0.0]|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Transf3"
+	  Tag			  "PSATblock"
+	  Description		  "Power Flow"
+	  Ports			  [0, 0, 0, 0, 0, 1, 1]
+	  Position		  [155, 262, 225, 288]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Line"
+	  MaskDescription	  "This block defines a transformer with constant phase shifter."
+	  MaskPromptString	  "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Primary and secondary voltage ratio [kV/kV]|"
+	  "Resistance [p.u.]|Reactance [p.u.]|Fixed phase shift [deg]|Imax, Pmax and Smax [p.u. p.u. p.u.]|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p3_4_5q=@1;p7q=@2;p8q=@3;p9q=@4;p12q=@5;p13_14_15q=@6;p16q=@7;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on"
+	  MaskCallbackString	  "||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');\n[xa,ya] = fm_draw('a');\n[x1,y1] = fm_draw('1');\n[x2,y2] = fm_dr"
+	  "aw('2');"
+	  MaskDisplay		  "plot(x,y,x+1.4,y,[-1 -1.3],[0 0],[2.4 2.7],[0 0],[2.7 2.7 4 4 2.7],[-0.5 0.5 0.5 -0.5 -0.5],[4 4.3]"
+	  ",[0 0])\ncolor('red')\nplot(3.35+0.2*xa,-0.1+0.15*ya)\ncolor('green')\nplot(-0.1+0.65*x1,0.65*y1)\nplot(1.5+0.65*x2"
+	  ",0.65*y2)\n"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  400 60]|400/400|0.01|0.20|0.00|[0.0  0.0  0.0]|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Transf4"
+	  Tag			  "PSATblock"
+	  Description		  "Power Flow"
+	  Ports			  [0, 0, 0, 0, 0, 1, 1]
+	  Position		  [270, 259, 340, 291]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Line"
+	  MaskDescription	  "This block defines a transformer with constant phase shifter and constant tap ratio."
+	  MaskPromptString	  "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Primary and secondary voltage ratio [kV/kV]|"
+	  "Resistance [p.u.]|Reactance [p.u.]|Fixed tap ratio [p.u./p.u.]|Fixed phase shift [deg]|Imax, Pmax and Smax [p.u. p."
+	  "u. p.u.]|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p3_4_5q=@1;p7q=@2;p8q=@3;p9q=@4;p11q=@5;p12q=@6;p13_14_15q=@7;p16q=@8;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "|||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');\n[xa,ya] = fm_draw('a');\n[x2,y2] = fm_draw('2');"
+	  MaskDisplay		  "plot(x,y,x+1.4,y,[-1 -1.3],[0 0],[2.4 2.7],[0 0],[2.7 2.7 4 4 2.7],[-0.5 0.5 0.5 -0.5 -0.5],[4 4.3]"
+	  ",[0 0])\ncolor('green')\nplot([-0.8 0.7],[-1.2 1.2],[0.5 0.7],[1.1 1.2],[0.7 0.7],[1.0 1.2])\nplot(1.5+0.65*x2,0.65"
+	  "*y2)\ncolor('red')\nplot(3.35+0.2*xa,-0.1+0.15*ya)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  400  60]|400/400|0.01|0.20|1.00|0.00|[0.0  0.0  0.0]|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Twt"
+	  Tag			  "PSATblock"
+	  Description		  "Power Flow"
+	  Ports			  [0, 0, 0, 0, 0, 1, 2]
+	  Position		  [50, 263, 105, 312]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  RConnTagsString	  "__newr0|__newr1"
+	  MaskType		  "Twt"
+	  MaskDescription	  "This block defines a three-winding transformer with constant tap ratio."
+	  MaskPromptString	  "Power and Frequency Ratings [MVA, Hz]|Voltage Ratings Vn1, Vn2 and Vn3 [kV, kV, kV]|Resistances"
+	  " R12, R13 and R23 [p.u.  p.u.  p.u.]|Reactances X12, X13 and X23 [p.u.  p.u.  p.u.]|Fixed tap ratio [p.u./p.u.]|Max"
+	  " Currents Imax1, Imax2 and Imax3  [p.u. p.u. p.u.]|Max Powers Pmax1, Pmax2 and Pmax3 [p.u. p.u. p.u.]|Max Powers Sm"
+	  "ax1, Smax2 and Smax3 [p.u. p.u. p.u.]|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p4_5q=@1;p6_7_8q=@2;p9_10_11q=@3;p12_13_14q=@4;p15q=@5;p16_17_18q=@6;p19_20_21q=@7;p22_23_24q=@8;"
+	  "p25q=@9;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "||||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');\n[x2,y2] = fm_draw('2');\n[x3,y3] = fm_draw('3');\n"
+	  MaskDisplay		  "plot(x,y,x+1.4,0.8+y,1.4+x,y-0.8,[-1 -1.3],[0 0],[2.4 2.75],[0.9 0.9],[2.4 2.75],[-0.9 -0.9])\ncolo"
+	  "r('green')\nplot([-0.8 0.7]-0.4,[-1.2 1.2]+0.2,[0.5 0.7]-0.4,[1.1 1.2]+0.2,[0.7 0.7]-0.4,[1.0 1.2]+0.2)\nplot(1.5+0"
+	  ".65*x2,0.9+0.65*y2)\nplot(1.5+0.65*x3,-0.9+0.65*y3)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  60]|[230 132 60]|[0.01 0.01 0.01]|[0.1 0.1 0.1]|1.00|[0.0  0.0  0.0]|[0.0  0.0  0.0]|[0.0 "
+	  " 0.0  0.0]|on"
+	}
+	Annotation {
+	  Name			  "Static Components & Devices"
+	  Position		  [180, 29]
+	  ForegroundColor	  "blue"
+	  FontSize		  12
+	}
+	Annotation {
+	  Name			  "Slack Bus"
+	  Position		  [52, 111]
+	}
+	Annotation {
+	  Name			  "PV\nGenerator"
+	  Position		  [123, 118]
+	}
+	Annotation {
+	  Name			  "Constant\nPQ load"
+	  Position		  [259, 117]
+	}
+	Annotation {
+	  Name			  "Transmission\nLine"
+	  Position		  [171, 178]
+	}
+	Annotation {
+	  Name			  "Transformer"
+	  Position		  [60, 181]
+	}
+	Annotation {
+	  Name			  "Shunt\nAdmittance"
+	  Position		  [336, 226]
+	}
+	Annotation {
+	  Name			  "Tap Ratio\nTransformer"
+	  Position		  [61, 243]
+	}
+	Annotation {
+	  Name			  "Phase Shifter\nTransformer"
+	  Position		  [191, 307]
+	}
+	Annotation {
+	  Name			  "Tap Ratio and\nPhase Shifter\nTransfomer"
+	  Position		  [302, 318]
+	}
+	Annotation {
+	  Name			  "Extra model for\nTransmission Line"
+	  Position		  [300, 383]
+	}
+	Annotation {
+	  Name			  "Static\nCompensator"
+	  Position		  [188, 383]
+	}
+	Annotation {
+	  Name			  "Autotransformer"
+	  Position		  [80, 390]
+	}
+	Annotation {
+	  Name			  "Static\nCondenser"
+	  Position		  [268, 226]
+	}
+	Annotation {
+	  Name			  "Cable"
+	  Position		  [169, 233]
+	}
+	Annotation {
+	  Name			  "Three-Winding\nTransformer"
+	  Position		  [74, 326]
+	}
+	Annotation {
+	  Name			  "PQ\nGenerator"
+	  Position		  [190, 118]
+	}
+	Annotation {
+	  Name			  "Fixed V\ntheta"
+	  Position		  [330, 119]
+	}
+	Annotation {
+	  Name			  "Area"
+	  Position		  [72, 457]
+	}
+	Annotation {
+	  Name			  "Region"
+	  Position		  [182, 457]
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "ULTC"
+      Tag		      "PSATfolder"
+      Description	      "ULTC"
+      Ports		      []
+      Position		      [298, 95, 361, 139]
+      ShowName		      off
+      FontSize		      12
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      MaskInitialization      "x = fm_draw('ultc');"
+      MaskDisplay	      "image(x)"
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      System {
+	Name			"ULTC"
+	Location		[736, 311, 1060, 598]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Ltc"
+	  Tag			  "PSATblock"
+	  Description		  "ULTC"
+	  Ports			  [0, 0, 0, 0, 0, 1, 1]
+	  Position		  [45, 59, 115, 111]
+	  ShowName		  off
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  MaskType		  "Ltc"
+	  MaskDescription	  "This block defines a pi model for a LTC Transformer.\n\nControl type:   \n\n[1] secondary V cont"
+	  "rol; \n[2] secondary Q control;\n[3] remote V control."
+	  MaskPromptString	  "Power and Frequency ratings [MVA, Hz]|Primary Voltage rating and nominal tap ratio V1/V2 [kV,  "
+	  "kV/kV]|Control Type|Inverse Time Constant and integral deviation [1/s, p.u.]|Max and Min Tap Ratio [p.u./p.u.  p.u."
+	  "/p.u.]|Tap ratio step [0 for continuous model]|Reference Voltage Vref [p.u.]|Resistance and Reactance  [p.u.  p.u.]"
+	  "|Dead zone [%]|Connected"
+	  MaskStyleString	  "edit,edit,popup(1|2|3),edit,edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p3_5q=@1;p4_6q=@2;p16q=@3;p8_7q=@4;p9_10q=@5;p11q=@6;p12q=@7;p14_13q=@8;p17q=@9;p18q=@10;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "||fm_block|||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "rot = strcmp(get_param(gcb,'NamePlacement'),'normal');\n[x,y] = fm_draw('circle');"
+	  MaskDisplay		  "plot(x,y,x+1.4,y,[2.4 2.8],[0 0],[3.1 3.5],[0 0],[-1 -2],[0 0],0,2), color('green'), plot([2.95 2.9"
+	  "5],[-0.15 -2],[2.95 -0.8],[-2 -2],[-0.8 -0.8],[-2 -1.2], [-0.8 0.7],[-1.2 1.2],[0.5 0.7],[1.1 1.2],[0.7 0.7], [1.0 "
+	  "1.2],[2.8 3.1 3.1 2.8 2.8],[-0.15 -0.15 0.15 0.15 -0.15]);"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  60]|[220   5]|1|[0.10  1e-3]|[1.20  0.8]|0|1.00|[0.10  0.001]|5|on"
+	  System {
+	    Name		    "Ltc"
+	    Location		    [285, 394, 645, 586]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      PMComponent
+	      Name		      "Atomic Subsystem"
+	      Ports		      [0, 0, 0, 0, 0, 1, 1]
+	      Position		      [125, 74, 225, 116]
+	      ShowName		      off
+	      PhysicalDomain	      "psatdomain"
+	      LeftPortType	      "p1"
+	      RightPortType	      "p1"
+	      LConnTagsString	      "__newl0"
+	      RConnTagsString	      "__newr0"
+	    }
+	    Block {
+	      BlockType		      PMIOPort
+	      Name		      "Connection\nPort1"
+	      Tag		      "PMCPort"
+	      Position		      [260, 86, 290, 104]
+	      Orientation	      "left"
+	      ShowName		      off
+	      Port		      "1"
+	      Side		      "Left"
+	    }
+	    Block {
+	      BlockType		      PMIOPort
+	      Name		      "Connection\nPort2"
+	      Tag		      "PMCPort"
+	      Position		      [60, 86, 90, 104]
+	      ShowName		      off
+	      Port		      "2"
+	      Side		      "Right"
+	    }
+	    Line {
+	      LineType		      "Connection"
+	      SrcBlock		      "Atomic Subsystem"
+	      SrcPort		      RConn1
+	      DstBlock		      "Connection\nPort1"
+	      DstPort		      RConn1
+	    }
+	    Line {
+	      LineType		      "Connection"
+	      SrcBlock		      "Connection\nPort2"
+	      SrcPort		      RConn1
+	      DstBlock		      "Atomic Subsystem"
+	      DstPort		      LConn1
+	    }
+	    Annotation {
+	      Name		      "Tap Changer Under Load "
+	      Position		      [164, 45]
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Ltc1"
+	  Tag			  "PSATblock"
+	  Description		  "ULTC"
+	  Ports			  [0, 0, 1, 0, 0, 1, 1]
+	  Position		  [190, 164, 260, 216]
+	  Orientation		  "left"
+	  ShowName		  off
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  MaskType		  "Ltc"
+	  MaskDescription	  "This block defines a pi model for a LTC Transformer.\n\nControl type:   \n\n[1] secondary V cont"
+	  "rol; \n[2] secondary Q control;\n[3] remote V control."
+	  MaskPromptString	  "Power and Frequency ratings [MVA, Hz]|Primary Voltage rating and nominal tap ratio V1/V2 [kV,  "
+	  "kV/kV]|Control Type|Inverse Time Constant and integral deviation [1/s, p.u.]|Max and Min Tap Ratio [p.u./p.u.  p.u."
+	  "/p.u.]|Tap ratio step [0 for continuous model]|Remote Reference Voltage Vref [p.u.]|Resistance and Reactance  [p.u."
+	  "  p.u.]|Dead zone [%]|Connected"
+	  MaskStyleString	  "edit,edit,popup(1|2|3),edit,edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p3_5q=@1;p4_6q=@2;p16q=@3;p8_7q=@4;p9_10q=@5;p11q=@6;p12q=@7;p14_13q=@8;p17q=@9;p18q=@10;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "||fm_block|||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "rot = strcmp(get_param(gcb,'NamePlacement'),'normal');\n[x,y] = fm_draw('circle');"
+	  MaskDisplay		  "plot(x,y,x+1.4,y,[2.4 3.5],[0 0],[-1 -2],[0 0],0,2-4*rot), color('green'), plot([0.8 0.8],3*rot-[1."
+	  "3 1.7],[0.65 0.95 0.95 0.65 0.65],[3.4*rot-1.7 3.4*rot-1.7 4*rot-2 4*rot-2 3.4*rot-1.7],[0.8 -0.8],[2.4*rot-1.2 1.3"
+	  "-2.6*rot],[-0.6 -0.8],[1.1-2.2*rot 1.2-2.4*rot],[-0.8 -0.8], [1-2*rot 1.2-2.4*rot]);"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  60]|[220   5]|3|[0.10  1e-3]|[1.20  0.8]|0|1.00|[0.10  0.001]|5|on"
+	  System {
+	    Name		    "Ltc1"
+	    Location		    [285, 394, 645, 586]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      EnablePort
+	      Name		      "in_2"
+	      Ports		      []
+	      Position		      [65, 155, 85, 175]
+	    }
+	    Block {
+	      BlockType		      PMComponent
+	      Name		      "Atomic Subsystem"
+	      Ports		      [0, 0, 0, 0, 0, 1, 1]
+	      Position		      [125, 74, 225, 116]
+	      ShowName		      off
+	      PhysicalDomain	      "psatdomain"
+	      LeftPortType	      "p1"
+	      RightPortType	      "p1"
+	      LConnTagsString	      "__newl0"
+	      RConnTagsString	      "__newr0"
+	    }
+	    Block {
+	      BlockType		      PMIOPort
+	      Name		      "Connection\nPort1"
+	      Tag		      "PMCPort"
+	      Position		      [260, 86, 290, 104]
+	      Orientation	      "left"
+	      ShowName		      off
+	      Port		      "1"
+	      Side		      "Left"
+	    }
+	    Block {
+	      BlockType		      PMIOPort
+	      Name		      "Connection\nPort2"
+	      Tag		      "PMCPort"
+	      Position		      [60, 86, 90, 104]
+	      ShowName		      off
+	      Port		      "2"
+	      Side		      "Right"
+	    }
+	    Line {
+	      LineType		      "Connection"
+	      SrcBlock		      "Connection\nPort2"
+	      SrcPort		      RConn1
+	      Points		      [0, 0]
+	      DstBlock		      "Atomic Subsystem"
+	      DstPort		      LConn1
+	    }
+	    Line {
+	      LineType		      "Connection"
+	      SrcBlock		      "Atomic Subsystem"
+	      SrcPort		      RConn1
+	      Points		      [0, 0]
+	      DstBlock		      "Connection\nPort1"
+	      DstPort		      RConn1
+	    }
+	    Annotation {
+	      Name		      "Tap Changer Under Load "
+	      Position		      [164, 45]
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Phs"
+	  Tag			  "PSATblock"
+	  Description		  "Phase Shifter"
+	  Ports			  [0, 0, 0, 0, 0, 1, 1]
+	  Position		  [190, 61, 265, 109]
+	  NamePlacement		  "alternate"
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Phs"
+	  MaskDescription	  "This block defines a pi model for a Phase Shifting Transformer."
+	  MaskPromptString	  "Power and Frequency ratings [MVA, Hz]|Primary and Secondary Voltage ratings [kV,  kV]|Time cons"
+	  "tant of measurement block [s]|Max and Min Phase angle [rad rad]|Proportional and Integral Gains [Kp Ki]|Reference P"
+	  "ower Pref [p.u.]|Resistance and Reactance  [p.u.  p.u.]|Tap ratio [p.u./p.u.]|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p3_6q=@1;p4_5q=@2;p7q=@3;p13_14q=@4;p8_9q=@5;p10q=@6;p11_12q=@7;p15q=@8;p16q=@9;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "||||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "if strcmp(get_param(gcb,'NamePlacement'),'alternate'), rot = 0; else, rot = 1; end\n[x,y] = f"
+	  "m_draw('circle');\n[xa,ya] = fm_draw('a');\n"
+	  MaskDisplay		  "plot(x,y,x+1.4,y,[-1 -1.3],[0 0],[2.4 2.7],[0 0],[2.7 2.7 4 4 2.7],[-0.5 0.5 0.5 -0.5 -0.5],[4 4.3]"
+	  ",[0 0],[-1.7 -2],[0 0])\ncolor('green')\nplot([-1.3 -1.3 -1.7 -1.7 -1.3],[0.2 -0.2 -0.2 0.2 0.2],[3.35 3.35 -1.5 -1"
+	  ".5],[-0.5 -2 -2 -0.2],0,2)\ncolor('red')\nplot(3.35+0.2*xa,-0.1+0.15*ya)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  60]|[230  138]|0.001|[pi/2  -pi/2]|[0.05  0.1]|1.00|[0.01  0.1]|1|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Tap"
+	  Tag			  "PSATblock"
+	  Description		  "ULTC"
+	  Ports			  [0, 0, 0, 0, 0, 1]
+	  Position		  [50, 165, 140, 215]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  MaskType		  "Tap"
+	  MaskDescription	  "This block defines an ideal LTC transformer feeding a static load described by monomial expressi"
+	  "ons. "
+	  MaskPromptString	  "Power and Voltage Ratings [MVA, kV]|Integral Behaviour Deviation|Inverse Time Constant [1/s]|Ma"
+	  "x and Min Tap Ratio Limits [p.u./p.u.  p.u./p.u.]|Reference Voltage [p.u.]|Nominal Active and Reactive Power Rating"
+	  "s [p.u.  p.u.]|Active and Reactive Power Exponents|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p2_3q=@1;p4q=@2;p5q=@3;p6_7q=@4;p8q=@5;p9_10q=@6;p11_12q=@7;p13q=@8;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "|||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');"
+	  MaskDisplay		  "plot(x,y,x+1.4,y)\nplot([-1 -1.3],[0 0],[2.4 2.8],[0 0],[3.1 3.7],[0 0],0,2)\nplot([3.7 3.7 5.7 5.7"
+	  " 3.7],[-1 1 1 -1 -1])\ncolor('green')\nplot([-0.8 0.7],[-1.2 1.2],[0.5 0.7],[1.1 1.2],[0.7 0.7],[1.0 1.2])\nplot([2"
+	  ".8 3.1 3.1 2.8 2.8],[-0.15 -0.15 0.15 0.15 -0.15])\nplot([2.95 2.95],[-0.15 -2],[2.95 -0.8],[-2 -2],[-0.8 -0.8],[-2"
+	  " -1.2])\ncolor('blue')\nplot([4.2 4.2 5.2],[0.6 -0.6 -0.6])"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[100  60]|1e-3|0.10|[1.20  0.80]|1.00|[0.80  0.60]|[2.00  2.00]|on"
+	}
+	Annotation {
+	  Name			  "Regulating Transformers"
+	  Position		  [157, 32]
+	  ForegroundColor	  "blue"
+	  FontSize		  12
+	}
+	Annotation {
+	  Name			  "Under Load Tap\nChanger with\nEmbedded Load"
+	  Position		  [82, 241]
+	}
+	Annotation {
+	  Name			  "Under Load Tap\nChanger"
+	  Position		  [81, 133]
+	}
+	Annotation {
+	  Name			  "Phase Shifting\nTransformer"
+	  Position		  [226, 128]
+	}
+	Annotation {
+	  Name			  "Under Load Tap\nChanger with\nRemote Voltage Control"
+	  Position		  [226, 243]
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Wind\nTurbines"
+      Tag		      "PSATfolder"
+      Description	      "Controls"
+      Ports		      []
+      Position		      [132, 165, 197, 216]
+      ShowName		      off
+      FontSize		      12
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      MaskInitialization      "x = fm_draw('wind');"
+      MaskDisplay	      "image(x)"
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      System {
+	Name			"Wind\nTurbines"
+	Location		[267, 309, 610, 683]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Cswt"
+	  Tag			  "PSATblock"
+	  Description		  "Wind Turbines"
+	  Ports			  [0, 0, 0, 0, 0, 1, 1]
+	  Position		  [195, 64, 295, 136]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Cswt"
+	  MaskDescription	  "This block defines a constant speed wind turbine with third order asynchronous generator and dyn"
+	  "amic shaft."
+	  MaskPromptString	  "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Stator Resistance Rs and Reactance Xs [p.u. "
+	  " p.u.]|Rotor Resitance Rr and Reactance Xr [p.u. p.u.]|Magnetization Reactance Xm [p.u.]|Inertia Constants Hwr Hm a"
+	  "nd Ks [kWs/kVA kWs/kVA p.u.]|Number of poles p and gear box ratio [int  -]|Blade length and number [m int]|Number o"
+	  "f machine that compose the park|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p3_4_5q=@1;p6_7q=@2;p8_9q=@3;p10q=@4;p11_12_13q=@5;p15_17q=@6;p14_16q=@7;p18q=@8;p19q=@9;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "||||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');\n[xh,yh] = fm_draw('helix');"
+	  MaskDisplay		  "plot(1.4*x,1.4*y,[0,-2],[0 0],[-2 -3 -3 -2 -2],[-1 -1 1 1 -1],[-3 -5],[0 0],[1.4 3],[0 0],[2.2 2.2]"
+	  ",[0 -1],[1.8 2.6],[-1 -1],[1.8 2.6],[-1.2 -1.2],[2.2 2.2],[-1.2 -2.2],[1.9 2.5],[-2.2 -2.2],[2.1 2.3],[-2.4 -2.4])\n"
+	  "color('blue')\nplot(x,y)\ncolor('cyan')\nplot(xh-4,3*yh)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[2   25   60]|[0.01  0.10]|[0.01  0.08]|3.00|[2.5  0.5  0.3]|[4 1/89]|[75.00  3]|0|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Ddsg"
+	  Tag			  "PSATblock"
+	  Description		  "Wind Turbines"
+	  Ports			  [0, 0, 0, 0, 0, 1, 1]
+	  Position		  [185, 227, 310, 303]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Ddsg"
+	  MaskDescription	  "This block defines a variable speed wind turbine with direct drive synchronous generator."
+	  MaskPromptString	  "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Stator Resistance Rs [p.u.]|Direct and inver"
+	  "se reactances Xd and Xq [p.u.  p.u.]|Constant field flux  Psi_p [p.u.]|Inertia Constants Hm  [kWs/kVA]|Pitch contro"
+	  "l gain and time constant  Kp, Tp [p.u.  s]|Voltage control gain and time constant Kv  Tv [p.u.  s]|Active and React"
+	  "ive Power Control time constants Tep Teq [s s]|Number of poles p and gear box ratio [int  -]|Blade length and numbe"
+	  "r [m int]|Pmax and Pmin [p.u.  p.u.]|Qmax and Qmin [p.u.  p.u.]|Number of machines that compose the park|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p3_4_5q=@1;p6q=@2;p7_8q=@3;p9q=@4;p10q=@5;p11_12q=@6;p13_14q=@7;p15_16q=@8;p18_20q=@9;p17_19q=@10"
+	  ";p21_22q=@11;p23_24q=@12;p25q=@13;p26q=@14;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "|||||||||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');\n[xh,yh] = fm_draw('helix');"
+	  MaskDisplay		  "plot(1.4*x,1.4*y,[0,-2],[0 0],[-2 -3 -3 -2 -2],[-1 -1 1 1 -1],[-3 -5],[0 0],[1.4 2.075],[0 0],[3.95"
+	  " 4.5],[0 0])\nplot(1.5*[0.3 0.3 -0.95 -0.95 0.3]+3.5,0.5*[-1.7 2.7  2.7  -1.7 -1.7]-0.25,1.5*[0 0.2]+3.5,0.5*[0.5 0"
+	  ".5]-0.25)\ncolor('blue')\nplot(x,y)\ncolor('cyan')\nplot(xh-4,3*yh)\ncolor('magenta')\nplot(1.5*[0 0]+3.5,0.5*[-0.5"
+	  " 1.5]-0.25,1.5*[0 -0.2]+3.5,0.5*[-0.5 -0.5]-0.25,1.5*[0 -0.65]+3.5,0.5*[1.5 1.5]-0.25)\nplot(1.5*[-0.2 -0.2]+3.5,0."
+	  "5*[-1 0]-0.25,1.5*[-0.2 -0.45]+3.5,0.5*[-1 -0.5]-0.25,1.5*[-0.2 -0.45]+3.5,0.5*[0 -0.5]-0.25,1.5*[-0.45 -0.45]+3.5,"
+	  "0.5*[-1 0]-0.25)\nplot(1.5*[-0.2 -0.2]+3.5,0.5*[2 1]-0.25,1.5*[-0.45 -0.45]+3.5,0.5*[2 1]-0.25,1.5*[-0.45 -0.2]+3.5"
+	  ",0.5*[2 1.5]-0.25,1.5*[-0.45 -0.2]+3.5,0.5*[1 1.5]-0.25)\nplot(1.5*[-0.65 -0.65]+3.5,0.5*[-0.5 1.5]-0.25,1.5*[-0.45"
+	  " -0.65]+3.5,0.5*[-0.5 -0.5]-0.25,1.5*[-0.45 -0.65]+3.5,0.5*[1.5 1.5]-0.25)\nplot(1.5*[-0.65 -0.85]+3.5,0.5*[0.5 0.5"
+	  "]-0.25,1.5*[-0.3 -0.3]+3.5,0.5*[1.7 2.2]-0.25,1.5*[-0.325 -0.275]+3.5,0.5*[1.975 1.975]-0.25)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[2   25   60]|0.01|[1  0.8]|1.00|3|[10  3]|[10  1]|[0.01 0.01]|[4 1/89]|[75.00  3]|[1.00  0.00]|"
+	  "[0.7  -0.7]|0|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Dfig"
+	  Tag			  "PSATblock"
+	  Description		  "Wind Turbines"
+	  Ports			  [0, 0, 0, 0, 0, 1, 1]
+	  Position		  [35, 148, 145, 252]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  LConnTagsString	  "__newl0"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Dfig"
+	  MaskDescription	  "This block defines a variable speed wind turbine with doubly fed induction generator."
+	  MaskPromptString	  "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Stator Resistance Rs and Reactance Xs [p.u. "
+	  " p.u.]|Rotor Resitance Rr and Reactance Xr [p.u. p.u.]|Magnetization Reactance Xm [p.u.]|Inertia Constants Hm  [kWs"
+	  "/kVA]|Pitch control gain and time constant  Kp, Tp [p.u.  s]|Voltage control gain Kv [p.u.]|Power Control time cons"
+	  "tant Te [s]|Number of poles p and gear box ratio [int  -]|Blade length and number [m int]|Pmax and Pmin [p.u.  p.u."
+	  "]|Qmax and Qmin [p.u.  p.u.]|Number of wind generators that compose the park|Connected"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,checkbox"
+	  MaskVariables		  "p3_4_5q=@1;p6_7q=@2;p8_9q=@3;p10q=@4;p11q=@5;p12_13q=@6;p14q=@7;p15q=@8;p17_19q=@9;p16_18q=@10;p2"
+	  "0_21q=@11;p22_23q=@12;p24q=@13;p25q=@14;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "|||||||||||||fm_block"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "[x,y] = fm_draw('circle');\n[xh,yh] = fm_draw('helix');"
+	  MaskDisplay		  "plot(1.4*x,1.4*y,[0,-2],[0 0],[-2 -3 -3 -2 -2],[-1 -1 1 1 -1],[-3 -5],[0 0],[1.4 3.5],[0 0],1,4.35,"
+	  "[0 0 1.075],[-1 -3.25 -3.25],[2.05  2.05],[0 -2.15])\nplot(1.5*[0.3 0.3]+2.5,0.5*[-1.7 2.7]-3.5,1.5*[ -0.95  -0.95]"
+	  "+2.5,0.5*[-1.7 2.7]-3.5,1.5*[0 0.2]+2.5,0.5*[0.5 0.5]-3.5)\nplot(1.5*[0.3 -0.95]+2.5,0.5*[2.7 2.7]-3.5,1.5*[0.3 -0."
+	  "95]+2.5,0.5*[-1.7 -1.7]-3.5)\ncolor('blue')\nplot(x,y)\ncolor('cyan')\nplot(xh-4,3*yh)\ncolor('magenta')\nplot(1.5*"
+	  "[0 0]+2.5,0.5*[-0.5 1.5]-3.5,1.5*[0 -0.2]+2.5,0.5*[-0.5 -0.5]-3.5,1.5*[0 -0.65]+2.5,0.5*[1.5 1.5]-3.5)\nplot(1.5*[-"
+	  "0.2 -0.2]+2.5,0.5*[-1 0]-3.5,1.5*[-0.2 -0.45]+2.5,0.5*[-1 -0.5]-3.5,1.5*[-0.2 -0.45]+2.5,0.5*[0 -0.5]-3.5,1.5*[-0.4"
+	  "5 -0.45]+2.5,0.5*[-1 0]-3.5)\nplot(1.5*[-0.2 -0.2]+2.5,0.5*[2 1]-3.5,1.5*[-0.45 -0.45]+2.5,0.5*[2 1]-3.5,1.5*[-0.45"
+	  " -0.2]+2.5,0.5*[2 1.5]-3.5,1.5*[-0.45 -0.2]+2.5,0.5*[1 1.5]-3.5)\nplot(1.5*[-0.65 -0.65]+2.5,0.5*[-0.5 1.5]-3.5,1.5"
+	  "*[-0.45 -0.65]+2.5,0.5*[-0.5 -0.5]-3.5,1.5*[-0.45 -0.65]+2.5,0.5*[1.5 1.5]-3.5)\nplot(1.5*[-0.65 -0.85]+2.5,0.5*[0."
+	  "5 0.5]-3.5,1.5*[-0.3 -0.3]+2.5,0.5*[1.7 2.2]-3.5,1.5*[-0.325 -0.275]+2.5,0.5*[1.975 1.975]-3.5)\n"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "[2   25   60]|[0.01  0.10]|[0.01  0.08]|3.00|3|[10 3]|10|0.01|[4 1/89]|[75.00  3]|[1.00  0.00]|["
+	  "0.7  -0.7]|1|on"
+	}
+	Block {
+	  BlockType		  PMComponent
+	  Name			  "Wind"
+	  Tag			  "PSATblock"
+	  Description		  "Wind Turbines"
+	  Ports			  [0, 0, 0, 0, 0, 0, 1]
+	  Position		  [55, 79, 110, 121]
+	  ShowName		  off
+	  PhysicalDomain	  "psatdomain"
+	  LeftPortType		  "p1"
+	  RightPortType		  "p1"
+	  RConnTagsString	  "__newr0"
+	  MaskType		  "Wind"
+	  MaskDescription	  "This block defines wind models for use with wind turbines."
+	  MaskPromptString	  "Number of output ports|Wind model type|Nominal wind speed [m/s]|Air density rho [kg/m^3]|Filter"
+	  " time constant tau [s]|Sample time for wind measures [s]|Weibull distribution constants  C and K |Wind ramp constan"
+	  "ts Tsr, Ter and Awr [s s m/s]|Wind gust constants Tsg, Teg and Awg [s s m/s]|Wind turbolence constants h, z0, df an"
+	  "d n [m - Hz int]|Mexican hat wavelet time center and shape factor"
+	  MaskStyleString	  "edit,popup(measurements|weibull|composite|mexican_hat),edit,edit,edit,edit,edit,edit,edit,edit,e"
+	  "dit"
+	  MaskVariables		  "out=@1;p1q=@2;p2q=@3;p3q=@4;p4q=@5;p5q=@6;p6_7q=@7;p8_9_10q=@8;p11_12_13q=@9;p14_15_16_17q=@10;p_"
+	  "18_19q=@11;"
+	  MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on"
+	  MaskCallbackString	  "||||||||||"
+	  MaskEnableString	  "on,on,on,on,on,on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on,on,on,on,on"
+	  MaskInitialization	  "fm_inout\n[xa,ya] = fm_draw('arrow');"
+	  MaskDisplay		  "color('cyan')\nplot(xa,ya,xa-0.2,ya-0.2,xa+0.2,ya+0.2,xa+0.4,ya+0.4,xa-0.4,ya-0.4)"
+	  MaskIconFrame		  off
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "port"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "1|measurements|15.00|1.225|4|0.1|[20  2]|[5  15  1]|[5  15  1]|[50  0.01  0.2  50]|[10  1]"
+	}
+	Annotation {
+	  Name			  "Constant Speed\nWind Turbine with\nSquirrel Cage\nInduction Generator"
+	  Position		  [249, 166]
+	}
+	Annotation {
+	  Name			  "Wind Turbines"
+	  Position		  [177, 34]
+	  ForegroundColor	  "blue"
+	  FontSize		  12
+	}
+	Annotation {
+	  Name			  "Wind Model"
+	  Position		  [86, 134]
+	}
+	Annotation {
+	  Name			  "Variable Speed\nWind Turbine with\nDoubly Fed Induction\nGenerator"
+	  Position		  [84, 279]
+	}
+	Annotation {
+	  Name			  "Variable Speed\nWind Turbine with\nDirect Drive Synchronous\nGenerator"
+	  Position		  [253, 331]
+	}
+      }
+    }
+  }
+}

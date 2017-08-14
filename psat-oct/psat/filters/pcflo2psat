@@ -1,0 +1,556 @@
+#!/usr/bin/perl -w
+# PCFLO2PSAT converts PCFLO data file into PSAT data file
+# 
+# PCFLO2PSAT <OPTIONS> FILESINPUT <FILEOUTPUT>
+#
+# Author:  Juan Carlos Morataya
+# Date:    06-Nov-2005
+# Version: 1.0.0
+# 
+# E-mail:    jmorataya@eegsa.net
+#
+
+use strict;
+
+# -----------------------------------------------------------------------
+# variable declaration
+# -----------------------------------------------------------------------
+my $nargin = 0;
+my $verbose = 0;
+my $helpmsg = 0;
+my ($i,$j,$h,$k);
+my $nbus = -1;
+my $nsw = -1;
+my $npv = -1;
+my $npq = -1;
+my $npl = -1;
+my $nsh = -1;
+my $nline = -1;
+my $narea = -1;
+my ($kvb,$kae,$ein,$ang,);
+my ($swbus,$swsb,$swvs,$swqt,
+    $swqb,$swpg);
+my (@pqbus,@pqpl,@pqql);    
+my $title1 = 'Generic PCFLO Data Format File.';
+my $title2;
+my ($vmax,$vmin);
+my $pbas = 100;
+my $format;
+my (@dat,@data);
+my (@kvb,@kzo,@kae,@ein,@ang,@bustype,@busidx,@busname,@qmi,@qma,
+    @bshunt,@title,@comment,@pbtf);
+my (@pvbus,@pvsb,@pvpg,@pvvs,@pvqt,@pvqb);    
+my (@pvidx,@pqidx,@idxsh,@psh,@qsh);
+my (@busfr,@bustt);
+my (@rest,@reat,@susc,@rate,@phas,@ratio,@tap);	    
+my (@idxsvc,@svcbus,@svcbma,@svcbmi,@svcref,@rgn,@rtc);
+my (@demand,@pmax,@pmin,@c0);
+my (@plbus,@pn,@qn,@pfapl);
+my (@kvbase,@einsch);
+my $blanks = " " x 100;
+my $ast = '*';
+my ($ext,$extn,$adata,$lch1,$lch2);
+my (@areanum,@areaslack,@areaexp,@areatol);
+
+# -----------------------------------------------------------------------
+# check inputs
+# -----------------------------------------------------------------------
+$nargin = @ARGV;
+$nargin || die "Error: No input data file.\n";
+
+# -----------------------------------------------------------------------
+# check options
+# -----------------------------------------------------------------------
+while ($ARGV[0] =~ /^-/) {
+    if ($ARGV[0] =~ /v/) {$verbose = 1;}
+    if ($ARGV[0] =~ /h/) {$helpmsg = 1;}
+    shift(@ARGV);
+    $nargin--;
+    if ($nargin == 0) { 
+	last;
+    }
+}
+$title1 = 'Generic PCFLO Data Format File '.$ARGV[0];
+$lch1 = length ($ARGV[0]);
+$lch2 = index "$ARGV[0]",'.';
+$ext = substr "$ARGV[0]",$lch2,$lch1;
+$extn = $ast."".$ext;
+
+# -----------------------------------------------------------------------
+# help (if requested)
+# -----------------------------------------------------------------------
+if ($helpmsg) {
+    print "\nPCFLO2PSAT converts PCFLO data files into PSAT data files.\n\n";
+    print "PCFLO2PSAT [options] fileinput [fileoutput]\n";
+    print "  -v   verbose\n";
+    print "  -h   print this help and exit\n\n";
+    print "Author:   Juan Carlos Morataya\n";
+    print "Date:     06-Nov-2005\n";
+    print "Version:  1.0.0\n\n";
+    print "E-mail:   jmorataya\@eegsa.net\n";
+    die "\n";
+}
+
+# -----------------------------------------------------------------------
+# define output file name (if necessary)
+# -----------------------------------------------------------------------
+if ($nargin == 1) {
+    $ARGV[1] = $ARGV[0] . ".m";
+    $ARGV[1] =~ s/^bdat\.//i;
+    $ARGV[1] =~ s/^d*_*/d_/;
+    $ARGV[1] =~ s/[^\w\.]/_/g;
+} elsif ($nargin == 0) {
+    die "Error: Input file name is missing.\n";
+}
+
+# -----------------------------------------------------------------------
+# open BDAT.* data file
+# -----------------------------------------------------------------------
+print "Opening BDAT/PCFLO data file \"$ARGV[0]\"...\n";
+carret();
+open(IN,$ARGV[0]) || die "cannot open $ARGV[0]: $!\n";
+
+# -----------------------------------------------------------------------
+# scan BDAT data file
+# -----------------------------------------------------------------------
+
+# read bus, generation and load data (all values in percent)
+while (<IN>) {
+    next if /^:/;  # skip comment line
+    next if !/\d/; # skip blank line
+    chomp;
+    
+    if ($_ =~ /,/) { # comma separated format
+	chomp;
+	@data = splitdata($_);
+	$nbus++;
+	$busidx[$nbus] = $data[0];
+	$busname[$nbus] = $data[1];
+	$busname[$nbus] =~ s/\'//g;
+	$busname[$nbus] =~ s/\"//g;
+	if (!$data[7]) { $data[7] = 0; }
+	if ($data[7] == 0) { 
+	    $kvb[$nbus] = 1; 
+	    $ein[$nbus] = 1; 
+	} else { 
+	    $kvb[$nbus] = 1; 
+	    $ein[$nbus] = 0.01*$data[7]; 
+	}
+	if (!$data[8]) { $data[8] = 0; }
+	if ($data[8] != 0) {
+	    $nsh++;
+	    $idxsh[$nsh] = $data[0];
+	    $psh[$nsh] = 0;
+            # guessing V = 100 and f = 60 Hz.	
+	    $qsh[$nsh] = -0.01*$data[8]; 
+	}
+	$kvbase[$busidx[$nbus]] = $kvb[$nbus];
+	$einsch[$busidx[$nbus]] = $ein[$nbus];
+	$ang[$nbus] = 0;
+	
+	if ($data[2] == 1) {
+	    $nsw++; 
+	    $swbus = $data[0];
+	    $swpg = 0.01*$data[3];
+	    $swqt = 0.01*$data[9];
+	    $swqb = 0.01*$data[10];	
+	    $swvs = $ein[$nbus]; 
+	} elsif ($data[2] == 2) {
+	    $npv++; 
+	    $pvbus[$npv] = $data[0];
+	    $pvpg[$npv] = 0.01*$data[3];
+	    $pvqt[$npv] = 0.01*$data[9];
+	    $pvqb[$npv] = 0.01*$data[10];	
+	    $pvvs[$npv] = $ein[$nbus]; 
+	} elsif ($data[2] == 3) {
+	    if ($data[5] != 0 || $data[6] != 0) {
+		$npq++;
+		$pqbus[$npq] = $data[0];
+		$pqpl[$npq] = 0.01*$data[5];
+		$pqql[$npq] = 0.01*$data[6];
+	} if ($data[26] != 0) {
+	    $npl++;
+	    $plbus[$npl] = $data[0];
+	    $pn[$npl] = $data[24]/$pbas;
+	    $qn[$npl] = ($pn[$npl]/$data[25])*
+	    (1-$data[25]**2)**0.5;
+	}
+    } 	
+    
+    } else { # fixed position format
+	chomp;
+	$_ = $_ . $blanks;
+	$nbus++;
+	$busidx[$nbus]  = assign($_,0,4,1);
+	$busname[$nbus] = deblank(substr($_,4,12));
+	$busname[$nbus] =~ s/\'//g;
+	$busname[$nbus] =~ s/\"//g;
+	$bustype[$nbus] = assign($_,16,1,0);
+	$pqpl[$nbus] = assign($_,33,8,0);
+	$pqql[$nbus] = assign($_,41,0,0);
+	$ein[$nbus] = 0.01*assign($_,49,8,100);
+	$kvb[$nbus] = 1; 
+	$qsh[$nbus] = assign($_,57,8,0);
+	$pn[$nbus] = assign($_,163,8,0);
+	if (assign($_,171,8,0) != 0) {
+	    $qn[$nbus] = ($pn[$nbus]/(assign($_,171,8,0)))*
+		(1-(assign($_,171,8,0))**2)**0.5;
+	}
+ 	if ($qsh[$nbus]) {
+	    $nsh++;
+	    $idxsh[$nsh] = assign($_,0,4,1);
+	    $psh[$nsh] = 0;	
+            # guessing V = 100 and f = 60 Hz.
+	    $qsh[$nsh] = -0.01*assign($_,57,8,0); 
+	}
+	$kvbase[$busidx[$nbus]] = $kvb[$nbus];
+	$einsch[$busidx[$nbus]] = $ein[$nbus];
+	$ang[$nbus] = 0;
+	if ($bustype[$nbus] == 3) {
+	    if ($pqpl[$nbus] != 0 || $pqql[$nbus] != 0) {
+		$npq++;
+		$pqbus[$npq] = assign($_,0,4,1);
+		$pqpl[$npq] = 0.01*assign($_,33,8,0);
+		$pqql[$npq] = 0.01*assign($_,41,8,0);
+	    }
+	    if ($pn[$nbus] || $qn[$nbus] ) {
+		$npl++;
+		$plbus[$npl] = assign($_,0,4,1);
+		$pn[$npl] = 0.01*assign($_,163,8,0);
+		$qn[$npl] = ($pn[$npl]/(assign($_,171,8,0)))*
+		    (1-(assign($_,171,8,0))**2)**0.5;
+	    }
+	} elsif ($bustype[$nbus] == 2) {
+	    $npv++; 
+	    $pvbus[$npv] = assign($_,0,4,1);
+	    $pvpg[$npv] = 0.01*assign($_,17,8,0);
+	    $pvqt[$npv] = 0.01*assign($_,65,8,999);
+	    $pvqb[$npv] = 0.01*assign($_,73,8,-999);
+	    $pvvs[$npv] = $ein[$nbus];
+	} elsif ($bustype[$nbus] == 1) {
+	    $nsw++; 
+	    $swbus = assign($_,0,4,1);
+	    $swpg = 0.01*assign($_,17,8,0);
+	    $swqt = 0.01*assign($_,65,8,999);
+	    $swqb = 0.01*assign($_,73,8,-999);
+	    $swvs = $ein[$nbus];      
+	} 
+    }
+    
+}
+
+# -----------------------------------------------------------------------
+# close BDAT.* data file
+# -----------------------------------------------------------------------
+close(IN) || die "cannot close $ARGV[0]: $!\n";
+
+# -----------------------------------------------------------------------
+# open LDAT.* data file
+# -----------------------------------------------------------------------
+$ARGV[0] =~ s/^BDAT/LDAT/;
+$ARGV[0] =~ s/^bdat/ldat/;
+print "Opening LDAT/PCFLO file \"$ARGV[0]\"...\n";
+carret();
+open(IN,$ARGV[0]) || die "cannot open $ARGV[0]: $!\n";
+
+# -----------------------------------------------------------------------
+# scan LDAT data file
+# -----------------------------------------------------------------------
+
+# read branch data (all values in percent)
+while (<IN>) {
+    next if /^:/;  # skip comment line
+    next if !/\d/; # skip blank line
+    chomp;
+    
+    if ($_ =~ /,/) { # comma separated format
+	@data = splitdata($_);
+	$nline++;
+	$busfr[$nline] = $data[0];
+	$bustt[$nline] = $data[1];
+	$rest[$nline] = 0.01*$data[3];
+	$reat[$nline] = 0.01*$data[4];
+	$susc[$nline] = 0.01*$data[5];
+	$rate[$nline] = $data[6];
+	
+	if ($data[8] == 1 || $data[8] == 2 ||
+	    $data[8] == 3 || $data[8] == 4 ||
+	    $data[8] == 5 || $data[8] == 6 ||
+	    $data[8] == 7 || $data[8] == 8 ||
+	    $data[8] == 9) {
+	    $ratio[$nline] = $data[10];
+	    $phas[$nline] = $data[11];
+	} else {
+	    $ratio[$nline] = 0;
+	    $phas[$nline] = 0; 
+	}	
+	
+    } else { # fixed position format
+	$_ = $_ . $blanks;
+	$nline++;
+	$busfr[$nline] = assign($_,0,4,1);
+	$bustt[$nline] = assign($_,4,4,1);
+	$rest[$nline] = 0.01*assign($_,10,12,0);
+	$reat[$nline] = 0.01*assign($_,22,12,0);
+	$susc[$nline] = 0.01*assign($_,34,12,0);
+	$rate[$nline] = 0.01*assign($_,46,8,100);
+	$tap[$nline] = assign($_,61,7,1);
+	if ($tap[$nline]) {
+	    $ratio[$nline] = assign($_,75,7,0);
+	    $phas[$nline] = assign($_,82,8,0);
+	} 
+    }
+}
+
+# -----------------------------------------------------------------------
+# close LDAT.* data file
+# -----------------------------------------------------------------------
+close(IN) || die "cannot close $ARGV[0]: $!\n";
+
+# -----------------------------------------------------------------------
+# open ADAT.* data file
+# -----------------------------------------------------------------------
+$ARGV[0] =~ s/^LDAT/ADAT/;
+$ARGV[0] =~ s/^ldat/adat/;
+if (open(IN,$ARGV[0])) {
+    print "Opening ADAT/PCFLO file \"$ARGV[0]\"...\n";
+
+# -----------------------------------------------------------------------
+# scan ADAT data file
+# -----------------------------------------------------------------------
+    
+# read area data (all values in percent)
+    while (<IN>) {
+	next if /^:/;  # skip comment line
+	next if !/\d/; # skip blank line
+	chomp;
+	@data = splitdata($_);
+	if ($data[2] > 0) {
+	    $narea++;
+	    $areanum[$narea] = $data[0];
+	    $areaslack[$narea] = $data[2];
+	    $areaexp[$narea] = 0.01*$data[3];
+	    $areatol[$narea] = 0.01*$data[4];
+	}
+    }
+    
+# -----------------------------------------------------------------------
+# close ADAT.* data file
+# -----------------------------------------------------------------------
+    close(IN) || die "cannot close $ARGV[0]: $!\n";
+}
+
+
+# -----------------------------------------------------------------------
+# open output data file
+# -----------------------------------------------------------------------
+print "Writing PSAT file \"$ARGV[1]\"...\n";
+carret();
+open(OUT,">$ARGV[1]") || die "cannot open $ARGV[1]: $!\n";
+
+# -----------------------------------------------------------------------
+# write output data file
+# -----------------------------------------------------------------------
+print OUT "% File generated by PSAT from PCFLO data file.\n";
+print OUT "% "."-" x 78 . "\n";
+print OUT "% Author:   Juan Carlos Morataya\n";
+print OUT "% E-mail:   jmorataya\@eegsa.net\n";
+print OUT "% "."-" x 78 . "\n";
+print OUT "% $title1\n\n";
+
+# -----------------------------------------------------------------------
+# write Bus.con
+# -----------------------------------------------------------------------
+$format = "%4d %8.2f %8.5f %8.5f 1 1";
+$nbus >= 0 && print OUT "Bus.con = [ ...\n";
+
+for ($i = 0; $i <= $nbus-1; $i++) {
+    printf OUT "$format;\n",$busidx[$i],$kvb[$i],
+    $ein[$i],$ang[$i];
+}
+
+$nbus >= 0 && printf OUT "$format];\n\n",$busidx[$i],$kvb[$i],
+$ein[$i],$ang[$i];
+
+# -----------------------------------------------------------------------
+# write SW.con
+# -----------------------------------------------------------------------
+if ($nsw >= 0) {
+    print OUT "SW.con = [ ...\n";
+    $format = "%4d %7.2f %6.2f %8.5f 0.00 %8.5f %8.5f 1.1 0.9 %8.5f 1";
+    printf OUT "$format];\n\n", $swbus,$pbas,$kvbase[$swbus],
+    $swvs,$swqt,$swqb,$swpg;
+}
+
+# -----------------------------------------------------------------------
+# write PV.con
+# -----------------------------------------------------------------------
+$npv >= 0 && printf OUT "PV.con = [ ...\n";
+$format = "%4d %7.2f %6.2f " . "%8.5f " x 4 . "1.1 0.9 1";
+for ($i = 0; $i <= $npv-1; $i++) {
+    printf OUT "$format;\n", $pvbus[$i],$pbas,$kvbase[$pvbus[$i]],
+    $pvpg[$i],$pvvs[$i],$pvqt[$i],$pvqb[$i];
+}
+$i = $npv;
+$npv >= 0 && printf OUT "$format];\n\n",$pvbus[$i],$pbas,
+    $kvbase[$pvbus[$i]],$pvpg[$i],$pvvs[$i],$pvqt[$i],$pvqb[$i];
+
+# -----------------------------------------------------------------------
+# write PQ.con
+# -----------------------------------------------------------------------
+$npq >= 0 && printf OUT "PQ.con = [ ...\n";
+$format = "%4d $pbas %8.2f %8.5f %8.5f 1.1 0.9 1";
+for ($i = 0; $i <= $npq-1; $i++) {
+    $h = $pqbus[$i];
+    printf OUT "$format;\n", $h,$kvbase[$h],$pqpl[$i],$pqql[$i];
+}
+$h = $pqbus[$npq];
+$i = $npq;
+$npq >= 0 && printf OUT "$format];\n\n",$h,$kvbase[$h],$pqpl[$i],
+    $pqql[$i];
+
+# -----------------------------------------------------------------------
+# write Pl.con
+# -----------------------------------------------------------------------
+$npl >= 0 && print OUT "Pl.con = [ ...\n";
+$format = "%4d $pbas %8.2f 60 0 0 %8.5f 0 0 %8.5f 0";
+for ($i = 0; $i <= $npl-1; $i++) {
+    printf OUT "$format;\n", $plbus[$i],$kvbase[$plbus[$i]],
+    $pn[$i],$qn[$i];
+}
+$h = $plbus[$npl];
+$i = $npl;
+$npl >= 0 && printf OUT "$format];\n\n", $plbus[$i],$kvbase[$plbus[$i]],
+    $pn[$i],$qn[$i];
+        
+# -----------------------------------------------------------------------
+# write Shunt.con
+# -----------------------------------------------------------------------
+$nsh >= 0 && print OUT "Shunt.con = [ ...\n";
+$format = "%4d $pbas %8.2f 60 %8.5f %8.5f";
+for ($i = 0; $i <= $nsh-1; $i++) {
+    if ($psh[$i] != 0 or $qsh[$i] != 0) {
+	$h = $idxsh[$i];
+	printf OUT "$format;\n", $h,$kvbase[$h],$psh[$i],$qsh[$i];
+    }
+}
+$h = $idxsh[$nsh];
+$i = $nsh;
+$nsh >= 0 && printf OUT "$format];\n\n",$h,$kvbase[$h],$psh[$i],$qsh[$i];
+
+# -----------------------------------------------------------------------
+# write Line.con
+# -----------------------------------------------------------------------
+if ($nline >= 0) {
+    print OUT "Line.con = [ ...\n";
+    $format = "%4d %4d " . " %8.5f " x 2 ."  60   0 " . " %8.5f " x 4 . 
+    "" . " %8.5f " x 3 . " 0  0";
+    for ($i = 0; $i <= $nline-1; $i++) {
+	$kvbase[$bustt[$i]] = 1;   
+    $k = $kvbase[$busfr[$i]]/$kvbase[$bustt[$i]];
+    if ($k == 1) { $k = 0; }
+    printf OUT "$format;\n",$busfr[$i],$bustt[$i],$pbas,$kvbase[$busfr[$i]],
+	$k,$rest[$i],$reat[$i],$susc[$i],$ratio[$i],$phas[$i],$rate[$i];
+    }
+    $i = $nline; 
+  	$kvbase[$bustt[$i]] = 1;   
+    $k = $kvbase[$busfr[$i]]/$kvbase[$bustt[$i]];
+    if ($k == 1) { $k = 0; }
+    printf OUT "$format];\n\n",$busfr[$i],$bustt[$i],$pbas,$kvbase[$busfr[$i]],
+	$k,$rest[$i],$reat[$i],$susc[$i],$ratio[$i],$phas[$i],$rate[$i];
+}    
+
+# -----------------------------------------------------------------------
+# write Area.con
+# -----------------------------------------------------------------------
+$narea >= 0 && print OUT "Area.con = [ ...\n";
+$format = "%4d %4d $pbas %8.5f %8.5f";
+for ($i = 0; $i <= $narea-1; $i++) {
+    printf OUT "$format;\n", $areanum[$i],$areaslack[$i],
+    $areaexp[$i],$areatol[$i];
+}
+$i = $narea;
+if ($narea >= 0) {
+    printf OUT "$format];\n\n", $areanum[$i],$areaslack[$i],
+    $areaexp[$i],$areatol[$i];
+}
+
+# -----------------------------------------------------------------------
+# write bus names
+# -----------------------------------------------------------------------
+$nbus >= 0 && print OUT "Bus.names = { ...\n";
+$h = ($nbus+1) % 5;
+if ($h == 0) {$h = 5;}
+if (($nbus+1) > 5) {
+    for ($i = 0; $i <= $nbus-$h; $i+=5) {
+	print OUT "  '$busname[$i]'; '$busname[$i+1]'; " . 
+	    "'$busname[$i+2]'; '$busname[$i+3]'; '$busname[$i+4]';\n";
+    }
+}
+print OUT "  ";
+for ($i = $nbus-$h+1; $i <= $nbus-1; $i++) {
+    print OUT "'$busname[$i]'; ";
+}
+print OUT "'$busname[$nbus]'};\n\n";
+
+# -----------------------------------------------------------------------
+# close output data file
+# -----------------------------------------------------------------------
+close(OUT) || die "cannot close $ARGV[1]: $!\n";
+print "Conversion completed.\n";
+
+# -----------------------------------------------------------------------
+# function for formatting data and/or assigning default values
+# -----------------------------------------------------------------------
+sub assign {
+    my $param;
+    $param = substr($_[0],$_[1],$_[2]);
+    $param =~ s/\s*//g;
+    unless ($param) {$param = "0";}
+    unless ($param =~ /[1-9]/) {$param = $_[3];}
+    return $param;
+}
+# -----------------------------------------------------------------------
+# function for writing a separator
+# -----------------------------------------------------------------------
+sub carret {
+    $verbose && print "-" x 50 . "\n";
+}
+
+# -----------------------------------------------------------------------
+# function for formatting data and/or assigning default values
+# -----------------------------------------------------------------------
+sub deblank {
+    my $name = $_[0];
+    $name =~ s/( *)$//;
+    return $name;
+}
+
+# -----------------------------------------------------------------------
+# function for scanning the file up to the data entries 
+# -----------------------------------------------------------------------
+sub splitdata {
+    my $kkk;
+    my $name1;
+    my $name2;
+
+    # remove commas in bus names 
+    $_[0] =~ m/\"\w*,\w*\"/;
+    if ($& ne ",") {
+	$name1 = $&;
+	$name2 = $name1;
+	$name2 =~ s/,/_/g;
+	$_[0] =~ s/$name1/$name2/;
+    }
+    if ($_ =~  /,/)  {
+	my @mydata = split /,/, $_[0]; 
+	if (!$mydata[0]) { shift(@mydata); } 
+	for ($kkk=0; $kkk<@mydata-1; $kkk++) {
+	    $mydata[$kkk] =~ s/\s*//g;
+	    if (!$mydata[$kkk]) { $mydata[$kkk] = 0; }
+	}
+	return @mydata; 
+    } 
+}
+
+

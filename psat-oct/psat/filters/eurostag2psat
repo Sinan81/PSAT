@@ -1,0 +1,373 @@
+#!/usr/bin/perl -w
+# EUROSTAG2PSAT converts EUROSTAG data file into PSAT data file
+#
+# EUROSTAG2PSAT <OPTIONS> FILEINPUT <FILEOUTPUT>
+#
+# Author:  Juan Carlos Morataya
+# Date:    19-Nov-2005
+# Update:  08-Mar-2006
+# Version: 1.0.0
+# Version: 1.0.1
+# 
+# E-mail:    jc.morataya@ieee.org
+#
+
+use strict;
+
+# -----------------------------------------------------------------------
+# variable declaration
+# -----------------------------------------------------------------------
+my $nargin = 0;
+my $verbose = 0;
+my $helpmsg = 0;
+my ($i,$j,$h,$k);
+
+my $nbus = -1;
+my $nsw = -1;
+my $npv = -1;
+my $npq = -1;
+my $npl = -1;
+my $nsh = -1;
+my $nline = -1;
+my $ntitle = -1;
+my $ncom = -1;
+my $trg = -1;
+my $ntw = -1;
+my $nsvc = -1;
+my $narea = -1;
+my $kae = 0;
+
+my ($kvb,$ein,$ang,);
+my ($swidx,$qmin,$qmax);
+my (@pqbus,@pqpl,@pqql);    
+my ($title1,$title2,$ver,);
+my $pbas = 100;
+my $freq = 60;
+my $format;
+my (@data,@data1,@data2,@data3);
+my (@kvb,@kzo,@kae,@ein,@ang,@bustype,
+    @busidx,@busname,@pload,@qload,@qcap,
+    @shidx,@title,@comment,
+    @pbtf);
+my (@pvbus,@pvsb,@pvpg,@pvvs,
+    @pvqt,@pvqb,@pvpt,@pvpb);    
+my (@swidx,@pvidx,@pqidx,@idxsh,
+    @vmax,@vmin,@psh,@qsh);
+my (@busfr,@bustt,@rest,@reat,
+    @susc,@rate,@ratio);	    
+my (@areanum,@areaslack,@areaexp,@areatol);
+my (@pgen,@qgen,@bsh,@gsh,@qmax,@qmin,@gename);
+my $blanks = " " x 100;
+my (%kvbase,%nameidx);
+
+# -----------------------------------------------------------------------
+# check inputs
+# -----------------------------------------------------------------------
+$nargin = @ARGV;
+$nargin || die "Error: No input data file.\n";
+
+# -----------------------------------------------------------------------
+# check options
+# -----------------------------------------------------------------------
+while ($ARGV[0] =~ /^-/) {
+    if ($ARGV[0] =~ /v/) {$verbose = 1;}
+    if ($ARGV[0] =~ /h/) {$helpmsg = 1;}
+    shift(@ARGV);
+    $nargin--;
+    if ($nargin == 0) { 
+	last;
+    }
+}
+
+# -----------------------------------------------------------------------
+# help (if requested)
+# -----------------------------------------------------------------------
+if ($helpmsg) {
+    print "\nEUROSTAG2PSAT converts EUROSTAG data files into PSAT data files.\n\n";
+    print "EUROSTAG2psat [options] fileinput [fileoutput]\n";
+    print "  -v   verbose\n";
+    print "  -h   print this help and exit\n\n";
+    print "Author:   Juan Carlos Morataya\n";
+    print "Date:     19-Nov-2005\n";
+    print "Version:  1.0.0\n\n";
+    print "E-mail:   jc.morataya\@ieee.org\n";
+    die "\n";
+}
+
+# -----------------------------------------------------------------------
+# define output file name (if necessary)
+# -----------------------------------------------------------------------
+if ($nargin == 1) {
+    $ARGV[1] = $ARGV[0];
+    $ARGV[1] =~ s/^/d_/;
+    $ARGV[1] =~ s/^d_d/d_/;
+    $ARGV[1] =~ s/^d_d_/d_/;
+    $ARGV[1] =~ s/[^a-zA-Z0-9_\.]/_/g;
+    $ARGV[1] =~ s/\..*//;
+    $ARGV[1] =~ s/^d__/d_/;
+    $ARGV[1] = $ARGV[1] . ".m";
+} elsif ($nargin == 0) {
+    die "Error: Input file name is missing.\n";
+}
+
+# -----------------------------------------------------------------------
+# open input data file
+# -----------------------------------------------------------------------
+print "Opening EUROSTAG data file \"$ARGV[0]\"...\n";
+carret();
+open(IN,$ARGV[0]) || die "cannot open $ARGV[0]: $!\n";
+
+# -----------------------------------------------------------------------
+# scan data file
+# -----------------------------------------------------------------------
+
+# read title
+while (<IN>) {
+    chomp;
+    last if /^B/;
+    $ntitle++;
+    $title[$ntitle] = $_;
+}
+
+# read parameters
+while (<IN>) {
+    chomp;
+    last if /^8/;
+}
+
+while (<IN>) {
+	if (/^AA/) { $kae++; next; }
+    chomp;
+    $_ = $_ . $blanks;
+    if (/^101/) {  # read bus data
+    $nbus++;
+    $busidx[$nbus] = $nbus+1;
+    $kae[$nbus] = $kae;
+    $busname[$nbus] = deblank(substr($_,3,8));
+    $pbas = assign($_,84,8,100);
+    $pgen[$nbus] = assign($_,30,8,0)/$pbas;
+    $qgen[$nbus] = assign($_,54,8,0)/$pbas;
+    $pload[$nbus] = assign($_,48,8,0)/$pbas;
+    $qload[$nbus] = assign($_,57,8,0)/$pbas;
+    if ($pload[$nbus] || $qload[$nbus]) {
+	$npq++;
+	$pqidx[$npq] = $busidx[$nbus];
+    }
+    $kvb[$nbus] = assign($_,66,8,1);
+    $bsh[$nbus] = assign($_,75,8,0)/$pbas;
+    if ($bsh[$nbus]) {
+	$nsh++;
+	$shidx[$nsh] = $busidx[$nbus];
+    }    
+    $ein[$nbus] = assign($_,99,7,1);
+    $ang[$nbus] = 0.01745329552*assign($_,109,6,0);
+    $kvbase{$busidx[$nbus]} = $kvb[$nbus];
+    $nameidx{$busname[$nbus]} = $busidx[$nbus];
+    }   
+    if (/^5\s*/) {  # read pv/sw generator data
+    $npv++;
+    $gename[$npv] = deblank(substr($_,3,8));
+    $qmin[$npv] = assign($_,21,8,-99999.99)/$pbas;
+    $qmax[$npv] = assign($_,30,8,99999.99)/$pbas;
+    $bustype[$npv] = assign($_,57,1,2);
+    if ($bustype[$npv] == 1) {
+	$pvidx[$npv] = $nameidx{$gename[$npv]}-1;
+    } else {
+	$nsw++;
+	#my $tempvar = $npv + 1;
+	$swidx = $nameidx{$gename[$npv]};
+	$qmin = assign($_,21,8,-999.99)/$pbas;
+    $qmax = assign($_,30,8,999.99)/$pbas;
+	$npv--;
+    }   
+    } 
+    if (/^30/) { # read line data
+    $nline++;
+    $bustt[$nline] = $nameidx{deblank(substr($_,2,8))};
+    $busfr[$nline] = $nameidx{deblank(substr($_,11,8))};
+    $rest[$nline] = assign($_,21,8,0);	
+    $reat[$nline] = assign($_,30,8,0);	    
+    $susc[$nline] = 2*assign($_,48,8,0);
+    $ratio[$nline] = 1;
+    } 
+    if (/^41/) {  # read transformers data
+	$nline++;
+	$bustt[$nline] = $nameidx{deblank(substr($_,2,8))};
+    $busfr[$nline] = $nameidx{deblank(substr($_,11,8))};
+    $rest[$nline] = assign($_,21,8,0);	
+    $reat[$nline] = assign($_,30,8,0);	    
+    $susc[$nline] = 2*assign($_,48,8,0);
+    $ratio[$nline] = 2-assign($_,66,8,1);
+    }   
+}
+
+# -----------------------------------------------------------------------
+# close data file
+# -----------------------------------------------------------------------
+close(IN) || die "cannot close $ARGV[0]: $!\n";
+
+# -----------------------------------------------------------------------
+# open output data file
+# -----------------------------------------------------------------------
+print "Writing PSAT file \"$ARGV[1]\"...\n";
+carret();
+open(OUT,">$ARGV[1]") || die "cannot open $ARGV[1]: $!\n";
+
+# -----------------------------------------------------------------------
+# write output data file
+# -----------------------------------------------------------------------
+print OUT "% File EUROSTAGnerated by PSAT from EUROSTAG data file.\n";
+print OUT "% "."-" x 78 . "\n";
+print OUT "% Author:   Juan Carlos Morataya\n";
+print OUT "% E-mail:   jc.morataya\@ieee.org\n";
+print OUT "% "."-" x 78 . "\n";
+print OUT "% 'EUROSTAGneric EUROSTAG data format "."$ARGV[0]'"."\n";
+for ($i = 0; $i <= $ntitle; $i++) { print OUT "% $title[$i]\n"; }
+print OUT "\n";
+
+# -----------------------------------------------------------------------
+# write Bus.con
+# -----------------------------------------------------------------------
+$format = "%4d  " . " %8.5f " x 3 ." %2d  1";
+$nbus >= 0 && print OUT "Bus.con = [ ...\n";
+
+for ($i = 0; $i <= $nbus-1; $i++) {
+    printf OUT "$format;\n",$busidx[$i],$kvb[$i],$ein[$i],
+    $ang[$i],$kae[$i];
+}
+
+$nbus >= 0 && printf OUT "$format];\n\n",$busidx[$i],$kvb[$i],
+    $ein[$i],$ang[$i],$kae[$i];
+
+# -----------------------------------------------------------------------
+# write SW.con
+# -----------------------------------------------------------------------
+if ($nsw >= 0) {
+    print OUT "SW.con = [ ...\n";
+    $format = "%4d  $pbas 1 %8.5f  0  %8.5f  %8.5f  1.1  0.9  %8.5f   1 ";
+    $i = $swidx;
+    $h = $swidx-1;
+    printf OUT "$format];\n\n",$swidx,$ein[$h],$qmax,
+    $qmin,$pgen[$h];
+}
+
+# -----------------------------------------------------------------------
+# write PV.con
+# -----------------------------------------------------------------------
+if ($npv >= 0) {
+    print OUT "PV.con = [ ...\n";
+    $format = "%4d  $pbas   1  " . "%8.5f " x 4 . "   1.1   0.9   1";
+    for ($i = 0; $i <= $npv-1; $i++) {
+	$h = $pvidx[$i];
+	printf OUT "$format;\n", $busidx[$h],$pgen[$h],$ein[$h],
+	$qmax[$i],$qmin[$i];
+    }
+    $h = $pvidx[$npv]; 
+    printf OUT "$format];\n\n",$busidx[$h],$pgen[$h],$ein[$h],
+	$qmax[$i],$qmin[$i];
+}
+
+# -----------------------------------------------------------------------
+# write PQ.con
+# -----------------------------------------------------------------------
+if ($npq >= 0) {
+    print OUT "PQ.con = [ ...\n";
+    $format = "%4d  $pbas   1  " . "%8.5f " x 2 . "  1.1   0.9   1";
+    for ($i = 0; $i <= $npq-1; $i++) {
+	$h = $pqidx[$i]-1;
+	printf OUT "$format;\n", $busidx[$h],$pload[$h],$qload[$h];
+    }
+    $h = $pqidx[$npq]-1; 
+    printf OUT "$format];\n\n",$busidx[$h],$pload[$h],$qload[$h];
+}
+
+# -----------------------------------------------------------------------
+# write Shunt.con
+# -----------------------------------------------------------------------
+if ($nsh >= 0) {
+    print OUT "Shunt.con = [ ...\n";
+    $format = "%4d  $pbas  %8.5f  60  0  %8.5f";
+    for ($i = 0; $i <= $nsh-1; $i++) {
+	$h = $shidx[$i]-1;
+	printf OUT "$format;\n", $busidx[$h],$kvbase{$busidx[$h]},
+	$bsh[$h];
+    }
+    $h = $shidx[$nsh]-1;
+    printf OUT "$format];\n\n", $busidx[$h],$kvbase{$busidx[$h]},
+    $bsh[$h];
+}
+
+# -----------------------------------------------------------------------
+# write Line.con
+# -----------------------------------------------------------------------
+if ($nline >= 0) {
+    print OUT "Line.con = [ ...\n";
+    $format = "%4d %4d " . " %8.5f " x 2 ."  60   0 " . " %8.5f " x 5 . 
+    " 0  0  0  0";
+    for ($i = 0; $i <= $nline-1; $i++) {
+    $k = $kvbase{$busfr[$i]}/$kvbase{$bustt[$i]};
+    if ($k == 1) { $k = 0; }
+    printf OUT "$format;\n",$busfr[$i],$bustt[$i],$pbas,$kvbase{$busfr[$i]},
+	$k,$rest[$i],$reat[$i],$susc[$i],$ratio[$i];
+    }
+    $i = $nline; 
+    $k = $kvbase{$busfr[$i]}/$kvbase{$bustt[$i]};
+    if ($k == 1) { $k = 0; }
+    printf OUT "$format];\n\n",$busfr[$i],$bustt[$i],$pbas,$kvbase{$busfr[$i]},
+	$k,$rest[$i],$reat[$i],$susc[$i],$ratio[$i];
+}    
+
+
+# -----------------------------------------------------------------------
+# write bus names
+# -----------------------------------------------------------------------
+$nbus >= 0 && print OUT "Bus.names = { ...\n";
+$h = ($nbus+1) % 5;
+if ($h == 0) {$h = 5;}
+if (($nbus+1) > 5) {
+    for ($i = 0; $i <= $nbus-$h; $i+=5) {
+	print OUT "  '$busname[$i]'; '$busname[$i+1]'; " . 
+	    "'$busname[$i+2]'; '$busname[$i+3]'; '$busname[$i+4]';\n";
+    }
+}
+print OUT "  ";
+for ($i = $nbus-$h+1; $i <= $nbus-1; $i++) {
+    print OUT "'$busname[$i]'; ";
+}
+print OUT "'$busname[$nbus]'};\n\n";
+
+# -----------------------------------------------------------------------
+# close output data file
+# -----------------------------------------------------------------------
+close(OUT) || die "cannot close $ARGV[1]: $!\n";
+print "Conversion completed.\n";
+
+# -----------------------------------------------------------------------
+# function for formatting data and/or assigning default values
+# -----------------------------------------------------------------------
+sub assign {
+    my $param;
+    $param = substr($_[0],$_[1],$_[2]);
+    $param =~ s/\s*//g;
+    unless ($param) {$param = "0";}
+    #$param =~ s/^0*\.0*//;
+    unless ($param =~ /[1-9]/) {$param = $_[3];}
+    return $param;
+}
+
+# -----------------------------------------------------------------------
+# function for formatting data and/or assigning default values
+# -----------------------------------------------------------------------
+sub deblank {
+    my $name = $_[0];
+    $name =~ s/( *)$//;
+    return $name;
+}
+
+# -----------------------------------------------------------------------
+# function for writing a separator
+# -----------------------------------------------------------------------
+sub carret {
+    $verbose && print "-" x 50 . "\n";
+}
+

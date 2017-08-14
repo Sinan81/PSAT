@@ -1,0 +1,570 @@
+#!/usr/bin/perl -w
+# INPTC12PSAT converts INPTC1 data file into PSAT data file
+#
+# INPTC12PSAT <OPTIONS> FILEINPUT <FILEOUTPUT>
+#
+# Author:  Federico Milano
+# Date:    16-Apr-2006
+# Version: 1.0.0
+# 
+# E-mail:    fmilano@thunderbox.uwaterloo.ca
+# Web-site:  http://thunderbox.uwaterloo.ca/~fmilano
+
+use strict;
+
+# -----------------------------------------------------------------------
+# variable declaration
+# -----------------------------------------------------------------------
+my $nargin = 0;
+my $verbose = 0;
+my $helpmsg = 0;
+my $colasadd = 0;
+my $addfile = " ";
+my ($i,$h);
+
+my $nbus = -1;
+my $nsw = -1;
+my $npv = -1;
+my $npq = -1;
+my $nsh = -1;
+my $nsup = -1;
+my $nline = -1;
+my $ntitle = -1;
+my $narea = -1;
+my $nregion = 0;
+
+my @title;
+my $format;
+my $busty;
+my ($tempcode,$tempto,$tempfr);
+
+my $vx = 0;
+my (@vnomdef,@vmindef,@vmaxdef);
+my (%buscode,%linecode,%region);
+
+my $pvbus = "yyyy";
+my $swbus = "xxxx";
+
+my (@busname,@busvol,@pgen,@qgen,@vmin,@vmax,@pload,@qload,@qmax,@qmin,@vnom,@busreg);
+my (@swidx,@pvidx,@pqidx);
+my (@busfr,@busto,@rline,@xline,@bline,@kline,@vline,@mline,@iline);
+my (@shidx,@ssh,@qsh,@vsh);
+my (@supidx,@supsn,@suppmax,@suppmin,@supqmax,@supqmin,@supc0,@supc1,@supc2);
+my (@areanum,@areaslack,@areaexp,@areatol);
+
+# -----------------------------------------------------------------------
+# check inputs
+# -----------------------------------------------------------------------
+$nargin = @ARGV;
+$nargin || die "Error: No input data file.\n";
+
+# -----------------------------------------------------------------------
+# check options
+# -----------------------------------------------------------------------
+while ($ARGV[0] =~ /^-/) {
+    if ($ARGV[0] =~ /v/) {$verbose = 1;}
+    if ($ARGV[0] =~ /h/) {$helpmsg = 1;}
+    if ($ARGV[0] =~ /a/) {
+	$colasadd = 1;
+	$addfile = $ARGV[1];
+	@ARGV = @ARGV[0, 2 .. $#ARGV];  
+	$nargin--;
+    }
+    shift(@ARGV);
+    $nargin--;
+    if ($nargin == 0) { 
+	last;
+    }
+}
+$title[0] = 'Generic INPTC1 data format ' . $ARGV[0];
+
+# -----------------------------------------------------------------------
+# help (if requested)
+# -----------------------------------------------------------------------
+if ($helpmsg) {
+    print "\nINPTC12PSAT converts INPTC1 data files into PSAT data files.\n\n";
+    print "inptc12psat <options> fileinput <fileoutput>\n";
+    print "  -v   verbose\n";
+    print "  -h   print this help and exit\n\n";
+    print "Date:     16-Apr-2006\n";
+    print "Version:  1.0.0\n\n";
+    print "Author:   Federico Milano\n";
+    print "E-mail:   fmilano\@thunderbox.uwaterloo.ca\n";
+    die "\n";
+}
+
+# -----------------------------------------------------------------------
+# define output file name (if necessary)
+# -----------------------------------------------------------------------
+if ($nargin == 1) {
+    $ARGV[1] = $ARGV[0];
+    $ARGV[1] =~ s/^d*_*/d_/;
+    $ARGV[1] =~ s/[^\w\.]/_/g;
+    $ARGV[1] =~ s/\..+$/.m/;
+} elsif ($nargin == 0) {
+    die "Error: Input file name is missing.\n";
+}
+
+# -----------------------------------------------------------------------
+# open input data file
+# -----------------------------------------------------------------------
+print "Opening INPTC1 data file \"$ARGV[0]\"...\n";
+open(IN,$ARGV[0]) || die "cannot open $ARGV[0]: $!\n";
+
+# -----------------------------------------------------------------------
+# read data
+# -----------------------------------------------------------------------
+while (<IN>) {
+
+    chomp;
+    $busty = substr($_,79,1);
+
+    if ($busty eq 'O') { # Kind of data
+	# not used
+    } elsif ($busty eq 'C') { # Data description
+	$ntitle++;
+	$title[$ntitle] = substr($_,0,78);
+    } elsif ($busty eq 'F') { # End of data
+	last;
+    } elsif ($busty eq '*') { # Comment
+	# nothing to do...
+    } elsif ($busty eq '#') { # Comment (not documented)
+	# nothing to do...
+    } elsif ($busty eq 'Z') { # Voltage Definition
+	if (/^VNOM/) {
+	    @vnomdef = split /\s+/;
+	} elsif (/^VMIN/) {
+	    @vmindef = split /\s+/;
+	} elsif (/^VMAX/) {
+	    @vmaxdef = split /\s+/;
+	}
+    } elsif ($busty eq 'W') { # DC connection
+	# not supported yet ...
+    } elsif ($busty eq 'N') { # Bus 
+	$nbus++;
+	$busname[$nbus] = getname($_,60,75) . substr($_,0,5);
+	$tempcode = getcode($_,0,5);
+	$buscode{$tempcode} = $nbus;
+	$vx = substr($_,4,1);
+	if (!$region{substr($_,3,1)}) { 
+	    $nregion++;
+	    $region{substr($_,3,1)} = $nregion;
+	} 
+	$busreg[$nbus] = $region{substr($_,3,1)};
+	$vnom[$nbus] = $vnomdef[$vx];
+	$busvol[$nbus] = getval($_,47,51,$vnomdef[$vx]);
+	$vmin[$nbus] = getval($_,53,55,$vmindef[$vx]);
+	$vmax[$nbus] = getval($_,57,59,$vmaxdef[$vx]);
+	# If the additional data file is missing, voltage rates can be wrong.
+	# The following is an euristic method to fix voltage rates
+	if (($busvol[$nbus]/$vnom[$nbus] < 0.95 ||
+	     $busvol[$nbus]/$vnom[$nbus] > 1.05) &&
+	    $vnom[$nbus] < 150) { 
+	    $vnom[$nbus] = round($busvol[$nbus]);
+	}
+	#$busvol[$nbus] /= $vnom[$nbus];
+	$vmin[$nbus] /= $vnomdef[$vx];
+	$vmax[$nbus] /= $vnomdef[$vx];
+	$pgen[$nbus] = getval($_,13,19,0)/100;
+	$qgen[$nbus] = getval($_,37,41,0)/100;
+	$qmax[$nbus] = 0;
+	$qmin[$nbus] = 0;
+	if ($pgen[$nbus] != 0 || $qgen[$nbus] != 0) {
+	    $npq++;	
+	    $pload[$npq] = $pgen[$nbus];
+	    $qload[$npq] = $qgen[$nbus];
+	    $pqidx[$npq] = $nbus;
+	}
+	if (substr($_,22,1) eq 'T') {
+	    $nsw++;
+	    $swidx[$nsw] = $nbus;
+	    $swbus = $tempcode;
+	    $pgen[$nbus] = 0;
+	}
+	if (substr($_,44,1) eq 'T') {
+	    $npv++;
+	    $pvidx[$npv] = $nbus;
+	    $pvbus = $tempcode;
+	}
+    } elsif ($busty eq 'I') { # Hydro-electric generator 
+	$tempcode = getcode($_,0,5);
+	if ($pvbus ne $tempcode && $swbus ne $tempcode) {
+	    $npv++;
+	    $pvidx[$npv] = $nbus;
+	    $pvbus = $tempcode;
+	    if ($pqidx[$npq] == $nbus && $pgen[$nbus] <= 0) { $npq--; }
+	    $pgen[$nbus] = getval($_,15,19,0)/100;
+	    $qmin[$nbus] = -getval($_,43,46,0)/100;
+	    $qmax[$nbus] = abs(getval($_,48,51,0)/100);
+	} elsif ($pvbus eq $tempcode) {
+	    $pgen[$nbus] += getval($_,15,19,0)/100;	    
+	    $qmin[$nbus] += -getval($_,43,46,0)/100;
+	    $qmax[$nbus] += abs(getval($_,48,51,0)/100);
+	} elsif ($swbus eq $tempcode) {
+	    $pgen[$nbus] += getval($_,15,19,0)/100;	    	    
+	}
+	$nsup++;
+	$supidx[$nsup] = $buscode{$tempcode};
+	$supsn[$nsup] = abs(getval($_,31,34,-100));
+	$suppmax[$nsup] = abs(getval($_,26,29,0)/$supsn[$nsup]);
+	$suppmin[$nsup] = -getval($_,21,24,0)/$supsn[$nsup];
+	$supqmax[$nsup] = abs(getval($_,48,51,0)/$supsn[$nsup]);
+	$supqmin[$nsup] = -getval($_,43,46,0)/$supsn[$nsup];
+	$supc0[$nsup] = 0;
+	$supc1[$nsup] = 0;
+	$supc2[$nsup] = 0;
+    } elsif ($busty eq 'E') { # Thermo-electric generator 
+	$tempcode = getcode($_,0,5);
+	if ($pvbus ne $tempcode && $swbus ne $tempcode) {
+	    $npv++;
+	    $pvidx[$npv] = $nbus;
+	    $pvbus = $tempcode;
+	    if ($pqidx[$npq] == $nbus && $pgen[$nbus] <= 0) { $npq--; }
+	    $pgen[$nbus] = getval($_,15,19,0)/100;
+	    $qmin[$nbus] = -getval($_,43,46,0)/100;
+	    $qmax[$nbus] = abs(getval($_,48,51,0)/100);
+	} elsif ($pvbus eq $tempcode) {
+	    $pgen[$nbus] += getval($_,15,19,0)/100;	    
+	    $qmin[$nbus] += -getval($_,43,46,0)/100;
+	    $qmax[$nbus] += abs(getval($_,48,51,0)/100);
+	} elsif ($swbus eq $tempcode) {
+	    $pgen[$nbus] += getval($_,15,19,0)/100;	    	    
+	}
+	$nsup++;
+	$supidx[$nsup] = $buscode{$tempcode};
+	$supsn[$nsup] = abs(getval($_,31,34,-100));
+	$suppmax[$nsup] = abs(getval($_,26,29,0)/$supsn[$nsup]);
+	$suppmin[$nsup] = -getval($_,21,24,0)/$supsn[$nsup];
+	$supqmax[$nsup] = abs(getval($_,48,51,0)/$supsn[$nsup]);
+	$supqmin[$nsup] = -getval($_,43,46,0)/$supsn[$nsup];
+	# prices are given in Euros
+	$supc0[$nsup] = getval($_,9,13,0)*getval($_,53,59,0)/1936.27;
+	$supc1[$nsup] = getval($_,9,13,0)*getval($_,61,66,0)/1936.27;
+	$supc2[$nsup] = getval($_,9,13,0)*getval($_,68,74,0)/1936.27;
+    } elsif ($busty eq 'S') { # Synchronous compensator 
+	$tempcode = getcode($_,0,5);
+	if ($pvbus ne $tempcode && $swbus ne $tempcode) {
+	    $npv++;
+	    $pvidx[$npv] = $nbus;
+	    $pvbus = $tempcode;
+	    if ($pqidx[$npq] == $nbus && $pgen[$nbus] <= 0) { $npq--; }
+	}
+    } elsif ($busty eq 'Q') { # Shunt condenser
+	$tempcode = getcode($_,0,5);
+	$nsh++;
+	$shidx[$nsh] = $buscode{$tempcode};
+	$ssh[$nsh] = -getval($_,47,51,-100); 
+	$qsh[$nsh] = -getval($_,37,41,0)/$ssh[$nsh]; 
+	$vsh[$nsh] = getval($_,43,46,$vnomdef[substr($_,4,1)]); 
+    } elsif ($busty eq 'L') { # Transmission line 
+	$tempfr = getcode($_,0,5);
+	$tempto = getcode($_,6,5);
+	if ($linecode{$tempfr . $tempto}) { next; }
+	$nline++;
+	$vx = substr($_,4,1);
+	$vline[$nline] = substr($_,4,1);
+	$busfr[$nline] = $tempfr;
+	$busto[$nline] = $tempto;
+	$linecode{$tempto . $tempfr} = $nline+1;
+	$kline[$nline] = 0;
+	$mline[$nline] = 0;
+	#$lline[$nline] = getval($_,29,35,1); # line length
+	$rline[$nline] = 100*getval($_,45,51,0)/$vnomdef[$vx]/$vnomdef[$vx];
+	$xline[$nline] = 100*getval($_,52,59,0)/$vnomdef[$vx]/$vnomdef[$vx];
+	$bline[$nline] = $vnomdef[$vx]*$vnomdef[$vx]*getval($_,60,66,0)/100000000;
+	#$rline[$nline] = getval($_,45,51,0)/$lline[$nline];
+	#$xline[$nline] = getval($_,52,59,0)/$lline[$nline];
+	#$bline[$nline] = getval($_,60,66,0)/1000000/$lline[$nline];
+	$iline[$nline] = sqrt(3)*$vnomdef[$vx]*getval($_,23,27,0)/100000;
+	#$npar[$nline] = getval($_,13,13,0);
+    } elsif ($busty eq 'T') { # Transformer 
+	$tempfr = getcode($_,0,5);
+	$tempto = getcode($_,6,5);
+	if ($linecode{$tempfr . $tempto}) { next; }
+	$nline++;
+	$vx = substr($_,4,1);
+	if (substr($_,10,1) < $vx) { 
+	    $vx = substr($_,10,1);
+	    $busfr[$nline] = $tempto;
+	    $busto[$nline] = $tempfr;
+	    $kline[$nline] = $vnomdef[$vx]/$vnomdef[substr($_,4,1)];	    
+	    $vline[$nline] = substr($_,10,1);
+	} else {
+	    $busfr[$nline] = $tempfr;
+	    $busto[$nline] = $tempto;
+	    $kline[$nline] = $vnomdef[$vx]/$vnomdef[substr($_,10,1)];
+	    $vline[$nline] = substr($_,4,1);
+	}
+	$mline[$nline] = getval($_,29,33,$kline[$nline])/$kline[$nline];
+	$linecode{$tempto . $tempfr} = $nline+1;
+	#$lline[$nline] = 0; # line length
+	$rline[$nline] = 100*getval($_,45,51,0)/$vnomdef[$vx]/$vnomdef[$vx];
+	$xline[$nline] = 100*getval($_,52,59,0)/$vnomdef[$vx]/$vnomdef[$vx];
+	$bline[$nline] = $vnomdef[$vx]*$vnomdef[$vx]*getval($_,60,66,0)/100000000;
+	$iline[$nline] = sqrt(3)*$vnomdef[$vx]*getval($_,23,27,0)/100000;
+	#$npar[$nline] = getval($_,13,13,0);
+    } 
+    
+}
+
+# -----------------------------------------------------------------------
+# close DAT data file
+# -----------------------------------------------------------------------
+close(IN) || die "cannot close $ARGV[0]: $!\n";
+
+if ($colasadd) {
+
+# -----------------------------------------------------------------------
+# open ADD data file
+# -----------------------------------------------------------------------
+    print "Opening COLAS ADD file \"$addfile\"...\n";
+    open(IN,$addfile) || die "cannot open file $addfile: $!\n";
+
+# -----------------------------------------------------------------------
+# read data
+# -----------------------------------------------------------------------
+
+    while (<IN>) {
+	
+	chomp;
+	$busty = substr($_,79,1);
+	
+	if ($busty eq 'O') { # Kind of data
+	    # not used
+	} elsif ($busty eq 'C') { # Data description
+	    $ntitle++;
+	    $title[$ntitle] = substr($_,0,78);
+	} elsif ($busty eq 'F') { # End of data
+	    last;
+	} elsif ($busty eq '*') { # Comment
+	    # nothing to do...
+	} elsif ($busty eq '#') { # Comment (not documented)
+	    # nothing to do...
+	} elsif ($busty eq 'K') { # Additional bus data
+	    $tempcode = getcode($_,0,5);
+	    $vx = substr($_,4,1);
+	    $i = $buscode{$tempcode};
+	    if ($i) {
+		$vnom[$i] = getval($_,6,12,$vnomdef[$vx]);
+		$vmin[$i] = getval($_,13,19,$vmindef[$vx])/$vnom[$i];
+		$vmax[$i] = getval($_,20,26,$vmaxdef[$vx])/$vnom[$i];
+	    }
+	} elsif ($busty eq 'G') { # Generator data
+	    # nothing to do ...
+	} elsif ($busty eq 'H') { # Capability curve data
+	    # nothing to do ...
+	} elsif ($busty eq 'R') { # ULTC data
+	    # not supported yet ...	    
+	} elsif ($busty eq 'B' && substr($_,31,1) eq 'T') { # SVC data
+	    $i = getval($_,15,22,0);
+	    if ($i == 0) {next;}
+	    if (substr($_,30,1) eq 'T') { # SVC
+		getval($_,15,22,0)
+		# not implemented yet
+	    } else { # Static condenser
+		$nsh++;
+		$shidx[$nsh] = $buscode{getcode($_,0,5)};
+		$ssh[$nsh] = 100; 
+		$qsh[$nsh] = $i/100; 
+		$vsh[$nsh] = $vnomdef[substr($_,4,1)]; 
+	    }
+	} elsif ($busty eq 'J') { # Area data
+	    # nothing to do ...	    
+	} elsif ($busty eq 'S') { # Secundary voltage regulation data
+	    # nothing to do ...	    
+	} elsif ($busty eq 'Q') { # Reactive power transfer limits
+	    # nothing to do ...
+	} elsif ($busty eq 'T') { # Breaker data
+	    # nothing to do ...
+	}
+    }
+
+# -----------------------------------------------------------------------
+# close ADD data file
+# -----------------------------------------------------------------------
+    close(IN) || die "cannot close $addfile: $!\n";
+}
+
+# -----------------------------------------------------------------------
+# open output data file
+# -----------------------------------------------------------------------
+print "Writing PSAT file \"$ARGV[1]\"...\n";
+open(OUT,">$ARGV[1]") || die "cannot open $ARGV[1]: $!\n";
+
+# -----------------------------------------------------------------------
+# write output data file
+# -----------------------------------------------------------------------
+print OUT "% File generated by PSAT from INPTC1 data file.\n";
+print OUT "% "."-" x 78 . "\n";
+print OUT "% Author:   Federico Milano\n";
+print OUT "% E-mail:   fmilano\@thunderbox.uwaterloo.ca\n";
+print OUT "% "."-" x 78 . "\n";
+for ($i = 0; $i <= $ntitle; $i++) {
+    print OUT "% $title[$i]\n";
+}
+print OUT "% "."-" x 78 . "\n\n";
+
+# -----------------------------------------------------------------------
+# write Bus.con
+# -----------------------------------------------------------------------
+$format = "%5d %7.2f %8.5f 0 %2d;\n";
+$nbus >= 0 && print OUT "Bus.con = [ ...\n";
+for ($i = 0; $i <= $nbus; $i++) {
+    printf OUT $format,$i+1,$vnom[$i],1,$busreg[$i]; # $busvol[$i]/$vnom[$i]
+}
+$nbus >= 0 && print OUT "  ];\n\n";
+
+# -----------------------------------------------------------------------
+# write SW.con
+# -----------------------------------------------------------------------
+if ($nsw >= 0) {
+    print OUT "SW.con = [ ...\n";
+    $format = "%4d 100 %7.2f %8.5f 0 %8.5f %8.5f %8.5f %8.5f %8.5f 1];\n\n";
+    $h = $swidx[0];
+    if ($qmax[$h] == 0 && $qmin[$h] == 0) {
+	$qmax[$h] = 999;
+	$qmin[$h] = -999;
+    }
+    printf OUT $format,$h+1,$vnom[$h],$busvol[$h]/$vnom[$h],
+    $qmax[$h],$qmin[$h],$vmax[$h],$vmin[$h],-$pgen[$h];
+}
+ 
+# -----------------------------------------------------------------------
+# write PV.con
+# -----------------------------------------------------------------------
+$npv >= 0 && print OUT "PV.con = [ ...\n";
+$format = "%4d 100 %7.2f %8.5f %8.5f %8.5f %8.5f %8.5f %8.5f 1;\n";
+for ($i = 0; $i <= $npv; $i++) {
+    $h = $pvidx[$i];
+    printf OUT $format,$h+1,$vnom[$h],-$pgen[$h],$busvol[$h]/$vnom[$h],
+    $qmax[$h],$qmin[$h],$vmax[$h],$vmin[$h];
+}
+$npv >= 0 && print OUT "  ];\n\n";
+
+# -----------------------------------------------------------------------
+# write PQ.con
+# -----------------------------------------------------------------------
+$npq >= 0 && print OUT "PQ.con = [ ...\n";
+$format = "%4d 100 %8.2f %8.5f %8.5f %8.5f %8.5f 1;\n";
+for ($i = 0; $i <= $npq; $i++) {
+    $h = $pqidx[$i];
+    printf OUT $format,$h+1,$vnom[$h],$pload[$i],$qload[$i],
+    $vmax[$h],$vmin[$h];
+}
+$npq >= 0 && print OUT "  ];\n\n";
+
+# -----------------------------------------------------------------------
+# write Shunt.con
+# -----------------------------------------------------------------------
+$nsh >= 0 && print OUT "Shunt.con = [ ...\n";
+$format = "%4d %7.2f %7.2f 50 0 %8.5f;\n";
+for ($i = 0; $i <= $nsh; $i++) {
+    printf OUT $format,$shidx[$i]+1,$ssh[$i],$vsh[$i],$qsh[$i];
+}
+$nsh >= 0 && print OUT "  ];\n\n";
+
+# -----------------------------------------------------------------------
+# write Supply.con
+# -----------------------------------------------------------------------
+$nsup >= 0 && print OUT "Supply.con = [ ...\n";
+$format = "%4d %7.2f 0 %8.5f %8.5f 0 %8.5f %8.5f %8.5f 0 0 0 0 0 1 %8.5f %8.5f 0 0;\n";
+for ($i = 0; $i <= $nsup; $i++) {
+    printf OUT $format,$supidx[$i]+1,$supsn[$i],$suppmax[$i],$suppmin[$i],
+    $supc0[$i],$supc1[$i],$supc2[$i],$supqmax[$i],$supqmin[$i];
+}
+$nsup >= 0 && print OUT "  ];\n\n";
+
+# -----------------------------------------------------------------------
+# write Line.con
+# -----------------------------------------------------------------------
+$nline >= 0 && print OUT "Line.con = [ ...\n";
+$format = "%4d %4d 100 %7.2f 50 0 %8.5f %10.7f %10.7f %10.7f %8.5f 0 %7.3f 0 0;\n";
+for ($i = 0; $i <= $nline; $i++) {
+    $h = $buscode{$busfr[$i]};
+    if ($kline[$i] != 0) {
+	$kline[$i] = $vnom[$h]/$vnom[$buscode{$busto[$i]}];
+    }
+    printf OUT $format,$h+1,$buscode{$busto[$i]}+1,
+    $vnom[$h],$kline[$i],$rline[$i],
+    $xline[$i],$bline[$i],$mline[$i],$iline[$i];
+}
+$nline >= 0 && print OUT "  ];\n\n";
+
+# -----------------------------------------------------------------------
+# write Area.con
+# -----------------------------------------------------------------------
+if ($narea >= 0) {
+    print OUT "Area.con = [ ...\n";
+    $format = "%4d %4d 100 %8.5f %8.5f;\n";
+    for ($i = 0; $i <= $narea; $i++) {
+	printf OUT $format, $areanum[$i],$areaslack[$i],
+	$areaexp[$i],$areatol[$i];
+    }
+    printf OUT "  ];\n\n";    
+}
+
+# -----------------------------------------------------------------------
+# write bus names
+# -----------------------------------------------------------------------
+$nbus >= 0 && print OUT "Bus.names = { ...\n";
+$h = ($nbus+1) % 5;
+if ($h == 0) {$h = 5;}
+if (($nbus+1) > 5) {
+    for ($i = 0; $i <= $nbus-$h; $i+=5) {
+	print OUT "  '$busname[$i]'; '$busname[$i+1]'; " . 
+	    "'$busname[$i+2]'; '$busname[$i+3]'; '$busname[$i+4]';\n";
+    }
+}
+print OUT "  ";
+for ($i = $nbus-$h+1; $i <= $nbus-1; $i++) {
+    print OUT "'$busname[$i]'; ";
+}
+print OUT "'$busname[$nbus]'};\n\n";
+
+# -----------------------------------------------------------------------
+# close output data file
+# -----------------------------------------------------------------------
+close(OUT) || die "cannot close $ARGV[1]: $!\n";
+print "Conversion completed.\n";
+
+# -----------------------------------------------------------------------
+# function for formatting data and/or assigning default values
+# -----------------------------------------------------------------------
+sub getval {
+    my $param;
+    $param = substr($_[0],$_[1]-1,$_[2]-$_[1]+1);
+    unless ($param) {$param = "0";}
+    unless ($param =~ /[1-9]/) {$param = $_[3];}
+    return $param;
+}
+
+# -----------------------------------------------------------------------
+# function for formatting data and/or assigning default values
+# -----------------------------------------------------------------------
+sub getname {
+    my $param;
+    $param = substr($_[0],$_[1]-1,$_[2]-$_[1]+1);
+    $param =~ s/^\s+//;
+    $param =~ s/\s+&//;
+    $param =~ s/\'/ /g;
+    return $param;
+}
+
+# -----------------------------------------------------------------------
+# function for getting bus code
+# -----------------------------------------------------------------------
+sub getcode {
+    my $param;
+    $param = substr($_[0],$_[1],$_[2]);
+    $param =~ s/\s/0/g;
+    return $param;
+}
+
+# -----------------------------------------------------------------------
+# round function
+# -----------------------------------------------------------------------
+sub round {
+    my($number) = shift;
+    return int($number + .4);
+}
+

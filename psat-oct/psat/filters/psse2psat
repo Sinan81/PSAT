@@ -1,0 +1,1163 @@
+#!/usr/bin/perl -w
+# PSSE2PSAT converts PSS/E data file into PSAT data file
+#
+# PSSE2PSAT <OPTIONS> FILEINPUT <FILEOUTPUT>
+# 
+# Author:   Federico Milano
+# Date:     19-July-2004
+# Update:   24-March-2006 by JC.Morataya@ieee.org
+# Update:   12-December-2007
+# Version:  1.3
+#
+#E-mail:    fmilano@thunderbox.uwaterloo.ca
+#Web-site:  http://thunderbox.uwaterloo.ca/~fmilano
+   
+
+use strict;
+
+use constant V23 => 23;
+use constant V24 => 24;
+use constant V25 => 25;
+use constant V26 => 26;
+use constant V29 => 29;
+use constant V30 => 30;
+ 
+# -----------------------------------------------------------------------
+# variable declaration
+# -----------------------------------------------------------------------
+my $nargin = 0;
+my $verbose = 0;
+my $helpmsg = 0;
+my ($i,$h,$k,$j);
+my $format;
+my $format1;
+my $n = 0;
+my $npv = -1;
+my $nsw = -1;
+my $npq = -1;
+my $npl = -1;
+my $nsh = -1;
+my $ntr = -1;
+my $nsvc = -1;
+my $title1 = 'PSS/E Data Format File '.$ARGV[0];
+my $title2 = '   ';
+my $pbas = 100;
+my $nbus = -1;
+my $nline = -1;
+my $narea = -1;
+my $nzone = -1;
+my $ncard = -1;
+my $flag_bus = 0;
+my $flag_line = 0;
+my $flag_area = 0;
+my $flag_trsf = 0;
+my $V26_up = 0;
+my $V25_down = 0;
+my $guess = 0;
+my $psse_v = 0;
+my ($ver,$pos,$rev,$block);
+my $flag_version = V29; # By default, version is supposed to be 29 
+my @data;
+my (@busidx,@bustype,@busname,%extname);
+my (@ein,@ang,@pag,@prg,@qmi,@qma,@tap,
+    @pac,@prc,@psh,@qsh,@kae,@kzo,@kvb);	    
+my (@plbus,@plip,@pliq,@plyp,@plyq);
+my (@pqbus,@pqpl,@pqql,@stt,@chkcard,@pqu,@shu,@plu,@pvu);
+my $stt = '%';
+my %kvbase;
+my %busidw;
+my (@svcbus,@svcbma,@svcbmi,@svcref);
+my (@areaidx,@areabus,@areapdes,@areaptol,@areaname);
+my (@zoneidx,@zonename);
+
+# -----------------------------------------------------------------------
+# check inputs
+# -----------------------------------------------------------------------
+$nargin = @ARGV;
+$nargin || die "Error: No input data file.\n";
+   
+# -----------------------------------------------------------------------
+# check options
+# -----------------------------------------------------------------------
+while ($ARGV[0] =~ /^-/) {
+    if ($ARGV[0] =~ /v/) {$verbose = 1;}
+    if ($ARGV[0] =~ /h/) {$helpmsg = 1;}
+    shift(@ARGV);
+    $nargin--;
+    if ($nargin == 0) { 
+	last;
+    }
+}
+  
+# -----------------------------------------------------------------------
+# help (if requested)
+# -----------------------------------------------------------------------
+if ($helpmsg) {
+print "\nPSSE2PSAT converts PSS/E data files into PSAT data files.\n\n";
+print "psse2psat <options> fileinput <fileoutput>\n";
+print "  -v   verbose\n";
+print "  -h   print this help and exit\n\n";
+print " Author:   Federico Milano\n";
+print " Date:     19-July-2004\n";
+print " Update:   24-March-2006 by JC.Morataya\@ieee.org\n";
+print " Version:  1.2.1\n";
+print "E-mail:   fmilano\@thunderbox.uwaterloo.ca\n";
+print "Web-site: http://thunderbox.uwaterloo.ca/~fmilano\n";
+die "\n";
+}
+   
+# -----------------------------------------------------------------------
+# define output file name (if necessary)
+# -----------------------------------------------------------------------
+if ($nargin == 1) {
+    $ARGV[1] = $ARGV[0];
+    $ARGV[1] =~ s/^/d_/;
+    $ARGV[1] =~ s/^d_d/d_/;
+    $ARGV[1] =~ s/[^a-zA-Z0-9_\.]/_/g;
+    $ARGV[1] =~ s/\..*/.m/;
+} elsif ($nargin == 0) {
+    die "Error: Input file name is missing.\n";
+}
+
+# -----------------------------------------------------------------------
+# find data version
+# -----------------------------------------------------------------------
+print "Opening PSS/E file \"$ARGV[0]\"...\n";
+carret();
+open(IN,$ARGV[0]) || die "cannot open $ARGV[0]: $!\n";
+while (<IN>) {
+    if (/PSS\/E-30/) { $flag_version = V30; }
+    if (/Version:24/) { $flag_version = V24; }
+    if (/Version:25/) { $flag_version = V25; }
+    if (/Version:26/) { $flag_version = V26; }
+    next if !/\d+/;
+    if (/^\s*0/) {
+	$ncard++; 
+	$chkcard[$ncard] = $_;
+	if ($ncard == 0) {
+	    $pos = index "$_" , 'RAW';
+	    $block = substr "$_",$pos,16;
+	    $block =~ s/\s+//g;
+	    if ($pos == -1) {
+		$pos = index "$_" , 'PSS/E';
+		$block = substr "$_",$pos,16;
+		$block =~ s/\s+//g;
+		$psse_v = 1;
+	    }
+	    unless ($pos == -1) {
+		if ($psse_v != 1) {
+		    $ver = substr "$block",3,2;
+		    $rev = substr "$block",9,2;
+		    print "PSS/E V-"."$ver"." revision "."$rev"." file found...\n";
+		} else {
+		    $ver = substr "$block",6,4;
+		    print "PSS/E V-"."$ver"." file found...\n";
+		}
+		$guess = 1;
+	    }
+	}
+	if ($ncard == 4) { last; }
+	if ($chkcard[$ncard] =~ /^\s*0\s*\//) {
+	    #if ($ncard == 3 && $guess == 0 ) { print "PSS/E Version > 25 file found...\n"; }
+	    $V26_up = 1;
+	} else {
+	    #if ($ncard == 3 && $guess == 0) { print "PSS/E Version < 26 file found...\n"; }
+	} 
+    } else {
+	if ($ncard == 0) {
+	    $V25_down = index "$_" , '\'';
+	    if ($V25_down > 20) {
+		$flag_version = V23;
+	    }
+	} elsif ($ncard == 3) {
+	    if (/,,,/) {
+		if ($V26_up == 1) {
+		    $flag_version = V26;
+		} else {
+		    $flag_version = V24;
+		}
+	    }
+	}
+    }
+}	
+close (IN) || die "cannot close $ARGV[0]: $!\n";
+print "PSS/E data version " . $flag_version . "\n"; 
+
+# -----------------------------------------------------------------------
+# open input data file
+# -----------------------------------------------------------------------
+#print "Scanning PSS/E file \"$ARGV[0]\"...\n";
+#carret();
+open(IN,$ARGV[0]) || die "cannot open $ARGV[0]: $!\n";
+   
+# -----------------------------------------------------------------------
+# scan input data file
+# -----------------------------------------------------------------------
+# read identification data
+$_ = <IN>;
+chomp;
+
+@data = mysplit($_);
+if ($data[1]) { # assign system base
+    $pbas = deblank($data[1]);
+    chomp($pbas);
+}  
+print "Power Base = " . $pbas . " MVA\n";
+
+$_ = <IN>;
+chomp;
+$title1 = $_;  # 1st header line
+
+$_ = <IN>;
+chomp;
+$title2 = $_;  # 2nd header line
+
+# bus data PSS/E V24, V29 
+my ($swbus,@idxsh,$nisl,@islbus); 
+$nisl = -1;
+while (<IN>) {
+    chomp;
+    @data = mysplit($_);
+    last if /^\s*0/; 
+    if ($flag_version != V23) {
+	$nbus++;
+	$busidx[$nbus] = int($data[0]);
+	$bustype[$nbus] = $data[3];
+	$busname[$nbus] = $data[1];
+	$extname{$busname[$nbus]} = $busidx[$nbus];
+	$kvb[$nbus] = $data[2];
+	$ein[$nbus] = $data[8];
+	$ang[$nbus] = 0.0175*$data[9];
+	$kae[$nbus] = $data[6];
+	$kzo[$nbus] = $data[7];
+	$kvbase{$busidx[$nbus]} = $kvb[$nbus];
+	$busidw{$busidx[$nbus]} = $busname[$nbus]; # for the warnings
+	if ($data[3] == 3) { $nsw++; $swbus = $data[0]; } 
+	if ($data[3] == 4) { 
+	    $nisl++;
+	    $islbus[$nisl] = $data[0];
+	    # printf "Isolated bus " . $data[0] . " will be ignored.\n";
+	}   
+    } else { # bus data V23 format  
+	$nbus++;
+	$busidx[$nbus] = int($data[0]);
+	$bustype[$nbus] = $data[1];
+	$busname[$nbus] = $data[9];
+	$extname{$busname[$nbus]} = $busidx[$nbus];
+	$kvb[$nbus] =  $data[10];
+	$ein[$nbus] =  $data[7];
+	$ang[$nbus] =  0.0175*$data[8];
+	$kae[$nbus] =  $data[6];
+	$kzo[$nbus] =  $data[11];
+	$kvbase{$busidx[$nbus]} = $kvb[$nbus];
+	$busidw{$busidx[$nbus]} = $busname[$nbus]; # to identify warnings
+	if ($data[1] == 3) { $nsw++; $swbus = $data[0]; } 
+	if ($data[1] == 4) { 
+	    $nisl++;
+	    $islbus[$nisl] = $data[0];
+	    # printf "Isolated bus " . $data[0] . " will be ignored.\n";
+	}
+	
+	# load data V23 format  
+        if ($data[2] != 0  || $data[3] != 0) {
+	    $npq++;
+	    $pqbus[$npq] = int($data[0]);
+	    $pqpl[$npq] = $data[2]/$pbas;
+	    $pqql[$npq] = $data[3]/$pbas;	
+	    $pqu[$npq] = ididx($pqbus[$npq]);
+	}
+    }	    
+    
+    # shunt data V23, V24 and V25 formats
+    if ($data[4] != 0  || $data[5] != 0) {
+	$nsh++; 
+	$idxsh[$nsh] = int($data[0]);
+	$psh[$nsh] = $data[4]/$pbas/$ein[$nbus]/$ein[$nbus];	
+	$qsh[$nsh] = $data[5]/$pbas/$ein[$nbus]/$ein[$nbus];	
+	$shu[$nsh] = ididx($idxsh[$nsh]);
+    }
+}
+
+# load data PSS/E V29 and V30
+if ($flag_version != V23) {
+    while (<IN>) {
+	chomp;
+	@data = mysplit($_);
+	last if /^\s*0/;  
+	if ($data[5] != 0 || $data[6] != 0) {	
+            $npq++;
+	    $pqbus[$npq] = extended($data[0]);
+	    $pqpl[$npq] = $data[5]/$pbas;
+	    $pqql[$npq] = $data[6]/$pbas;	
+   	    $pqu[$npq] = ididx($pqbus[$npq]);
+	}
+	if ($data[7] != 0 || $data[8] != 0 || 
+	    $data[9] != 0 || $data[10] != 0) {	
+	    $npl++;
+	    $plbus[$npl] = extended($data[0]);
+	    $plip[$npl] = $data[7]/$pbas;
+	    $pliq[$npl] = $data[8]/$pbas;
+	    $plyp[$npl] = $data[9]/$pbas;
+	    $plyq[$npl] = $data[10]/$pbas;
+   	    $plu[$npl] = ididx($plbus[$npl]);
+	}
+    }
+}
+
+# generator data all formats (PSS/E V23 - V29)
+my (@pvbus,@pvpg,@pvqt,@pvqb,@pvvs,@pvsb,@pvpt,@pvpb);
+my ($swpg,$swqt,$swqb,$swvs,$swsb,$swpt,$swpb);
+while (<IN>) {
+    chomp;
+    @data = mysplit($_);
+    last if /^\s*0/;
+    if (extended($data[0]) == $swbus) {
+	$swsb = $data[8]; 
+	if ($swsb == 0) { $swsb = $pbas; } 
+	$swbus = extended($data[0]);            
+	$swpg = $data[2]/$swsb;            
+	$swqt = $data[4]/$swsb;
+	$swqb = $data[5]/$swsb;
+	$swvs = $data[6];
+	$swpt = $data[16]/$swsb;
+	$swpb = $data[17]/$swsb;
+    } else {
+        $npv++;
+        $pvsb[$npv] = $data[8];
+        if ($pvsb[$npv] == 0) { $pvsb[$npv] = $pbas; }
+        $pvbus[$npv] = extended($data[0]);
+        $pvpg[$npv] = $data[2]/$pvsb[$npv];
+        $pvqt[$npv] = $data[4]/$pvsb[$npv];
+        $pvqb[$npv] = $data[5]/$pvsb[$npv];
+        $pvvs[$npv] = $data[6];
+        $pvpt[$npv] = $data[16]/$pvsb[$npv];
+        $pvpb[$npv] = $data[17]/$pvsb[$npv];
+   	$pvu[$npv] = ididx($pvbus[$npv]);
+    }
+}
+
+# branch data PSS/E V29 and V30 (line and transformers 
+# data for PSS/E V23, V24, V25 and V26 data files)
+my (@busfr,@bustt);
+my (@rest,@reat,@susc,@ratea,@rateb,@ratec,@phas,@lbas,@ratio);	    
+
+while (<IN>) {
+    chomp;
+    @data = mysplit($_);
+    last if /^\s*0/;    
+    $nline++;
+    $busfr[$nline] = extended($data[0]);
+    $bustt[$nline] = extended($data[1]);
+    $stt[$nline] = ididx($busfr[$nline])*ididx($bustt[$nline]);
+    $lbas[$nline] = $pbas;
+    $rest[$nline] = $data[3];
+    $reat[$nline] = $data[4];
+    $susc[$nline] = $data[5];
+    $phas[$nline] = 0;
+    $ratea[$nline] = $data[6]/$pbas;
+    $rateb[$nline] = $data[7]/$pbas;
+    $ratec[$nline] = $data[8]/$pbas;
+    unless ($flag_version <= V24) {
+	$stt[$nline] = $data[13];
+    }
+    if ($flag_version <= V26) {
+	# this is for PSS/E V23-V26 data files
+	if (/,,,/) {           
+	    $ratio[$nline] = 0;
+	    # additional shunt admittance at "from" bus
+	    if ($data[9] != 0 || $data[10] != 0) { 
+		$nsh++;
+		$idxsh[$nsh] = extended($data[0]); 
+		$psh[$nsh] = $data[9];	
+		$qsh[$nsh] = $data[10];		
+ 	        $shu[$nsh] = ididx($idxsh[$nsh]);
+	    }
+	    # additional shunt admittance at "to" bus
+	    if ($data[11] != 0 || $data[12] != 0) {
+		$nsh++;
+		$idxsh[$nsh] = extended($data[1]);
+		$psh[$nsh] = $data[11];	
+		$qsh[$nsh] = $data[12];		
+	        $shu[$nsh] = ididx($idxsh[$nsh]);
+	    }
+	    $stt[$nline] = $data[13];
+	} else {
+	    $ratio[$nline] = $data[9];
+	    $stt[$nline] = $data[15];
+	    print $ratio[$nline] . "\n";
+	}
+    } else {
+	$ratio[$nline] = 0; 
+        # additional shunt admittance at "from" bus
+	if ($data[9] != 0 || $data[10] != 0) { 
+	    $nsh++;
+	    $idxsh[$nsh] = extended($data[0]);
+	    $psh[$nsh] = $data[9];	
+	    $qsh[$nsh] = $data[10];		
+	    $shu[$nsh] = ididx($idxsh[$nsh]);
+	}
+	# additional shunt admittance at "to" bus
+	if ($data[11] != 0 || $data[12] != 0) {
+	    $nsh++;
+	    $idxsh[$nsh] = extended($data[1]);
+	    $psh[$nsh] = $data[11];	
+	    $qsh[$nsh] = $data[12];		
+	    $shu[$nsh] = ididx($idxsh[$nsh]);
+	}	       	     
+    }
+}
+   
+# transformer data PSS/E V29 and V30
+my (@data1,@data2,@data3,@data4,@data5);
+my (@bustw1,@bustw2,@bustw3,@twu);
+my ($ntw,$three_winding);
+my (@r12,@r23,@r13,@x12,@x23,@x13,@rt1a,@rt1b,@rt1c,
+    @rt2a,@rt2b,@rt2c,@rt3a,@rt3b,@rt3c);
+my ($nltc,@ltc_busfr,@ltc_busto,@ltc_busct,@ltc_r,@ltc_dm,
+    @ltc_x,@ltc_bas,@ltc_vma,@ltc_vmi,@ltc_ctr,@ltc_ref,@ltcu);
+my ($nphs,@phs_busfr,@phs_busto,@phs_r,@phs_x,@phs_bas,
+    @phs_vma,@phs_vmi,@phs_ref,@phsu);
+$ntw = -1;
+$nltc = -1;
+$nphs = -1;
+while ($flag_version >= V29) {
+    # read first line
+    $three_winding = 0;
+    $_ = <IN>; 
+    chomp;
+    @data1 = mysplit($_); 
+    # check for end of transformer data
+    if (extended($data1[0]) == 0) { last; }  
+    # read second line
+    $_ = <IN>;
+    chomp;
+    @data2 = mysplit($_);
+    # read third line
+    $_ = <IN>;
+    chomp;
+    @data3 = mysplit($_);
+    # read fourth line
+    $_ = <IN>;
+    chomp;
+    @data4 = mysplit($_);
+    # check for three-winding transformers
+    if (int($data1[2]) != 0) {
+	$three_winding = 1;
+	$_ = <IN>;
+	chomp;
+	@data5 = mysplit($_);
+    }
+    if ($three_winding == 0) {
+	if (1) {
+	    # standard transformer PSS/E V29 and V30
+	    $nline++;
+	    $ntr++;
+	    $busfr[$nline] = extended($data1[0]);
+	    $bustt[$nline] = extended($data1[1]);
+            $stt[$nline] = ididx($busfr[$nline])*ididx($bustt[$nline]);
+	    if (abs($data3[6]) == 4) {
+		printf "DC line control for transformer #" . 
+		    $ntr . " is ignored.\n";
+	    }
+	    if ($flag_version >= V29) { 
+	        $stt[$nline] *= $data1[11]; 
+	    } else {
+	        $stt[$nline] *= $data[15];
+	    }
+	    $rest[$nline] = $data2[0];
+	    $reat[$nline] = $data2[1];
+	    $susc[$nline] = $data1[8];
+	    if ($data1[4] == 1) {
+		$ratio[$nline] = $data3[0];
+		if ($ratio[$nline] == 1) {
+		    if ($data4[0] != 0) {
+			$ratio[$nline] = $data4[0];
+		    }
+		}
+	    } else {
+		$ratio[$nline] = 1;		
+	    }
+	    $phas[$nline] = 0.175*$data3[2];
+	    if ($data1[5] == 1) {
+		$lbas[$nline] = $pbas;
+		$ratea[$nline] = $data3[3]/$pbas;
+		$rateb[$nline] = $data3[4]/$pbas;
+		$ratec[$nline] = $data3[5]/$pbas;
+	    } elsif ($data1[5] == 2) {
+		$lbas[$nline] = $data2[2];
+		$lbas[$nline] =~ s/\'//g;
+		$ratea[$nline] = $data3[3]/$data2[2];
+		$rateb[$nline] = $data3[4]/$data2[2];
+		$ratec[$nline] = $data3[5]/$data2[2];
+	    } else {
+		$lbas[$nline] = $data2[2];
+		$lbas[$nline] =~ s/\'//g;
+		if ($data3[1] == 0) {
+		    $j = $kvbase{$busfr[$nline]};
+		} else {
+		    $j = $data3[1];		
+		}
+		$h = $lbas[$nline]*$lbas[$nline]/3/$j/$j;
+		
+		$rest[$nline] = $rest[$nline]/$h;
+		$ratea[$nline] = $data3[3]/$lbas[$nline];
+		$rateb[$nline] = $data3[4]/$lbas[$nline];
+		$ratec[$nline] = $data3[5]/$lbas[$nline];	
+	    }
+	} elsif (abs($data3[6]) == 3) {
+	    # phase shifting transformer PSS/E V29 and V30
+	    $nphs++;
+	    $phs_busfr[$nphs] = extended($data1[0]);
+	    $phs_busto[$nphs] = extended($data1[1]);
+	    $phs_r[$nphs] = $data2[0];
+	    $phs_x[$nphs] = $data2[1];
+	    $phs_vma[$nphs] = 0.175*$data3[8];
+	    $phs_vmi[$nphs] = 0.175*$data3[9];
+            $phsu[$nphs] = ididx($phs_busfr[$nphs])*ididx($phs_busto[$nphs]);
+	    if ($flag_version == V29) { 
+	        $phsu[$nphs] *= $data1[11]; 
+	    } else {
+	        $phsu[$nphs] *= $data[15];
+	    }
+	    if ($data1[5] == 1) {
+		$phs_bas[$nphs] = $pbas;
+	    } elsif ($data1[5] == 2) {
+		$phs_bas[$nphs] = $data2[2];
+	    } else {
+		$phs_bas[$nphs] = $data2[2];
+		if ($data3[1] == 0) {
+		    $j = $kvbase{$phs_busfr[$nphs]};
+		} else {
+		    $j = $data3[1];		
+		}
+		$h = $data2[2]*$data2[2]/3/$j/$j;
+		$phs_r[$nphs] = $phs_r[$nphs]/$h;
+	    }   	
+	    $phs_ref[$nphs] = 0.5*($data3[10]+$data3[11])/$phs_bas[$nphs];
+	} elsif (abs($data3[6]) == 1 || abs($data3[6]) == 2) {
+	    # under load tap changer PSS/E V29 and V30
+	    $nltc++;
+	    $ltc_busfr[$nltc] = extended($data1[0]);
+	    $ltc_busto[$nltc] = extended($data1[1]);
+	    $ltc_busct[$nltc] = extended($data3[7]);
+	    if ($ltc_busct[$nltc] == 0) {
+		$ltc_busct[$nltc] = $ltc_busto[$nltc];	
+	    }
+	    $ltc_ctr[$nltc] = abs($data3[6]);
+	    if ($ltc_busct[$nltc] != $ltc_busfr[$nltc] || 
+		$ltc_busct[$nltc] != $ltc_busto[$nltc]) {
+		$ltc_ctr[$nltc] = 3;	    
+	    }
+	    $ltc_r[$nltc] = $data2[0];
+	    $ltc_x[$nltc] = $data2[1];
+	    $ltc_vma[$nltc] = $data3[8];
+	    $ltc_vmi[$nltc] = $data3[9];
+            $ltcu[$nphs] = ididx($ltc_busfr[$nltc])*ididx($ltc_busto[$nltc]);
+	    if ($flag_version == V29) { 
+	        $ltcu[$nltc] *= $data1[11]; 
+	    } else {
+	        $ltcu[$nltc] *= $data[15];
+	    }
+	    if (int($data3[12]) == 0) {
+		$ltc_dm[$nltc] = 0;
+	    } else {
+		$ltc_dm[$nltc] = 0; #($data3[8]-$data3[9])/$data3[12];
+	    }
+	    $ltc_ref[$nltc] = 0.5*($data3[10]+$data3[11]);
+	    if ($data1[5] == 1) {
+		$ltc_bas[$nltc] = $pbas;
+	    } elsif ($data1[5] == 2) {
+		$ltc_bas[$nltc] = $data2[2];
+	    } else {
+		$ltc_bas[$nltc] = $data2[2];
+		if ($data3[1] == 0) {
+		    $j = $kvbase{$ltc_busfr[$nltc]};
+		} else {
+		    $j = $data3[1];		
+		}
+		$h = $data2[2]*$data2[2]/3/$j/$j;
+		$ltc_r[$nltc] = $ltc_r[$nltc]/$h;
+	    }    	    
+	}	
+    } else {
+	# three-winding transformer PSS/E V29 and V30
+	$ntw++;
+	$bustw1[$ntw] = extended($data1[0]);
+	$bustw2[$ntw] = extended($data1[1]);
+	$bustw3[$ntw] = extended($data1[2]);
+	$twu[$ntw] = $data1[11];
+	$x12[$ntw] = $data2[1]*$pbas/$data2[2];
+	$x23[$ntw] = $data2[4]*$pbas/$data2[5];
+	$x13[$ntw] = $data2[7]*$pbas/$data2[8];
+	if ($twu[$ntw] == 2) {
+	  $x12[$ntw] = 1000000;
+	  $x23[$ntw] = 1000000;
+	  $twu[$ntw] = 1;
+	}
+	if ($twu[$ntw] == 3) {
+	  $x13[$ntw] = 1000000;
+	  $x23[$ntw] = 1000000;
+	  $twu[$ntw] = 1;
+	}
+	if ($twu[$ntw] == 4) {
+	  $x13[$ntw] = 1000000;
+	  $x12[$ntw] = 1000000;
+	  $twu[$ntw] = 1;
+	}
+	if ($data1[5] == 3) {
+	    $j = $kvbase{$bustw1[$ntw]};
+	    $h = $data2[2]*$data2[2]/3/$j/$j;
+	    $r12[$ntw] = $data2[0]/$h;
+	    $j = $kvbase{$bustw2[$ntw]};
+	    $h = $data2[5]*$data2[5]/3/$j/$j;
+	    $r23[$ntw] = $data2[3]/$h;
+	    $j = $kvbase{$bustw3[$ntw]};
+	    $h = $data2[8]*$data2[8]/3/$j/$j;
+	    $r13[$ntw] = $data2[6]/$h;
+	} else {
+	    $r12[$ntw] = $data2[0]*$pbas/$data2[2];
+	    $r23[$ntw] = $data2[3]*$pbas/$data2[5];
+	    $r13[$ntw] = $data2[6]*$pbas/$data2[8];
+	}
+	$rt1a[$ntw] = $data3[3]/$pbas;
+	$rt1b[$ntw] = $data3[4]/$pbas;
+	$rt1c[$ntw] = $data3[5]/$pbas;
+	$rt2a[$ntw] = $data4[3]/$pbas;
+	$rt2b[$ntw] = $data4[4]/$pbas;
+	$rt2c[$ntw] = $data4[5]/$pbas;
+	$rt3a[$ntw] = $data5[3]/$pbas;
+	$rt3b[$ntw] = $data5[4]/$pbas;
+	$rt3c[$ntw] = $data5[5]/$pbas;
+   }
+}
+
+if ($flag_version <= V26) { 
+    # for PSS/E V23-V26:
+    # under load tap changer and phase shifting transformer 
+    while (<IN>) {
+	@data = mysplit($_);
+	last if /^\s*0/;        
+    }
+}
+
+# area data all formats (PSS/E V23 - V30)
+while (<IN>) {
+    chomp;
+    @data = mysplit($_);
+    last if /^\s*0/;
+    $narea++; 
+    $areaidx[$narea] = int($data[0]);
+    $areabus[$narea] = extended($data[1]);
+    $areapdes[$narea] = $data[2]/$pbas;
+    $areaptol[$narea] = $data[3]/$pbas;
+    $data[4] =~ s/\W$//;
+    $areaname[$narea] = $data[4];
+}
+
+# two terminal DC data all formats (PSS/E V23 - V30)
+while (<IN>) {
+   @data = mysplit($_);
+   last if /^\s*0/;        
+}
+
+if ($flag_version >= V29) { # PSS/E V29 and V30
+    # VSC DC line data 
+    while (<IN>) {
+	@data = mysplit($_);
+	last if /^\s*0/;        
+    }
+}
+
+# switched shunt data all formats (PSS/E V23 - V30)
+while (<IN>) {
+    @data = mysplit($_);
+    last if /^\s*0/;  
+    #next if (ididx(int($data[0])));
+    #$j = pvidx(int($data[0]));
+    # add SVC only if there is no PV at the same bus
+    #if ($j) {
+    #printf "SVC at PV bus " . $data[0] . " will be ignored.\n" ;
+    #} elsif ($data[1] == 0) { # fixed SVCs are treated as a shunt
+    if ($flag_version >= V29 || $flag_version == V23) {
+	if ($data[6] =~ m/\'/) {
+	    # likely PSS/E V30 ...
+	    $flag_version = V30;
+	    $data[6] = $data[5];
+	}
+	if ($data[6] != 0) {
+	    $nsh++;
+	    $idxsh[$nsh] = extended($data[0]);
+	    $psh[$nsh] = 0;
+	    $qsh[$nsh] = $data[6]/$pbas;	
+	    $shu[$nsh] = ididx($idxsh[$nsh]);
+	}
+    } elsif ($flag_version == V24)  {
+	if ($data[7] != 0) { 
+	    $nsh++;
+	    $idxsh[$nsh] = extended($data[0]);
+	    $psh[$nsh] = 0;	
+	    $qsh[$nsh] = $data[5]/$pbas;	
+	    $shu[$nsh] = ididx($idxsh[$nsh]);
+	}
+    }
+}
+
+# transformer impedance correction tables
+while (<IN>) {
+    @data = mysplit($_);
+    last if /^\s*0/;        
+}
+
+# multi-terminal dc line data
+while (<IN>) {
+    @data = mysplit($_);
+    last if /^\s*0/;        
+}
+
+# multisection line grouping data
+while (<IN>) {
+    @data = mysplit($_);
+    last if /^\s*0/;        
+}
+
+# zone data
+while (<IN>) {
+    chomp;
+    @data = mysplit($_);
+    last if /^\s*0/;
+    $nzone++; 
+    $zoneidx[$nzone] = int($data[0]);
+    $data[1] =~ s/\W$//;
+    $zonename[$nzone] = $data[1];
+}
+
+# -----------------------------------------------------------------------
+# close input data file
+# -----------------------------------------------------------------------
+close(IN) || die "cannot close $ARGV[0]: $!\n";
+
+# -----------------------------------------------------------------------
+# open output data file
+# -----------------------------------------------------------------------
+print "Writing PSAT file \"$ARGV[1]\"...\n";
+carret();
+open(OUT,">$ARGV[1]") || die "cannot open $ARGV[1]: $!\n";
+
+# -----------------------------------------------------------------------
+# write output data file
+# -----------------------------------------------------------------------
+print OUT "% File generated by PSAT from PSS/E data file.\n";
+print OUT "% "."-" x 78 . "\n";
+print OUT "% Author:   Federico Milano\n";
+print OUT "% E-mail:   fmilano\@thunderbox.uwaterloo.ca\n";
+print OUT "% Web-site: http://thunderbox.uwaterloo.ca/~fmilano\n";
+print OUT "% Coauthor: Juan Carlos Morataya\n";
+print OUT "% E-mail:   jc.morataya\@ieee.org\n";
+print OUT "% "."-" x 78 . "\n";
+print OUT "% $title1\n";
+print OUT "% $title2\n";
+print OUT "% "."-" x 78 . "\n\n";
+
+# -----------------------------------------------------------------------
+# write Bus.con
+# -----------------------------------------------------------------------
+if ($nbus >= 0) {
+    print OUT "Bus.con = [ ...\n";
+    $format = "%4d %8.2f %8.5f %8.5f %2d %2d;\n";
+    for ($i = 0; $i <= $nbus; $i++) {
+	printf OUT $format,$busidx[$i],$kvb[$i],$ein[$i],$ang[$i],
+	$kae[$i],$kzo[$i];
+    }
+    print OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write SW.con
+# -----------------------------------------------------------------------
+if ($nsw >= 0) {
+    print OUT "SW.con = [ ...\n";
+    $format = "%4d %7.2f %6.2f %8.5f 0.00 %8.5f %8.5f 1.1 0.9 %8.5f 1];\n\n";
+    printf OUT $format,$swbus,$swsb,$kvbase{$swbus},$swvs,$swqt,$swqb,$swpg;
+}
+
+# -----------------------------------------------------------------------
+# write PV.con
+# -----------------------------------------------------------------------
+if ($npv >= 0) {
+    printf OUT "PV.con = [ ...\n";
+    $format = "%4d %7.2f %6.2f " . "%8.5f " x 4 . "1.1 0.9 1 %2d;\n";
+    for ($i = 0; $i <= $npv; $i++) {
+	printf OUT $format,$pvbus[$i],$pvsb[$i],$kvbase{$pvbus[$i]},
+	$pvpg[$i],$pvvs[$i],$pvqt[$i],$pvqb[$i],$pvu[$i];
+    }
+    print OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write PQ.con
+# -----------------------------------------------------------------------
+if ($npq >= 0) {
+    printf OUT "PQ.con = [ ...\n";
+    $format = "%4d %7.2f %8.2f %8.5f %8.5f 1.1 0.9 1 %2d;\n";
+    for ($i = 0; $i <= $npq; $i++) {
+	$h = $pqbus[$i];
+	printf OUT $format,$h,$pbas,$kvbase{$h},$pqpl[$i],$pqql[$i],$pqu[$i];
+    }
+    print OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write Pl.con
+# -----------------------------------------------------------------------
+if ($npl >= 0) {
+    print OUT "Pl.con = [ ...\n";
+    $format = "%4d %7.2f %8.2f 60 %8.5f %8.5f 0 %8.5f %8.5f 0 0 %2d;\n";
+    for ($i = 0; $i <= $npl; $i++) {
+	printf OUT $format,$plbus[$i],$pbas,$kvbase{$plbus[$i]},$plyp[$i],
+	$plip[$i],$plyq[$i],$pliq[$i],$plu[$i];
+    }
+    print OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write Shunt.con
+# -----------------------------------------------------------------------
+if ($nsh >= 0) {
+    print OUT "Shunt.con = [ ...\n";
+    $format = "%4d %7.2f %8.2f 60 %8.5f %8.5f %2d;\n";
+    for ($i = 0; $i <= $nsh; $i++) {
+	$h = abs($idxsh[$i]);
+	printf OUT $format,$h,$pbas,$kvbase{$h},$psh[$i],$qsh[$i],$shu[$i];
+    }
+    print OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write Line.con
+# -----------------------------------------------------------------------
+if ($nline >= 0) {
+    print OUT "Line.con = [ ...\n";
+    $format = "%4d %4d %8.2f %8.2f 60 0 %5.2f " . "%8.5f " x 5 . 
+	" %8.3f %8.3f %8.3f %2d;\n";
+    for ($i = 0; $i <= $nline; $i++) {
+	if ($busidw{$bustt[$i]}) {
+	    if ($kvbase{$bustt[$i]} != 0) {
+		$k = $kvbase{$busfr[$i]}/$kvbase{$bustt[$i]};  
+	    } else { 
+		$k = 0;
+		print "WARNING: Check voltage rating of bus ".$busidw{$bustt[$i]}."\n";
+	    }    
+	    if ($k == 1) { $k = 0; }
+	    #if ($stt[$i] == 1) { 
+	    #	$stt = ' ';
+	    #} else {
+	    #	$stt = '%';
+	    #}
+	    printf OUT $format,$busfr[$i],$bustt[$i],$lbas[$i],
+	    $kvbase{$busfr[$i]},$k,$rest[$i],$reat[$i],$susc[$i],$ratio[$i],$phas[$i],
+	    $ratea[$i],$rateb[$i],$ratec[$i],$stt[$i];
+	} else {
+	    print "WARNING: Bus ".$bustt[$i]." does not exists -> Line ".$i." ignored.\n";
+	}
+    }
+    print OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write Ltc.con
+# -----------------------------------------------------------------------
+if ($nltc >= 0) {
+    print OUT "Ltc.con = [ ...\n";
+    $format = "%4d %4d %8.2f %8.2f 60 1 0.001 0.1 " . 
+	"%8.5f " x 6 . " %4d %4d %2d;\n";
+    for ($i = 0; $i <= $nltc; $i++) {
+	printf OUT $format,$ltc_busfr[$i],$ltc_busto[$i],$ltc_bas[$i],
+	$kvbase{$ltc_busfr[$i]},$ltc_vma[$i],$ltc_vmi[$i],$ltc_dm[$i],
+	$ltc_ref[$i],$ltc_x[$i],$ltc_r[$i],$ltc_busct[$i],$ltc_ctr[$i],$ltcu[$i];
+    }
+    print OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write Phs.con
+# -----------------------------------------------------------------------
+if ($nphs >= 0) {
+    print OUT "Phs.con = [ ...\n";
+    $format = "%4d %4d %8.2f %8.2f %8.2f 60 0.001 10 50 %2d" . 
+	"%8.5f " x 5 . ";\n";
+    for ($i = 0; $i <= $nphs; $i++) {
+	printf OUT $format,$phs_busfr[$i],$phs_busto[$i],$phs_bas[$i],
+	$kvbase{$ltc_busfr[$i]},$kvbase{$ltc_busto[$i]},$phs_ref[$i],
+	$phs_r[$i],$phs_x[$i],$phs_vma[$i],$phs_vmi[$i],$phsu[$i];
+    }
+    print OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write Twt.con
+# -----------------------------------------------------------------------
+if ($flag_version == V29 && $ntw >= 0) {
+    print OUT "Twt.con = [ ...\n";
+    $format = "%4d %4d %4d $pbas 60 %5.2f %5.2f %5.2f " . "%8.5f " x 6 . 
+	" 1 " . "%7.3f " x 9 . " %2d;\n";
+    for ($i = 0; $i <= $ntw; $i++) {
+	#if ($twu[$i] == 1) {
+	#    $twu = ' ';
+	#} else {
+	#    $twu = '%';
+	#}
+	printf OUT $format,$bustw1[$i],$bustw2[$i],$bustw3[$i],
+	$kvbase{$bustw1[$i]},$kvbase{$bustw2[$i]},$kvbase{$bustw3[$i]},
+	$r12[$i],$r13[$i],$r23[$i],$x12[$i],$x13[$i],$x23[$i],
+	$rt1a[$i],$rt1b[$i],$rt1c[$i],$rt2a[$i],$rt2b[$i],$rt2c[$i],
+	$rt3a[$i],$rt3b[$i],$rt3c[$i],$twu[$i];
+    }
+    print OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write Svc.con
+# -----------------------------------------------------------------------
+if ($nsvc >= 0) {
+    print OUT "Svc.con = [ ...\n";
+    $format = "%4d $pbas %8.2f 60 1 1 10 " . "%8.5f " x 3 . ";\n";
+    for ($i = 0; $i <= $nsvc; $i++) {
+	printf OUT $format,$svcbus[$i],$kvbase{$svcbus[$i]},
+	$svcref[$i],$svcbma[$i],$svcbmi[$i];
+    }
+    print OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write Areas.con
+# -----------------------------------------------------------------------
+if ($narea >= 0) {
+    print OUT "Areas.con = [ ...\n";
+    $format = "%4d %5d $pbas %8.5f %8.5f 0;\n";
+    for ($i = 0; $i <= $narea; $i++) {
+	printf OUT $format,$areaidx[$i],$areabus[$i],
+	$areapdes[$i],$areaptol[$i];
+    }
+    print OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write Regions.con
+# -----------------------------------------------------------------------
+if ($nzone >= 0) {
+    print OUT "Regions.con = [ ...\n";
+    $format = "%4d 0 $pbas 0 0 0;\n";
+    for ($i = 0; $i <= $nzone; $i++) {
+	printf OUT $format,$zoneidx[$i];
+    }
+    print OUT "   ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write component names
+# -----------------------------------------------------------------------
+writenames($nbus,'Bus',\@busname);
+writenames($narea,'Areas',\@areaname);
+writenames($nzone,'Regions',\@zonename);
+
+# -----------------------------------------------------------------------
+# close output data file
+# -----------------------------------------------------------------------
+close(OUT) || die "cannot close $ARGV[1]: $!\n";
+print "Conversion completed assuming PSS/E V". $flag_version ." data format.\n";
+   
+#########################################################################
+#########################################################################
+   
+# -----------------------------------------------------------------------
+# function for formatting data and/or assigning default values
+# -----------------------------------------------------------------------
+sub assign {
+    my $param;
+    $param = substr($_[0],$_[1],$_[2]);
+    $param =~ s/\s*//g;
+    unless ($param) {$param = "0";}
+    unless ($param =~ /[1-9]/) {$param = $_[3];}
+    return $param;
+}
+
+# -----------------------------------------------------------------------
+# function for formatting data and/or assigning default values
+# -----------------------------------------------------------------------
+sub deblank {
+    my $name = $_[0];
+    $name =~ s/( *)$//;
+    return $name;
+}
+
+# -----------------------------------------------------------------------
+# function for writing a separator
+# -----------------------------------------------------------------------
+sub carret {
+    $verbose && print "-" x 50 . "\n";
+}
+
+# -----------------------------------------------------------------------
+# function for reading comma separated data
+# -----------------------------------------------------------------------
+sub mysplit {
+    
+    my $data = $_;
+    my $string = $_[0];
+    $_[0] =~ s/\'(.*)\'//;
+    my $string1 = $&;
+    #print $string1 . "\n";
+    if ($string1) {
+	my $string0 = $string1;
+	# ----------------------------------------------------------------
+	# add similar substitutions in case bus names contain special 
+	# characters
+	$string0 =~ s/\(/-/g;
+	$string0 =~ s/\)/-/g;
+	# ----------------------------------------------------------------
+	$string1 =~ s/\//-/g;
+	$string =~ s/$string0/$string1/;
+    }
+    $string =~ s/\/(.*)//;
+
+    if ($data =~ /\s*,\s*/) {
+	
+	# this is to parse line data in PSS/E V23 to V26 formats
+	if (/,,,/)  {
+ 
+	    if ($V26_up == 0) { 
+		
+		$string =~ s/,,,/ /;
+		my @mydata = split /\s+/, $string; 
+		if ($mydata[0] eq "") { shift(@mydata); } 
+		return @mydata; 
+
+	    } else {
+
+		# this is to parse line data in PSS/E V26 format	   
+		$string =~ s/,,,/,/;
+		$string =~ s/\s*//g;
+		my @mydata = split /,/, $string; 
+		if ($mydata[0] eq "") { shift(@mydata); } 
+		return @mydata;    
+	    }
+	}
+   
+	# this is to parse data in PSS/E V27 to V30 formats
+	my @mydata = split /\s*,\s*/, $string; 
+	if ($mydata[0] eq "") { shift(@mydata); } 
+	return @mydata; 
+
+    } elsif ($data =~ /\s+/)  {
+
+	$string =~ s/\'//g; 
+	my @mydata = split /\s+/, $string; 
+	if ($mydata[0] eq "") { shift(@mydata); } 
+	return @mydata; 
+
+    } 
+}
+
+sub mysplitdata { 
+    my $nn = 0;
+    my @localdata;
+    $_[0] =~ s/://g;
+    $_[0] =~ s/,//g;
+    $_[0] =~ s/\///g;
+    last if /^\s*0/;
+    
+    $nn = 0;
+    while ($_[0]) {
+	$_[0] =~ s/\s*-?\d+[\.,]?\d*\s*|\s*\'.*?\'\s*//;
+	$localdata[$nn] = $&;
+	$localdata[$nn] =~ s/^\s*\'?//;
+	$localdata[$nn] =~ s/,/\./;
+	$localdata[$nn] =~ s/\s*\'?\s*$//;
+	$nn++;
+	if ($nn > 100) {die "Bad input string (infinite regexp loop...)";}
+    }
+    return @localdata;
+}
+
+# -----------------------------------------------------------------------
+# function for finding multiple PV generators at the same bus
+# -----------------------------------------------------------------------
+sub pvidx {
+    my $mypvbus = $_[0];
+    my $check = -1;
+    
+    for ($i = 0; $i <= $npv; $i++) {
+	if ($pvbus[$i] == $mypvbus) {
+	    $check = $i; 
+	    last;
+	}	    
+    }	
+    return $check;
+}
+
+# -----------------------------------------------------------------------
+# function for determining if the bus is isolated
+# -----------------------------------------------------------------------
+sub ididx {
+    my $myisbus = $_[0];
+    my $check = 1;
+    
+    for ($i = 0; $i <= $nisl; $i++) {
+	if ($islbus[$i] == $myisbus) {
+	    $check = 0; 
+	    last;
+	}	    
+    }	
+    return $check;
+}
+
+# -----------------------------------------------------------------------
+# function for detecting extended names
+# -----------------------------------------------------------------------
+sub extended {
+
+    my $input = $_[0];
+    my $index;
+    if ($input =~ /^\'/) {
+	$input =~ s/^\'-/\'/;
+	if ($flag_version < V30) {
+	    $input = substr($input,0,9) . "'";
+	} else {
+	    $input = substr($input,0,13) . "'";
+	}
+	$index = $extname{$input};
+    } else {
+	$index = int(abs($input));
+    }
+    return $index;
+
+}
+
+# -----------------------------------------------------------------------
+# function for writing component names
+# -----------------------------------------------------------------------
+sub writenames {
+
+    my $n = $_[0];
+    my $names = $_[2];
+
+    for ($i = 0; $i <= $n; $i++) {
+	$$names[$i] =~ s/\'//g;
+	$$names[$i] = deblank ($$names[$i]);    
+    }
+    $n >= 0 && print OUT $_[1] . ".names = { ...\n";
+    $h = ($n+1) % 5;
+    if ($h == 0) {$h = 5;}
+    if (($n+1) > 5) {
+	for ($i = 0; $i <= $n-$h; $i+=5) {
+	    print OUT "  '$$names[$i]'; '$$names[$i+1]'; " . 
+		"'$$names[$i+2]'; '$$names[$i+3]'; '$$names[$i+4]';\n";
+	}
+    }
+    print OUT "  ";
+    for ($i = $n-$h+1; $i <= $n-1; $i++) {
+	print OUT "'$$names[$i]'; ";
+    }
+    print OUT "'$$names[$n]'};\n\n";
+
+}

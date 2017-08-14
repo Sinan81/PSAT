@@ -1,0 +1,444 @@
+#!/usr/bin/perl -w
+# FLOWDEMO2PSAT converts GE data file into PSAT data file
+#
+# FLOWDEMO2PSAT <OPTIONS> FILEINPUT <FILEOUTPUT>
+#
+# Author:  Juan Carlos Morataya
+# Date:    04-Nov-2005
+# Version: 1.0.0
+# 
+# E-mail:    jmorataya@eegsa.net
+#
+
+use strict;
+
+# -----------------------------------------------------------------------
+# variable declaration
+# -----------------------------------------------------------------------
+my $nargin = 0;
+my $verbose = 0;
+my $helpmsg = 0;
+my ($i,$j,$h,$k);
+my $nbus = -1;
+my $nsw = -1;
+my $npv = -1;
+my $npq = -1;
+my $nsh = -1;
+my $nline = -1;
+my $ndemand = -1;
+my ($kvb,$kae,$ein,$ang,);
+my ($swbus,$swsb,$swvs,$swqt,
+    $swqb,$swpg);
+my (@pqbus,@pqpl,@pqql);    
+my $title1 = 'Generic Flowdemo.Net Data Format File.';
+my $title2;
+my ($vmax,$vmin);
+my $pbas;
+my $format;
+my ($name1,$name2);
+my @data;
+my (@kvb,@kzo,@kae,@ein,@ang,@bustype,@busidx,@busname,@qmi,@qma,
+    @bshunt,@title,@comment,@pbtf);
+my (@pvbus,@pvsb,@pvpg,@pvvs,@pvqt,@pvqb);    
+my (@pvidx,@pqidx,@idxsh,@psh,@qsh);
+my (@busfr,@bustt);
+my (@rest,@reat,@susc,@rate,@phas,@ratio);	    
+my (@idxsvc,@svcbus,@svcbma,@svcbmi,@svcref,@rgn,@rtc);
+my (@demand,@pmax,@pmin,@c0);
+my (%kvbase,%einsch);
+
+# -----------------------------------------------------------------------
+# check inputs
+# -----------------------------------------------------------------------
+$nargin = @ARGV;
+$nargin || die "Error: No input data file.\n";
+
+# -----------------------------------------------------------------------
+# check options
+# -----------------------------------------------------------------------
+while ($ARGV[0] =~ /^-/) {
+    if ($ARGV[0] =~ /v/) {$verbose = 1;}
+    if ($ARGV[0] =~ /h/) {$helpmsg = 1;}
+    shift(@ARGV);
+    $nargin--;
+    if ($nargin == 0) { 
+	last;
+    }
+}
+$title1 = 'Generic Flowdemo.Net Data Format File '.$ARGV[0];
+
+# -----------------------------------------------------------------------
+# help (if requested)
+# -----------------------------------------------------------------------
+if ($helpmsg) {
+    print "\nFLOWDEMO2PSAT converts GE data files into PSAT data files.\n\n";
+    print "FLOWDEMO2PSAT [options] fileinput [fileoutput]\n";
+    print "  -v   verbose\n";
+    print "  -h   print this help and exit\n\n";
+    print "Author:   Juan Carlos Morataya\n";
+    print "Date:     04-Nov-2005\n";
+    print "Version:  1.0.0\n\n";
+    print "E-mail:   jmorataya\@eegsa.net\n";
+    die "\n";
+}
+
+# -----------------------------------------------------------------------
+# define output file name (if necessary)
+# -----------------------------------------------------------------------
+if ($nargin == 1) {
+    $ARGV[1] = $ARGV[0];
+    $ARGV[1] =~ s/^d*_*/d_/;
+    $ARGV[1] =~ s/[^\w\.]/_/g;
+    $ARGV[1] =~ s/\..+$/.m/;
+} elsif ($nargin == 0) {
+    die "Error: Input file name is missing.\n";
+}
+
+# -----------------------------------------------------------------------
+# open input data file
+# -----------------------------------------------------------------------
+print "Opening FLOWDEMO.NET data file \"$ARGV[0]\"...\n";
+carret();
+open(IN,$ARGV[0]) || die "cannot open $ARGV[0]: $!\n";
+
+# -----------------------------------------------------------------------
+# scan data file
+# -----------------------------------------------------------------------
+# read title
+$title2 = <IN>;
+chomp ($title2);
+
+# read parameters
+while (<IN>) {
+    chomp;
+    last if /^Element/;
+    next if /^\D+/;
+    @data = mysplit($_);
+    $vmax = $data[4];
+    $vmin = $data[5];
+    if ($vmax == 0) { $vmax = 1.1; }
+    if ($vmin == 0) { $vmax = 0.9; }
+    $pbas = $data[9];
+    if ($pbas == 0) { $pbas = 100; }
+}
+
+# read bus data
+while (<IN>) {
+    chomp;
+    last if /^Element/;
+    next if /^\D+/;
+    $_ =~ m/\'.*\'/;
+    $name1 = $&;
+    $name2 = $name1;
+    $name2 =~ s/[,;]//g;
+    $_ =~ s/$name1/$name2/;
+    @data = mysplit($_);
+    $nbus++;
+    $busidx[$nbus] = $data[0];
+    $busname[$nbus] = $data[1];
+    $busname[$nbus] =~ s/\'//g;
+    if ($data[2] == 0) { $kvb[$nbus] = 1; }
+    else { $kvb[$nbus] = $data[2]; }
+    $ein[$nbus] = $data[3];
+    $ang[$nbus] = 3.141592654*$data[4]/180;
+    $kvbase{$busidx[$nbus]} = $kvb[$nbus];
+    $einsch{$busidx[$nbus]} = $ein[$nbus]; 
+}
+
+# read synchronous condenser data
+while (<IN>) {
+    chomp;
+    last if /^Element/;
+    next if /^\D+/;
+    @data = mysplit($_);
+    if ($data[6] == 2) {
+	$npv++;
+	$pvbus[$npv] = $data[0];
+	$pvpg[$npv] = $data[4]/$pbas;
+	if ($data[3] == 0) { 
+	$pvvs[$npv] = $einsch{$pvbus[$npv]}; 
+	} else {
+	$pvvs[$npv] = $data[3]
+	}
+	$pvqt[$npv] = $data[7]/$pbas;
+	$pvqb[$npv] = $data[8]/$pbas; 
+    }   
+}
+
+# read generator data
+while (<IN>) {
+    chomp;
+    last if /^Element/;
+    next if /^\D+/;
+    @data = mysplit($_);
+    if ($data[13] == 1) {
+    if ($data[7] == 3) { 
+	    $nsw++; 
+	    $swbus = $data[0]; 
+	    $swbus = $data[0];
+	    $swpg = $data[4]/$pbas;
+	    if ($data[6] == 0) { 
+		    $swvs = $einsch{$swbus}; 
+		} else {
+			$swvs = $data[6]
+		}
+	    $swqt = $data[8]/$pbas;
+	    $swqb = $data[9]/$pbas;
+	} else {
+	    $npv++;
+	    $pvbus[$npv] = $data[0];
+	    $pvpg[$npv] = $data[4]/$pbas;
+	    if ($data[6] == 0) { 
+		    $pvvs[$npv] = $einsch{$pvbus[$npv]}; 
+		} else {
+			$pvvs[$npv] = $data[6]
+		}
+	    $pvqt[$npv] = $data[8]/$pbas;
+	    $pvqb[$npv] = $data[9]/$pbas;
+	}
+    }
+}
+
+# read line data
+while (<IN>) {
+    chomp;
+    last if /^Element/;
+    next if /^\D+/;
+    @data = mysplit($_);
+	if ($data[18] * $data[19] == 1) {
+	    $nline++;
+	    $busfr[$nline] = $data[0];
+	    $bustt[$nline] = $data[1];
+	    $rest[$nline] = $data[4];
+	    $reat[$nline] = $data[5];
+	    $susc[$nline] = $data[7];
+	    $rate[$nline] = $data[12]/$pbas;
+	    $ratio[$nline] = 0;
+	    $phas[$nline] = 0;
+    }
+}
+
+# read load data
+while (<IN>) {
+    chomp;
+    last if /^Element/;
+    next if /^\D+/;
+    @data = mysplit($_);
+    if ($data[7] == 1 && $data[2] != 0 ||
+        $data[7] == 1 && $data[3] != 0 ) {
+	$npq++;
+	$pqbus[$npq] = $data[0];
+	$pqpl[$npq] = $data[2]/$pbas;
+	$pqql[$npq] = $data[3]/$pbas;
+	if ($data[8] != 0 || $data[9] != 0 ||
+	    $data[10] != 0 || $data[11] != 0) {
+		$ndemand++;
+		$demand[$ndemand] = $data[0];
+		$pmin[$ndemand] = $data[8];
+		$pmax[$ndemand] = $data[9];   
+		$c0[$ndemand] = $data[11];
+	   }
+    }
+}
+
+# read shunt data
+while (<IN>) {
+    chomp;
+    last if /^Element/;
+    next if /^\D+/;
+    @data = mysplit($_);
+    if ($data[9] == 1 && $data[2] != 0 ||
+        $data[9] == 1 && $data[3] != 0 ) {
+    $nsh++;
+    $idxsh[$nsh] = $data[0];
+    $psh[$nsh] = $data[2]/$pbas;	
+    $qsh[$nsh] = $data[3]/$pbas;		    
+	}
+}
+
+# read transformer data
+while (<IN>) {
+    chomp;
+    last if /^Element/;
+    next if /^\D+/;
+    @data = mysplit($_);
+	if ($data[20] * $data[21] == 1) {
+	    $nline++;
+	    $busfr[$nline] = $data[0];
+	    $bustt[$nline] = $data[1];
+	    $rest[$nline] = $data[4];
+	    $reat[$nline] = $data[5];
+	    $susc[$nline] = $data[7];
+	    $ratio[$nline] = $data[8];
+	    $phas[$nline] = $data[9];
+	    $rate[$nline] = $data[14]/$pbas;
+    }
+}
+
+# -----------------------------------------------------------------------
+# close data file
+# -----------------------------------------------------------------------
+close(IN) || die "cannot close $ARGV[0]: $!\n";
+
+# -----------------------------------------------------------------------
+# open output data file
+# -----------------------------------------------------------------------
+print "Writing PSAT file \"$ARGV[1]\"...\n";
+carret();
+open(OUT,">$ARGV[1]") || die "cannot open $ARGV[1]: $!\n";
+
+# -----------------------------------------------------------------------
+# write output data file
+# -----------------------------------------------------------------------
+print OUT "% File generated by PSAT from FLOWDEMO.NET data file.\n";
+print OUT "% "."-" x 78 . "\n";
+print OUT "% Author:   Juan Carlos Morataya\n";
+print OUT "% E-mail:   jmorataya\@eegsa.net\n";
+print OUT "% "."-" x 78 . "\n";
+print OUT "% $title1\n";
+print OUT "% $title2\n\n";
+
+# -----------------------------------------------------------------------
+# write Bus.con
+# -----------------------------------------------------------------------
+$format = "%4d %8.2f %8.5f %8.5f 1 1";
+$nbus >= 0 && print OUT "Bus.con = [ ...\n";
+
+for ($i = 0; $i <= $nbus-1; $i++) {
+    printf OUT "$format;\n",$busidx[$i],$kvb[$i],
+    $ein[$i],$ang[$i];
+}
+
+$nbus >= 0 && printf OUT "$format];\n\n",$busidx[$i],$kvb[$i],
+$ein[$i],$ang[$i];
+
+# -----------------------------------------------------------------------
+# write SW.con
+# -----------------------------------------------------------------------
+if ($nsw >= 0) {
+	print OUT "SW.con = [ ...\n";
+    $format = "%4d %7.2f %6.2f %8.5f 0.00 %8.5f %8.5f %8.5f %8.5f %8.5f 1";
+    printf OUT "$format];\n\n", $swbus,$pbas,$kvbase{$swbus},
+    $swvs,$swqt,$swqb,$vmax,$vmin,$swpg;
+}
+
+# -----------------------------------------------------------------------
+# write PV.con
+# -----------------------------------------------------------------------
+$npv >= 0 && printf OUT "PV.con = [ ...\n";
+$format = "%4d %7.2f %6.2f " . "%8.5f " x 6 . " 1";
+for ($i = 0; $i <= $npv-1; $i++) {
+    printf OUT "$format;\n", $pvbus[$i],$pbas,$kvbase{$pvbus[$i]},
+    $pvpg[$i],$pvvs[$i],$pvqt[$i],$pvqb[$i],$vmax,$vmin;
+}
+$i = $npv;
+$npv >= 0 && printf OUT "$format];\n\n",$pvbus[$i],$pbas,
+$kvbase{$pvbus[$i]},$pvpg[$i],$pvvs[$i],$pvqt[$i],$pvqb[$i],
+$vmax,$vmin;
+
+# -----------------------------------------------------------------------
+# write PQ.con
+# -----------------------------------------------------------------------
+$npq >= 0 && printf OUT "PQ.con = [ ...\n";
+$format = "%4d $pbas %8.2f %8.5f %8.5f %8.5f %8.5f 1";
+for ($i = 0; $i <= $npq-1; $i++) {
+    $h = $pqbus[$i];
+    printf OUT "$format;\n", $h,$kvbase{$h},$pqpl[$i],$pqql[$i],
+    $vmax,$vmin;
+}
+$h = $pqbus[$npq];
+$i = $npq;
+$npq >= 0 && printf OUT "$format];\n\n",$h,$kvbase{$h},$pqpl[$i],
+    $pqql[$i],$vmax,$vmin;
+
+# -----------------------------------------------------------------------
+# write Demand.con
+# -----------------------------------------------------------------------
+$ndemand >= 0 && print OUT "Demand.con = [ ...\n";
+$format = "%4d %8.2f 0 0 %8.5f %8.5f 0 %8.5f 0 0 0 0 0 0 0";
+for ($i = 0; $i <= $ndemand-1; $i++) {
+    printf OUT "$format;\n",$demand[$i],$pbas,
+    $pmax[$i],$pmin[$i],$c0[$i];
+}
+$i = $ndemand;
+$ndemand >= 0 && printf OUT "$format];\n\n",$demand[$i],$pbas,
+    $pmax[$i],$pmin[$i],$c0[$i];
+    
+# -----------------------------------------------------------------------
+# write Shunt.con
+# -----------------------------------------------------------------------
+$nsh >= 0 && print OUT "Shunt.con = [ ...\n";
+$format = "%4d $pbas %8.2f 60 %8.5f %8.5f";
+for ($i = 0; $i <= $nsh-1; $i++) {
+	if ($psh[$i] != 0 or $qsh[$i] != 0) {
+       $h = $idxsh[$i];
+       printf OUT "$format;\n", $h,$kvbase{$h},$psh[$i],$qsh[$i];
+    }
+}
+$h = $idxsh[$nsh];
+$i = $nsh;
+$nsh >= 0 && printf OUT "$format];\n\n",$h,$kvbase{$h},$psh[$i],$qsh[$i];
+
+# -----------------------------------------------------------------------
+# write Line.con
+# -----------------------------------------------------------------------
+if ($nline >= 0) {
+    print OUT "Line.con = [ ...\n";
+    $format = "%4d %4d " . " %8.5f " x 2 ."  60   0 " . " %8.5f " x 4 . 
+    "" . " %8.5f " x 3 . " 0  0";
+    for ($i = 0; $i <= $nline-1; $i++) {
+    $k = $kvbase{$busfr[$i]}/$kvbase{$bustt[$i]};
+    if ($k == 1) { $k = 0; }
+    printf OUT "$format;\n",$busfr[$i],$bustt[$i],$pbas,$kvbase{$busfr[$i]},
+	$k,$rest[$i],$reat[$i],$susc[$i],$ratio[$i],$phas[$i],$rate[$i];
+    }
+    $i = $nline; 
+    $k = $kvbase{$busfr[$i]}/$kvbase{$bustt[$i]};
+    if ($k == 1) { $k = 0; }
+    printf OUT "$format];\n\n",$busfr[$i],$bustt[$i],$pbas,$kvbase{$busfr[$i]},
+	$k,$rest[$i],$reat[$i],$susc[$i],$ratio[$i],$phas[$i],$rate[$i];
+}    
+
+# -----------------------------------------------------------------------
+# write bus names
+# -----------------------------------------------------------------------
+$nbus >= 0 && print OUT "Bus.names = { ...\n";
+$h = ($nbus+1) % 5;
+if ($h == 0) {$h = 5;}
+if (($nbus+1) > 5) {
+    for ($i = 0; $i <= $nbus-$h; $i+=5) {
+	print OUT "  '$busname[$i]'; '$busname[$i+1]'; " . 
+	    "'$busname[$i+2]'; '$busname[$i+3]'; '$busname[$i+4]';\n";
+    }
+}
+print OUT "  ";
+for ($i = $nbus-$h+1; $i <= $nbus-1; $i++) {
+    print OUT "'$busname[$i]'; ";
+}
+print OUT "'$busname[$nbus]'};\n\n";
+
+# -----------------------------------------------------------------------
+# close output data file
+# -----------------------------------------------------------------------
+close(OUT) || die "cannot close $ARGV[1]: $!\n";
+print "Conversion completed.\n";
+
+# -----------------------------------------------------------------------
+# function for writing a separator
+# -----------------------------------------------------------------------
+sub carret {
+    $verbose && print "-" x 50 . "\n";
+}
+
+# -----------------------------------------------------------------------
+# function for reading comma/semicolon separated data
+# -----------------------------------------------------------------------
+sub mysplit {
+    my $nn = 0;
+    my $string = $_[0];
+    $string =~ s/true/1/g;
+    $string =~ s/false/0/g;
+    my @localdata = split (/[,;]/,$string);
+    return @localdata;
+}
+

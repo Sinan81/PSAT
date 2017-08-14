@@ -1,0 +1,676 @@
+#!/usr/bin/perl -w
+# DIGSILENT2PSAT converts DIGSILENT data file into PSAT data file
+#
+# DIGSILENT2PSAT <OPTIONS> FILEINPUT <FILEOUTPUT>
+#
+# Author:  Federico Milano
+# Date:    12-Dec-2007
+# Version: 2.0.0
+#
+# E-mail: federico.milano@ucd.ie
+
+use strict;
+
+# -----------------------------------------------------------------------
+# variable declaration
+# -----------------------------------------------------------------------
+my $nargin = 0;
+my $verbose = 0;
+my $helpmsg = 0;
+my ($i,$h,$k,$w,$n,$m);
+my $j = 0;
+my $pi = 3.141592653589793;
+my $checklnesec = 0;
+my $ntitle = -1;
+my $nbus = -1;
+my $nsw = -1;
+my $nsyn = -1;
+my $nasm = -1;
+my $npq = -1;
+my $nsh = -1;
+my $ntw = -1;
+my $nline = -1;
+my $nsec = -1;
+my $nzo = -1;
+my $ntr = -1;
+my $nmn = -1;
+my $nopv = -1;
+my $nopq = -1;
+my $nopsyn = -1;
+my $nopasm = -1;
+my $nopext = -1;
+my $noptr = -1;
+my $noptw = -1;
+my $next = -1;
+my $flglne = -1;
+my $swpg = 0;
+my ($version,$msg,$crd,%card,$format,@data);
+my @title;
+my $pbas = 100;
+my (@busfr,@bustt,@dline,@tline,%uline,%rline,%xline,%bline,%iline);
+my (@pqbus,@nload,@tload,@pqpl,@pqql,%kpu,%kqu);
+my (@shbus,@qshnt,@pshnt);
+my (@sname,@stype,@pvbus,%sbas,%vbas,%xd,%xq,
+    %xdsss,%rstr,%xdsat,%satur);
+my (@synstt,@opmode,@pvpg,@pvqg,@pvqt,@pvqb,@pvvs);
+my (@ename,@exbus,@extstt,@expg,@exqg,@exqt,@exqb,@exvs);
+my $swan = 0;
+my $tysw;
+my (@busidx,@busname,@kvb,@kae,%busnum,%buskvb);
+my (@bustfr,@busttt,@ttrasf,%utrasf,%ktrasf,%rtrasf,%xtrasf,
+    %phs,%tap,@utr,@ntap,%strasf);
+my (@twname,@bustw1,@bustw2,@bustw3,%twname,%twsb,%kv1,%kv2,
+    %kv3,%x12,%x31,%x23,%r12,%r23,%r31,%twdu,@utw,@ntaptw);
+my (@kzonum,@kzoname,%kzo);
+my (@busasm,@tasm,@npasm,%kvasm,%fnasm,$eta,%snasm,@pasm,@uasm,
+    $cage,$imode,$cosphi,$ze,$xe,$re,$qn,$sigma,$p,$W0,$Wn,
+    %xsasm,%xr1asm,%rr1asm,%xr2asm,%rr2asm,%xmasm,%rsasm);
+
+# -----------------------------------------------------------------------
+# check inputs
+# -----------------------------------------------------------------------
+$nargin = @ARGV;
+$nargin || die "Error: No input data file.\n";
+
+# -----------------------------------------------------------------------
+# check options
+# -----------------------------------------------------------------------
+while ($ARGV[0] =~ /^-/) {
+    if ($ARGV[0] =~ /v/) {$verbose = 1;}
+    if ($ARGV[0] =~ /h/) {$helpmsg = 1;}
+    shift(@ARGV);
+    $nargin--;
+    if ($nargin == 0) {
+	last;
+    }
+}
+
+# -----------------------------------------------------------------------
+# help (if requested)
+# -----------------------------------------------------------------------
+if ($helpmsg) {
+    print "\nDIGSILENT2PSAT converts DIGSILENT data files into PSAT data files.\n\n";
+    print "DIGSILENT2psat <options> fileinput <fileoutput>\n";
+    print "  -v   verbose\n";
+    print "  -h   print this help and exit\n\n";
+    print "Author:   Federico Milano\n";
+    print "Date:     12-Dec-2007\n";
+    print "Version:  2.0.0\n\n";
+    print "E-mail:   Federico.Milano\@uclm.es\n";
+    die "\n";
+}
+
+# -----------------------------------------------------------------------
+# define output file name (if necessary)
+# -----------------------------------------------------------------------
+if ($nargin == 1) {
+    $ARGV[1] = $ARGV[0];
+    $ARGV[1] =~ s/^/d_/;
+    $ARGV[1] =~ s/^d_d/d_/;
+    $ARGV[1] =~ s/^d_d_/d_/;
+    $ARGV[1] =~ s/[^a-zA-Z0-9_\.]/_/g;
+    $ARGV[1] =~ s/\..*//;
+    $ARGV[1] =~ s/^d__/d_/;
+    $ARGV[1] = $ARGV[1] . ".m";
+} elsif ($nargin == 0) {
+    die "Error: Input file name is missing.\n";
+}
+
+# -----------------------------------------------------------------------
+# open input data file
+# -----------------------------------------------------------------------
+print "Scanning DIGSILENT data file \"$ARGV[0]\"...\n";
+open(IN,$ARGV[0]) || die "cannot open $ARGV[0]: $!\n";
+
+# -----------------------------------------------------------------------
+# scan input data file
+# -----------------------------------------------------------------------
+$_ = <IN>; # discard first line
+
+# read comments and case information
+while (<IN>) {
+    chomp;
+    $_ =~ s/^\*//g;
+    next if !/\d+/;
+    last if /^\$\$\w+/;
+    $ntitle++;
+    $title[$ntitle] = $_;
+    $title[$ntitle] =~ s/\s+/+/g;
+    $title[$ntitle] =~ s/\+/ /g;
+}
+
+$crd = $_;
+%card = fields();
+
+while (<IN>) {
+
+    chomp;
+    next if /^\*/;
+    next if /^.$/;
+    next if !/\d+/;
+    if (/^\$\$\w+/) {
+	$crd = $_;
+	%card = fields();
+	next;
+    }
+    @data = mysplit($_);
+
+    if ($crd =~ /^\$\$General/) {
+
+	if ($data[1] eq "Version") {
+	    $data[2] =~ s/\W$//;
+	    print "Data Exchange Version " . $data[2] . "\n";
+	    $version = $data[2];
+	}
+
+    } elsif ($crd =~ /^\$\$ElmAsm/) { # read asynchronous motors el. data
+
+	$nasm++;
+	$busasm[$nasm] = assign("Station1",);
+	$tasm[$nasm] = assign("typ_id",);
+	$npasm[$nasm] = assign("ngnum",1);
+
+    } elsif ($crd =~ /^\$\$TypAsm/) {
+
+	$n = assign("Name",);
+	$kvasm{$n} = assign("ugn",1);
+	$fnasm{$n} = assign("frequ",1);
+	$eta = assign("effic",100)/100;
+	$cosphi = assign("cosn",1);
+	$snasm{$n} = assign("pgn",1000*$pbas)/$cosphi/1000/$eta;
+	$imode = assign("i_mode",0);
+	if ($imode) { # use electrical parameters
+	    $xmasm{$n} = assign("xm",5);
+	    $xsasm{$n} = assign("xstr",0.01);
+	    $rsasm{$n} = assign("rstr",0.001);
+	    $cage = assign("i_cage",1);
+	    if ($cage == 1) { # single cage
+		$xr1asm{$n} = assign("xrtrA",0.01);
+		$rr1asm{$n} = assign("rrtrA",0.001);
+		$xr2asm{$n} = 0;
+		$rr2asm{$n} = 0;
+	    } else { # double cage
+		$xr1asm{$n} = assign("x0",0.01);
+		$rr1asm{$n} = assign("r0",0.001);
+		$xr2asm{$n} = assign("x1",0.01);
+		$rr2asm{$n} = assign("r1",0.001);
+	    }
+	} else { # use slip/torque characteristic
+	    $p = assign("nppol",2);
+	    $W0 = 2*$pi*$fnasm{$n}/$p;
+	    $Wn = 2*$pi*assign("anend",$W0)/60;
+	    $sigma = ($W0-$Wn)/$W0;
+	    # locked rotor current: assign("aiazn",)
+	    # locked rotor torque:  assign("amazn",)
+	    $xe = 0.5/assign("amkzn",2.5);
+	    $qn = sin(atan2(sqrt(1-$cosphi**2),$cosphi));
+	    $rr1asm{$n} = $sigma;
+	    $rsasm{$n} = $rr1asm{$n};
+	    $xr1asm{$n} = $xe/2;
+	    $xsasm{$n} = $xe/2;
+	    $xr2asm{$n} = 0;
+	    $rr2asm{$n} = 0;
+	    $xmasm{$n} = 1/($qn-$xe/($xe*$xe+($rsasm{$n}+$rr1asm{$n}/$sigma)**2));
+	}
+
+    } elsif ($crd =~ /^\$\$OP_ElmAsm/) {
+
+	$nopasm++;
+	$pasm[$nopasm] = assign("pgini",0);
+	$uasm[$nopasm] = !assign("outserv",0);
+
+    } elsif ($crd =~ /^\$\$ElmLnesec/) { # print warning message
+
+	$checklnesec++;
+	next if $checklnesec;
+	print "WARNING: Line sections are discarded in the current filter.\n";
+
+    } elsif ($crd =~ /^\$\$ElmLne/) { # read line element data
+
+	$nline++;
+	$busfr[$nline] = assign("Station1",);
+	$bustt[$nline] = assign("Station2",);
+	$dline[$nline] = assign("dline",1);
+	$tline[$nline] = assign("typ_id",);
+
+    } elsif ($crd =~ /^\$\$TypLne/) { # line type data
+
+	$n = assign("Name",);
+	$uline{$n} = assign("uline",220);
+	$k = $uline{$n}*$uline{$n}/$pbas;
+	$rline{$n} = assign("rline",0)/$k;
+	$xline{$n} = assign("xline",0)/$k;
+	$bline{$n} = 0.0003769911*$k*assign("cline",0); # assuming f = 60 Hz
+	$iline{$n} = 1.73205*$uline{$n}*assign("sline",0)/$pbas;
+
+    } elsif ($crd =~ /^\$\$ElmLod/) { # load element data
+
+	$npq++;
+	$nload[$npq] = assign("Name",);
+	$n = assign("typ_id",);
+	$kpu{$n} = 0;
+	$kqu{$n} = 0;
+	$tload[$npq] = $n;
+	$pqbus[$npq] = assign("Station1",);
+
+    } elsif ($crd =~ /^\$\$TypLod/) { # load type data
+
+	$n = assign('Name',1);
+	$kpu{$n} = assign('kpu',0);
+	$kqu{$n} = assign('kqu',0);
+	if ($kpu{$n} || $kqu{$n}) {
+	    $nmn++;
+	}
+
+    } elsif ($crd =~ /^\$\$OP_ElmLod/) { # load operational data
+
+	$nopq++;
+	$pqpl[$nopq] = assign("plini",0)/$pbas;
+	$pqql[$nopq] = assign("qlini",0)/$pbas;
+
+    } elsif ($crd =~ /^\$\$ElmShnt/) { # shunt element data
+
+        $nsh++;
+        $shbus[$nsh] = assign('Station1',);
+        $qshnt[$nsh] = assign('qcapn',0)/$pbas;
+        $pshnt[$nsh] = 0;
+
+    } elsif ($crd =~ /^\$\$ElmSym/) { # sychronous machine element data
+
+	$nsyn++;
+	$sname[$nsyn] = assign("Name",);
+	$stype[$nsyn] = assign("typ_id",);
+	$pvbus[$nsyn] = assign("Station1",);
+
+    } elsif ($crd =~ /^\$\$ElmXnet/) { # external network element data
+
+	$next++;
+	$ename[$next] = assign("Name",);
+	$exbus[$next] = assign("Station1",);
+
+    } elsif ($crd =~ /^\$\$OP_ElmXnet/) { # external network operational data
+
+	$nopext++;
+	$extstt[$nopext] = !assign('outserv',0);
+	$expg[$nopext] = assign('pgini',0)/$pbas;
+	$exqg[$nopext] = assign('qgini',0)/$pbas;
+	$exqt[$nopext] = assign('q_min',0);
+	$exqb[$nopext] = assign('q_max',0);
+	$exvs[$nopext] = assign('usetp',1);
+
+	# assign slack generator
+	if ($expg[$nopext] > $swpg || $nopext == 0 || assign("bustp","PV") eq "SL") {
+	    $nsw = $nopext;
+	    $tysw = "EXT";
+	    $swpg = $expg[$nopext];
+	    $swan = 0.01745329251994*assign('phiini',0);
+	}
+
+    } elsif ($crd =~ /^\$\$TypSym/) { # sinchronous machine type data
+
+	$n = assign("Name",1);
+	$sbas{$n} = assign("sgn",100);
+	$vbas{$n} = assign("ugn",1);
+	$xd{$n} = assign("xd",1.9);
+	$xq{$n} = assign("xq",1.7);
+	$xdsss{$n} = assign("xdsss",0.204);
+	$rstr{$n} = assign("rstr",0);
+	$xdsat{$n} = assign("xdsat",0);
+	$satur{$n} = assign("satur",0); # Machine IEC909
+
+    } elsif ($crd =~ /^\$\$OP_ElmSym/) { # synchronous machine operational data
+
+	$nopsyn++;
+	$synstt[$nopsyn] = !assign('outserv',0);
+	$opmode[$nopsyn] = assign('iv_mode',99);
+	$pvpg[$nopsyn] = assign('pgini',0)/$sbas{$stype[$nopsyn]};
+	$pvqg[$nopsyn] = assign('qgini',0)/$sbas{$stype[$nopsyn]};
+	$pvqt[$nopsyn] = assign('q_min',0);
+	$pvqb[$nopsyn] = assign('q_max',0);
+	$pvvs[$nopsyn] = assign('usetp',1);
+
+	# assign slack generator
+	next if $nopext >= 0;
+	if ($pvpg[$nopsyn] > $swpg || $nopsyn == 0) {
+	    $nsw = $nopsyn;
+	    $tysw = "SYN";
+	    $swpg = $pvpg[$nopsyn];
+	    $swan = 0;
+	}
+
+    } elsif ($crd =~ /^\$\$ElmTerm/) { # terminal element data
+
+	$nbus++;
+	$busidx[$nbus] = assign("No",1);
+	$busname[$nbus] = assign("Name",("Bus" . $busidx[$nbus]));
+	$kvb[$nbus] = assign("uknom",1.00);
+	$kae[$nbus] = assign("pZone",1);
+	$busnum{$busname[$nbus]} = $busidx[$nbus];
+	$buskvb{$busname[$nbus]} = $kvb[$nbus];
+
+    } elsif ($crd =~ /^\$\$ElmTr2/) { # two winding transformer element data
+
+	$ntr++;
+	$bustfr[$ntr] = assign("Station1",);
+	$busttt[$ntr] = assign("Station2",);
+	$ttrasf[$ntr] = assign("typ_id",);
+
+    } elsif ($crd =~ /^\$\$ElmTr3/) { # three winding transformer element data
+
+	$ntw++;
+	$twname[$ntw] = assign('typ_id',);
+	$bustw1[$ntw] = assign('Station1',);
+	$bustw2[$ntw] = assign('Station2',);
+	$bustw3[$ntw] = assign('Station3',);
+
+    } elsif ($crd =~ /^\$\$ElmZone/) { # zone data
+
+	$nzo++;
+	$kzonum[$nzo] = assign('No',1);
+	$kzoname[$nzo] = assign('Name',1);
+	$kzo{$kzoname[$nzo]} = $kzonum[$nzo];
+
+    } elsif ($crd =~ /^\$\$TypTr2/) { # two winding transformer type data
+
+	$n = assign('Name',);
+	$utrasf{$n} = assign("utrn_h",1);
+	$k = $utrasf{$n}*$utrasf{$n}/$pbas;
+	$ktrasf{$n} = $utrasf{$n}/assign('utrn_l',1);
+	$strasf{$n} = assign('strn',$pbas);
+	$rtrasf{$n} = assign('pcutr',0)/$strasf{$n}/1000;
+	$xtrasf{$n} = assign('uktr',1)/100;
+	$phs{$n} = assign('phitr',0);
+	$tap{$n} = assign('dutap',0)/100;
+
+    } elsif ($crd =~ /^\$\$OP_ElmTr2/) { # two winding transformer operational data
+
+	$noptr++;
+	$utr[$noptr] = !assign("outserv",0);
+	$ntap[$noptr] = assign("nntap",0);
+
+    } elsif ($crd =~ /^\$\$TypTr3/) { # three winding transformer type data
+
+	$n = assign('Name',);
+	$twname{$n} = assign('Name',1);
+	$twsb{$n} = assign('strn3_h',$pbas); # MVA
+	$twdu{$n} = assign('du3tp_h',0)/100;
+	$kv1{$n} = assign('utrn3_h',1); # kV
+	$kv2{$n} = assign('utrn3_m',1);
+	$kv3{$n} = assign('utrn3_l',1);
+	$x12{$n} = assign('uktr3_h',1)/100;
+	$x23{$n} = assign('uktr3_m',1)/100;
+	$x31{$n} = assign('uktr3_l',1)/100;
+	$r12{$n} = assign('pcut3_h',0)/1000/$twsb{$n};
+	$r23{$n} = assign('pcut3_m',0)/1000/$twsb{$n};
+	$r31{$n} = assign('pcut3_l',0)/1000/$twsb{$n};
+
+    } elsif ($crd =~ /^\$\$OP_ElmTr3/) { # three winding transformer operational data
+
+	$noptw++;
+	$utw[$noptw] = !assign("outserv",0);
+	$ntaptw[$noptw] = assign("n3tap_h",0);
+
+    } elsif ($crd =~ /^\$\$Graphic/) { # do nothing for now
+
+    } else { # do nothing
+
+	next;
+
+    }
+
+}
+
+# -----------------------------------------------------------------------
+# close data file
+# -----------------------------------------------------------------------
+close(IN) || die "Cannot close $ARGV[0]: $!\n";
+$nbus >= 0 || die "ERROR: no bus has been found. Conversion failed.";
+$nline >= 0 || $ntr >= 0 || $ntw >= 0 ||
+    die "ERROR: no line has been found. Conversion failed.";
+
+# -----------------------------------------------------------------------
+# open output data file
+# -----------------------------------------------------------------------
+print "Writing PSAT file \"$ARGV[1]\"...\n";
+open(OUT,">$ARGV[1]") || die "cannot open $ARGV[1]: $!\n";
+
+# -----------------------------------------------------------------------
+# write output data file
+# -----------------------------------------------------------------------
+print OUT "% File generated by PSAT from DigSilent v.$version data file.\n";
+print OUT "% "."-" x 72 . "\n";
+print OUT "% Author:   Federico Milano\n";
+print OUT "% E-mail:   Federico.Milano\@uclm.es\n";
+print OUT "% "."-" x 72 . "\n";
+for ($j = 0; $j <= $ntitle; $j++) {
+    print OUT "% $title[$j]\n";
+}
+print OUT "% "."-" x 72 . "\n\n";
+
+# -----------------------------------------------------------------------
+# write Bus.con
+# -----------------------------------------------------------------------
+$format = "%4d  %6.2f  1  0 %4d  1;\n";
+$nbus >= 0 && print OUT "Bus.con = [ ...\n";
+for ($i = 0; $i <= $nbus; $i++) {
+    printf OUT $format,$busidx[$i],$kvb[$i],$kae[$i];
+}
+$nbus >= 0 &&  printf OUT "];\n\n";
+
+# -----------------------------------------------------------------------
+# write SW.con
+# -----------------------------------------------------------------------
+if ($nsw >= 0) {
+    print OUT "SW.con = [ ...\n";
+    $format = "%4d %7.2f %6.2f %8.5f 0 %8.5f %8.5f 1.1 0.9 " .
+	"%8.5f 1 1 %1d;\n";
+    if ($tysw eq "EXT") {
+	$h = $exbus[$nsw];
+	printf OUT $format,$busnum{$h},$pbas,$buskvb{$h},
+	$exvs[$nsw],$exqb[$nsw],$exqt[$nsw],
+	$expg[$nsw],$extstt[$nsw];
+    } elsif ($tysw eq "SYN") {
+	$h = $pvbus[$nsw];
+	$k = $sname[$nsw];
+	printf OUT $format,$busnum{$h},$sbas{$k},
+	$buskvb{$h},$pvvs[$nsw],$pvqb[$nsw],$pvqt[$nsw],
+	$pvpg[$nsw],$synstt[$nsw];
+    }
+    printf OUT "];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write PV.con
+# -----------------------------------------------------------------------
+($nsyn >= 0 || $next >= 0) && printf OUT "PV.con = [ ...\n";
+$format = "%4d %7.2f %6.2f " . "%8.5f " x 4 . "1.1 0.9 1 %1d;\n";
+for ($i = 0; $i <= $nsyn; $i++) {
+    unless ($i == $nsw && $tysw eq "SYN") {
+	$h = $pvbus[$i];
+	$k = $stype[$i];
+	printf OUT $format,$busnum{$h},$sbas{$k},$vbas{$k},
+	$pvpg[$i],$pvvs[$i],$pvqb[$i],$pvqt[$i],$synstt[$i];
+    }
+}
+for ($i = 0; $i <= $next; $i++) {
+    unless ($i == $nsw && $tysw eq "EXT") {
+	$h = $exbus[$i];
+	printf OUT $format,$busnum{$h},$pbas,$buskvb{$h},
+	$expg[$i],$exvs[$i],$exqb[$i],$exqt[$i],$extstt[$i];
+    }
+}
+($nsyn >= 0 || $next >= 0) && printf OUT "];\n\n";
+
+# -----------------------------------------------------------------------
+# write PQ.con
+# -----------------------------------------------------------------------
+$npq >= 0 && printf OUT "PQ.con = [ ...\n";
+$format = "%4d $pbas %8.2f %8.5f %8.5f 1.1 0.9 1 1;\n";
+for ($i = 0; $i <= $npq; $i++) {
+    $h = $pqbus[$i];
+    printf OUT $format,$busnum{$h},$buskvb{$h},$pqpl[$i],$pqql[$i];
+}
+$npq >= 0 && printf OUT "];\n\n";
+
+# -----------------------------------------------------------------------
+# write Mn.con
+# -----------------------------------------------------------------------
+$nmn >= 0 && printf OUT "Mn.con = [ ...\n";
+$format = "%4d $pbas %8.2f  100  100  %2.2f %2.2f 1 1;\n";
+for ($i = 0; $i <= $npq; $i++) {
+    $k = $tload[$i];
+    $h = $pqbus[$i];
+    if ($kpu{$k} || $kqu{$k}) {
+	printf OUT $format,$busnum{$h},$buskvb{$h},$kpu{$k},$kqu{$k};
+    }
+}
+$nmn >= 0 && printf OUT "];\n\n";
+
+# -----------------------------------------------------------------------
+# write Shunt.con
+# -----------------------------------------------------------------------
+$nsh >= 0 && print OUT "Shunt.con = [ ...\n";
+$format = "%4d $pbas %8.2f 60 %8.5f %8.5f 1;\n";
+for ($i = 0; $i <= $nsh; $i++) {
+    $h = $shbus[$i];
+    printf OUT $format,$busnum{$h},$buskvb{$h},$pshnt[$i],$qshnt[$i];
+}
+$nsh >= 0 && print OUT "];\n\n";
+
+#------------------------------------------------------------------------
+# write Mot.con
+#------------------------------------------------------------------------
+$nasm >= 0 && print OUT "Mot.con = [ ...\n";
+$format = "%4d %8.2f %8.2f %6.2f 1 0 %8.5f %8.5f %8.5f %8.5f " .
+    "%8.5f %8.5f %8.5f 1 %8.5f 0 0 0 1 %1d;\n";
+for ($i = 0; $i <= $nasm; $i++) {
+    $h = $busasm[$i];
+    $k = $tasm[$i];
+    printf OUT $format,$busnum{$h},$snasm{$k},$kvasm{$k},$fnasm{$k},
+    $rsasm{$k},$xsasm{$k},$rr1asm{$k},$xr1asm{$k},$rr2asm{$k},$xr2asm{$k},
+    $xmasm{$k},$pasm[$i]/$snasm{$k},$uasm[$i];
+}
+$nasm >= 0 && print OUT "];\n\n";
+
+# -----------------------------------------------------------------------
+# write Line.con
+# -----------------------------------------------------------------------
+($nline >= 0 || $ntr >= 0) && print OUT "Line.con = [ ...\n";
+$format = "%4d %4d %8.2f %8.2f 60 0 %5.2f " . "%8.5f " x 5 .
+    " %8.3f 0 0 %1d;\n";
+for ($i = 0; $i <= $nline; $i++) {
+    $h = $busfr[$i];
+    $j = $bustt[$i];
+    $k = $tline[$i];
+    printf OUT $format,$busnum{$h},$busnum{$j},
+    $pbas,$buskvb{$h},0,$dline[$i]*$rline{$k},$dline[$i]*$xline{$k},
+    $dline[$i]*$bline{$k},0,0,$iline{$k},1;
+}
+for ($i = 0; $i <= $ntr; $i++) {
+    $h = $bustfr[$i];
+    $j = $busttt[$i];
+    $k = $ttrasf[$i];
+    printf OUT $format,$busnum{$h},$busnum{$j},$strasf{$k},
+    $utrasf{$k},$ktrasf{$k},$rtrasf{$k},$xtrasf{$k},
+    0,$ntap[$i]*$tap{$k}+1,$phs{$k},0,$utr[$i];
+}
+($nline >= 0 || $ntr >= 0) && print OUT "];\n\n";
+
+# -----------------------------------------------------------------------
+# write Twt.con
+# -----------------------------------------------------------------------
+$ntw >= 0 && print OUT "Twt.con = [ ...\n";
+$format = "%4d %4d %4d %5.2f 60 %5.2f %5.2f %5.2f " . "%8.5f " x 7 .
+    " 0 0 0 0 0 0 0 0 0 %1d;\n";
+for ($i = 0; $i <= $ntw; $i++) {
+    $k = $twname[$i];
+    $h = $bustw1[$i];
+    $j = $bustw2[$i];
+    $w = $bustw3[$i];
+    printf OUT $format,$busnum{$h},$busnum{$j},$busnum{$w},
+    $twsb{$k},$kv1{$k},$kv2{$k},$kv3{$k},
+    $r12{$k},$r31{$k},$r23{$k},$x12{$k},$x31{$k},$x23{$k},
+    $ntaptw[$i]*$twdu{$k}+1,$utw[$i];
+}
+$ntw >= 0 && print OUT "];\n\n";
+
+# -----------------------------------------------------------------------
+# write bus names
+# -----------------------------------------------------------------------
+$nbus >= 0 && print OUT "Bus.names = { ...\n";
+$h = ($nbus+1) % 5;
+if ($h == 0) {$h = 5;}
+if (($nbus+1) > 5) {
+    for ($i = 0; $i <= $nbus-$h; $i+=5) {
+	print OUT "  '$busname[$i]'; '$busname[$i+1]'; " .
+	    "'$busname[$i+2]'; '$busname[$i+3]'; '$busname[$i+4]';\n";
+    }
+}
+print OUT "  ";
+for ($i = $nbus-$h+1; $i <= $nbus-1; $i++) {
+    print OUT "'$busname[$i]'; ";
+}
+print OUT "'$busname[$nbus]'};\n\n";
+
+# -----------------------------------------------------------------------
+# close output data file
+# -----------------------------------------------------------------------
+close(OUT) || die "cannot close $ARGV[1]: $!\n";
+print "Conversion completed.\n";
+
+# -----------------------------------------------------------------------
+# function for getting data fields
+# -----------------------------------------------------------------------
+
+sub fields {
+    my $item;
+    my $counter = -1;
+    my %cards;
+    my @mydata = split /;/, $crd; #/
+    shift(@mydata);
+    foreach $item (@mydata) {
+	$counter++;
+	$item =~ s/\(\w+:*\d*\).*$//;
+	$cards{$item} = $counter;
+    }
+    return %cards;
+}
+
+# -----------------------------------------------------------------------
+# function for formatting data and/or assigning default values
+# -----------------------------------------------------------------------
+sub assign {
+    my $param;
+    if (defined($card{$_[0]})) {
+	$param = $data[$card{$_[0]}];
+	if ($param eq "") { $param = $_[1]; }
+    } else {
+	$param = $_[1];
+    }
+    return $param;
+}
+
+# -----------------------------------------------------------------------
+# function for finding the slack generator
+# -----------------------------------------------------------------------
+sub swgen {
+    my $swpgen = $_[0];
+    my $swpos = 0;
+    for ($k = 0; $k <= $nopv; $k++) {
+	if ($swpgen < $pvpg[$k]) {
+	    $swpos = $k;
+	    $swpgen = $pvpg[$k];
+	}
+    }
+    return $swpos;
+}
+
+# -----------------------------------------------------------------------
+# function for reading comma separated data
+# -----------------------------------------------------------------------
+sub mysplit {
+    my $string = $_[0];
+    my @mydata = split /;/, $string;
+    if ($mydata[0] eq "") { shift(@mydata); }
+    return @mydata;
+}

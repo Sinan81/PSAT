@@ -1,0 +1,205 @@
+POWER FLOW REPORT
+ 
+P S A T  2.1.9
+ 
+Author:  Federico Milano, (c) 2002-2013
+e-mail:  federico.milano@ucd.ie
+website: faraday1.ucd.ie/psat.html
+ 
+File:  /home/fmilano/Apps/psat/tests/d_014_dyn_l14_mdl
+Date:  06-Sep-2014 14:44:34
+
+
+NETWORK STATISTICS
+
+Buses:                        14         
+Lines:                        16         
+Transformers:                 4          
+Generators:                   5          
+Loads:                        11         
+
+SOLUTION STATISTICS
+
+Number of Iterations:         3          
+Maximum P mismatch [p.u.]     0          
+Maximum Q mismatch [p.u.]     0          
+Power rate [MVA]              100        
+
+POWER FLOW RESULTS
+
+Bus         V           phase       P gen       Q gen       P load      Q load      
+            [p.u.]      [rad]       [p.u.]      [p.u.]      [p.u.]      [p.u.]      
+
+Bus 01      1.06        0           3.5203     -0.28197     0           0          
+Bus 02      1.045      -0.13568     0.4         0.9486      0.3038      0.1778     
+Bus 03      1.01       -0.33212     0           0.59736     1.3188      0.266      
+Bus 04      0.99782    -0.26441     0           0           0.6692      0.056      
+Bus 05      1.0029     -0.22695     0           0           0.1064      0.0224     
+Bus 06      1.07       -0.36956     0           0.44433     0.1568      0.105      
+Bus 07      1.036      -0.33938     0           0           0           0          
+Bus 08      1.09       -0.33938     0           0.33402     0           0          
+Bus 09      1.0129     -0.37908     0           0           0.413       0.2324     
+Bus 10      1.0122     -0.38446     0           0           0.126       0.0812     
+Bus 11      1.0357     -0.37984     0           0           0.049       0.0252     
+Bus 12      1.0462     -0.39059     0           0           0.0854      0.0224     
+Bus 13      1.0366     -0.39147     0           0           0.189       0.0812     
+Bus 14      0.99695    -0.41056     0           0           0.2086      0.07       
+
+STATE VARIABLES
+
+delta_Syn_1                   0.32595    
+omega_Syn_1                   1          
+e1q_Syn_1                     1.044      
+e2q_Syn_1                     1.0345     
+e2d_Syn_1                     0.12925    
+delta_Syn_2                  -0.33367    
+omega_Syn_2                   1          
+e1q_Syn_2                     1.1963     
+e1d_Syn_2                     0.00083    
+e2q_Syn_2                     1.1381     
+e2d_Syn_2                     0.0013     
+delta_Syn_3                   0.10487    
+omega_Syn_3                   1          
+e1q_Syn_3                     1.3221     
+e1d_Syn_3                     0.14153    
+e2q_Syn_3                     1.2265     
+e2d_Syn_3                     0.22029    
+delta_Syn_4                  -0.34132    
+omega_Syn_4                   1          
+e1q_Syn_4                     1.3825     
+e1d_Syn_4                     0.00117    
+e2q_Syn_4                     1.2371     
+e2d_Syn_4                     0.00262    
+delta_Syn_5                  -0.37176    
+omega_Syn_5                   1          
+e1q_Syn_5                     1.4664     
+e1d_Syn_5                     0.0018     
+e2q_Syn_5                     1.2693     
+e2d_Syn_5                     0.00402    
+vm_Exc_1                      1.06       
+vr1_Exc_1                     7.32       
+vr2_Exc_1                    -NaN        
+vf_Exc_1                     -NaN        
+vm_Exc_2                      1.045      
+vr1_Exc_2                     4.38       
+vr2_Exc_2                    -NaN        
+vf_Exc_2                     -NaN        
+vm_Exc_3                      1.01       
+vr1_Exc_3                     4.38       
+vr2_Exc_3                    -NaN        
+vf_Exc_3                     -NaN        
+vm_Exc_4                      1.09       
+vr1_Exc_4                     6.81       
+vr2_Exc_4                    -NaN        
+vf_Exc_4                     -NaN        
+vm_Exc_5                      1.07       
+vr1_Exc_5                     6.81       
+vr2_Exc_5                    -NaN        
+vf_Exc_5                     -NaN        
+tg1_Tg_1                      3.5203     
+tg2_Tg_1                      3.5203     
+tg3_Tg_1                      2.6754     
+tg1_Tg_2                      0.40501    
+tg2_Tg_2                      0.40501    
+tg3_Tg_2                      0.30781    
+
+OTHER ALGEBRAIC VARIABLES
+
+vf_Syn_1                     -NaN        
+pm_Syn_1                      3.5203     
+p_Syn_1                       3.5203     
+q_Syn_1                      -0.28197    
+vf_Syn_2                     -NaN        
+pm_Syn_2                      0.00181    
+p_Syn_2                       0          
+q_Syn_2                       0.59736    
+vf_Syn_3                     -NaN        
+pm_Syn_3                      0.40501    
+p_Syn_3                       0.4        
+q_Syn_3                       0.9486     
+vf_Syn_4                     -NaN        
+pm_Syn_4                      0.00154    
+p_Syn_4                       0          
+q_Syn_4                       0.33402    
+vf_Syn_5                     -NaN        
+pm_Syn_5                      0.00283    
+p_Syn_5                       0          
+q_Syn_5                       0.44433    
+vref_Exc_1                   -NaN        
+vref_Exc_2                   -NaN        
+vref_Exc_3                   -NaN        
+vref_Exc_4                   -NaN        
+vref_Exc_5                   -NaN        
+wref_Tg_1                     1          
+wref_Tg_2                     1          
+
+LINE FLOWS
+
+From Bus    To Bus      Line        P Flow      Q Flow      P Loss      Q Loss      
+                                    [p.u.]      [p.u.]      [p.u.]      [p.u.]      
+
+Bus 02      Bus 05      1           0.57838     0.07        0.01785     0.01885    
+Bus 06      Bus 12      2           0.11407     0.04591     0.00162     0.00338    
+Bus 12      Bus 13      3           0.02704     0.02014     0.00023     0.00021    
+Bus 06      Bus 13      4           0.25989     0.14446     0.00511     0.01006    
+Bus 06      Bus 11      5           0.1186      0.12844     0.00254     0.00531    
+Bus 11      Bus 10      6           0.06706     0.09793     0.00108     0.00252    
+Bus 09      Bus 10      7           0.06013    -0.01389     0.00012     0.00031    
+Bus 09      Bus 14      8           0.12001     0.00518     0.00179     0.0038     
+Bus 14      Bus 13      9          -0.09038    -0.06862     0.00221     0.00451    
+Bus 07      Bus 09      10          0.37857     0.22523     0           0.01989    
+Bus 01      Bus 02      11          2.4172     -0.38062     0.10291     0.2557     
+Bus 03      Bus 02      12         -1.0022      0.13952     0.04747     0.15375    
+Bus 03      Bus 04      13         -0.31661     0.19184     0.00947    -0.01071    
+Bus 01      Bus 05      14          1.1031      0.09865     0.05928     0.19231    
+Bus 05      Bus 04      15          0.84856    -0.13731     0.00978     0.01805    
+Bus 02      Bus 04      16          0.7825      0.05026     0.03285     0.06063    
+Bus 05      Bus 06      17          0.64936     0.0724      0           0.09291    
+Bus 04      Bus 09      18          0.21456     0.04349     0           0.02514    
+Bus 04      Bus 07      19          0.37857    -0.06267     0           0.02958    
+Bus 08      Bus 07      20          0           0.33402     0           0.01654    
+
+LINE FLOWS
+
+From Bus    To Bus      Line        P Flow      Q Flow      P Loss      Q Loss      
+                                    [p.u.]      [p.u.]      [p.u.]      [p.u.]      
+
+Bus 05      Bus 02      1          -0.56053    -0.05115     0.01785     0.01885    
+Bus 12      Bus 06      2          -0.11244    -0.04254     0.00162     0.00338    
+Bus 13      Bus 12      3          -0.02681    -0.01993     0.00023     0.00021    
+Bus 13      Bus 06      4          -0.25478    -0.1344      0.00511     0.01006    
+Bus 11      Bus 06      5          -0.11606    -0.12313     0.00254     0.00531    
+Bus 10      Bus 11      6          -0.06598    -0.09541     0.00108     0.00252    
+Bus 10      Bus 09      7          -0.06002     0.01421     0.00012     0.00031    
+Bus 14      Bus 09      8          -0.11822    -0.00138     0.00179     0.0038     
+Bus 13      Bus 14      9           0.0926      0.07313     0.00221     0.00451    
+Bus 09      Bus 07      10         -0.37857    -0.20534     0           0.01989    
+Bus 02      Bus 01      11         -2.3143      0.63632     0.10291     0.2557     
+Bus 02      Bus 03      12          1.0497      0.01423     0.04747     0.15375    
+Bus 04      Bus 03      13          0.32608    -0.20255     0.00947    -0.01071    
+Bus 05      Bus 01      14         -1.0438      0.09366     0.05928     0.19231    
+Bus 04      Bus 05      15         -0.83877     0.15536     0.00978     0.01805    
+Bus 04      Bus 02      16         -0.74965     0.01037     0.03285     0.06063    
+Bus 06      Bus 05      17         -0.64936     0.02051     0           0.09291    
+Bus 09      Bus 04      18         -0.21456    -0.01835     0           0.02514    
+Bus 07      Bus 04      19         -0.37857     0.09225     0           0.02958    
+Bus 07      Bus 08      20          0          -0.31748     0           0.01654    
+
+GLOBAL SUMMARY REPORT
+
+
+TOTAL GENERATION
+
+REAL POWER [p.u.]             3.9203     
+REACTIVE POWER [p.u.]         2.0424     
+
+TOTAL LOAD
+
+REAL POWER [p.u.]             3.626      
+REACTIVE POWER [p.u.]         1.1396     
+
+TOTAL LOSSES
+
+REAL POWER [p.u.]             0.2943     
+REACTIVE POWER [p.u.]         0.90275    
+

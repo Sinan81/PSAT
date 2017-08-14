@@ -1,0 +1,13 @@
+function Gycall_oxl(a)
+
+global DAE
+
+if ~a.n, return, end
+
+dipqv = ifield_oxl(a,2);
+
+DAE.Gy = DAE.Gy ...
+         - sparse(a.If,a.If,1,DAE.m,DAE.m) ...
+         + sparse(a.If,a.p,dipqv(:,1),DAE.m,DAE.m) ...
+         + sparse(a.If,a.q,dipqv(:,2),DAE.m,DAE.m) ...
+         + sparse(a.If,a.vbus,dipqv(:,3),DAE.m,DAE.m);

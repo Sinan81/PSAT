@@ -1,0 +1,501 @@
+#!/usr/bin/perl -w
+# IEEE2PSAT converts IEEE/CDF data file into PSAT data file
+#
+# IEEE2PSAT <OPTIONS> FILEINPUT <FILEOUTPUT>
+#
+# Author:  Federico Milano
+# Date:    25-Jun-2003
+# Version: 1.0.0
+#
+#E-mail:    fmilano@thunderbox.uwaterloo.ca
+#Web-site:  http://thunderbox.uwaterloo.ca/~fmilano
+
+use strict;
+
+# -----------------------------------------------------------------------
+# variable declaration
+# -----------------------------------------------------------------------
+my $nargin = 0;
+my $verbose = 0;
+my $helpmsg = 0;
+my ($i,$k);
+my $h = 1;
+my $format;
+my $n = 0;
+my $npv = -1;
+my $nsw = -1;
+my $npq = -1;
+my $nsh = -1;
+my (@idxpv, @idxsw, @idxpq, @idxsh);
+my $pbas = 100;
+my $freq = 60;
+my $blanks = " " x 100;
+my $iter = 20;
+my $toler = 0.0001;
+my $nbus = -1;
+my $nline = -1;
+my $narea = -1; # Zones in PSAT format
+my $nzone = -1; # Areas in PSAT format
+my $flag_bus = 0;
+my $flag_line = 0;
+my $flag_area = 0;
+my $flag_trsf = 0;
+my $flag = 1;
+my $check = 0;
+my $skipline = 0;
+my $skipbus = 0;
+my (@busidx,@bustype,@busname,@status);
+my (@ein,@ang,@pag,@prg,@qmi,@qma,@psh,@pac);
+my (@prc,@qsh,@kvb,@karea,@kzone);	    
+my %kvbase;
+my (@busfr,@busto);
+my (@rest,@reat,@susc,@tfas,@tfmi,@tfma,@phsf);
+my (@nbci,@cano,@caem,@sbas,@linestatus);	    
+my (@areanum,@areaslack,@areaexp,@areatol,@areaname);
+my (@zonenum,@zonename);
+
+# -----------------------------------------------------------------------
+# check inputs
+# -----------------------------------------------------------------------
+$nargin = @ARGV;
+$nargin || die "Error: No input data file.\n";
+my $title = 'Generic IEEE/CDF Data Format File '.$ARGV[0];
+
+# -----------------------------------------------------------------------
+# check options
+# -----------------------------------------------------------------------
+while ($ARGV[0] =~ /^-/) {
+    if ($ARGV[0] =~ /v/) {$verbose = 1;}
+    if ($ARGV[0] =~ /h/) {$helpmsg = 1;}
+    shift(@ARGV);
+    $nargin--;
+    if ($nargin == 0) { 
+	last;
+    }
+}
+
+# -----------------------------------------------------------------------
+# help (if requested)
+# -----------------------------------------------------------------------
+if ($helpmsg) {
+    print "\nIEEE2PSAT converts IEEE/CDF data files into PSAT data files.\n\n";
+    print "ieee2psat <options> fileinput <fileoutput>\n";
+    print "  -v   verbose\n";
+    print "  -h   print this help and exit\n\n";
+    print "Author:   Federico Milano\n";
+    print "Date:     25-Jun-2003\n";
+    print "Version:  1.0.0\n\n";
+    print "E-mail:   fmilano\@thunderbox.uwaterloo.ca\n";
+    print "Web-site: http://thunderbox.uwaterloo.ca/~fmilano\n";
+    die "\n";
+}
+
+# -----------------------------------------------------------------------
+# define output file name (if necessary)
+# -----------------------------------------------------------------------
+if ($nargin == 1) {
+    $ARGV[1] = $ARGV[0];
+    $ARGV[1] =~ s/^d*_*/d_/;
+    $ARGV[1] =~ s/[^\w\.]/_/g;
+    $ARGV[1] =~ s/\..+$/.m/;
+} elsif ($nargin == 0) {
+    die "Error: Input file name is missing.\n";
+}
+
+# -----------------------------------------------------------------------
+# open input data file
+# -----------------------------------------------------------------------
+print "Opening IEEE/CDF file \"$ARGV[0]\"...\n";
+carret();
+open(IN,$ARGV[0]) || die "cannot open $ARGV[0]: $!\n";
+
+# -----------------------------------------------------------------------
+# find header
+# -----------------------------------------------------------------------
+while (<IN>) {
+    if (/^TAPE/) {      # TAPE data format
+	$verbose && print "IEEE data file is in TAPE format";
+    } elsif (/^CARD/) { # CARD data format
+	$verbose && print "IEEE data file is in CARD format";
+    } elsif (/^C/) {
+	next;
+    } else {
+	chomp;
+	$title = $_;
+	last;    
+    }
+}
+
+$pbas  = assign($_,31,6,100) || die "Header row is in a wrong format.\n";
+
+# -----------------------------------------------------------------------
+# find bus data
+# -----------------------------------------------------------------------
+$i = 0;
+while (<IN>) {
+    if (/^C/) {next;}
+    if (/^BUS/) {last;}
+    $i++;
+    if ($i == 5) {die "No Bus Data Found.";}
+}
+
+# -----------------------------------------------------------------------
+# scan bus data
+# -----------------------------------------------------------------------
+while (<IN>) {
+    if (/^-999/) {last;}
+    chomp;
+    $_ = $_ . $blanks;
+    $nbus++;
+    $bustype[$nbus] = assign($_,24,2,0);
+    $busidx[$nbus]  = assign($_,0,5,1);
+    $ein[$nbus] = assign($_,27,6,1);
+    $ang[$nbus] = 3.141592654*assign($_,33,7,0)/180;	    
+    if ($bustype[$nbus] == 4) { 
+	$status[$nbus] = 0;
+    } else {
+	$status[$nbus] = 1;
+    }
+    if ($bustype[$nbus] == 2) {
+	$npv++;
+	$idxpv[$npv] = $nbus;
+	if (assign($_,84,6,0)) {
+	    $ein[$nbus] = assign($_,84,6,1);
+	}
+    } elsif ($bustype[$nbus] == 3) {
+	$nsw++;
+	$idxsw[$nsw] = $nbus;
+    }
+    $check = ($bustype[$nbus] <= 1);
+    $busname[$nbus] = deblank(substr($_,5,12));
+    $busname[$nbus] =~ s/\'/\'\'/g;
+    $pag[$nbus] = assign($_,59,8,0)/$pbas;
+    $prg[$nbus] = assign($_,67,8,0)/$pbas;
+    $qma[$nbus] = assign($_,90,8,0)/$pbas;
+    $qmi[$nbus] = assign($_,98,8,0)/$pbas;
+    $pac[$nbus] = assign($_,40,9,0)/$pbas;
+    $prc[$nbus] = assign($_,49,10,0)/$pbas;
+    if ($pac[$nbus] != 0 || $prc[$nbus] != 0 || 
+	$check*$pag[$nbus] != 0 || $check*$prg[$nbus] != 0) {
+	$npq++;
+	$idxpq[$npq] = $nbus;
+	$pac[$nbus] -= $check*$pag[$nbus];
+	$prc[$nbus] -= $check*$prg[$nbus];
+    }
+    $psh[$nbus] = assign($_,106,8,0);
+    $qsh[$nbus] = assign($_,114,8,0); 
+    if ($qsh[$nbus] != 0 || $psh[$nbus] != 0) {
+	$nsh++;
+	$idxsh[$nsh] = $nbus;
+    }
+    $kvb[$nbus] = assign($_,76,7,1.00);
+    if ($kvb[$nbus] == 0) { $kvb[$nbus] = 1; }
+    $karea[$nbus] = assign($_,17,3,1);
+    $kzone[$nbus] = assign($_,20,4,1);
+    $kvbase{$busidx[$nbus]} = $kvb[$nbus];
+    $verbose && printf("Found Bus  %4d:  $busname[$nbus]\n",$nbus+1);
+}
+if ($skipbus) {print "* * Skipped " . $skipbus . " isolated buses.\n"; }
+
+# -----------------------------------------------------------------------
+# find branch data
+# -----------------------------------------------------------------------
+$i = 0;
+while (<IN>) {
+    if (/^BRANCH/) {last;}
+    $i++;
+    if ($i == 5) {die "No Branch Data Found.";}
+}
+
+# -----------------------------------------------------------------------
+# scan branch data
+# -----------------------------------------------------------------------
+while (<IN>) {
+    if (/^-999/) {last;}
+    chomp;
+    $nline++;
+    $linestatus[$nline] = openline($_);
+    $_ = $_ . $blanks;
+    $busfr[$nline] = assign($_,0,5,1);
+    $busto[$nline] = assign($_,5,5,1);
+    $rest[$nline] = assign($_,19,10,0);
+    $reat[$nline] = assign($_,29,11,0);	    
+    $susc[$nline] = assign($_,40,10,0);
+    $tfas[$nline] = assign($_,76,6,1);
+    $tfmi[$nline] = assign($_,90,7,1.1);
+    $tfma[$nline] = assign($_,97,7,0.9);
+    $phsf[$nline] = assign($_,83,7,0);
+    $nbci[$nline] = assign($_,105,6,0);
+    $cano[$nline] = assign($_,50,5,0)/$pbas;
+    $caem[$nline] = assign($_,56,5,0)/$pbas;	    
+    $verbose && printf("Found Line %4d: %4d -> %4d\n",$nline+1,$busfr[$nline],$busto[$nline]);
+}
+
+# -----------------------------------------------------------------------
+# scan loss zones
+# -----------------------------------------------------------------------
+$_  = <IN>;
+if (/^LOSS/) {
+    while (<IN>) {
+	if (/^-9/) {last;}
+	chomp;
+	$_ = $_ . $blanks;
+	$nzone++;
+	$zonenum[$nzone] = assign($_,0,3,1);
+	$zonename[$nzone] = deblank(assign($_,4,12,"Area " . $zonenum[$nzone]));
+	$zonename[$nzone] =~ s/\'/\'\'/g;
+	$verbose && printf("Found Area %4d: %2d\n",$nzone+1,$zonenum[$nzone]);
+    }
+    $_  = <IN>;
+} else {
+    print "No Loss Zone Data found.";
+}
+
+# -----------------------------------------------------------------------
+# scan interchange data
+# -----------------------------------------------------------------------
+if (/^INTERCHANGE/) {
+    while (<IN>) {
+	if (/^-9/) {last;}
+	chomp;
+	$_ = $_ . $blanks;
+	$narea++;
+	$areanum[$narea] = assign($_,0,3,1);
+	$areaname[$narea] = deblank(assign($_,37,10,"Region " . $areanum[$narea]));
+	$areaname[$narea] =~ s/\'/\'\'/g;
+	$areaslack[$narea] = assign($_,3,5,0);
+	$areaexp[$narea] = assign($_,20,8,0)/$pbas;
+	$areatol[$narea] = assign($_,29,6,0)/$pbas;
+	$verbose && printf("Found Region %4d: %2d\n",$narea+1,$areanum[$narea]);
+    }
+    $_  = <IN>;
+} else {
+    print "No Interchange Data found.";
+}
+
+# -----------------------------------------------------------------------
+# scan tie lines
+# -----------------------------------------------------------------------
+if (/^TIE/) {
+    print "TIE LINES are not defined in PSAT and will be neglected.\n";
+    while (<IN>) {
+	if (/^-9/) {last;}
+    }
+}
+
+# -----------------------------------------------------------------------
+# close input data file
+# -----------------------------------------------------------------------
+close(IN) || die "cannot close $ARGV[0]: $!\n";
+
+# -----------------------------------------------------------------------
+# open output data file
+# -----------------------------------------------------------------------
+print "Writing PSAT file \"$ARGV[1]\"...\n";
+carret();
+open(OUT,">$ARGV[1]") || die "cannot open $ARGV[1]: $!\n";
+
+# -----------------------------------------------------------------------
+# write output data file
+# -----------------------------------------------------------------------
+print OUT "% File generated by PSAT from IEEE/CDF data file.\n";
+print OUT "% "."-" x 78 . "\n";
+print OUT "% Author:   Federico Milano\n";
+print OUT "% E-mail:   fmilano\@thunderbox.uwaterloo.ca\n";
+print OUT "% Web-site: http://thunderbox.uwaterloo.ca/~fmilano\n";
+print OUT "% "."-" x 78 . "\n";
+print OUT "% $title\n\n";
+
+# -----------------------------------------------------------------------
+# write Bus.con
+# -----------------------------------------------------------------------
+if ($nbus >= 0) {
+    print OUT "Bus.con = [ ...\n";
+    $format = "%4d %7.2f %8.5f %8.5f %2d %2d;\n";
+    for ($i = 0; $i <= $nbus; $i++) {
+	printf OUT $format,$busidx[$i],$kvb[$i],$ein[$i],$ang[$i],
+	$kzone[$i],$karea[$i];
+    }
+    printf OUT "  ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write SW.con
+# -----------------------------------------------------------------------
+if ($nsw >= 0) {
+    print OUT "SW.con = [ ...\n";
+    $format = "%4d $pbas %6.2f " . "%8.5f " x 4 . "1.1 0.9 %8.5f 1 1 1;\n";
+    for ($i = 0; $i <= $nsw; $i++) {
+	$h = $idxsw[$i];
+	printf OUT $format,$busidx[$h],$kvb[$h],$ein[$h],$ang[$h],
+	$qma[$h],$qmi[$h],$pag[$h];
+    }
+    printf OUT "  ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write PV.con
+# -----------------------------------------------------------------------
+if ($npv >= 0) {
+    print OUT "PV.con = [ ...\n";
+    $format = "%4d $pbas %6.2f " . "%8.5f " x 4 . "1.1 0.9 1 %2d;\n";
+    for ($i = 0; $i <= $npv; $i++) {
+	$h = $idxpv[$i];
+	printf OUT $format,$busidx[$h],$kvb[$h],$pag[$h],$ein[$h],
+	$qma[$h],$qmi[$h],$status[$h];
+    }
+    printf OUT "  ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write PQ.con
+# -----------------------------------------------------------------------
+if ($npq >= 0) {
+    print OUT "PQ.con = [ ...\n";
+    $format = "%4d $pbas %6.2f %8.5f %8.5f 1.1 0.9 1 %2d;\n";
+    for ($i = 0; $i <= $npq; $i++) {
+	$h = $idxpq[$i];
+	printf OUT $format, $busidx[$h],$kvb[$h],$pac[$h],$prc[$h],$status[$h];
+    }
+    printf OUT "  ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write Shunt.con
+# -----------------------------------------------------------------------
+if ($nsh >= 0) {
+    print OUT "Shunt.con = [ ...\n";
+    $format = "%4d $pbas %6.2f 60 %8.5f %8.5f %2d;\n";
+    for ($i = 0; $i <= $nsh; $i++) {
+	$h = $idxsh[$i];
+	printf OUT $format, $busidx[$h],$kvb[$h],$psh[$h],$qsh[$h],$status[$h];
+    }
+    printf OUT "  ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write Line.con
+# -----------------------------------------------------------------------
+if ($nline >= 0) {
+    print OUT "Line.con = [ ...\n";
+    $format = "%4d %4d %7.2f %6.2f 60 0 %8.4f " . "%8.5f " x 5 . "0 %8.3f %8.3f %2d;\n";
+    for ($i = 0; $i <= $nline; $i++) {
+	$k = $kvbase{$busfr[$i]}/$kvbase{$busto[$i]};
+	if ($k == 1) {$k = 0;}
+	printf OUT $format, $busfr[$i],$busto[$i],$pbas,
+	$kvbase{$busfr[$i]},$k,$rest[$i],$reat[$i],$susc[$i],$tfas[$i],
+	$phsf[$i],$cano[$i],$caem[$i],$linestatus[$i];
+    }
+    printf OUT "  ];\n\n";
+}
+
+# -----------------------------------------------------------------------
+# write Areas.con
+# -----------------------------------------------------------------------
+if ($nzone >= 0) {
+    print OUT "Areas.con = [ ...\n";
+    $format = "%4d 0 $pbas 0 0 0 0 0;\n";
+    for ($i = 0; $i <= $nzone; $i++) {
+	printf OUT $format, $zonenum[$i];
+    }
+    printf OUT "  ];\n\n";    
+}
+
+# -----------------------------------------------------------------------
+# write Region.con
+# -----------------------------------------------------------------------
+if ($narea >= 0) {
+    print OUT "Regions.con = [ ...\n";
+    $format = "%4d %4d $pbas %8.5f %8.5f 0 0 0;\n";
+    for ($i = 0; $i <= $narea; $i++) {
+	printf OUT $format, $areanum[$i],$areaslack[$i],
+	$areaexp[$i],$areatol[$i];
+    }
+    printf OUT "  ];\n\n";    
+}
+
+# -----------------------------------------------------------------------
+# write bus names
+# -----------------------------------------------------------------------
+$nbus >= 0 && print OUT "Bus.names = { ...\n";
+$h = ($nbus+1) % 5;
+if ($h == 0) {$h = 5;}
+if (($nbus+1) > 5) {
+    for ($i = 0; $i <= $nbus-$h; $i+=5) {
+	print OUT "  '$busname[$i]'; '$busname[$i+1]'; " . 
+	    "'$busname[$i+2]'; '$busname[$i+3]'; '$busname[$i+4]';\n";
+    }
+}
+print OUT "  ";
+for ($i = $nbus-$h+1; $i <= $nbus-1; $i++) {
+    print OUT "'$busname[$i]'; ";
+}
+print OUT "'$busname[$nbus]'};\n\n";
+
+# -----------------------------------------------------------------------
+# write area names
+# -----------------------------------------------------------------------
+$nzone >= 0 && print OUT "Areas.names = { ...\n";
+for ($i = 0; $i <= $nzone-1; $i++) {
+    print OUT "  '$zonename[$i]';\n";
+}
+$nzone >= 0 && print OUT "  '$zonename[$nzone]'};\n\n";
+
+# -----------------------------------------------------------------------
+# write region names
+# -----------------------------------------------------------------------
+$narea >= 0 && print OUT "Regions.names = { ...\n";
+for ($i = 0; $i <= $narea-1; $i++) {
+    print OUT "  '$areaname[$i]';\n";
+}
+$narea >= 0 && print OUT "  '$areaname[$narea]'};\n\n";
+
+# -----------------------------------------------------------------------
+# close output data file
+# -----------------------------------------------------------------------
+close(OUT) || die "cannot close $ARGV[1]: $!\n";
+print "Conversion completed.\n";
+
+# -----------------------------------------------------------------------
+# function for formatting data and/or assigning default values
+# -----------------------------------------------------------------------
+sub assign {
+    my $param;
+    $param = substr($_[0],$_[1],$_[2]);
+    $param =~ s/\s+//g;
+    if ($param eq "") { $param = $_[3]; }
+    return $param;
+}
+
+# -----------------------------------------------------------------------
+# function for determining if the line is close
+# -----------------------------------------------------------------------
+sub openline {
+    my @mydata = split /\s+/, $_[0];
+    $_[0] =~ s/\s+$//;
+    if (length($_[0]) > 130) {
+	if ($mydata[-1] > 1) {
+	    return 1;
+	} else {
+	    return $mydata[-1];
+	}
+    } else {
+	return 1;
+    }
+}
+
+# -----------------------------------------------------------------------
+# function for formatting data and/or assigning default values
+# -----------------------------------------------------------------------
+sub deblank {
+    my $name = $_[0];
+    $name =~ s/( *)$//;
+    return $name;
+}
+
+# -----------------------------------------------------------------------
+# function for writing a separator
+# -----------------------------------------------------------------------
+sub carret {
+    $verbose && print "-" x 50 . "\n";
+}

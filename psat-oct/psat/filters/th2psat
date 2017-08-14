@@ -1,0 +1,510 @@
+#!/usr/bin/perl -w
+# TH2PSAT converts TH data file into PSAT data file
+#
+# TH2PSAT <OPTIONS> FILEINPUT <FILEOUTPUT>
+#
+# Author:  Federico Milano
+# Date:    25-Jun-2003
+# Version: 1.0.0
+#
+#E-mail:    fmilano@thunderbox.uwaterloo.ca
+#Web-site:  http://thunderbox.uwaterloo.ca/~fmilano
+
+use strict;
+
+# -----------------------------------------------------------------------
+# variable declaration
+# -----------------------------------------------------------------------
+
+my $nargin = 0;
+my $verbose = 0;
+my $helpmsg = 0;
+my ($i,$h,$k);
+my $format;
+my $n = 2;
+my (@dum,$idx);
+
+#  System variables
+my $pbas = 100;
+my $freq = 60;
+
+#  BUS variables
+my $nbus = 0;
+my $npv = -1;
+my $npq = -1;
+my $nsh = -1;
+my (@idxpv, @idxpq, @idxsh, @idxzip);
+my (@ein,@ang,@pag,@prg,@qmi,@qma,@tap,@pac,@prc,@psh,@qsh,@vmi,@vma);	    
+my (%busname,%genname,%busidx);
+
+#  Slack variables
+my $nsw = -1;
+my (@idxsw,@vsw,@tsw);
+
+# LINE SHUNT variables
+my $nshunt = -1;
+my (@shname,@gsh,@bsh);
+
+#  LINE variables
+my $nline = -1;
+my (@busfr,@busto);
+my (@rest,@reat,@susc,@kt,@phsf,@tfas,@sbas);	    
+
+#  ZIP LOAD variables
+my $nzip = -1;
+my (@ppzip,@pqzip,@ipzip,@iqzip,@zpzip,@zqzip,@kvzip);
+
+#  LTC variables
+my $nltc = -1;
+my (@ltcfr,@ltcto,@rltc,@xltc,@mltc,@mstep,@mmax,@mmin);
+
+# -----------------------------------------------------------------------
+# check inputs
+# -----------------------------------------------------------------------
+$nargin = @ARGV;
+$nargin || die "Error: No input data file.\n";
+my $title1 = 'Generic TH Data Format File '.$ARGV[0];
+my $title2;
+
+# -----------------------------------------------------------------------
+# check options
+# -----------------------------------------------------------------------
+
+while ($ARGV[0] =~ /^-/) {
+    if ($ARGV[0] =~ /v/) {$verbose = 1;}
+    if ($ARGV[0] =~ /h/) {$helpmsg = 1;}
+    shift(@ARGV);
+    $nargin--;
+    if ($nargin == 0) { 
+	last;
+    }
+} 
+
+# -----------------------------------------------------------------------
+# help (if requested)
+# -----------------------------------------------------------------------
+if ($helpmsg) {
+    print "\nTH2PSAT converts TH data files into PSAT data files.\n\n";
+    print "th2psat <options> fileinput <fileoutput>\n";
+    print "  -v   verbose\n";
+    print "  -h   print this help and exit\n\n";
+    print "Author:   Federico Milano\n";
+    print "Date:     14-Jan-2004\n";
+    print "Version:  1.0.0\n\n";
+    print "E-mail:   fmilano\@thunderbox.uwaterloo.ca\n";
+    print "Web-site: http://thunderbox.uwaterloo.ca/~fmilano\n";
+    die "\n";
+}
+
+# -----------------------------------------------------------------------
+# define output file name (if necessary)
+# -----------------------------------------------------------------------
+if ($nargin == 1) {
+    $ARGV[1] = $ARGV[0];
+    $ARGV[1] =~ s/^d*_*/d_/;
+    $ARGV[1] =~ s/[^\w\.]/_/g;
+    $ARGV[1] =~ s/\..+$/.m/;
+} elsif ($nargin == 0) {
+    die "Error: Input file name is missing.\n";
+}
+
+# -----------------------------------------------------------------------
+# open input data file
+# -----------------------------------------------------------------------
+print "Opening TH file \"$ARGV[0]\"...\n";
+carret();
+open(IN,$ARGV[0]) || die "cannot open $ARGV[0]: $!\n";
+
+# -----------------------------------------------------------------------
+# scan input data file
+# -----------------------------------------------------------------------
+$title2 = <IN>;
+$_ = <IN>; # dummy line
+while (<IN>) {
+    chomp;
+    $n++;
+    @dum = split(/\s+/);
+    if (/^\*/) { # comment 
+	next;
+    } elsif (/^\s+/) { # blank line
+	$verbose && print "Line $n is blank\n";
+	next;
+    } elsif ($_ eq '') { # empty line
+	$verbose && print "Line $n is empty\n";
+	next;
+    } elsif (/^SYSBASE/) { # System base 
+	$pbas = $dum[2];
+    } elsif (/^SYSF(RE|ER)Q/)  { # System frequency 
+	$freq = $dum[2];
+    } elsif (/^THLINE/) { # transmission line
+	$nline++;
+	$busfr[$nline] = $dum[2];
+	$busto[$nline] = $dum[3];
+	$rest[$nline] = $dum[4];
+	$reat[$nline] = $dum[5];
+	$susc[$nline] = -2*$dum[6];
+	$kt[$nline] = 0;
+	$idx = addbus($dum[2]);
+	$idx = addbus($dum[3]);
+    } elsif (/^LINE/) { # transmission line
+	$nline++;
+	$busfr[$nline] = $dum[2];
+	$busto[$nline] = $dum[3];
+	$rest[$nline] = $dum[4];
+	$reat[$nline] = $dum[5];
+	$susc[$nline] = -2*$dum[6];
+	$sbas[$nline] = $dum[7];
+	$kt[$nline] = 0;	
+	$idx = addbus($dum[2]);
+	$idx = addbus($dum[3]);
+    } elsif (/^THTRFO/) { # transformer
+	$nline++;
+	$busfr[$nline] = $dum[2];
+	$busto[$nline] = $dum[3];
+	$rest[$nline] = $dum[4];
+	$reat[$nline] = $dum[5];
+	$tfas[$nline] = $dum[6]/100;
+	$kt[$nline] = 1;	
+	$idx = addbus($dum[2]);
+	$idx = addbus($dum[3]);
+    } elsif (/^TRFOPH/) { # transformer
+	$nline++;
+	$busfr[$nline] = $dum[2];
+	$busto[$nline] = $dum[3];
+	$rest[$nline] = $dum[4];
+	$reat[$nline] = $dum[5];
+	$tfas[$nline] = $dum[6]/100;
+	$phsf[$nline] = $dum[7];
+	$kt[$nline] = 1;	
+	$idx = addbus($dum[2]);
+	$idx = addbus($dum[3]);
+    } elsif (/^TRFOB2/) { # transformer
+	$nline++;
+	$busfr[$nline] = $dum[2];
+	$busto[$nline] = $dum[3];
+	$rest[$nline] = $dum[4];
+	$reat[$nline] = $dum[5];
+	$tfas[$nline] = $dum[10]/100;
+	$kt[$nline] = 1;
+	$nshunt++;
+	$shname[$nshunt] = $busfr[$nline];
+	$gsh[$nshunt] = $dum[6];
+	$bsh[$nshunt] = $dum[7];
+	$nshunt++;
+	$shname[$nshunt] = $busto[$nline];
+	$gsh[$nshunt] = $dum[8];
+	$bsh[$nshunt] = $dum[9];
+	$idx = addbus($dum[2]);
+	$idx = addbus($dum[3]);
+    } elsif (/^TRFO/) { # transformer
+	$nline++;
+	$busfr[$nline] = $dum[2];
+	$busto[$nline] = $dum[3];
+	$rest[$nline] = $dum[4];
+	$reat[$nline] = $dum[5];
+	$tfas[$nline] = $dum[6]/100;
+	$sbas[$nline] = $dum[7];
+	$kt[$nline] = 1;
+	$idx = addbus($dum[2]);
+	$idx = addbus($dum[3]);
+    } elsif (/^TAPCV/) { # transformer
+	# not implemented
+	print "Warning: TAPCV data are not used";
+    } elsif (/^TAP/) { # transformer
+	$nltc++;
+	$rltc[$nltc] = $dum[4];
+	$xltc[$nltc] = $dum[5];
+	if ($dum[16] == 1) { # control on sending side
+	    $ltcfr[$nltc] = $dum[3];
+	    $ltcto[$nltc] = $dum[2];
+	    $mltc[$nltc] = $dum[10]/100;
+	    $mstep[$nltc] = $dum[12]/100;
+	} else { # control on ending side
+	    $ltcfr[$nltc] = $dum[2];
+	    $ltcto[$nltc] = $dum[3];
+	    $mltc[$nltc] = $dum[11]/100;
+	    $mstep[$nltc] = $dum[13]/100;
+	}	
+	$mmax[$nltc] = $dum[17]*$mstep[$nltc]+$mltc[$nltc];
+	$mmin[$nltc] = $dum[18]*$mstep[$nltc]+$mltc[$nltc];
+	if ($dum[6] || $dum[7]) {
+	    $nshunt++;
+	    $shname[$nshunt] = $ltcfr[$nline];
+	    $gsh[$nshunt] = $dum[6];
+	    $bsh[$nshunt] = $dum[7];
+	}
+	if ($dum[8] || $dum[9]) {
+	    $nshunt++;
+	    $shname[$nshunt] = $ltcto[$nline];
+	    $gsh[$nshunt] = $dum[8];
+	    $bsh[$nshunt] = $dum[9];
+	}
+	$idx = addbus($dum[2]);
+	$idx = addbus($dum[3]);
+    } elsif (/^GENERCV/) { # PV generator
+	$idx = addbus($dum[2]);
+	$npv++;
+	$idxpv[$npv] = $idx;
+	$genname{$dum[1]} = $idx;
+	$pag[$idx] = $dum[3]/$pbas;
+	$prg[$idx] = $dum[4]/$pbas;
+    } elsif (/^GENERDATA/) { # generator data
+	$idx = $genname{$dum[1]};
+	$qmi[$idx] = $dum[10]/$pbas;
+	$qma[$idx] = $dum[9]/$pbas;
+	$vmi[$idx] = $dum[12];
+	$vma[$idx] = $dum[11];
+    } elsif (/^GENER/) { # PQ generator
+	$idx = addbus($dum[2]);
+	#if ($dum[3] || $dum[4]) {
+	#    $npq++;
+	#    $idxpq[$npq] = $idx;
+	#    $pac[$idx] = -$dum[3]/$pbas;
+	#    $prc[$idx] = -$dum[4]/$pbas;
+	#}
+	$genname{$dum[1]} = $idx;
+    } elsif (/^THLOAD/) { # PQ load
+	$idx = addbus($dum[2]);
+	$npq++;
+	$idxpq[$npq] = $idx;
+	$pac[$idx] = $dum[3];
+	$prc[$idx] = $dum[4];
+    } elsif (/^LOAD/) { # ZIP load
+	$idx = addbus($dum[2]);
+	$nzip++;
+	$idxzip[$nzip] = $idx;
+	$ppzip[$nzip] = $dum[3]/$pbas;
+	$pqzip[$nzip] = $dum[4]/$pbas;
+	$ipzip[$nzip] = $dum[5]/$pbas/$dum[9];
+	$iqzip[$nzip] = $dum[6]/$pbas/$dum[9];
+	$zpzip[$nzip] = $dum[7]/$pbas/$dum[9]/$dum[9];
+	$zqzip[$nzip] = $dum[8]/$pbas/$dum[9]/$dum[9]; 
+	$kvzip[$nzip] = $dum[9];
+    } elsif (/^THSHUNT/) { # Shunt
+	$idx = addbus($dum[2]);
+	$nsh++;
+	$idxsh[$nsh] = $idx;
+	$psh[$idx] = $dum[3];
+	$qsh[$idx] = -$dum[4];
+    } elsif (/^THSLACK/) { # Slack bus
+	$nsw++;
+	$idxsw[$nsw] = $dum[1];
+	$vsw[$nsw] = $dum[2];
+	$tsw[$nsw] = 3.141592654*$dum[3]/180;
+    } elsif (/^SLACK/) { # Slack bus
+	$idx = addbus($dum[2]);
+	$nsw++;
+	$genname{$dum[1]} = $idx;
+	$idxsw[$nsw] = $dum[1];
+	$vsw[$nsw] = $dum[3];
+	$tsw[$nsw] = 3.141592654*$dum[4]/180;
+    } elsif (/^RES_V/) { # solution voltages
+	$idx = addbus($dum[1]);
+	$ein[$idx] = $dum[2];
+	$ang[$idx] = 3.141592654*$dum[3]/180;
+    } elsif (/^RES_MAC/) { # generators output
+	# not used
+    } elsif (/^MAC_CMXD/) { # generator data
+	# not used
+    } else {
+	$verbose && print "Warning: Line $n does not seem " .
+	    "properly formed and will be ignored.\n";
+    }
+}
+
+# -----------------------------------------------------------------------
+# close input data file
+# -----------------------------------------------------------------------
+close(IN) || die "cannot close $ARGV[0]: $!\n";
+
+# -----------------------------------------------------------------------
+# open output data file
+# -----------------------------------------------------------------------
+print "Writing PSAT file \"$ARGV[1]\"...\n";
+carret();
+open(OUT,">$ARGV[1]") || die "cannot open $ARGV[1]: $!\n";
+
+# -----------------------------------------------------------------------
+# write output data file
+# -----------------------------------------------------------------------
+print OUT "% File generated by PSAT from TH data file.\n";
+print OUT "% "."-" x 78 . "\n";
+print OUT "% Author:   Federico Milano\n";
+print OUT "% E-mail:   fmilano\@thunderbox.uwaterloo.ca\n";
+print OUT "% Web-site: http://thunderbox.uwaterloo.ca/~fmilano\n";
+print OUT "% "."-" x 78 . "\n";
+print OUT "% $title1\n";
+print OUT "% $title2\n\n";
+
+# -----------------------------------------------------------------------
+# write Bus.con
+# -----------------------------------------------------------------------
+$format = "%4d 1 %8.5f %8.5f 1 1";
+$nbus >= 0 && print OUT "Bus.con = [ ...\n";
+for ($i = 1; $i <= $nbus-1; $i++) {
+    printf OUT "$format;\n",$i,$ein[$i] || 1,$ang[$i] || 0;
+}
+$i = $nbus;
+$nbus >= 0 && printf OUT "$format];\n\n",$i,$ein[$i] || 1,$ang[$i] || 0;
+
+# -----------------------------------------------------------------------
+# write SW.con
+# -----------------------------------------------------------------------
+$nsw >= 0 && print OUT "SW.con = [ ...\n";
+$format = "%4d $pbas 1 " . "%8.5f " x 4 . "1.1 0.9 %8.5f 1";
+for ($i = 0; $i <= $nsw-1; $i++) {
+    $h = $genname{$idxsw[$i]};
+    printf OUT "$format;\n", $h,$vsw[$i] || $ein[$h] || 1,
+    $tsw[$h] || $ang[$h] || 0,$qma[$h] || 9999,
+    $qmi[$h] || -9999,$pag[$h] || 0;
+}
+$h = $genname{$idxsw[$nsw]};
+$nsw >= 0 && printf OUT "$format];\n\n",$h,$vsw[-1] || $ein[$h] || 1,
+    $tsw[-1] || $ang[$h] || 0,$qma[$h] || 9999,$qmi[$h] || -9999,
+    $pag[$h] || 0;
+
+# -----------------------------------------------------------------------
+# write PV.con
+# -----------------------------------------------------------------------
+$npv >= 0 && print OUT "PV.con = [ ...\n";
+$format = "%4d $pbas 1 " . "%8.5f " x 4 . "1.1 0.9 1";
+for ($i = 0; $i <= $npv-1; $i++) {
+    $h = $idxpv[$i];
+    printf OUT "$format;\n", $h,$pag[$h] || 0,$ein[$h] || 1,
+    $qma[$h] || 9999,$qmi[$h] || -9999;
+}
+$h = $idxpv[$npv];
+$npv >= 0 && printf OUT "$format];\n\n",$h,$pag[$h] || 0,
+    $ein[$h] || 1,$qma[$h] || 9999,$qmi[$h] || -9999;
+
+# -----------------------------------------------------------------------
+# write PQ.con
+# -----------------------------------------------------------------------
+$npq >= 0 && print OUT "PQ.con = [ ...\n";
+$format = "%4d $pbas 1 %8.5f %8.5f 1.1 0.9 1";
+for ($i = 0; $i <= $npq-1; $i++) {
+    $h = $idxpq[$i];
+    printf OUT "$format;\n", $h,$pac[$h],$prc[$h];
+}
+$h = $idxpq[$npq];
+$npq >= 0 && printf OUT "$format];\n\n",$h,$pac[$h],$prc[$h];
+
+# -----------------------------------------------------------------------
+# write Shunt.con
+# -----------------------------------------------------------------------
+$idx = $nsh + $nshunt + 1;
+if ($idx >= 0) {
+    print OUT "Shunt.con = [ ...\n";
+    $format = "%4d $pbas 1 $freq %8.5f %8.5f";
+    for ($i = 0; $i <= $nsh-1; $i++) {
+	$h = $idxsh[$i];
+	printf OUT "$format;\n", $h,$psh[$h],$qsh[$h];	
+    }
+    $h = $idxsh[$nsh];
+    if ($nshunt == -1) {
+	$nsh >= 0 && printf OUT "$format];\n\n",$h,$psh[$h],$qsh[$h];
+    } else {
+	$nsh >= 0 && printf OUT "$format;\n",$h,$psh[$h],$qsh[$h];	
+    }
+    for ($i = 0; $i <= $nshunt-1; $i++) {
+	$h = $busname{$shname[$i]};
+	printf OUT "$format;\n", $h,$gsh[$i],$bsh[$i];	
+    }
+    if ($nshunt >= 0) {
+	$h = $busname{$shname[$nshunt]};
+	printf OUT "$format;\n",$h,$gsh[$nshunt],$bsh[$nshunt];	    
+    }
+}
+
+# -----------------------------------------------------------------------
+# write Pl.con
+# -----------------------------------------------------------------------
+$nzip >= 0 && print OUT "Pl.con = [ ...\n";
+$format = "%4d $pbas %8.2f $freq "."%8.5f " x 6 . "0";
+for ($i = 0; $i <= $nzip-1; $i++) {
+    $h = $idxzip[$i];
+    printf OUT "$format;\n", $h,$kvzip[$h],$ppzip[$h],$pqzip[$h],
+    $ipzip[$h],$iqzip[$h],$zpzip[$h],$zqzip[$h];
+}
+$h = $idxzip[$nzip];
+$nzip >= 0 && printf OUT "$format];\n\n", $h,$kvzip[$h],$ppzip[$h],
+    $pqzip[$h],$ipzip[$h],$iqzip[$h],$zpzip[$h],$zqzip[$h];
+
+# -----------------------------------------------------------------------
+# write Line.con
+# -----------------------------------------------------------------------
+$nline >= 0 && print OUT "Line.con = [ ...\n";
+$format = "%4d %4d $pbas 1 $freq 0 %5.2f "."%8.5f " x 5 . "0 0 %8.3f";
+for ($i = 0; $i <= $nline-1; $i++) {
+    printf OUT "$format;\n", $busidx{$busfr[$i]},
+    $busidx{$busto[$i]},$kt[$i] || 0,$rest[$i],$reat[$i],
+    $susc[$i] || 0,$tfas[$i] || 1,$phsf[$i] || 0,$sbas[$i] || 0;
+}
+$i = $nline;
+if ($nline >= 0) {
+    printf OUT "$format];\n\n", $busidx{$busfr[$i]},
+    $busidx{$busto[$i]},$kt[$i] || 0,$rest[$i],$reat[$i],
+    $susc[$i] || 0,$tfas[$i] || 1,$phsf[$i] || 0,$sbas[$i] || 0;
+}
+
+# -----------------------------------------------------------------------
+# write Ltc.con
+# -----------------------------------------------------------------------
+$nltc >= 0 && print OUT "Ltc.con = [ ...\n";
+$format = "%4d %4d $pbas 1 $freq %8.5f 0 0.1 "."%8.5f " x 3 .
+    "1 %8.5f %8.5f 0 1";
+for ($i = 0; $i <= $nltc-1; $i++) {
+    printf OUT "$format;\n", $busidx{$ltcfr[$i]},$busidx{$ltcto[$i]},
+    $mltc[$i],$mmax[$i],$mmin[$i],$mstep[$i],$xltc[$i],$rltc[$i];
+}
+$i = $nltc;
+if ($nltc >= 0) {
+    printf OUT "$format];\n\n", $busidx{$ltcfr[$i]},
+    $busidx{$ltcto[$i]},$mltc[$i],$mmax[$i],$mmin[$i],$mstep[$i],
+    $xltc[$i],$rltc[$i];
+}
+
+# -----------------------------------------------------------------------
+# write bus names
+# -----------------------------------------------------------------------
+$nbus > 0 && print OUT "Bus.names = { ...\n";
+$h = $nbus % 5;
+if ($h == 0) {$h = 5;}
+if ($nbus > 5) {
+    for ($i = 1; $i <= $nbus-$h; $i+=5) {
+	print OUT "  '$busname{$i}'; '$busname{$i+1}'; " . 
+	    "'$busname{$i+2}'; '$busname{$i+3}'; '$busname{$i+4}';\n";
+    }
+}
+print OUT "  ";
+for ($i = $nbus-$h+1; $i <= $nbus-1; $i++) {
+    print OUT "'$busname{$i}'; ";
+}
+print OUT "'$busname{$nbus}'};\n\n";
+
+# -----------------------------------------------------------------------
+# close output data file
+# -----------------------------------------------------------------------
+close(OUT) || die "cannot close $ARGV[1]: $!\n";
+print "Conversion completed.\n";
+
+# -----------------------------------------------------------------------
+# function for writing a separator
+# -----------------------------------------------------------------------
+sub carret {
+    $verbose && print "-" x 50 . "\n";
+}
+
+# -----------------------------------------------------------------------
+# function add new bus
+# -----------------------------------------------------------------------
+sub addbus {
+    if ($busidx{$_[0]}) {
+	return $busidx{$_[0]}; 
+    } else {
+	$nbus++;
+	$busidx{$_[0]} = $nbus;
+	$busname{$nbus} = $_[0];
+	return $nbus;
+    }
+}
