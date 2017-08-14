@@ -11,6 +11,6 @@ As modifications are made, they will be indicated in the source files as require
 
 The hope is that Github will prove to be a better platform for the community than the official yahoo groups page which is in my personal view an out-dated place for scientific software developers.
 
+# Contributing
 
-
-
+Ideas for contributing coming soon ....
