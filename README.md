@@ -13,4 +13,4 @@ The hope is that Github will prove to be a better platform for the community tha
 
 # Contributing
 
-Ideas for contributing coming soon ....
+Simplest way to contribute is to create as many examples (regardless how simple they are)! Please head to the Wiki section for more information. In particular, we would like to see example problems in the book by Kundur expressed within PSAT.
