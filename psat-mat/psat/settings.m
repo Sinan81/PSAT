@@ -1,3 +1,7 @@
+function settings()
+
+global Settings Theme
+
 Settings.absvalues = 'off';
 Settings.beep = 0;
 Settings.checkdelta = 0;
@@ -66,6 +70,7 @@ Settings.violations = 'off';
 Settings.vs = 0;
 Settings.xlabel = 'time (s)';
 Settings.zoom = '';
+
 Theme.color01 = [0.68235     0.69804     0.76471];
 Theme.color02 = [0.68235     0.69804     0.76471];
 Theme.color03 = [0.44314      0.5451     0.64706];

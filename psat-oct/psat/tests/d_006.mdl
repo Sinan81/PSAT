@@ -1,35 +1,163 @@
 Model {
-  Name			  d_006
-  Version		  5.1
-  SaveDefaultBlockParams  on
+  Name			  "d_006"
+  Version		  9.3
+  SavedCharacterEncoding  "ISO-8859-1"
+  GraphicalInterface {
+    NumRootInports	    0
+    NumRootOutports	    0
+    ParameterArgumentNames  ""
+    ComputedModelVersion    "1.124"
+    NumModelReferences	    0
+    NumTestPointedSignals   0
+    NumProvidedFunctions    0
+    NumRequiredFunctions    0
+    NumResetEvents	    0
+    HasInitializeEvent	    0
+    HasTerminateEvent	    0
+    PreCompExecutionDomainType "Unset"
+    IsExportFunctionModel   0
+    IsArchitectureModel	    0
+    NumParameterArguments   0
+    NumExternalFileReferences 0
+    OrderedModelArguments   1
+  }
+  WebScopes_FoundationPlugin "on"
+  DiagnosticSuppressor	  "on"
+  SLCCPlugin		  "on"
+  NotesPlugin		  "on"
+  LogicAnalyzerPlugin	  "on"
+  EnableAccessToBaseWorkspace on
+  ScopeRefreshTime	  0.035000
+  OverrideScopeRefreshTime on
+  DisableAllScopes	  off
   DataTypeOverride	  "UseLocalSettings"
+  DataTypeOverrideAppliesTo "AllNumericTypes"
   MinMaxOverflowLogging	  "UseLocalSettings"
   MinMaxOverflowArchiveMode "Overwrite"
-  Created		  "Fri Sep  7 09:42:52 2001"
+  FPTRunName		  "Run 1"
+  MaxMDLFileLineLength	  120
+  LastSavedArchitecture	  "maci64"
+  Object {
+    $PropName		    "BdWindowsInfo"
+    $ObjectID		    1
+    $ClassName		    "Simulink.BDWindowsInfo"
+    Object {
+      $PropName		      "WindowsInfo"
+      $ObjectID		      2
+      $ClassName	      "Simulink.WindowInfo"
+      IsActive		      [1]
+      Location		      [637.0, 78.0, 621.0, 691.0]
+      Object {
+	$PropName		"ModelBrowserInfo"
+	$ObjectID		3
+	$ClassName		"Simulink.ModelBrowserInfo"
+	Visible			[1]
+	DockPosition		"Left"
+	Width			[50]
+	Height			[50]
+	Filter			[8]
+	Minimized		"On"
+      }
+      Object {
+	$PropName		"ExplorerBarInfo"
+	$ObjectID		4
+	$ClassName		"Simulink.ExplorerBarInfo"
+	Visible			[1]
+      }
+      Object {
+	$PropName		"EditorsInfo"
+	$ObjectID		5
+	$ClassName		"Simulink.EditorInfo"
+	IsActive		[1]
+	ViewObjType		"SimulinkTopLevel"
+	LoadSaveID		"0"
+	Extents			[546.0, 515.0]
+	ZoomFactor		[0.64]
+	Offset			[10.3125, 4.4375]
+      }
+      Object {
+	$PropName		"DockComponentsInfo"
+	$ObjectID		6
+	$ClassName		"Simulink.DockComponentInfo"
+	Type			"GLUE2:PropertyInspector"
+	ID			"Property Inspector"
+	Visible			[1]
+	CreateCallback		""
+	UserData		""
+	Floating		[0]
+	DockPosition		"Right"
+	Width			[640]
+	Height			[480]
+	Minimized		"On"
+      }
+      WindowState	      "AAAA/wAAAAD9AAAAAgAAAAAAAAC9AAAB+PwCAAAAA/sAAAAWAEQAbwBjAGsAVwBpAGQAZwBlAHQAMwEAAAAxAAAB+AAAA"
+      "AAAAAAA+wAAABYARABvAGMAawBXAGkAZABnAGUAdAA0AAAAAAD/////AAAAAAAAAAD7AAAAUgBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0Ac"
+      "ABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAAAP////8AAABrAP///wAAAAEAAAAAAAAAAPwCA"
+      "AAAAfsAAABUAEcATABVAEUAMgA6AFAAcgBvAHAAZQByAHQAeQBJAG4AcwBwAGUAYwB0AG8AcgAvAFAAcgBvAHAAZQByAHQAeQAgAEkAbgBzAHAAZ"
+      "QBjAHQAbwByAAAAAAD/////AAABrAD///8AAAJIAAACPgAAAAEAAAACAAAAAQAAAAL8AAAABAAAAAAAAAABAAAANgBjAG8AbABsAGEAcABzAGkAY"
+      "gBsAGUAUABhAG4AZQBsAFQAbwBvAGwAQgBhAHIATABlAGYAdAMAAAAA/////wAAAAAAAAAAAAAAAQAAAAEAAAA4AGMAbwBsAGwAYQBwAHMAaQBiA"
+      "GwAZQBQAGEAbgBlAGwAVABvAG8AbABCAGEAcgBSAGkAZwBoAHQCAAAAAP////8AAAAAAAAAAAAAAAIAAAAP/////wAAAAAA/////wAAAAAAAAAA/"
+      "////wEAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/"
+      "////wEAAACE/////wAAAAAAAAAA/////wEAAAD2/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAFd/////wAAAAAAAAAA/"
+      "////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAI+/////wAAAAAAAAAA/"
+      "////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAAAAAAAwAAAAEAAAA6AGMAbwBsAGwAYQBwAHMAaQBiAGwAZQBQAGEAbgBlA"
+      "GwAVABvAG8AbABCAGEAcgBCAG8AdAB0AG8AbQAAAAAA/////wAAAAAAAAAA"
+    }
+  }
+  HideAutomaticNames	  on
+  Created		  "Fri Sep 07 09:42:52 2001"
   Creator		  "fmilano"
   UpdateHistory		  "UpdateHistoryNever"
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "fmilano"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri Oct 30 13:33:54 2009"
+  LastModifiedDate	  "Fri Aug 16 17:35:24 2019"
+  RTWModifiedTimeStamp	  0
   ModelVersionFormat	  "1.%<AutoIncrement:124>"
-  ConfigurationManager	  "none"
   SampleTimeColors	  off
+  SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "none"
   WideLines		  off
   ShowLineDimensions	  off
   ShowPortDataTypes	  off
+  ShowAllPropagatedSignalLabels	off
+  PortDataTypeDisplayFormat "AliasTypeOnly"
+  ShowEditTimeErrors	  on
+  ShowEditTimeWarnings	  on
+  ShowEditTimeAdvisorChecks off
+  ShowPortUnits		  off
+  ShowDesignRanges	  off
   ShowLoopsOnError	  on
   IgnoreBidirectionalLines off
   ShowStorageClass	  off
+  ShowTestPointIcons	  on
+  ShowSignalResolutionIcons on
+  ShowViewerIcons	  on
   SortedOrder		  off
+  VariantCondition	  off
+  ShowSubsystemDomainSpec off
+  ExecutionContextIcon	  off
+  ShowLinearizationAnnotations on
+  ShowVisualizeInsertedRTB on
+  ShowMarkup		  on
   BlockNameDataTip	  off
   BlockParametersDataTip  off
   BlockDescriptionStringDataTip	off
+  BlockVariantConditionDataTip off
   ToolBar		  on
   StatusBar		  on
   BrowserShowLibraryLinks off
+  FunctionConnectors	  off
   BrowserLookUnderMasks	  off
+  MultiThreadCoSim	  on
+  SimulationMode	  "normal"
+  PauseTimes		  "5"
+  NumberOfSteps		  1
+  SnapshotBufferSize	  10
+  SnapshotInterval	  10
+  NumberOfLastSnapshots	  0
+  EnablePacing		  off
+  PacingRate		  1
   LinearizationMsg	  "none"
   Profile		  off
   ParamWorkspaceSource	  "MATLABWorkspace"
@@ -37,22 +165,32 @@ Model {
   AccelTemplateMakefile	  "accel_default_tmf"
   AccelMakeCommand	  "make_rtw"
   TryForcingSFcnDF	  off
-  RecordCoverage	  off
-  CovPath		  "/"
-  CovSaveName		  "covdata"
-  CovMetricSettings	  "dw"
-  CovNameIncrementing	  off
-  CovHtmlReporting	  on
-  covSaveCumulativeToWorkspaceVar on
-  CovSaveSingleToWorkspaceVar on
-  CovCumulativeVarName	  "covCumulativeData"
-  CovCumulativeReport	  off
+  Object {
+    $PropName		    "DataLoggingOverride"
+    $ObjectID		    7
+    $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
+    model_		    "d_006"
+    Array {
+      Type		      "Cell"
+      Dimension		      1
+      Cell		      "d_006"
+      PropName		      "logAsSpecifiedByModels_"
+    }
+    Array {
+      Type		      "Cell"
+      Dimension		      1
+      Cell		      ""
+      PropName		      "logAsSpecifiedByModelsSSIDs_"
+    }
+  }
   ExtModeBatchMode	  off
+  ExtModeEnableFloating	  on
   ExtModeTrigType	  "manual"
   ExtModeTrigMode	  "normal"
   ExtModeTrigPort	  "1"
   ExtModeTrigElement	  "any"
   ExtModeTrigDuration	  1000
+  ExtModeTrigDurationFloating "auto"
   ExtModeTrigHoldOff	  0
   ExtModeTrigDelay	  0
   ExtModeTrigDirection	  "rising"
@@ -66,97 +204,753 @@ Model {
   ExtModeSkipDownloadWhenConnect off
   ExtModeLogAll		  on
   ExtModeAutoUpdateStatusClock off
-  BufferReuse		  on
-  Solver		  "ode45"
-  SolverMode		  "Auto"
-  StartTime		  "0.0"
-  StopTime		  "10.0"
-  MaxOrder		  5
-  MaxStep		  "auto"
-  MinStep		  "auto"
-  MaxNumMinSteps	  "-1"
-  InitialStep		  "auto"
-  FixedStep		  "auto"
-  RelTol		  "1e-3"
-  AbsTol		  "auto"
-  OutputOption		  "RefineOutputTimes"
-  OutputTimes		  "[]"
-  Refine		  "1"
-  LoadExternalInput	  off
-  ExternalInput		  "[t, u]"
-  LoadInitialState	  off
-  InitialState		  "xInitial"
-  SaveTime		  on
-  TimeSaveName		  "tout"
-  SaveState		  off
-  StateSaveName		  "xout"
-  SaveOutput		  on
-  OutputSaveName	  "yout"
-  SaveFinalState	  off
-  FinalStateName	  "xFinal"
-  SaveFormat		  "Array"
-  Decimation		  "1"
-  LimitDataPoints	  on
-  MaxDataPoints		  "1000"
-  SignalLoggingName	  "logsout"
-  ConsistencyChecking	  "none"
-  ArrayBoundsChecking	  "none"
-  AlgebraicLoopMsg	  "warning"
-  BlockPriorityViolationMsg "warning"
-  MinStepSizeMsg	  "warning"
-  InheritedTsInSrcMsg	  "warning"
-  DiscreteInheritContinuousMsg "warning"
-  MultiTaskRateTransMsg	  "error"
-  SingleTaskRateTransMsg  "none"
-  CheckForMatrixSingularity "none"
-  IntegerOverflowMsg	  "warning"
-  Int32ToFloatConvMsg	  "warning"
-  ParameterDowncastMsg	  "error"
-  ParameterOverflowMsg	  "error"
-  ParameterPrecisionLossMsg "warning"
-  UnderSpecifiedDataTypeMsg "none"
-  UnnecessaryDatatypeConvMsg "none"
-  VectorMatrixConversionMsg "none"
-  InvalidFcnCallConnMsg	  "error"
-  SignalLabelMismatchMsg  "none"
-  UnconnectedInputMsg	  "warning"
-  UnconnectedOutputMsg	  "warning"
-  UnconnectedLineMsg	  "warning"
-  SfunCompatibilityCheckMsg "none"
-  RTWInlineParameters	  off
-  BlockReductionOpt	  on
-  BooleanDataType	  off
-  ConditionallyExecuteInputs on
-  OptimizeBlockIOStorage  on
-  AssertionControl	  "UseLocalSettings"
-  ProdHWWordLengths	  "8,16,32,32"
-  RTWSystemTargetFile	  "grt.tlc"
-  RTWTemplateMakefile	  "grt_default_tmf"
-  RTWMakeCommand	  "make_rtw"
-  RTWGenerateCodeOnly	  off
-  RTWRetainRTWFile	  off
-  TLCProfiler		  off
-  TLCDebug		  off
-  TLCCoverage		  off
-  TLCAssertion		  off
-  RTWOptions		  "-aEnforceIntegerDowncast=1 -aFoldNonRolledExpr=1 -aInlineInvariantSignals=1 -aInlineParameters=0 -aLo"
-  "calBlockOutputs=1 -aRollThreshold=5 -aZeroInternalMemoryAtStartup=1 -aZeroExternalMemoryAtStartup=1 -aInitFltsAndDbl"
-  "sToZero=1 -aForceBlockIOInitOptimize=0 -aGenerateReport=0 -aGenCodeOnly=0 -aRTWVerbose=1 -aIncludeHyperlinkInReport="
-  "0 -aLaunchReport=0 -aGenerateTraceInfo=0  -aForceParamTrailComments=0 -aGenerateComments=1 -aIgnoreCustomStorageClas"
-  "ses=1 -aIncHierarchyInIds=0 -aMaxRTWIdLen=31 -aShowEliminatedStatements=0 -aIncDataTypeInIds=0 -aInsertBlockDesc=0 -"
-  "aIgnoreTestpoints=0 -aSimulinkBlockComments=1 -aInlinedPrmAccess=\"Literals\"  -aSuppressErrorStatus=0 -aModelRefere"
-  "nceCompliant=1 -aParenthesesLevel=\"Nominal\" -aModelStepFunctionPrototypeControlCompliant=0 -aPortableWordSizes=0 -"
-  "aParMdlRefBuildCompliant=0 -aSupportNonInlinedSFcns=1 -aSupportContinuousTime=1 -aSupportComplex=1 -aSupportNonFinit"
-  "e=1 -aSupportAbsoluteTime=1 -aMultiwordLength=2048 -aTargetPreCompLibLocation=\"\" -aTargetLibSuffix=\"\" -aTargetFu"
-  "nctionLibrary=\"ANSI_C\" -aTargetFcnLib=\"ansi_tfl_tmw.mat\" -aMultiInstanceERTCode=0 -aLogVarNameModifier=\"rt_\" -"
-  "aERTFirstTimeCompliant=0 -aIsPILTarget=0 -aCombineOutputUpdateFcns=0 -aGenerateASAP2=0 -aGenerateClassInterface=0 -a"
-  "GenerateTestInterfaces=0 -aGenerateSampleERTMain=0 -aGenerateFullHeader=1 -aUtilityFuncGeneration=\"Auto\" -aInclude"
-  "FileDelimiter=\"Auto\" -aIncludeMdlTerminateFcn=1 -aPurelyIntegerCode=0 -aAutosarCompliant=0 -aERTCustomFileBanners="
-  "0 -aRTWCAPIStates=0 -aRTWCAPIParams=0 -aRTWCAPISignals=0 -aMatFileLogging=1 -aCompOptLevelCompliant=0 -aCPPClassGenC"
-  "ompliant=0 -aExtModeIntrfLevel=\"Level1\" -aExtModeMexFile=\"ext_comm\" -aExtModeTransport=0 -aExtModeStaticAllocSiz"
-  "e=1000000 -aExtModeTesting=0 -aExtModeStaticAlloc=0 -aExtMode=0 -aERTMultiwordLength=256 -aERTMultiwordTypeDef=\"Sys"
-  "tem defined\"  -aGenerateTraceInfo=0 -aIgnoreTestpoints=0 -aGenerateTraceInfo=0 -aGenerateTraceInfo=0 -aGenerateTrac"
-  "eInfo=0 -aGenerateTraceInfo=0 -aPrefixModelToSubsysFcnNames=1 "
+  ShowModelReferenceBlockVersion off
+  ShowModelReferenceBlockIO off
+  OrderedModelArguments	  on
+  Array {
+    Type		    "Handle"
+    Dimension		    1
+    Simulink.ConfigSet {
+      $ObjectID		      8
+      Version		      "19.0.0"
+      DisabledProps	      []
+      Description	      ""
+      Array {
+	Type			"Handle"
+	Dimension		9
+	Simulink.SolverCC {
+	  $ObjectID		  9
+	  Version		  "19.0.0"
+	  DisabledProps		  []
+	  Description		  ""
+	  Components		  []
+	  StartTime		  "0.0"
+	  StopTime		  "10.0"
+	  AbsTol		  "auto"
+	  AutoScaleAbsTol	  on
+	  FixedStep		  "auto"
+	  InitialStep		  "auto"
+	  MaxOrder		  5
+	  ZcThreshold		  "auto"
+	  ConsecutiveZCsStepRelTol "10*128*eps"
+	  MaxConsecutiveZCs	  "1000"
+	  ExtrapolationOrder	  4
+	  NumberNewtonIterations  1
+	  MaxStep		  "auto"
+	  MinStep		  "auto"
+	  MaxConsecutiveMinStep	  "1"
+	  RelTol		  "1e-3"
+	  EnableMultiTasking	  on
+	  ConcurrentTasks	  off
+	  Solver		  "ode45"
+	  SolverName		  "ode45"
+	  SolverJacobianMethodControl "auto"
+	  ShapePreserveControl	  "DisableAll"
+	  ZeroCrossControl	  "UseLocalSettings"
+	  ZeroCrossAlgorithm	  "Nonadaptive"
+	  AlgebraicLoopSolver	  "TrustRegion"
+	  SolverInfoToggleStatus  off
+	  IsAutoAppliedInSIP	  off
+	  SolverResetMethod	  "Fast"
+	  PositivePriorityOrder	  off
+	  AutoInsertRateTranBlk	  off
+	  SampleTimeConstraint	  "Unconstrained"
+	  InsertRTBMode		  "Whenever possible"
+	  SampleTimeProperty	  []
+	  DecoupledContinuousIntegration off
+	  MinimalZcImpactIntegration off
+	  SolverOrder		  3
+	}
+	Simulink.DataIOCC {
+	  $ObjectID		  10
+	  Version		  "19.0.0"
+	  DisabledProps		  []
+	  Description		  ""
+	  Components		  []
+	  Decimation		  "1"
+	  ExternalInput		  "[t, u]"
+	  FinalStateName	  "xFinal"
+	  InitialState		  "xInitial"
+	  LimitDataPoints	  on
+	  MaxDataPoints		  "1000"
+	  LoadExternalInput	  off
+	  LoadInitialState	  off
+	  SaveFinalState	  off
+	  SaveOperatingPoint	  off
+	  SaveFormat		  "Array"
+	  SignalLoggingSaveFormat "ModelDataLogs"
+	  SaveOutput		  on
+	  SaveState		  off
+	  SignalLogging		  on
+	  DSMLogging		  on
+	  InspectSignalLogs	  off
+	  VisualizeSimOutput	  on
+	  StreamToWorkspace	  off
+	  StreamVariableName	  "streamout"
+	  SaveTime		  on
+	  ReturnWorkspaceOutputs  off
+	  StateSaveName		  "xout"
+	  TimeSaveName		  "tout"
+	  OutputSaveName	  "yout"
+	  SignalLoggingName	  "logsout"
+	  DSMLoggingName	  "dsmout"
+	  OutputOption		  "RefineOutputTimes"
+	  OutputTimes		  "[]"
+	  ReturnWorkspaceOutputsName "out"
+	  Refine		  "1"
+	  LoggingToFile		  off
+	  DatasetSignalFormat	  "timeseries"
+	  LoggingFileName	  "out.mat"
+	  LoggingIntervals	  "[-inf, inf]"
+	}
+	Simulink.OptimizationCC {
+	  $ObjectID		  11
+	  Version		  "19.0.0"
+	  Array {
+	    Type		    "Cell"
+	    Dimension		    8
+	    Cell		    "BooleansAsBitfields"
+	    Cell		    "PassReuseOutputArgsAs"
+	    Cell		    "PassReuseOutputArgsThreshold"
+	    Cell		    "ZeroExternalMemoryAtStartup"
+	    Cell		    "ZeroInternalMemoryAtStartup"
+	    Cell		    "OptimizeModelRefInitCode"
+	    Cell		    "NoFixptDivByZeroProtection"
+	    Cell		    "UseSpecifiedMinMax"
+	    PropName		    "DisabledProps"
+	  }
+	  Description		  ""
+	  Components		  []
+	  BlockReduction	  on
+	  BooleanDataType	  off
+	  ConditionallyExecuteInputs on
+	  DefaultParameterBehavior "Tunable"
+	  UseDivisionForNetSlopeComputation "off"
+	  GainParamInheritBuiltInType off
+	  UseFloatMulNetSlope	  off
+	  DefaultUnderspecifiedDataType	"double"
+	  UseSpecifiedMinMax	  off
+	  InlineInvariantSignals  off
+	  OptimizeBlockIOStorage  on
+	  BufferReuse		  on
+	  EnhancedBackFolding	  off
+	  CachingGlobalReferences off
+	  GlobalBufferReuse	  on
+	  StrengthReduction	  off
+	  AdvancedOptControl	  ""
+	  ExpressionFolding	  on
+	  BooleansAsBitfields	  off
+	  BitfieldContainerType	  "uint_T"
+	  EnableMemcpy		  on
+	  MemcpyThreshold	  64
+	  PassReuseOutputArgsAs	  "Structure reference"
+	  PassReuseOutputArgsThreshold 12
+	  ExpressionDepthLimit	  128
+	  LocalBlockOutputs	  on
+	  RollThreshold		  5
+	  StateBitsets		  off
+	  DataBitsets		  off
+	  ActiveStateOutputEnumStorageType "Native Integer"
+	  ZeroExternalMemoryAtStartup on
+	  ZeroInternalMemoryAtStartup on
+	  InitFltsAndDblsToZero	  on
+	  NoFixptDivByZeroProtection off
+	  EfficientFloat2IntCast  off
+	  EfficientMapNaN2IntZero on
+	  LifeSpan		  "auto"
+	  MaxStackSize		  "Inherit from target"
+	  BufferReusableBoundary  on
+	  SimCompilerOptimization "off"
+	  AccelVerboseBuild	  off
+	  OptimizeBlockOrder	  "off"
+	  OptimizeDataStoreBuffers on
+	  BusAssignmentInplaceUpdate on
+	  DifferentSizesBufferReuse off
+	  OptimizationLevel	  "level2"
+	  OptimizationPriority	  "Balanced"
+	  OptimizationCustomize	  on
+	  UseRowMajorAlgorithm	  off
+	  LabelGuidedReuse	  off
+	  MultiThreadedLoops	  off
+	  DenormalBehavior	  "GradualUnderflow"
+	}
+	Simulink.DebuggingCC {
+	  $ObjectID		  12
+	  Version		  "19.0.0"
+	  Array {
+	    Type		    "Cell"
+	    Dimension		    1
+	    Cell		    "UseOnlyExistingSharedCode"
+	    PropName		    "DisabledProps"
+	  }
+	  Description		  ""
+	  Components		  []
+	  RTPrefix		  "error"
+	  ConsistencyChecking	  "none"
+	  ArrayBoundsChecking	  "none"
+	  SignalInfNanChecking	  "none"
+	  StringTruncationChecking "error"
+	  SignalRangeChecking	  "none"
+	  ReadBeforeWriteMsg	  "UseLocalSettings"
+	  WriteAfterWriteMsg	  "UseLocalSettings"
+	  WriteAfterReadMsg	  "UseLocalSettings"
+	  AlgebraicLoopMsg	  "warning"
+	  ArtificialAlgebraicLoopMsg "warning"
+	  SaveWithDisabledLinksMsg "warning"
+	  SaveWithParameterizedLinksMsg	"none"
+	  CheckSSInitialOutputMsg on
+	  UnderspecifiedInitializationDetection	"Classic"
+	  MergeDetectMultiDrivingBlocksExec "none"
+	  CheckExecutionContextPreStartOutputMsg off
+	  CheckExecutionContextRuntimeOutputMsg	off
+	  SignalResolutionControl "TryResolveAllWithWarning"
+	  BlockPriorityViolationMsg "warning"
+	  MinStepSizeMsg	  "warning"
+	  TimeAdjustmentMsg	  "none"
+	  MaxConsecutiveZCsMsg	  "error"
+	  MaskedZcDiagnostic	  "warning"
+	  IgnoredZcDiagnostic	  "warning"
+	  SolverPrmCheckMsg	  "none"
+	  InheritedTsInSrcMsg	  "warning"
+	  MultiTaskDSMMsg	  "warning"
+	  MultiTaskCondExecSysMsg "none"
+	  MultiTaskRateTransMsg	  "error"
+	  SingleTaskRateTransMsg  "none"
+	  TasksWithSamePriorityMsg "warning"
+	  ExportedTasksRateTransMsg "none"
+	  SigSpecEnsureSampleTimeMsg "warning"
+	  CheckMatrixSingularityMsg "none"
+	  IntegerOverflowMsg	  "warning"
+	  Int32ToFloatConvMsg	  "warning"
+	  ParameterDowncastMsg	  "error"
+	  ParameterOverflowMsg	  "error"
+	  ParameterUnderflowMsg	  "none"
+	  ParameterPrecisionLossMsg "warning"
+	  ParameterTunabilityLossMsg "warning"
+	  FixptConstUnderflowMsg  "none"
+	  FixptConstOverflowMsg	  "none"
+	  FixptConstPrecisionLossMsg "none"
+	  UnderSpecifiedDataTypeMsg "none"
+	  UnnecessaryDatatypeConvMsg "none"
+	  VectorMatrixConversionMsg "none"
+	  InvalidFcnCallConnMsg	  "error"
+	  FcnCallInpInsideContextMsg "error"
+	  SignalLabelMismatchMsg  "none"
+	  UnconnectedInputMsg	  "warning"
+	  UnconnectedOutputMsg	  "warning"
+	  UnconnectedLineMsg	  "warning"
+	  UseOnlyExistingSharedCode "error"
+	  SFcnCompatibilityMsg	  "none"
+	  FrameProcessingCompatibilityMsg "error"
+	  UniqueDataStoreMsg	  "none"
+	  BusObjectLabelMismatch  "warning"
+	  RootOutportRequireBusObject "warning"
+	  AssertControl		  "UseLocalSettings"
+	  AllowSymbolicDim	  on
+	  RowMajorDimensionSupport off
+	  ModelReferenceIOMsg	  "none"
+	  ModelReferenceMultiInstanceNormalModeStructChecksumCheck "error"
+	  ModelReferenceVersionMismatchMessage "none"
+	  ModelReferenceIOMismatchMessage "none"
+	  UnknownTsInhSupMsg	  "warning"
+	  ModelReferenceDataLoggingMessage "warning"
+	  ModelReferenceSymbolNameMessage "warning"
+	  ModelReferenceExtraNoncontSigs "error"
+	  StateNameClashWarn	  "none"
+	  OperatingPointInterfaceChecksumMismatchMsg "warning"
+	  NonCurrentReleaseOperatingPointMsg "error"
+	  ChecksumConsistencyForSSReuse	"none"
+	  PregeneratedLibrarySubsystemCodeDiagnostic "warning"
+	  MatchCodeGenerationContextForUpdateDiagram "none"
+	  InitInArrayFormatMsg	  "warning"
+	  StrictBusMsg		  "ErrorLevel1"
+	  BusNameAdapt		  "WarnAndRepair"
+	  NonBusSignalsTreatedAsBus "none"
+	  SymbolicDimMinMaxWarning "warning"
+	  LossOfSymbolicDimsSimulationWarning "warning"
+	  LossOfSymbolicDimsCodeGenerationWarning "error"
+	  SymbolicDimsDataTypeCodeGenerationDiagnostic "error"
+	  BlockIODiagnostic	  "none"
+	  SFUnusedDataAndEventsDiag "warning"
+	  SFUnexpectedBacktrackingDiag "error"
+	  SFInvalidInputDataAccessInChartInitDiag "warning"
+	  SFNoUnconditionalDefaultTransitionDiag "error"
+	  SFTransitionOutsideNaturalParentDiag "warning"
+	  SFUnreachableExecutionPathDiag "warning"
+	  SFUndirectedBroadcastEventsDiag "warning"
+	  SFTransitionActionBeforeConditionDiag	"warning"
+	  SFOutputUsedAsStateInMooreChartDiag "error"
+	  SFTemporalDelaySmallerThanSampleTimeDiag "warning"
+	  SFSelfTransitionDiag	  "warning"
+	  SFExecutionAtInitializationDiag "warning"
+	  SFMachineParentedDataDiag "warning"
+	  IntegerSaturationMsg	  "warning"
+	  AllowedUnitSystems	  "all"
+	  UnitsInconsistencyMsg	  "warning"
+	  AllowAutomaticUnitConversions	on
+	  RCSCRenamedMsg	  "warning"
+	  RCSCObservableMsg	  "warning"
+	  ForceCombineOutputUpdateInSim	off
+	  UnitDatabase		  ""
+	  UnderSpecifiedDimensionMsg "none"
+	  DebugExecutionForFMUViaOutOfProcess off
+	  ArithmeticOperatorsInVariantConditions "error"
+	}
+	Simulink.HardwareCC {
+	  $ObjectID		  13
+	  Version		  "19.0.0"
+	  DisabledProps		  []
+	  Description		  ""
+	  Components		  []
+	  ProdBitPerChar	  8
+	  ProdBitPerShort	  16
+	  ProdBitPerInt		  32
+	  ProdBitPerLong	  32
+	  ProdBitPerLongLong	  64
+	  ProdBitPerFloat	  32
+	  ProdBitPerDouble	  64
+	  ProdBitPerPointer	  64
+	  ProdBitPerSizeT	  64
+	  ProdBitPerPtrDiffT	  64
+	  ProdLargestAtomicInteger "Char"
+	  ProdLargestAtomicFloat  "Float"
+	  ProdIntDivRoundTo	  "Zero"
+	  ProdEndianess		  "LittleEndian"
+	  ProdWordSize		  64
+	  ProdShiftRightIntArith  on
+	  ProdLongLongMode	  off
+	  ProdHWDeviceType	  "Intel->x86-64 (Windows64)"
+	  TargetBitPerChar	  8
+	  TargetBitPerShort	  16
+	  TargetBitPerInt	  32
+	  TargetBitPerLong	  32
+	  TargetBitPerLongLong	  64
+	  TargetBitPerFloat	  32
+	  TargetBitPerDouble	  64
+	  TargetBitPerPointer	  32
+	  TargetBitPerSizeT	  32
+	  TargetBitPerPtrDiffT	  32
+	  TargetLargestAtomicInteger "Char"
+	  TargetLargestAtomicFloat "None"
+	  TargetShiftRightIntArith on
+	  TargetLongLongMode	  off
+	  TargetIntDivRoundTo	  "Undefined"
+	  TargetEndianess	  "Unspecified"
+	  TargetWordSize	  32
+	  TargetPreprocMaxBitsSint 32
+	  TargetPreprocMaxBitsUint 32
+	  TargetHWDeviceType	  "Specified"
+	  TargetUnknown		  on
+	  ProdEqTarget		  on
+	  UseEmbeddedCoderFeatures on
+	  UseSimulinkCoderFeatures on
+	  HardwareBoardFeatureSet "EmbeddedCoderHSP"
+	}
+	Simulink.ModelReferenceCC {
+	  $ObjectID		  14
+	  Version		  "19.0.0"
+	  DisabledProps		  []
+	  Description		  ""
+	  Components		  []
+	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
+	  EnableRefExpFcnMdlSchedulingChecks on
+	  CheckModelReferenceTargetMessage "error"
+	  EnableParallelModelReferenceBuilds off
+	  ParallelModelReferenceErrorOnInvalidPool on
+	  ParallelModelReferenceMATLABWorkerInit "None"
+	  ModelReferenceNumInstancesAllowed "Multi"
+	  PropagateVarSize	  "Infer from blocks in model"
+	  ModelDependencies	  ""
+	  ModelReferencePassRootInputsByReference on
+	  ModelReferenceMinAlgLoopOccurrences off
+	  PropagateSignalLabelsOutOfModel off
+	  SupportModelReferenceSimTargetCustomCode off
+	}
+	Simulink.SFSimCC {
+	  $ObjectID		  15
+	  Version		  "19.0.0"
+	  DisabledProps		  []
+	  Description		  ""
+	  Components		  []
+	  SimCustomSourceCode	  ""
+	  SimCustomHeaderCode	  ""
+	  SimCustomInitializer	  ""
+	  SimCustomTerminator	  ""
+	  SimReservedNameArray	  []
+	  SimUserSources	  ""
+	  SimUserIncludeDirs	  ""
+	  SimUserLibraries	  ""
+	  SimUserDefines	  ""
+	  SimCustomCompilerFlags  ""
+	  SimCustomLinkerFlags	  ""
+	  SFSimEcho		  on
+	  SimCtrlC		  on
+	  SimIntegrity		  on
+	  SimUseLocalCustomCode	  on
+	  SimParseCustomCode	  on
+	  SimAnalyzeCustomCode	  off
+	  SimBuildMode		  "sf_incremental_build"
+	  SimGenImportedTypeDefs  off
+	  ModelFunctionsGlobalVisibility "on"
+	  CompileTimeRecursionLimit 50
+	  EnableRuntimeRecursion  on
+	  MATLABDynamicMemAlloc	  on
+	  MATLABDynamicMemAllocThreshold 65536
+	  CustomCodeFunctionArrayLayout	[]
+	  DefaultCustomCodeFunctionArrayLayout "NotSpecified"
+	}
+	Simulink.RTWCC {
+	  $BackupClass		  "Simulink.RTWCC"
+	  $ObjectID		  16
+	  Version		  "19.0.0"
+	  Array {
+	    Type		    "Cell"
+	    Dimension		    16
+	    Cell		    "IncludeHyperlinkInReport"
+	    Cell		    "GenerateTraceInfo"
+	    Cell		    "GenerateTraceReport"
+	    Cell		    "GenerateTraceReportSl"
+	    Cell		    "GenerateTraceReportSf"
+	    Cell		    "GenerateTraceReportEml"
+	    Cell		    "PortableWordSizes"
+	    Cell		    "GenerateWebview"
+	    Cell		    "GenerateCodeMetricsReport"
+	    Cell		    "GenerateCodeReplacementReport"
+	    Cell		    "GenerateMissedCodeReplacementReport"
+	    Cell		    "GenerateErtSFunction"
+	    Cell		    "CreateSILPILBlock"
+	    Cell		    "CodeExecutionProfiling"
+	    Cell		    "CodeProfilingSaveOptions"
+	    Cell		    "CodeProfilingInstrumentation"
+	    PropName		    "DisabledProps"
+	  }
+	  SystemTargetFile	  "grt.tlc"
+	  HardwareBoard		  "None"
+	  ShowCustomHardwareApp	  off
+	  ShowEmbeddedHardwareApp off
+	  TLCOptions		  ""
+	  GenCodeOnly		  off
+	  MakeCommand		  "make_rtw"
+	  GenerateMakefile	  on
+	  PackageGeneratedCodeAndArtifacts off
+	  PackageName		  ""
+	  TemplateMakefile	  "grt_default_tmf"
+	  PostCodeGenCommand	  ""
+	  Description		  ""
+	  GenerateReport	  off
+	  RTWVerbose		  on
+	  RetainRTWFile		  off
+	  RTWBuildHooks		  []
+	  ProfileTLC		  off
+	  TLCDebug		  off
+	  TLCCoverage		  off
+	  TLCAssert		  off
+	  RTWUseLocalCustomCode	  on
+	  RTWUseSimCustomCode	  off
+	  CustomSourceCode	  ""
+	  CustomHeaderCode	  ""
+	  CustomInclude		  ""
+	  CustomSource		  ""
+	  CustomLibrary		  ""
+	  CustomDefine		  ""
+	  CustomBLASCallback	  ""
+	  CustomLAPACKCallback	  ""
+	  CustomFFTCallback	  ""
+	  CustomInitializer	  ""
+	  CustomTerminator	  ""
+	  Toolchain		  "Automatically locate an installed toolchain"
+	  BuildConfiguration	  "Faster Builds"
+	  CustomToolchainOptions  []
+	  IncludeHyperlinkInReport off
+	  LaunchReport		  off
+	  PortableWordSizes	  off
+	  CreateSILPILBlock	  "None"
+	  CodeExecutionProfiling  off
+	  CodeExecutionProfileVariable "executionProfile"
+	  CodeProfilingSaveOptions "SummaryOnly"
+	  CodeProfilingInstrumentation "off"
+	  SILDebugging		  off
+	  TargetLang		  "C"
+	  IncludeBusHierarchyInRTWFileBlockHierarchyMap	off
+	  GenerateTraceInfo	  off
+	  GenerateTraceReport	  off
+	  GenerateTraceReportSl	  off
+	  GenerateTraceReportSf	  off
+	  GenerateTraceReportEml  off
+	  GenerateWebview	  off
+	  GenerateCodeMetricsReport off
+	  GenerateCodeReplacementReport	off
+	  GenerateMissedCodeReplacementReport off
+	  RTWCompilerOptimization "off"
+	  ObjectivePriorities	  []
+	  RTWCustomCompilerOptimizations ""
+	  CheckMdlBeforeBuild	  "Off"
+	  SharedConstantsCachingThreshold 1024
+	  Array {
+	    Type		    "Handle"
+	    Dimension		    2
+	    Simulink.CodeAppCC {
+	      $ObjectID		      17
+	      Version		      "19.0.0"
+	      Array {
+		Type			"Cell"
+		Dimension		28
+		Cell			"IgnoreCustomStorageClasses"
+		Cell			"IgnoreTestpoints"
+		Cell			"BlockCommentType"
+		Cell			"InsertBlockDesc"
+		Cell			"InsertPolySpaceComments"
+		Cell			"SFDataObjDesc"
+		Cell			"MATLABFcnDesc"
+		Cell			"SimulinkDataObjDesc"
+		Cell			"DefineNamingRule"
+		Cell			"SignalNamingRule"
+		Cell			"ParamNamingRule"
+		Cell			"InternalIdentifier"
+		Cell			"InlinedPrmAccess"
+		Cell			"CustomSymbolStr"
+		Cell			"CustomSymbolStrGlobalVar"
+		Cell			"CustomSymbolStrType"
+		Cell			"CustomSymbolStrField"
+		Cell			"CustomSymbolStrFcn"
+		Cell			"CustomSymbolStrModelFcn"
+		Cell			"CustomSymbolStrFcnArg"
+		Cell			"CustomSymbolStrBlkIO"
+		Cell			"CustomSymbolStrTmpVar"
+		Cell			"CustomSymbolStrMacro"
+		Cell			"CustomSymbolStrUtil"
+		Cell			"CustomSymbolStrEmxType"
+		Cell			"CustomSymbolStrEmxFcn"
+		Cell			"CustomUserTokenString"
+		Cell			"ReqsInCode"
+		PropName		"DisabledProps"
+	      }
+	      Description	      ""
+	      Components	      []
+	      Comment		      ""
+	      ForceParamTrailComments off
+	      GenerateComments	      on
+	      CommentStyle	      "Auto"
+	      IgnoreCustomStorageClasses on
+	      IgnoreTestpoints	      off
+	      MaxIdLength	      31
+	      PreserveName	      off
+	      PreserveNameWithParent  off
+	      ShowEliminatedStatement off
+	      OperatorAnnotations     off
+	      SimulinkDataObjDesc     off
+	      SFDataObjDesc	      off
+	      MATLABFcnDesc	      off
+	      MangleLength	      1
+	      SharedChecksumLength    8
+	      CustomSymbolStrGlobalVar "$R$N$M"
+	      CustomSymbolStrType     "$N$R$M_T"
+	      CustomSymbolStrField    "$N$M"
+	      CustomSymbolStrFcn      "$R$N$M$F"
+	      CustomSymbolStrModelFcn "$R$N"
+	      CustomSymbolStrFcnArg   "rt$I$N$M"
+	      CustomSymbolStrBlkIO    "rtb_$N$M"
+	      CustomSymbolStrTmpVar   "$N$M"
+	      CustomSymbolStrMacro    "$R$N$M"
+	      CustomSymbolStrUtil     "$N$C"
+	      CustomSymbolStrEmxType  "emxArray_$M$N"
+	      CustomSymbolStrEmxFcn   "emx$M$N"
+	      CustomUserTokenString   ""
+	      CustomCommentsFcn	      ""
+	      DefineNamingRule	      "None"
+	      DefineNamingFcn	      ""
+	      ParamNamingRule	      "None"
+	      ParamNamingFcn	      ""
+	      SignalNamingRule	      "None"
+	      SignalNamingFcn	      ""
+	      InsertBlockDesc	      off
+	      InsertPolySpaceComments off
+	      SimulinkBlockComments   on
+	      BlockCommentType	      "BlockPathComment"
+	      StateflowObjectComments off
+	      MATLABSourceComments    off
+	      EnableCustomComments    off
+	      InternalIdentifierFile  ""
+	      InternalIdentifier      "Shortened"
+	      InlinedPrmAccess	      "Literals"
+	      ReqsInCode	      off
+	      UseSimReservedNames     off
+	      ReservedNameArray	      []
+	    }
+	    Simulink.GRTTargetCC {
+	      $BackupClass	      "Simulink.TargetCC"
+	      $ObjectID		      18
+	      Version		      "19.0.0"
+	      Array {
+		Type			"Cell"
+		Dimension		16
+		Cell			"IncludeMdlTerminateFcn"
+		Cell			"SuppressErrorStatus"
+		Cell			"ERTCustomFileBanners"
+		Cell			"GenerateSampleERTMain"
+		Cell			"ExistingSharedCode"
+		Cell			"GenerateTestInterfaces"
+		Cell			"ModelStepFunctionPrototypeControlCompliant"
+		Cell			"GenerateAllocFcn"
+		Cell			"PurelyIntegerCode"
+		Cell			"SupportComplex"
+		Cell			"SupportAbsoluteTime"
+		Cell			"SupportContinuousTime"
+		Cell			"SupportNonInlinedSFcns"
+		Cell			"RemoveDisableFunc"
+		Cell			"RemoveResetFunc"
+		Cell			"PreserveStateflowLocalDataDimensions"
+		PropName		"DisabledProps"
+	      }
+	      Description	      ""
+	      Components	      []
+	      TargetFcnLib	      "ansi_tfl_tmw.mat"
+	      TargetLibSuffix	      ""
+	      TargetPreCompLibLocation ""
+	      GenFloatMathFcnCalls    "NOT IN USE"
+	      TargetLangStandard      "C99 (ISO)"
+	      CodeReplacementLibrary  "ANSI_C"
+	      UtilityFuncGeneration   "Auto"
+	      MultiwordTypeDef	      "System defined"
+	      MultiwordLength	      2048
+	      DynamicStringBufferSize 256
+	      GenerateFullHeader      on
+	      InferredTypesCompatibility off
+	      ExistingSharedCode      ""
+	      GenerateSampleERTMain   off
+	      GenerateTestInterfaces  off
+	      ModelReferenceCompliant on
+	      ParMdlRefBuildCompliant off
+	      CompOptLevelCompliant   off
+	      ConcurrentExecutionCompliant on
+	      IncludeMdlTerminateFcn  on
+	      GeneratePreprocessorConditionals "Use local settings"
+	      CombineOutputUpdateFcns off
+	      CombineSignalStateStructs	off
+	      GroupInternalDataByFunction off
+	      SuppressErrorStatus     off
+	      IncludeFileDelimiter    "Auto"
+	      ERTCustomFileBanners    off
+	      SupportAbsoluteTime     on
+	      LogVarNameModifier      "rt_"
+	      MatFileLogging	      on
+	      MultiInstanceERTCode    off
+	      CodeInterfacePackaging  "Nonreusable function"
+	      PurelyIntegerCode	      off
+	      SupportNonFinite	      on
+	      SupportComplex	      on
+	      SupportContinuousTime   on
+	      SupportNonInlinedSFcns  on
+	      RemoveDisableFunc	      off
+	      RemoveResetFunc	      off
+	      SupportVariableSizeSignals off
+	      ParenthesesLevel	      "Nominal"
+	      CastingMode	      "Nominal"
+	      PreserveStateflowLocalDataDimensions off
+	      MATLABClassNameForMDSCustomization "Simulink.SoftwareTarget.GRTCustomization"
+	      ModelStepFunctionPrototypeControlCompliant off
+	      CPPClassGenCompliant    off
+	      AutosarCompliant	      off
+	      MDXCompliant	      off
+	      GRTInterface	      on
+	      GenerateAllocFcn	      off
+	      UseToolchainInfoCompliant	on
+	      GenerateSharedConstants on
+	      CoderGroups	      []
+	      AccessMethods	      []
+	      LookupTableObjectStructAxisOrder "1,2,3,4,..."
+	      LUTObjectStructOrderExplicitValues "Size,Breakpoints,Table"
+	      LUTObjectStructOrderEvenSpacing "Size,Breakpoints,Table"
+	      ArrayLayout	      "Column-major"
+	      UnsupportedSFcnMsg      "error"
+	      ERTHeaderFileRootName   "$R$E"
+	      ERTSourceFileRootName   "$R$E"
+	      ERTDataFileRootName     "$R_data"
+	      UseMalloc		      off
+	      ExtMode		      off
+	      ExtModeStaticAlloc      off
+	      ExtModeTesting	      off
+	      ExtModeStaticAllocSize  1000000
+	      ExtModeTransport	      0
+	      ExtModeMexFile	      "ext_comm"
+	      ExtModeMexArgs	      ""
+	      ExtModeIntrfLevel	      "Level1"
+	      RTWCAPISignals	      off
+	      RTWCAPIParams	      off
+	      RTWCAPIStates	      off
+	      RTWCAPIRootIO	      off
+	      GenerateASAP2	      off
+	      MultiInstanceErrorCode  "Error"
+	    }
+	    PropName		    "Components"
+	  }
+	}
+	SlCovCC.ConfigComp {
+	  $ObjectID		  19
+	  Version		  "19.0.0"
+	  DisabledProps		  []
+	  Description		  "Simulink Coverage Configuration Component"
+	  Components		  []
+	  Name			  "Simulink Coverage"
+	  CovEnable		  off
+	  CovScope		  "EntireSystem"
+	  CovIncludeTopModel	  on
+	  RecordCoverage	  off
+	  CovPath		  "/"
+	  CovSaveName		  "covdata"
+	  CovCompData		  ""
+	  CovMetricSettings	  "dw"
+	  CovFilter		  ""
+	  CovHTMLOptions	  ""
+	  CovNameIncrementing	  off
+	  CovHtmlReporting	  on
+	  CovForceBlockReductionOff on
+	  CovEnableCumulative	  on
+	  CovSaveCumulativeToWorkspaceVar on
+	  CovSaveSingleToWorkspaceVar on
+	  CovCumulativeVarName	  "covCumulativeData"
+	  CovCumulativeReport	  off
+	  CovSaveOutputData	  on
+	  CovOutputDir		  "slcov_output/$ModelName$"
+	  CovDataFileName	  "$ModelName$_cvdata"
+	  CovShowResultsExplorer  on
+	  CovReportOnPause	  on
+	  CovModelRefEnable	  "off"
+	  CovModelRefExcluded	  ""
+	  CovExternalEMLEnable	  on
+	  CovSFcnEnable		  on
+	  CovBoundaryAbsTol	  1e-05
+	  CovBoundaryRelTol	  0.01
+	  CovUseTimeInterval	  off
+	  CovStartTime		  0
+	  CovStopTime		  0
+	  CovMcdcMode		  "Masking"
+	}
+	PropName		"Components"
+      }
+      Name		      "Configuration"
+      CurrentDlgPage	      "Solver"
+      ConfigPrmDlgPosition    [ 835, 170, 1725, 910 ]
+      ExtraOptions	      "-aEnforceIntegerDowncast=1 -aGenerateReport=0 -aIncludeHyperlinkInReport=0 -aLaunchReport=0 "
+      "-aGenerateTraceInfo=0 -aIgnoreTestpoints=0 -aGenerateTraceInfo=0 -aIgnoreTestpoints=0 -aGenerateTraceInfo=0 -aGe"
+      "nerateTraceInfo=0 -aGenerateTraceInfo=0 -aGenerateTraceInfo=0 -aPrefixModelToSubsysFcnNames=1 "
+    }
+    PropName		    "ConfigurationSets"
+  }
+  Simulink.ConfigSet {
+    $PropName		    "ActiveConfigurationSet"
+    $ObjectID		    8
+  }
+  Object {
+    $PropName		    "DataTransfer"
+    $ObjectID		    20
+    $ClassName		    "Simulink.GlobalDataTransfer"
+    DefaultTransitionBetweenSyncTasks "Ensure deterministic transfer (maximum delay)"
+    DefaultTransitionBetweenAsyncTasks "Ensure data integrity only"
+    DefaultTransitionBetweenContTasks "Ensure deterministic transfer (minimum delay)"
+    DefaultExtrapolationMethodBetweenContTasks "None"
+  }
+  ExplicitPartitioning	  off
   BlockDefaults {
     ForegroundColor	    "black"
     BackgroundColor	    "white"
@@ -167,7 +961,9 @@ Model {
     FontWeight		    "normal"
     FontAngle		    "normal"
     ShowName		    on
-    Orientation		    "right"
+    HideAutomaticName	    on
+    BlockRotation	    0
+    BlockMirror		    off
   }
   AnnotationDefaults {
     HorizontalAlignment	    "center"
@@ -179,6 +975,12 @@ Model {
     FontSize		    10
     FontWeight		    "normal"
     FontAngle		    "normal"
+    MarkupType		    "model"
+    UseDisplayTextAsClickCallback off
+    AnnotationType	    "note_annotation"
+    FixedHeight		    off
+    FixedWidth		    off
+    Interpreter		    "off"
   }
   LineDefaults {
     FontName		    "Helvetica"
@@ -186,16 +988,41 @@ Model {
     FontWeight		    "normal"
     FontAngle		    "normal"
   }
+  MaskDefaults {
+    SelfModifiable	    "off"
+    IconFrame		    "on"
+    IconOpaque		    "opaque"
+    RunInitForIconRedraw    "analyze"
+    IconRotate		    "none"
+    PortRotate		    "default"
+    IconUnits		    "autoscale"
+  }
+  MaskParameterDefaults {
+    Evaluate		    "on"
+    Tunable		    "on"
+    NeverSave		    "off"
+    Internal		    "off"
+    ReadOnly		    "off"
+    Enabled		    "on"
+    Visible		    "on"
+    ToolTip		    "on"
+  }
   BlockParameterDefaults {
     Block {
       BlockType		      PMComponent
+      PhysicalDomain	      "generic"
       SubClassName	      "unknown"
+      LeftPortType	      "blob"
+      RightPortType	      "blob"
     }
   }
   System {
-    Name		    d_006
-    Location		    [675, 198, 1256, 711]
+    Name		    "d_006"
+    Location		    [637, 78, 1258, 769]
     Open		    on
+    PortBlocksUseCompactNotation off
+    SetExecutionDomain	    off
+    ExecutionDomainType	    "Deduce"
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
     ScreenColor		    "white"
@@ -203,15 +1030,22 @@ Model {
     PaperPositionMode	    "auto"
     PaperType		    "usletter"
     PaperUnits		    "inches"
+    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+    TiledPageScale	    1
+    ShowPageBoundaries	    off
     ZoomFactor		    "64"
     ReportName		    "simulink-default.rpt"
+    SIDHighWatermark	    "29"
+    SimulinkSubDomain	    "Simulink"
     Block {
       BlockType		      PMComponent
       Name		      "Bus1"
+      SID		      "1"
       Tag		      "PSATblock"
       Description	      "Connection"
       Ports		      [0, 0, 0, 0, 0, 2, 3]
       Position		      [180, 524, 185, 726]
+      ZOrder		      -1
       BackgroundColor	      "blue"
       FontName		      "Arial"
       FontSize		      16
@@ -220,34 +1054,76 @@ Model {
       RightPortType	      "p1"
       LConnTagsString	      "__newl0|__newl1"
       RConnTagsString	      "__newr0|__newr1|__newr2"
-      MaskType		      "Bus"
-      MaskDescription	      "Bus block."
-      MaskPromptString	      "Number of inputs:|Number of outputs:|Voltage Rating [kV]|Voltage initial guess [p.u.  ra"
-      "d]|Area number|Region number"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit"
-      MaskTunableValueString  "on,on,on,on,on,on"
-      MaskCallbackString      "||||fm_block|"
-      MaskEnableString	      "on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,"
-      MaskVariables	      "in=@1;out=@2;p2q=@3;p3_4q=@4;p5q=@5;p6q=@6;"
-      MaskInitialization      "fm_inout\n\n"
-      MaskDisplay	      "plot([0 1 1 0 0],[0 0 1 1 0])"
-      MaskSelfModifiable      on
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "2|3|400|[1.00   0.00]|2|1"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		21
+	$ClassName		"Simulink.Mask"
+	Type			"Bus"
+	Description		"Bus block."
+	Initialization		"fm_inout\n\n"
+	SelfModifiable		"on"
+	Display			"plot([0 1 1 0 0],[0 0 1 1 0])"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  6
+	  Object {
+	    $ObjectID		    22
+	    Type		    "edit"
+	    Name		    "in"
+	    Prompt		    "Number of inputs:"
+	    Value		    "2"
+	  }
+	  Object {
+	    $ObjectID		    23
+	    Type		    "edit"
+	    Name		    "out"
+	    Prompt		    "Number of outputs:"
+	    Value		    "3"
+	  }
+	  Object {
+	    $ObjectID		    24
+	    Type		    "edit"
+	    Name		    "p2q"
+	    Prompt		    "Voltage Rating [kV]"
+	    Value		    "400"
+	  }
+	  Object {
+	    $ObjectID		    25
+	    Type		    "edit"
+	    Name		    "p3_4q"
+	    Prompt		    "Voltage initial guess [p.u.  rad]"
+	    Value		    "[1.00   0.00]"
+	  }
+	  Object {
+	    $ObjectID		    26
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Area number"
+	    Value		    "2"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    27
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Region number"
+	    Value		    "1"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "Bus2"
+      SID		      "2"
       Tag		      "PSATblock"
       Description	      "Connection"
       Ports		      [0, 0, 0, 0, 0, 3, 4]
       Position		      [300, 63, 305, 332]
+      ZOrder		      -2
       BackgroundColor	      "blue"
       FontName		      "Arial"
       FontSize		      16
@@ -256,34 +1132,76 @@ Model {
       RightPortType	      "p1"
       LConnTagsString	      "__newl0|__newl1|__newl2"
       RConnTagsString	      "__newr0|__newr1|__newr2|__newr3"
-      MaskType		      "Bus"
-      MaskDescription	      "Bus block."
-      MaskPromptString	      "Number of inputs:|Number of outputs:|Voltage Rating [kV]|Voltage initial guess [p.u.  ra"
-      "d]|Area number|Region number"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit"
-      MaskTunableValueString  "on,on,on,on,on,on"
-      MaskCallbackString      "||||fm_block|"
-      MaskEnableString	      "on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,"
-      MaskVariables	      "in=@1;out=@2;p2q=@3;p3_4q=@4;p5q=@5;p6q=@6;"
-      MaskInitialization      "fm_inout\n\n"
-      MaskDisplay	      "plot([0 1 1 0 0],[0 0 1 1 0])"
-      MaskSelfModifiable      on
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "3|4|400|[1.00   0.00]|2|1"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		28
+	$ClassName		"Simulink.Mask"
+	Type			"Bus"
+	Description		"Bus block."
+	Initialization		"fm_inout\n\n"
+	SelfModifiable		"on"
+	Display			"plot([0 1 1 0 0],[0 0 1 1 0])"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  6
+	  Object {
+	    $ObjectID		    29
+	    Type		    "edit"
+	    Name		    "in"
+	    Prompt		    "Number of inputs:"
+	    Value		    "3"
+	  }
+	  Object {
+	    $ObjectID		    30
+	    Type		    "edit"
+	    Name		    "out"
+	    Prompt		    "Number of outputs:"
+	    Value		    "4"
+	  }
+	  Object {
+	    $ObjectID		    31
+	    Type		    "edit"
+	    Name		    "p2q"
+	    Prompt		    "Voltage Rating [kV]"
+	    Value		    "400"
+	  }
+	  Object {
+	    $ObjectID		    32
+	    Type		    "edit"
+	    Name		    "p3_4q"
+	    Prompt		    "Voltage initial guess [p.u.  rad]"
+	    Value		    "[1.00   0.00]"
+	  }
+	  Object {
+	    $ObjectID		    33
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Area number"
+	    Value		    "2"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    34
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Region number"
+	    Value		    "1"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "Bus3"
+      SID		      "3"
       Tag		      "PSATblock"
       Description	      "Connection"
       Ports		      [0, 0, 0, 0, 0, 3, 2]
       Position		      [545, 126, 550, 284]
+      ZOrder		      -3
       BackgroundColor	      "blue"
       FontName		      "Arial"
       FontSize		      16
@@ -292,34 +1210,76 @@ Model {
       RightPortType	      "p1"
       LConnTagsString	      "__newl0|__newl1|__newl2"
       RConnTagsString	      "__newr0|__newr1"
-      MaskType		      "Bus"
-      MaskDescription	      "Bus block."
-      MaskPromptString	      "Number of inputs:|Number of outputs:|Voltage Rating [kV]|Voltage initial guess [p.u.  ra"
-      "d]|Area number|Region number"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit"
-      MaskTunableValueString  "on,on,on,on,on,on"
-      MaskCallbackString      "||||fm_block|"
-      MaskEnableString	      "on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,"
-      MaskVariables	      "in=@1;out=@2;p2q=@3;p3_4q=@4;p5q=@5;p6q=@6;"
-      MaskInitialization      "fm_inout\n\n"
-      MaskDisplay	      "plot([0 1 1 0 0],[0 0 1 1 0])"
-      MaskSelfModifiable      on
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "3|2|400|[1.00   0.00]|2|1"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		35
+	$ClassName		"Simulink.Mask"
+	Type			"Bus"
+	Description		"Bus block."
+	Initialization		"fm_inout\n\n"
+	SelfModifiable		"on"
+	Display			"plot([0 1 1 0 0],[0 0 1 1 0])"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  6
+	  Object {
+	    $ObjectID		    36
+	    Type		    "edit"
+	    Name		    "in"
+	    Prompt		    "Number of inputs:"
+	    Value		    "3"
+	  }
+	  Object {
+	    $ObjectID		    37
+	    Type		    "edit"
+	    Name		    "out"
+	    Prompt		    "Number of outputs:"
+	    Value		    "2"
+	  }
+	  Object {
+	    $ObjectID		    38
+	    Type		    "edit"
+	    Name		    "p2q"
+	    Prompt		    "Voltage Rating [kV]"
+	    Value		    "400"
+	  }
+	  Object {
+	    $ObjectID		    39
+	    Type		    "edit"
+	    Name		    "p3_4q"
+	    Prompt		    "Voltage initial guess [p.u.  rad]"
+	    Value		    "[1.00   0.00]"
+	  }
+	  Object {
+	    $ObjectID		    40
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Area number"
+	    Value		    "2"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    41
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Region number"
+	    Value		    "1"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "Bus4"
+      SID		      "4"
       Tag		      "PSATblock"
       Description	      "Connection"
       Ports		      [0, 0, 0, 0, 0, 2, 3]
       Position		      [475, 504, 480, 666]
+      ZOrder		      -4
       BackgroundColor	      "blue"
       NamePlacement	      "alternate"
       FontName		      "Arial"
@@ -329,34 +1289,76 @@ Model {
       RightPortType	      "p1"
       LConnTagsString	      "__newl0|__newl1"
       RConnTagsString	      "__newr0|__newr1|__newr2"
-      MaskType		      "Bus"
-      MaskDescription	      "Bus block."
-      MaskPromptString	      "Number of inputs:|Number of outputs:|Voltage Rating [kV]|Voltage initial guess [p.u.  ra"
-      "d]|Area number|Region number"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit"
-      MaskTunableValueString  "on,on,on,on,on,on"
-      MaskCallbackString      "||||fm_block|"
-      MaskEnableString	      "on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,"
-      MaskVariables	      "in=@1;out=@2;p2q=@3;p3_4q=@4;p5q=@5;p6q=@6;"
-      MaskInitialization      "fm_inout\n\n"
-      MaskDisplay	      "plot([0 1 1 0 0],[0 0 1 1 0])"
-      MaskSelfModifiable      on
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "2|3|400|[1.00   0.00]|2|1"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		42
+	$ClassName		"Simulink.Mask"
+	Type			"Bus"
+	Description		"Bus block."
+	Initialization		"fm_inout\n\n"
+	SelfModifiable		"on"
+	Display			"plot([0 1 1 0 0],[0 0 1 1 0])"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  6
+	  Object {
+	    $ObjectID		    43
+	    Type		    "edit"
+	    Name		    "in"
+	    Prompt		    "Number of inputs:"
+	    Value		    "2"
+	  }
+	  Object {
+	    $ObjectID		    44
+	    Type		    "edit"
+	    Name		    "out"
+	    Prompt		    "Number of outputs:"
+	    Value		    "3"
+	  }
+	  Object {
+	    $ObjectID		    45
+	    Type		    "edit"
+	    Name		    "p2q"
+	    Prompt		    "Voltage Rating [kV]"
+	    Value		    "400"
+	  }
+	  Object {
+	    $ObjectID		    46
+	    Type		    "edit"
+	    Name		    "p3_4q"
+	    Prompt		    "Voltage initial guess [p.u.  rad]"
+	    Value		    "[1.00   0.00]"
+	  }
+	  Object {
+	    $ObjectID		    47
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Area number"
+	    Value		    "2"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    48
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Region number"
+	    Value		    "1"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "Bus5"
+      SID		      "5"
       Tag		      "PSATblock"
       Description	      "Connection"
       Ports		      [0, 0, 0, 0, 0, 4, 3]
       Position		      [660, 517, 665, 713]
+      ZOrder		      -5
       BackgroundColor	      "blue"
       FontName		      "Arial"
       FontSize		      16
@@ -365,34 +1367,76 @@ Model {
       RightPortType	      "p1"
       LConnTagsString	      "__newl0|__newl1|__newl2|__newl3"
       RConnTagsString	      "__newr0|__newr1|__newr2"
-      MaskType		      "Bus"
-      MaskDescription	      "Bus block."
-      MaskPromptString	      "Number of inputs:|Number of outputs:|Voltage Rating [kV]|Voltage initial guess [p.u.  ra"
-      "d]|Area number|Region number"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit"
-      MaskTunableValueString  "on,on,on,on,on,on"
-      MaskCallbackString      "||||fm_block|"
-      MaskEnableString	      "on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,"
-      MaskVariables	      "in=@1;out=@2;p2q=@3;p3_4q=@4;p5q=@5;p6q=@6;"
-      MaskInitialization      "fm_inout\n\n"
-      MaskDisplay	      "plot([0 1 1 0 0],[0 0 1 1 0])"
-      MaskSelfModifiable      on
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "4|3|400|[1.00   0.00]|2|1"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		49
+	$ClassName		"Simulink.Mask"
+	Type			"Bus"
+	Description		"Bus block."
+	Initialization		"fm_inout\n\n"
+	SelfModifiable		"on"
+	Display			"plot([0 1 1 0 0],[0 0 1 1 0])"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  6
+	  Object {
+	    $ObjectID		    50
+	    Type		    "edit"
+	    Name		    "in"
+	    Prompt		    "Number of inputs:"
+	    Value		    "4"
+	  }
+	  Object {
+	    $ObjectID		    51
+	    Type		    "edit"
+	    Name		    "out"
+	    Prompt		    "Number of outputs:"
+	    Value		    "3"
+	  }
+	  Object {
+	    $ObjectID		    52
+	    Type		    "edit"
+	    Name		    "p2q"
+	    Prompt		    "Voltage Rating [kV]"
+	    Value		    "400"
+	  }
+	  Object {
+	    $ObjectID		    53
+	    Type		    "edit"
+	    Name		    "p3_4q"
+	    Prompt		    "Voltage initial guess [p.u.  rad]"
+	    Value		    "[1.00   0.00]"
+	  }
+	  Object {
+	    $ObjectID		    54
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Area number"
+	    Value		    "2"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    55
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Region number"
+	    Value		    "1"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "Bus6"
+      SID		      "6"
       Tag		      "PSATblock"
       Description	      "Connection"
       Ports		      [0, 0, 0, 0, 0, 3, 2]
       Position		      [765, 67, 770, 263]
+      ZOrder		      -6
       BackgroundColor	      "blue"
       FontName		      "Arial"
       FontSize		      16
@@ -401,142 +1445,424 @@ Model {
       RightPortType	      "p1"
       LConnTagsString	      "__newl0|__newl1|__newl2"
       RConnTagsString	      "__newr0|__newr1"
-      MaskType		      "Bus"
-      MaskDescription	      "Bus block."
-      MaskPromptString	      "Number of inputs:|Number of outputs:|Voltage Rating [kV]|Voltage initial guess [p.u.  ra"
-      "d]|Area number|Region number"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit"
-      MaskTunableValueString  "on,on,on,on,on,on"
-      MaskCallbackString      "||||fm_block|"
-      MaskEnableString	      "on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,"
-      MaskVariables	      "in=@1;out=@2;p2q=@3;p3_4q=@4;p5q=@5;p6q=@6;"
-      MaskInitialization      "fm_inout\n\n"
-      MaskDisplay	      "plot([0 1 1 0 0],[0 0 1 1 0])"
-      MaskSelfModifiable      on
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "3|2|400|[1.00   0.00]|2|1"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		56
+	$ClassName		"Simulink.Mask"
+	Type			"Bus"
+	Description		"Bus block."
+	Initialization		"fm_inout\n\n"
+	SelfModifiable		"on"
+	Display			"plot([0 1 1 0 0],[0 0 1 1 0])"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  6
+	  Object {
+	    $ObjectID		    57
+	    Type		    "edit"
+	    Name		    "in"
+	    Prompt		    "Number of inputs:"
+	    Value		    "3"
+	  }
+	  Object {
+	    $ObjectID		    58
+	    Type		    "edit"
+	    Name		    "out"
+	    Prompt		    "Number of outputs:"
+	    Value		    "2"
+	  }
+	  Object {
+	    $ObjectID		    59
+	    Type		    "edit"
+	    Name		    "p2q"
+	    Prompt		    "Voltage Rating [kV]"
+	    Value		    "400"
+	  }
+	  Object {
+	    $ObjectID		    60
+	    Type		    "edit"
+	    Name		    "p3_4q"
+	    Prompt		    "Voltage initial guess [p.u.  rad]"
+	    Value		    "[1.00   0.00]"
+	  }
+	  Object {
+	    $ObjectID		    61
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Area number"
+	    Value		    "2"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    62
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Region number"
+	    Value		    "1"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "Demand"
+      SID		      "7"
       Tag		      "PSATblock"
       Description	      "OPF & CPF"
       Ports		      [0, 0, 0, 0, 0, 1]
       Position		      [795, 195, 835, 235]
+      ZOrder		      -7
       ShowName		      off
       PhysicalDomain	      "psatdomain"
       LeftPortType	      "p1"
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
-      MaskType		      "Demand"
-      MaskDescription	      "This block defines a constant power load for bifurcation and market studies."
-      MaskPromptString	      "Power Rating [MVA]|Active Power [p.u.]|Reactive Power [p.u.]|Max and Min Power Demand [p"
-      ".u.  p.u.]|Cost = a + b*P + c*P^2 [$/h, $/MWh, $/(MW)^2 h]|Cost = a + b*Q + c*Q^2 [$/h, $/MVArh, $/(MVAr)^2 h]|A"
-      "llow Unit Commitment|Tie Breaking Cost [$/h]|Up and down congestion costs [$/h $/h]|Number of Output Signals|Con"
-      "nected"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit,checkbox,edit,edit,popup(0|1),checkbox"
-      MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on"
-      MaskCallbackString      "||||||||||fm_block"
-      MaskEnableString	      "on,on,on,on,on,on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,,,,,,"
-      MaskVariables	      "p2q=@1;p3q=@2;p4q=@3;p5_6q=@4;p8_9_10q=@5;p11_12_13q=@6;p14q=@7;p15q=@8;p16_17q=@9;out=@10;"
-      "p18q=@11;"
-      MaskInitialization      "fm_inout;\n[xs,ys]=fm_draw('$');"
-      MaskDisplay	      "plot([ 1.0000    -0.5   -0.5  1],[ 0    0.866    -0.866    0])\ncolor('blue')\nplot(0.6*xs,0."
-      "6*ys)"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "100|0.2|0.66666*0.1|[0.2  0.00001]|[0.00  9.5  0.00]|[0.00  0.00  0.00]|off|0|[0 0]|0|on"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		63
+	$ClassName		"Simulink.Mask"
+	Type			"Demand"
+	Description		"This block defines a constant power load for bifurcation and market studies."
+	Initialization		"fm_inout;\n[xs,ys]=fm_draw('$');"
+	Display			"plot([ 1.0000    -0.5   -0.5  1],[ 0    0.866    -0.866    0])\ncolor('blue')\nplot(0.6*xs,0.6*ys)"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  11
+	  Object {
+	    $ObjectID		    64
+	    Type		    "edit"
+	    Name		    "p2q"
+	    Prompt		    "Power Rating [MVA]"
+	    Value		    "100"
+	  }
+	  Object {
+	    $ObjectID		    65
+	    Type		    "edit"
+	    Name		    "p3q"
+	    Prompt		    "Active Power [p.u.]"
+	    Value		    "0.2"
+	  }
+	  Object {
+	    $ObjectID		    66
+	    Type		    "edit"
+	    Name		    "p4q"
+	    Prompt		    "Reactive Power [p.u.]"
+	    Value		    "0.66666*0.1"
+	  }
+	  Object {
+	    $ObjectID		    67
+	    Type		    "edit"
+	    Name		    "p5_6q"
+	    Prompt		    "Max and Min Power Demand [p.u.  p.u.]"
+	    Value		    "[0.2  0.00001]"
+	  }
+	  Object {
+	    $ObjectID		    68
+	    Type		    "edit"
+	    Name		    "p8_9_10q"
+	    Prompt		    "Cost = a + b*P + c*P^2 [$/h, $/MWh, $/(MW)^2 h]"
+	    Value		    "[0.00  9.5  0.00]"
+	  }
+	  Object {
+	    $ObjectID		    69
+	    Type		    "edit"
+	    Name		    "p11_12_13q"
+	    Prompt		    "Cost = a + b*Q + c*Q^2 [$/h, $/MVArh, $/(MVAr)^2 h]"
+	    Value		    "[0.00  0.00  0.00]"
+	  }
+	  Object {
+	    $ObjectID		    70
+	    Type		    "checkbox"
+	    Name		    "p14q"
+	    Prompt		    "Allow Unit Commitment"
+	    Value		    "off"
+	  }
+	  Object {
+	    $ObjectID		    71
+	    Type		    "edit"
+	    Name		    "p15q"
+	    Prompt		    "Tie Breaking Cost [$/h]"
+	    Value		    "0"
+	  }
+	  Object {
+	    $ObjectID		    72
+	    Type		    "edit"
+	    Name		    "p16_17q"
+	    Prompt		    "Up and down congestion costs [$/h $/h]"
+	    Value		    "[0 0]"
+	  }
+	  Object {
+	    $ObjectID		    73
+	    Type		    "popup"
+	    Array {
+	      Type		      "Cell"
+	      Dimension		      2
+	      Cell		      "0"
+	      Cell		      "1"
+	      PropName		      "TypeOptions"
+	    }
+	    Name		    "out"
+	    Prompt		    "Number of Output Signals"
+	    Value		    "0"
+	  }
+	  Object {
+	    $ObjectID		    74
+	    Type		    "checkbox"
+	    Name		    "p18q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "Demand1"
+      SID		      "8"
       Tag		      "PSATblock"
       Description	      "OPF & CPF"
       Ports		      [0, 0, 0, 0, 0, 1]
       Position		      [695, 660, 735, 700]
+      ZOrder		      -8
       ShowName		      off
       PhysicalDomain	      "psatdomain"
       LeftPortType	      "p1"
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
-      MaskType		      "Demand"
-      MaskDescription	      "This block defines a constant power load for bifurcation and market studies."
-      MaskPromptString	      "Power Rating [MVA]|Active Power [p.u.]|Reactive Power [p.u.]|Max and Min Power Demand [p"
-      ".u.  p.u.]|Cost = a + b*P + c*P^2 [$/h, $/MWh, $/(MW)^2 h]|Cost = a + b*Q + c*Q^2 [$/h, $/MVArh, $/(MVAr)^2 h]|A"
-      "llow Unit Commitment|Tie Breaking Cost [$/h]|Up and down congestion costs [$/h $/h]|Number of Output Signals|Con"
-      "nected"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit,checkbox,edit,edit,popup(0|1),checkbox"
-      MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on"
-      MaskCallbackString      "||||||||||fm_block"
-      MaskEnableString	      "on,on,on,on,on,on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,,,,,,"
-      MaskVariables	      "p2q=@1;p3q=@2;p4q=@3;p5_6q=@4;p8_9_10q=@5;p11_12_13q=@6;p14q=@7;p15q=@8;p16_17q=@9;out=@10;"
-      "p18q=@11;"
-      MaskInitialization      "fm_inout;\n[xs,ys]=fm_draw('$');"
-      MaskDisplay	      "plot([ 1.0000    -0.5   -0.5  1],[ 0    0.866    -0.866    0])\ncolor('blue')\nplot(0.6*xs,0."
-      "6*ys)"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "100|0.1|0.7*0.1|[0.1  0.00001]|[0.00  10.5  0.00]|[0.00  0.00  0.00]|off|0|[0 0]|0|on"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		75
+	$ClassName		"Simulink.Mask"
+	Type			"Demand"
+	Description		"This block defines a constant power load for bifurcation and market studies."
+	Initialization		"fm_inout;\n[xs,ys]=fm_draw('$');"
+	Display			"plot([ 1.0000    -0.5   -0.5  1],[ 0    0.866    -0.866    0])\ncolor('blue')\nplot(0.6*xs,0.6*ys)"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  11
+	  Object {
+	    $ObjectID		    76
+	    Type		    "edit"
+	    Name		    "p2q"
+	    Prompt		    "Power Rating [MVA]"
+	    Value		    "100"
+	  }
+	  Object {
+	    $ObjectID		    77
+	    Type		    "edit"
+	    Name		    "p3q"
+	    Prompt		    "Active Power [p.u.]"
+	    Value		    "0.1"
+	  }
+	  Object {
+	    $ObjectID		    78
+	    Type		    "edit"
+	    Name		    "p4q"
+	    Prompt		    "Reactive Power [p.u.]"
+	    Value		    "0.7*0.1"
+	  }
+	  Object {
+	    $ObjectID		    79
+	    Type		    "edit"
+	    Name		    "p5_6q"
+	    Prompt		    "Max and Min Power Demand [p.u.  p.u.]"
+	    Value		    "[0.1  0.00001]"
+	  }
+	  Object {
+	    $ObjectID		    80
+	    Type		    "edit"
+	    Name		    "p8_9_10q"
+	    Prompt		    "Cost = a + b*P + c*P^2 [$/h, $/MWh, $/(MW)^2 h]"
+	    Value		    "[0.00  10.5  0.00]"
+	  }
+	  Object {
+	    $ObjectID		    81
+	    Type		    "edit"
+	    Name		    "p11_12_13q"
+	    Prompt		    "Cost = a + b*Q + c*Q^2 [$/h, $/MVArh, $/(MVAr)^2 h]"
+	    Value		    "[0.00  0.00  0.00]"
+	  }
+	  Object {
+	    $ObjectID		    82
+	    Type		    "checkbox"
+	    Name		    "p14q"
+	    Prompt		    "Allow Unit Commitment"
+	    Value		    "off"
+	  }
+	  Object {
+	    $ObjectID		    83
+	    Type		    "edit"
+	    Name		    "p15q"
+	    Prompt		    "Tie Breaking Cost [$/h]"
+	    Value		    "0"
+	  }
+	  Object {
+	    $ObjectID		    84
+	    Type		    "edit"
+	    Name		    "p16_17q"
+	    Prompt		    "Up and down congestion costs [$/h $/h]"
+	    Value		    "[0 0]"
+	  }
+	  Object {
+	    $ObjectID		    85
+	    Type		    "popup"
+	    Array {
+	      Type		      "Cell"
+	      Dimension		      2
+	      Cell		      "0"
+	      Cell		      "1"
+	      PropName		      "TypeOptions"
+	    }
+	    Name		    "out"
+	    Prompt		    "Number of Output Signals"
+	    Value		    "0"
+	  }
+	  Object {
+	    $ObjectID		    86
+	    Type		    "checkbox"
+	    Name		    "p18q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "Demand3"
+      SID		      "9"
       Tag		      "PSATblock"
       Description	      "OPF & CPF"
       Ports		      [0, 0, 0, 0, 0, 1]
       Position		      [505, 565, 545, 605]
+      ZOrder		      -9
       ShowName		      off
       PhysicalDomain	      "psatdomain"
       LeftPortType	      "p1"
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
-      MaskType		      "Demand"
-      MaskDescription	      "This block defines a constant power load for bifurcation and market studies."
-      MaskPromptString	      "Power Rating [MVA]|Active Power [p.u.]|Reactive Power [p.u.]|Max and Min Power Demand [p"
-      ".u.  p.u.]|Cost = a + b*P + c*P^2 [$/h, $/MWh, $/(MW)^2 h]|Cost = a + b*Q + c*Q^2 [$/h, $/MVArh, $/(MVAr)^2 h]|A"
-      "llow Unit Commitment|Tie Breaking Cost [$/h]|Up and down congestion costs [$/h $/h]|Number of Output Signals|Con"
-      "nected"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit,checkbox,edit,edit,popup(0|1),checkbox"
-      MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on"
-      MaskCallbackString      "||||||||||fm_block"
-      MaskEnableString	      "on,on,on,on,on,on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,,,,,,"
-      MaskVariables	      "p2q=@1;p3q=@2;p4q=@3;p5_6q=@4;p8_9_10q=@5;p11_12_13q=@6;p14q=@7;p15q=@8;p16_17q=@9;out=@10;"
-      "p18q=@11;"
-      MaskInitialization      "fm_inout;\n[xs,ys]=fm_draw('$');"
-      MaskDisplay	      "plot([ 1.0000    -0.5   -0.5  1],[ 0    0.866    -0.866    0])\ncolor('blue')\nplot(0.6*xs,0."
-      "6*ys)"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "100|0.25|0.66666*0.25|[0.25  0.00001]|[0.00  12  0.00]|[0.00  0.00  0.00]|off|0|[0 0]|0|on"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		87
+	$ClassName		"Simulink.Mask"
+	Type			"Demand"
+	Description		"This block defines a constant power load for bifurcation and market studies."
+	Initialization		"fm_inout;\n[xs,ys]=fm_draw('$');"
+	Display			"plot([ 1.0000    -0.5   -0.5  1],[ 0    0.866    -0.866    0])\ncolor('blue')\nplot(0.6*xs,0.6*ys)"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  11
+	  Object {
+	    $ObjectID		    88
+	    Type		    "edit"
+	    Name		    "p2q"
+	    Prompt		    "Power Rating [MVA]"
+	    Value		    "100"
+	  }
+	  Object {
+	    $ObjectID		    89
+	    Type		    "edit"
+	    Name		    "p3q"
+	    Prompt		    "Active Power [p.u.]"
+	    Value		    "0.25"
+	  }
+	  Object {
+	    $ObjectID		    90
+	    Type		    "edit"
+	    Name		    "p4q"
+	    Prompt		    "Reactive Power [p.u.]"
+	    Value		    "0.66666*0.25"
+	  }
+	  Object {
+	    $ObjectID		    91
+	    Type		    "edit"
+	    Name		    "p5_6q"
+	    Prompt		    "Max and Min Power Demand [p.u.  p.u.]"
+	    Value		    "[0.25  0.00001]"
+	  }
+	  Object {
+	    $ObjectID		    92
+	    Type		    "edit"
+	    Name		    "p8_9_10q"
+	    Prompt		    "Cost = a + b*P + c*P^2 [$/h, $/MWh, $/(MW)^2 h]"
+	    Value		    "[0.00  12  0.00]"
+	  }
+	  Object {
+	    $ObjectID		    93
+	    Type		    "edit"
+	    Name		    "p11_12_13q"
+	    Prompt		    "Cost = a + b*Q + c*Q^2 [$/h, $/MVArh, $/(MVAr)^2 h]"
+	    Value		    "[0.00  0.00  0.00]"
+	  }
+	  Object {
+	    $ObjectID		    94
+	    Type		    "checkbox"
+	    Name		    "p14q"
+	    Prompt		    "Allow Unit Commitment"
+	    Value		    "off"
+	  }
+	  Object {
+	    $ObjectID		    95
+	    Type		    "edit"
+	    Name		    "p15q"
+	    Prompt		    "Tie Breaking Cost [$/h]"
+	    Value		    "0"
+	  }
+	  Object {
+	    $ObjectID		    96
+	    Type		    "edit"
+	    Name		    "p16_17q"
+	    Prompt		    "Up and down congestion costs [$/h $/h]"
+	    Value		    "[0 0]"
+	  }
+	  Object {
+	    $ObjectID		    97
+	    Type		    "popup"
+	    Array {
+	      Type		      "Cell"
+	      Dimension		      2
+	      Cell		      "0"
+	      Cell		      "1"
+	      PropName		      "TypeOptions"
+	    }
+	    Name		    "out"
+	    Prompt		    "Number of Output Signals"
+	    Value		    "0"
+	  }
+	  Object {
+	    $ObjectID		    98
+	    Type		    "checkbox"
+	    Name		    "p18q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "ESCO 1"
+      SID		      "10"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1]
       Position		      [505, 512, 540, 548]
+      ZOrder		      -10
       NamePlacement	      "alternate"
       ShowName		      off
       FontSize		      18
@@ -544,32 +1870,69 @@ Model {
       LeftPortType	      "p1"
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
-      MaskType		      "PQ"
-      MaskDescription	      "This block defines a constant power load:\n\nP = Pcost.\nQ = Qcost."
-      MaskPromptString	      "Power and Voltage Ratings [MVA, kV]|Active and Reactive Powers [p.u.  p.u.]|Maximum and "
-      "Minimum Allowable Voltage [p.u.   p.u.]|Allow conversion to impendance for min & max voltage|Connected"
-      MaskStyleString	      "edit,edit,edit,checkbox,checkbox"
-      MaskTunableValueString  "on,on,on,on,on"
-      MaskCallbackString      "|||fm_block|fm_block"
-      MaskEnableString	      "on,on,off,on,on"
-      MaskVisibilityString    "on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on"
-      MaskVarAliasString      ",,,,"
-      MaskVariables	      "p2_3q=@1;p4_5q=@2;p6_7q=@3;p8q=@4;p9q=@5;"
-      MaskDisplay	      "plot([1 -0.5 -0.5 1],[0 0.866 -0.866 0])"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "[100  400]|[0.90  0.60]|[1.1  0.9]|off|on"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		99
+	$ClassName		"Simulink.Mask"
+	Type			"PQ"
+	Description		"This block defines a constant power load:\n\nP = Pcost.\nQ = Qcost."
+	Display			"plot([1 -0.5 -0.5 1],[0 0.866 -0.866 0])"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  5
+	  Object {
+	    $ObjectID		    100
+	    Type		    "edit"
+	    Name		    "p2_3q"
+	    Prompt		    "Power and Voltage Ratings [MVA, kV]"
+	    Value		    "[100  400]"
+	  }
+	  Object {
+	    $ObjectID		    101
+	    Type		    "edit"
+	    Name		    "p4_5q"
+	    Prompt		    "Active and Reactive Powers [p.u.  p.u.]"
+	    Value		    "[0.90  0.60]"
+	  }
+	  Object {
+	    $ObjectID		    102
+	    Type		    "edit"
+	    Name		    "p6_7q"
+	    Prompt		    "Maximum and Minimum Allowable Voltage [p.u.   p.u.]"
+	    Value		    "[1.1  0.9]"
+	    Enabled		    "off"
+	  }
+	  Object {
+	    $ObjectID		    103
+	    Type		    "checkbox"
+	    Name		    "p8q"
+	    Prompt		    "Allow conversion to impendance for min & max voltage"
+	    Value		    "off"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    104
+	    Type		    "checkbox"
+	    Name		    "p9q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "ESCO 2"
+      SID		      "11"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1]
       Position		      [695, 597, 730, 633]
+      ZOrder		      -11
       NamePlacement	      "alternate"
       ShowName		      off
       FontSize		      18
@@ -577,64 +1940,138 @@ Model {
       LeftPortType	      "p1"
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
-      MaskType		      "PQ"
-      MaskDescription	      "This block defines a constant power load:\n\nP = Pcost.\nQ = Qcost."
-      MaskPromptString	      "Power and Voltage Ratings [MVA, kV]|Active and Reactive Powers [p.u.  p.u.]|Maximum and "
-      "Minimum Allowable Voltage [p.u.   p.u.]|Allow conversion to impendance for min & max voltage|Connected"
-      MaskStyleString	      "edit,edit,edit,checkbox,checkbox"
-      MaskTunableValueString  "on,on,on,on,on"
-      MaskCallbackString      "|||fm_block|fm_block"
-      MaskEnableString	      "on,on,off,on,on"
-      MaskVisibilityString    "on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on"
-      MaskVarAliasString      ",,,,"
-      MaskVariables	      "p2_3q=@1;p4_5q=@2;p6_7q=@3;p8q=@4;p9q=@5;"
-      MaskDisplay	      "plot([1 -0.5 -0.5 1],[0 0.866 -0.866 0])"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "[100  400]|[1.00  0.70]|[1.1  0.9]|off|on"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		105
+	$ClassName		"Simulink.Mask"
+	Type			"PQ"
+	Description		"This block defines a constant power load:\n\nP = Pcost.\nQ = Qcost."
+	Display			"plot([1 -0.5 -0.5 1],[0 0.866 -0.866 0])"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  5
+	  Object {
+	    $ObjectID		    106
+	    Type		    "edit"
+	    Name		    "p2_3q"
+	    Prompt		    "Power and Voltage Ratings [MVA, kV]"
+	    Value		    "[100  400]"
+	  }
+	  Object {
+	    $ObjectID		    107
+	    Type		    "edit"
+	    Name		    "p4_5q"
+	    Prompt		    "Active and Reactive Powers [p.u.  p.u.]"
+	    Value		    "[1.00  0.70]"
+	  }
+	  Object {
+	    $ObjectID		    108
+	    Type		    "edit"
+	    Name		    "p6_7q"
+	    Prompt		    "Maximum and Minimum Allowable Voltage [p.u.   p.u.]"
+	    Value		    "[1.1  0.9]"
+	    Enabled		    "off"
+	  }
+	  Object {
+	    $ObjectID		    109
+	    Type		    "checkbox"
+	    Name		    "p8q"
+	    Prompt		    "Allow conversion to impendance for min & max voltage"
+	    Value		    "off"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    110
+	    Type		    "checkbox"
+	    Name		    "p9q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "ESCO 3"
+      SID		      "12"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1]
       Position		      [795, 97, 830, 133]
+      ZOrder		      -12
       ShowName		      off
       FontSize		      18
       PhysicalDomain	      "psatdomain"
       LeftPortType	      "p1"
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
-      MaskType		      "PQ"
-      MaskDescription	      "This block defines a constant power load:\n\nP = Pcost.\nQ = Qcost."
-      MaskPromptString	      "Power and Voltage Ratings [MVA, kV]|Active and Reactive Powers [p.u.  p.u.]|Maximum and "
-      "Minimum Allowable Voltage [p.u.   p.u.]|Allow conversion to impendance for min & max voltage|Connected"
-      MaskStyleString	      "edit,edit,edit,checkbox,checkbox"
-      MaskTunableValueString  "on,on,on,on,on"
-      MaskCallbackString      "|||fm_block|fm_block"
-      MaskEnableString	      "on,on,off,on,on"
-      MaskVisibilityString    "on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on"
-      MaskVarAliasString      ",,,,"
-      MaskVariables	      "p2_3q=@1;p4_5q=@2;p6_7q=@3;p8q=@4;p9q=@5;"
-      MaskDisplay	      "plot([1 -0.5 -0.5 1],[0 0.866 -0.866 0])"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "[100  400]|[0.90  0.60]|[1.1  0.9]|off|on"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		111
+	$ClassName		"Simulink.Mask"
+	Type			"PQ"
+	Description		"This block defines a constant power load:\n\nP = Pcost.\nQ = Qcost."
+	Display			"plot([1 -0.5 -0.5 1],[0 0.866 -0.866 0])"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  5
+	  Object {
+	    $ObjectID		    112
+	    Type		    "edit"
+	    Name		    "p2_3q"
+	    Prompt		    "Power and Voltage Ratings [MVA, kV]"
+	    Value		    "[100  400]"
+	  }
+	  Object {
+	    $ObjectID		    113
+	    Type		    "edit"
+	    Name		    "p4_5q"
+	    Prompt		    "Active and Reactive Powers [p.u.  p.u.]"
+	    Value		    "[0.90  0.60]"
+	  }
+	  Object {
+	    $ObjectID		    114
+	    Type		    "edit"
+	    Name		    "p6_7q"
+	    Prompt		    "Maximum and Minimum Allowable Voltage [p.u.   p.u.]"
+	    Value		    "[1.1  0.9]"
+	    Enabled		    "off"
+	  }
+	  Object {
+	    $ObjectID		    115
+	    Type		    "checkbox"
+	    Name		    "p8q"
+	    Prompt		    "Allow conversion to impendance for min & max voltage"
+	    Value		    "off"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    116
+	    Type		    "checkbox"
+	    Name		    "p9q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "GENCO 1"
+      SID		      "13"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 0, 1]
       Position		      [95, 550, 145, 600]
+      ZOrder		      -13
       NamePlacement	      "alternate"
       ShowName		      off
       FontName		      "Arial"
@@ -643,33 +2080,81 @@ Model {
       LeftPortType	      "p1"
       RightPortType	      "p1"
       RConnTagsString	      "__newr0"
-      MaskType		      "PV"
-      MaskDescription	      "This block defines a PV bus for load flow studies:\n\nP = Pcost.\nV = Vdes."
-      MaskPromptString	      "Power and Voltage Ratings [MVA, kV]|Active Power [p.u.]|Voltage Magnitude [p.u.]|Qmax & "
-      "Qmin [p.u.  p.u.]|Vmax & Vmin [p.u.  p.u.]|Loss Participation Factor|Connected"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit,checkbox"
-      MaskTunableValueString  "on,on,on,on,on,on,on"
-      MaskCallbackString      "||||||fm_block"
-      MaskEnableString	      "on,on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,,"
-      MaskVariables	      "p2_3q=@1;p4q=@2;p5q=@3;p6_7q=@4;p8_9q=@5;p10q=@6;p11q=@7;"
-      MaskInitialization      "[x,y] = fm_draw('circle');\n[xp,yp] = fm_draw('P');"
-      MaskDisplay	      "plot(x,y)\ncolor('blue')\nplot(0.3*xp-0.35,0.6*yp,[0.1 0.3 0.5],[0.3 -0.3 0.3])\n"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "none"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "[100  400]|0.9|1.05|[1.5  -1.5]|[1.1  0.9]|1|on"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		117
+	$ClassName		"Simulink.Mask"
+	Type			"PV"
+	Description		"This block defines a PV bus for load flow studies:\n\nP = Pcost.\nV = Vdes."
+	Initialization		"[x,y] = fm_draw('circle');\n[xp,yp] = fm_draw('P');"
+	Display			"plot(x,y)\ncolor('blue')\nplot(0.3*xp-0.35,0.6*yp,[0.1 0.3 0.5],[0.3 -0.3 0.3])\n"
+	IconFrame		"off"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  7
+	  Object {
+	    $ObjectID		    118
+	    Type		    "edit"
+	    Name		    "p2_3q"
+	    Prompt		    "Power and Voltage Ratings [MVA, kV]"
+	    Value		    "[100  400]"
+	  }
+	  Object {
+	    $ObjectID		    119
+	    Type		    "edit"
+	    Name		    "p4q"
+	    Prompt		    "Active Power [p.u.]"
+	    Value		    "0.9"
+	  }
+	  Object {
+	    $ObjectID		    120
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Voltage Magnitude [p.u.]"
+	    Value		    "1.05"
+	  }
+	  Object {
+	    $ObjectID		    121
+	    Type		    "edit"
+	    Name		    "p6_7q"
+	    Prompt		    "Qmax & Qmin [p.u.  p.u.]"
+	    Value		    "[1.5  -1.5]"
+	  }
+	  Object {
+	    $ObjectID		    122
+	    Type		    "edit"
+	    Name		    "p8_9q"
+	    Prompt		    "Vmax & Vmin [p.u.  p.u.]"
+	    Value		    "[1.1  0.9]"
+	  }
+	  Object {
+	    $ObjectID		    123
+	    Type		    "edit"
+	    Name		    "p10q"
+	    Prompt		    "Loss Participation Factor"
+	    Value		    "1"
+	  }
+	  Object {
+	    $ObjectID		    124
+	    Type		    "checkbox"
+	    Name		    "p11q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "GENCO 2"
+      SID		      "14"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 0, 1]
       Position		      [215, 91, 250, 129]
+      ZOrder		      -14
       ShowName		      off
       FontName		      "Arial"
       FontSize		      16
@@ -677,35 +2162,98 @@ Model {
       LeftPortType	      "p1"
       RightPortType	      "p1"
       RConnTagsString	      "__newr0"
-      MaskType		      "SW"
-      MaskDescription	      "This block defines a V-theta bus:\n\nV = V_des\ntheta = theta_des"
-      MaskPromptString	      "Power and Voltage Ratings [MVA, kV]|Voltage Magnitude [p.u.]|Reference Phase Angle [rad]"
-      "|Qmax and Qmin [p.u.  p.u.]|Vmax and Vmin  [p.u.  p.u.]|Active Power Guess [p.u.]|Loss Participation Factor|Refe"
-      "rence bus|Connected"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit,edit,checkbox,checkbox"
-      MaskTunableValueString  "on,on,on,on,on,on,on,on,on"
-      MaskCallbackString      "|||||||fm_block|fm_block"
-      MaskEnableString	      "on,on,on,on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,,,,"
-      MaskVariables	      "p2_3q=@1;p4q=@2;p5q=@3;p6_7q=@4;p8_9q=@5;p10q=@6;p11q=@7;p12q=@8;p13q=@9;"
-      MaskInitialization      "[x,y] = fm_draw('circle');\n[xt,yt] = fm_draw('theta');\n"
-      MaskDisplay	      "plot([0 1 1 0 0],[0 0 1 1 0]), color('blue'), plot([0 1],[0 1],[0 1],[1 0],[0.5 1 0.5 0 0.5],"
-      "[0 0.5 1 0.5 0])"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "[100  400]|1.05|0.00|[1.5  -1.5]|[1.1  0.9]|1.4|1|on|on"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		125
+	$ClassName		"Simulink.Mask"
+	Type			"SW"
+	Description		"This block defines a V-theta bus:\n\nV = V_des\ntheta = theta_des"
+	Initialization		"[x,y] = fm_draw('circle');\n[xt,yt] = fm_draw('theta');\n"
+	Display			"plot([0 1 1 0 0],[0 0 1 1 0]), color('blue'), plot([0 1],[0 1],[0 1],[1 0],[0.5 1 0.5 0 0.5],[0 0.5 1 0.5 "
+	"0])"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  9
+	  Object {
+	    $ObjectID		    126
+	    Type		    "edit"
+	    Name		    "p2_3q"
+	    Prompt		    "Power and Voltage Ratings [MVA, kV]"
+	    Value		    "[100  400]"
+	  }
+	  Object {
+	    $ObjectID		    127
+	    Type		    "edit"
+	    Name		    "p4q"
+	    Prompt		    "Voltage Magnitude [p.u.]"
+	    Value		    "1.05"
+	  }
+	  Object {
+	    $ObjectID		    128
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Reference Phase Angle [rad]"
+	    Value		    "0.00"
+	  }
+	  Object {
+	    $ObjectID		    129
+	    Type		    "edit"
+	    Name		    "p6_7q"
+	    Prompt		    "Qmax and Qmin [p.u.  p.u.]"
+	    Value		    "[1.5  -1.5]"
+	  }
+	  Object {
+	    $ObjectID		    130
+	    Type		    "edit"
+	    Name		    "p8_9q"
+	    Prompt		    "Vmax and Vmin  [p.u.  p.u.]"
+	    Value		    "[1.1  0.9]"
+	  }
+	  Object {
+	    $ObjectID		    131
+	    Type		    "edit"
+	    Name		    "p10q"
+	    Prompt		    "Active Power Guess [p.u.]"
+	    Value		    "1.4"
+	  }
+	  Object {
+	    $ObjectID		    132
+	    Type		    "edit"
+	    Name		    "p11q"
+	    Prompt		    "Loss Participation Factor"
+	    Value		    "1"
+	  }
+	  Object {
+	    $ObjectID		    133
+	    Type		    "checkbox"
+	    Name		    "p12q"
+	    Prompt		    "Reference bus"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    134
+	    Type		    "checkbox"
+	    Name		    "p13q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "GENCO 3"
+      SID		      "15"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 0, 1]
       Position		      [455, 134, 500, 176]
+      ZOrder		      -15
       NamePlacement	      "alternate"
       ShowName		      off
       FontName		      "Arial"
@@ -714,60 +2262,165 @@ Model {
       LeftPortType	      "p1"
       RightPortType	      "p1"
       RConnTagsString	      "__newr0"
-      MaskType		      "PV"
-      MaskDescription	      "This block defines a PV bus for load flow studies:\n\nP = Pcost.\nV = Vdes."
-      MaskPromptString	      "Power and Voltage Ratings [MVA, kV]|Active Power [p.u.]|Voltage Magnitude [p.u.]|Qmax & "
-      "Qmin [p.u.  p.u.]|Vmax & Vmin [p.u.  p.u.]|Loss Participation Factor|Connected"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit,checkbox"
-      MaskTunableValueString  "on,on,on,on,on,on,on"
-      MaskCallbackString      "||||||fm_block"
-      MaskEnableString	      "on,on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,,"
-      MaskVariables	      "p2_3q=@1;p4q=@2;p5q=@3;p6_7q=@4;p8_9q=@5;p10q=@6;p11q=@7;"
-      MaskInitialization      "[x,y] = fm_draw('circle');\n[xp,yp] = fm_draw('P');"
-      MaskDisplay	      "plot(x,y)\ncolor('blue')\nplot(0.3*xp-0.35,0.6*yp,[0.1 0.3 0.5],[0.3 -0.3 0.3])\n"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "none"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "[100  400]|0.6|1.05|[1.5  -1.5]|[1.1  0.9]|1|on"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		135
+	$ClassName		"Simulink.Mask"
+	Type			"PV"
+	Description		"This block defines a PV bus for load flow studies:\n\nP = Pcost.\nV = Vdes."
+	Initialization		"[x,y] = fm_draw('circle');\n[xp,yp] = fm_draw('P');"
+	Display			"plot(x,y)\ncolor('blue')\nplot(0.3*xp-0.35,0.6*yp,[0.1 0.3 0.5],[0.3 -0.3 0.3])\n"
+	IconFrame		"off"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  7
+	  Object {
+	    $ObjectID		    136
+	    Type		    "edit"
+	    Name		    "p2_3q"
+	    Prompt		    "Power and Voltage Ratings [MVA, kV]"
+	    Value		    "[100  400]"
+	  }
+	  Object {
+	    $ObjectID		    137
+	    Type		    "edit"
+	    Name		    "p4q"
+	    Prompt		    "Active Power [p.u.]"
+	    Value		    "0.6"
+	  }
+	  Object {
+	    $ObjectID		    138
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Voltage Magnitude [p.u.]"
+	    Value		    "1.05"
+	  }
+	  Object {
+	    $ObjectID		    139
+	    Type		    "edit"
+	    Name		    "p6_7q"
+	    Prompt		    "Qmax & Qmin [p.u.  p.u.]"
+	    Value		    "[1.5  -1.5]"
+	  }
+	  Object {
+	    $ObjectID		    140
+	    Type		    "edit"
+	    Name		    "p8_9q"
+	    Prompt		    "Vmax & Vmin [p.u.  p.u.]"
+	    Value		    "[1.1  0.9]"
+	  }
+	  Object {
+	    $ObjectID		    141
+	    Type		    "edit"
+	    Name		    "p10q"
+	    Prompt		    "Loss Participation Factor"
+	    Value		    "1"
+	  }
+	  Object {
+	    $ObjectID		    142
+	    Type		    "checkbox"
+	    Name		    "p11q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
-
-      BlockType		      Reference
+      BlockType		      PMComponent
       Name		      "Line"
+      SID		      "16"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1, 1]
       Position		      [410, 249, 495, 261]
+      ZOrder		      -16
       ShowName		      off
       FontName		      "Arial"
       FontSize		      16
-	SourceBlock	"fm_lib/Power Flow/Line"
-      SourceType	      "Line"
       PhysicalDomain	      "psatdomain"
-      SubClassName	      "unknown"
       LeftPortType	      "p1"
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
       RConnTagsString	      "__newr0"
-      p3_4_5q		      "[100  400  60]"
-      p6q		      "0"
-      p8q		      "0.05"
-      p9q		      "0.25"
-      p10q		      "0.06"
-      p13_14_15q	      "[0.3082  0.0  0.0]"
-      p16q		      on
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		143
+	$ClassName		"Simulink.Mask"
+	Type			"Line"
+	Description		"This block defines a pi model for a tree phase line."
+	Initialization		"[xp,yp] = fm_draw('pi');"
+	Display			"plot([-1  1  1 -1 -1],[-0.2 -0.2 0.2 0.2 -0.2])\ncolor('blue')\nplot(0.35*xp,0.2*yp)"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  7
+	  Object {
+	    $ObjectID		    144
+	    Type		    "edit"
+	    Name		    "p3_4_5q"
+	    Prompt		    "Power, Voltage and Frequency Ratings [MVA, kV, Hz]"
+	    Value		    "[100  400  60]"
+	  }
+	  Object {
+	    $ObjectID		    145
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Length of line [km] (0 for p.u. parameters)"
+	    Value		    "0"
+	  }
+	  Object {
+	    $ObjectID		    146
+	    Type		    "edit"
+	    Name		    "p8q"
+	    Prompt		    "Resistance [p.u. (Ohms/km)]"
+	    Value		    "0.05"
+	  }
+	  Object {
+	    $ObjectID		    147
+	    Type		    "edit"
+	    Name		    "p9q"
+	    Prompt		    "Reactance [p.u. (H/km)]"
+	    Value		    "0.25"
+	  }
+	  Object {
+	    $ObjectID		    148
+	    Type		    "edit"
+	    Name		    "p10q"
+	    Prompt		    "Susceptance [p.u. (F/km)]"
+	    Value		    "0.06"
+	  }
+	  Object {
+	    $ObjectID		    149
+	    Type		    "edit"
+	    Name		    "p13_14_15q"
+	    Prompt		    "Imax, Pmax and Smax [p.u., p.u., p.u.]"
+	    Value		    "[0.3082  0.0  0.0]"
+	  }
+	  Object {
+	    $ObjectID		    150
+	    Type		    "checkbox"
+	    Name		    "p16q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "Line1"
+      SID		      "17"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1, 1]
       Position		      [610, 159, 695, 171]
+      ZOrder		      -17
       ShowName		      off
       FontName		      "Arial"
       FontSize		      16
@@ -776,34 +2429,82 @@ Model {
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
       RConnTagsString	      "__newr0"
-      MaskType		      "Line"
-      MaskDescription	      "This block defines a pi model for a tree phase line."
-      MaskPromptString	      "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Length of line [km] (0 for p.u. param"
-      "eters)|Resistance [p.u. (Ohms/km)]|Reactance [p.u. (H/km)]|Susceptance [p.u. (F/km)]|Imax, Pmax and Smax [p.u., "
-      "p.u., p.u.]|Connected"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit,checkbox"
-      MaskTunableValueString  "on,on,on,on,on,on,on"
-      MaskCallbackString      "||||||fm_block"
-      MaskEnableString	      "on,on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,,"
-      MaskVariables	      "p3_4_5q=@1;p6q=@2;p8q=@3;p9q=@4;p10q=@5;p13_14_15q=@6;p16q=@7;"
-      MaskInitialization      "[xp,yp] = fm_draw('pi');"
-      MaskDisplay	      "plot([-1  1  1 -1 -1],[-0.2 -0.2 0.2 0.2 -0.2])\ncolor('blue')\nplot(0.35*xp,0.2*yp)"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "[100  400  60]|0|0.02|0.10|0.02|[1.3973  0.0  0.0]|on"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		151
+	$ClassName		"Simulink.Mask"
+	Type			"Line"
+	Description		"This block defines a pi model for a tree phase line."
+	Initialization		"[xp,yp] = fm_draw('pi');"
+	Display			"plot([-1  1  1 -1 -1],[-0.2 -0.2 0.2 0.2 -0.2])\ncolor('blue')\nplot(0.35*xp,0.2*yp)"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  7
+	  Object {
+	    $ObjectID		    152
+	    Type		    "edit"
+	    Name		    "p3_4_5q"
+	    Prompt		    "Power, Voltage and Frequency Ratings [MVA, kV, Hz]"
+	    Value		    "[100  400  60]"
+	  }
+	  Object {
+	    $ObjectID		    153
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Length of line [km] (0 for p.u. parameters)"
+	    Value		    "0"
+	  }
+	  Object {
+	    $ObjectID		    154
+	    Type		    "edit"
+	    Name		    "p8q"
+	    Prompt		    "Resistance [p.u. (Ohms/km)]"
+	    Value		    "0.02"
+	  }
+	  Object {
+	    $ObjectID		    155
+	    Type		    "edit"
+	    Name		    "p9q"
+	    Prompt		    "Reactance [p.u. (H/km)]"
+	    Value		    "0.10"
+	  }
+	  Object {
+	    $ObjectID		    156
+	    Type		    "edit"
+	    Name		    "p10q"
+	    Prompt		    "Susceptance [p.u. (F/km)]"
+	    Value		    "0.02"
+	  }
+	  Object {
+	    $ObjectID		    157
+	    Type		    "edit"
+	    Name		    "p13_14_15q"
+	    Prompt		    "Imax, Pmax and Smax [p.u., p.u., p.u.]"
+	    Value		    "[1.3973  0.0  0.0]"
+	  }
+	  Object {
+	    $ObjectID		    158
+	    Type		    "checkbox"
+	    Name		    "p16q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "Line10"
+      SID		      "18"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1, 1]
       Position		      [530, 634, 615, 646]
+      ZOrder		      -18
       ShowName		      off
       FontName		      "Arial"
       FontSize		      16
@@ -812,203 +2513,594 @@ Model {
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
       RConnTagsString	      "__newr0"
-      MaskType		      "Line"
-      MaskDescription	      "This block defines a pi model for a tree phase line."
-      MaskPromptString	      "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Length of line [km] (0 for p.u. param"
-      "eters)|Resistance [p.u. (Ohms/km)]|Reactance [p.u. (H/km)]|Susceptance [p.u. (F/km)]|Imax, Pmax and Smax [p.u., "
-      "p.u., p.u.]|Connected"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit,checkbox"
-      MaskTunableValueString  "on,on,on,on,on,on,on"
-      MaskCallbackString      "||||||fm_block"
-      MaskEnableString	      "on,on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,,"
-      MaskVariables	      "p3_4_5q=@1;p6q=@2;p8q=@3;p9q=@4;p10q=@5;p13_14_15q=@6;p16q=@7;"
-      MaskInitialization      "[xp,yp] = fm_draw('pi');"
-      MaskDisplay	      "plot([-1  1  1 -1 -1],[-0.2 -0.2 0.2 0.2 -0.2])\ncolor('blue')\nplot(0.35*xp,0.2*yp)"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "[100  400  60]|0|0.2|0.4|0.08|[0.1796  0.0  0.0]|on"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		159
+	$ClassName		"Simulink.Mask"
+	Type			"Line"
+	Description		"This block defines a pi model for a tree phase line."
+	Initialization		"[xp,yp] = fm_draw('pi');"
+	Display			"plot([-1  1  1 -1 -1],[-0.2 -0.2 0.2 0.2 -0.2])\ncolor('blue')\nplot(0.35*xp,0.2*yp)"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  7
+	  Object {
+	    $ObjectID		    160
+	    Type		    "edit"
+	    Name		    "p3_4_5q"
+	    Prompt		    "Power, Voltage and Frequency Ratings [MVA, kV, Hz]"
+	    Value		    "[100  400  60]"
+	  }
+	  Object {
+	    $ObjectID		    161
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Length of line [km] (0 for p.u. parameters)"
+	    Value		    "0"
+	  }
+	  Object {
+	    $ObjectID		    162
+	    Type		    "edit"
+	    Name		    "p8q"
+	    Prompt		    "Resistance [p.u. (Ohms/km)]"
+	    Value		    "0.2"
+	  }
+	  Object {
+	    $ObjectID		    163
+	    Type		    "edit"
+	    Name		    "p9q"
+	    Prompt		    "Reactance [p.u. (H/km)]"
+	    Value		    "0.4"
+	  }
+	  Object {
+	    $ObjectID		    164
+	    Type		    "edit"
+	    Name		    "p10q"
+	    Prompt		    "Susceptance [p.u. (F/km)]"
+	    Value		    "0.08"
+	  }
+	  Object {
+	    $ObjectID		    165
+	    Type		    "edit"
+	    Name		    "p13_14_15q"
+	    Prompt		    "Imax, Pmax and Smax [p.u., p.u., p.u.]"
+	    Value		    "[0.1796  0.0  0.0]"
+	  }
+	  Object {
+	    $ObjectID		    166
+	    Type		    "checkbox"
+	    Name		    "p16q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
-
-      BlockType		      Reference
+      BlockType		      PMComponent
       Name		      "Line2"
+      SID		      "19"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1, 1]
       Position		      [605, 340, 615, 415]
-      Orientation	      "down"
+      ZOrder		      -19
+      BlockRotation	      270
+      BlockMirror	      on
       NamePlacement	      "alternate"
       ShowName		      off
       FontName		      "Arial"
       FontSize		      16
-	SourceBlock	"fm_lib/Power Flow/Line"
-      SourceType	      "Line"
       PhysicalDomain	      "psatdomain"
-      SubClassName	      "unknown"
       LeftPortType	      "p1"
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
       RConnTagsString	      "__newr0"
-      p3_4_5q		      "[100  400  60]"
-      p6q		      "0"
-      p8q		      "0.12"
-      p9q		      "0.26"
-      p10q		      "0.05"
-      p13_14_15q	      "[0.6585  0.0  0.0]"
-      p16q		      on
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		167
+	$ClassName		"Simulink.Mask"
+	Type			"Line"
+	Description		"This block defines a pi model for a tree phase line."
+	Initialization		"[xp,yp] = fm_draw('pi');"
+	Display			"plot([-1  1  1 -1 -1],[-0.2 -0.2 0.2 0.2 -0.2])\ncolor('blue')\nplot(0.35*xp,0.2*yp)"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  7
+	  Object {
+	    $ObjectID		    168
+	    Type		    "edit"
+	    Name		    "p3_4_5q"
+	    Prompt		    "Power, Voltage and Frequency Ratings [MVA, kV, Hz]"
+	    Value		    "[100  400  60]"
+	  }
+	  Object {
+	    $ObjectID		    169
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Length of line [km] (0 for p.u. parameters)"
+	    Value		    "0"
+	  }
+	  Object {
+	    $ObjectID		    170
+	    Type		    "edit"
+	    Name		    "p8q"
+	    Prompt		    "Resistance [p.u. (Ohms/km)]"
+	    Value		    "0.12"
+	  }
+	  Object {
+	    $ObjectID		    171
+	    Type		    "edit"
+	    Name		    "p9q"
+	    Prompt		    "Reactance [p.u. (H/km)]"
+	    Value		    "0.26"
+	  }
+	  Object {
+	    $ObjectID		    172
+	    Type		    "edit"
+	    Name		    "p10q"
+	    Prompt		    "Susceptance [p.u. (F/km)]"
+	    Value		    "0.05"
+	  }
+	  Object {
+	    $ObjectID		    173
+	    Type		    "edit"
+	    Name		    "p13_14_15q"
+	    Prompt		    "Imax, Pmax and Smax [p.u., p.u., p.u.]"
+	    Value		    "[0.6585  0.0  0.0]"
+	  }
+	  Object {
+	    $ObjectID		    174
+	    Type		    "checkbox"
+	    Name		    "p16q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
-
-      BlockType		      Reference
+      BlockType		      PMComponent
       Name		      "Line3"
+      SID		      "20"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1, 1]
       Position		      [695, 340, 705, 415]
-      Orientation	      "up"
+      ZOrder		      -20
+      BlockRotation	      270
       NamePlacement	      "alternate"
       ShowName		      off
       FontName		      "Arial"
       FontSize		      16
-	SourceBlock	"fm_lib/Power Flow/Line"
-      SourceType	      "Line"
       PhysicalDomain	      "psatdomain"
-      SubClassName	      "unknown"
       LeftPortType	      "p1"
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
       RConnTagsString	      "__newr0"
-      p3_4_5q		      "[100  400  60]"
-      p6q		      "0"
-      p8q		      "0.1"
-      p9q		      "0.30"
-      p10q		      "0.06"
-      p13_14_15q	      "[0.2  0.0  0.0]"
-      p16q		      on
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		175
+	$ClassName		"Simulink.Mask"
+	Type			"Line"
+	Description		"This block defines a pi model for a tree phase line."
+	Initialization		"[xp,yp] = fm_draw('pi');"
+	Display			"plot([-1  1  1 -1 -1],[-0.2 -0.2 0.2 0.2 -0.2])\ncolor('blue')\nplot(0.35*xp,0.2*yp)"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  7
+	  Object {
+	    $ObjectID		    176
+	    Type		    "edit"
+	    Name		    "p3_4_5q"
+	    Prompt		    "Power, Voltage and Frequency Ratings [MVA, kV, Hz]"
+	    Value		    "[100  400  60]"
+	  }
+	  Object {
+	    $ObjectID		    177
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Length of line [km] (0 for p.u. parameters)"
+	    Value		    "0"
+	  }
+	  Object {
+	    $ObjectID		    178
+	    Type		    "edit"
+	    Name		    "p8q"
+	    Prompt		    "Resistance [p.u. (Ohms/km)]"
+	    Value		    "0.1"
+	  }
+	  Object {
+	    $ObjectID		    179
+	    Type		    "edit"
+	    Name		    "p9q"
+	    Prompt		    "Reactance [p.u. (H/km)]"
+	    Value		    "0.30"
+	  }
+	  Object {
+	    $ObjectID		    180
+	    Type		    "edit"
+	    Name		    "p10q"
+	    Prompt		    "Susceptance [p.u. (F/km)]"
+	    Value		    "0.06"
+	  }
+	  Object {
+	    $ObjectID		    181
+	    Type		    "edit"
+	    Name		    "p13_14_15q"
+	    Prompt		    "Imax, Pmax and Smax [p.u., p.u., p.u.]"
+	    Value		    "[0.2  0.0  0.0]"
+	  }
+	  Object {
+	    $ObjectID		    182
+	    Type		    "checkbox"
+	    Name		    "p16q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
-
-      BlockType		      Reference
+      BlockType		      PMComponent
       Name		      "Line4"
+      SID		      "21"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1, 1]
       Position		      [370, 540, 440, 550]
+      ZOrder		      -21
       NamePlacement	      "alternate"
       ShowName		      off
       FontName		      "Arial"
       FontSize		      16
-	SourceBlock	"fm_lib/Power Flow/Line"
-      SourceType	      "Line"
       PhysicalDomain	      "psatdomain"
-      SubClassName	      "unknown"
       LeftPortType	      "p1"
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
       RConnTagsString	      "__newr0"
-      p3_4_5q		      "[100  400  60]"
-      p6q		      "0"
-      p8q		      "0.05"
-      p9q		      "0.10"
-      p10q		      "0.02"
-      p13_14_15q	      "[1.3740  0.0  0.0]"
-      p16q		      on
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		183
+	$ClassName		"Simulink.Mask"
+	Type			"Line"
+	Description		"This block defines a pi model for a tree phase line."
+	Initialization		"[xp,yp] = fm_draw('pi');"
+	Display			"plot([-1  1  1 -1 -1],[-0.2 -0.2 0.2 0.2 -0.2])\ncolor('blue')\nplot(0.35*xp,0.2*yp)"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  7
+	  Object {
+	    $ObjectID		    184
+	    Type		    "edit"
+	    Name		    "p3_4_5q"
+	    Prompt		    "Power, Voltage and Frequency Ratings [MVA, kV, Hz]"
+	    Value		    "[100  400  60]"
+	  }
+	  Object {
+	    $ObjectID		    185
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Length of line [km] (0 for p.u. parameters)"
+	    Value		    "0"
+	  }
+	  Object {
+	    $ObjectID		    186
+	    Type		    "edit"
+	    Name		    "p8q"
+	    Prompt		    "Resistance [p.u. (Ohms/km)]"
+	    Value		    "0.05"
+	  }
+	  Object {
+	    $ObjectID		    187
+	    Type		    "edit"
+	    Name		    "p9q"
+	    Prompt		    "Reactance [p.u. (H/km)]"
+	    Value		    "0.10"
+	  }
+	  Object {
+	    $ObjectID		    188
+	    Type		    "edit"
+	    Name		    "p10q"
+	    Prompt		    "Susceptance [p.u. (F/km)]"
+	    Value		    "0.02"
+	  }
+	  Object {
+	    $ObjectID		    189
+	    Type		    "edit"
+	    Name		    "p13_14_15q"
+	    Prompt		    "Imax, Pmax and Smax [p.u., p.u., p.u.]"
+	    Value		    "[1.3740  0.0  0.0]"
+	  }
+	  Object {
+	    $ObjectID		    190
+	    Type		    "checkbox"
+	    Name		    "p16q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
-
-      BlockType		      Reference
+      BlockType		      PMComponent
       Name		      "Line5"
+      SID		      "22"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1, 1]
       Position		      [235, 385, 245, 460]
-      Orientation	      "up"
+      ZOrder		      -22
+      BlockRotation	      270
       NamePlacement	      "alternate"
       ShowName		      off
       FontName		      "Arial"
       FontSize		      16
-	SourceBlock	"fm_lib/Power Flow/Line"
-      SourceType	      "Line"
       PhysicalDomain	      "psatdomain"
-      SubClassName	      "unknown"
       LeftPortType	      "p1"
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
       RConnTagsString	      "__newr0"
-      p3_4_5q		      "[100  400  60]"
-      p6q		      "0"
-      p8q		      "0.1"
-      p9q		      "0.2"
-      p10q		      "0.04"
-      p13_14_15q	      "[0.2591  0.0  0.0]"
-      p16q		      on
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		191
+	$ClassName		"Simulink.Mask"
+	Type			"Line"
+	Description		"This block defines a pi model for a tree phase line."
+	Initialization		"[xp,yp] = fm_draw('pi');"
+	Display			"plot([-1  1  1 -1 -1],[-0.2 -0.2 0.2 0.2 -0.2])\ncolor('blue')\nplot(0.35*xp,0.2*yp)"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  7
+	  Object {
+	    $ObjectID		    192
+	    Type		    "edit"
+	    Name		    "p3_4_5q"
+	    Prompt		    "Power, Voltage and Frequency Ratings [MVA, kV, Hz]"
+	    Value		    "[100  400  60]"
+	  }
+	  Object {
+	    $ObjectID		    193
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Length of line [km] (0 for p.u. parameters)"
+	    Value		    "0"
+	  }
+	  Object {
+	    $ObjectID		    194
+	    Type		    "edit"
+	    Name		    "p8q"
+	    Prompt		    "Resistance [p.u. (Ohms/km)]"
+	    Value		    "0.1"
+	  }
+	  Object {
+	    $ObjectID		    195
+	    Type		    "edit"
+	    Name		    "p9q"
+	    Prompt		    "Reactance [p.u. (H/km)]"
+	    Value		    "0.2"
+	  }
+	  Object {
+	    $ObjectID		    196
+	    Type		    "edit"
+	    Name		    "p10q"
+	    Prompt		    "Susceptance [p.u. (F/km)]"
+	    Value		    "0.04"
+	  }
+	  Object {
+	    $ObjectID		    197
+	    Type		    "edit"
+	    Name		    "p13_14_15q"
+	    Prompt		    "Imax, Pmax and Smax [p.u., p.u., p.u.]"
+	    Value		    "[0.2591  0.0  0.0]"
+	  }
+	  Object {
+	    $ObjectID		    198
+	    Type		    "checkbox"
+	    Name		    "p16q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
-
-      BlockType		      Reference
+      BlockType		      PMComponent
       Name		      "Line6"
+      SID		      "23"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1, 1]
       Position		      [285, 619, 370, 631]
+      ZOrder		      -23
       ShowName		      off
       FontName		      "Arial"
       FontSize		      16
-	SourceBlock	"fm_lib/Power Flow/Line"
-      SourceType	      "Line"
       PhysicalDomain	      "psatdomain"
-      SubClassName	      "unknown"
       LeftPortType	      "p1"
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
       RConnTagsString	      "__newr0"
-      p3_4_5q		      "[100  400  60]"
-      p6q		      "0"
-      p8q		      "0.05"
-      p9q		      "0.20"
-      p10q		      "0.04"
-      p13_14_15q	      "[0.9193  0.0  0.0]"
-      p16q		      on
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		199
+	$ClassName		"Simulink.Mask"
+	Type			"Line"
+	Description		"This block defines a pi model for a tree phase line."
+	Initialization		"[xp,yp] = fm_draw('pi');"
+	Display			"plot([-1  1  1 -1 -1],[-0.2 -0.2 0.2 0.2 -0.2])\ncolor('blue')\nplot(0.35*xp,0.2*yp)"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  7
+	  Object {
+	    $ObjectID		    200
+	    Type		    "edit"
+	    Name		    "p3_4_5q"
+	    Prompt		    "Power, Voltage and Frequency Ratings [MVA, kV, Hz]"
+	    Value		    "[100  400  60]"
+	  }
+	  Object {
+	    $ObjectID		    201
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Length of line [km] (0 for p.u. parameters)"
+	    Value		    "0"
+	  }
+	  Object {
+	    $ObjectID		    202
+	    Type		    "edit"
+	    Name		    "p8q"
+	    Prompt		    "Resistance [p.u. (Ohms/km)]"
+	    Value		    "0.05"
+	  }
+	  Object {
+	    $ObjectID		    203
+	    Type		    "edit"
+	    Name		    "p9q"
+	    Prompt		    "Reactance [p.u. (H/km)]"
+	    Value		    "0.20"
+	  }
+	  Object {
+	    $ObjectID		    204
+	    Type		    "edit"
+	    Name		    "p10q"
+	    Prompt		    "Susceptance [p.u. (F/km)]"
+	    Value		    "0.04"
+	  }
+	  Object {
+	    $ObjectID		    205
+	    Type		    "edit"
+	    Name		    "p13_14_15q"
+	    Prompt		    "Imax, Pmax and Smax [p.u., p.u., p.u.]"
+	    Value		    "[0.9193  0.0  0.0]"
+	  }
+	  Object {
+	    $ObjectID		    206
+	    Type		    "checkbox"
+	    Name		    "p16q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
-
-      BlockType		      Reference
+      BlockType		      PMComponent
       Name		      "Line7"
+      SID		      "24"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1, 1]
       Position		      [355, 684, 440, 696]
+      ZOrder		      -24
       ShowName		      off
       FontName		      "Arial"
       FontSize		      16
-	SourceBlock	"fm_lib/Power Flow/Line"
-      SourceType	      "Line"
       PhysicalDomain	      "psatdomain"
-      SubClassName	      "unknown"
       LeftPortType	      "p1"
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
       RConnTagsString	      "__newr0"
-      p3_4_5q		      "[100  400  60]"
-      p6q		      "0"
-      p8q		      "0.08"
-      p9q		      "0.30"
-      p10q		      "0.06"
-      p13_14_15q	      "[0.8478  0.0  0.0]"
-      p16q		      on
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		207
+	$ClassName		"Simulink.Mask"
+	Type			"Line"
+	Description		"This block defines a pi model for a tree phase line."
+	Initialization		"[xp,yp] = fm_draw('pi');"
+	Display			"plot([-1  1  1 -1 -1],[-0.2 -0.2 0.2 0.2 -0.2])\ncolor('blue')\nplot(0.35*xp,0.2*yp)"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  7
+	  Object {
+	    $ObjectID		    208
+	    Type		    "edit"
+	    Name		    "p3_4_5q"
+	    Prompt		    "Power, Voltage and Frequency Ratings [MVA, kV, Hz]"
+	    Value		    "[100  400  60]"
+	  }
+	  Object {
+	    $ObjectID		    209
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Length of line [km] (0 for p.u. parameters)"
+	    Value		    "0"
+	  }
+	  Object {
+	    $ObjectID		    210
+	    Type		    "edit"
+	    Name		    "p8q"
+	    Prompt		    "Resistance [p.u. (Ohms/km)]"
+	    Value		    "0.08"
+	  }
+	  Object {
+	    $ObjectID		    211
+	    Type		    "edit"
+	    Name		    "p9q"
+	    Prompt		    "Reactance [p.u. (H/km)]"
+	    Value		    "0.30"
+	  }
+	  Object {
+	    $ObjectID		    212
+	    Type		    "edit"
+	    Name		    "p10q"
+	    Prompt		    "Susceptance [p.u. (F/km)]"
+	    Value		    "0.06"
+	  }
+	  Object {
+	    $ObjectID		    213
+	    Type		    "edit"
+	    Name		    "p13_14_15q"
+	    Prompt		    "Imax, Pmax and Smax [p.u., p.u., p.u.]"
+	    Value		    "[0.8478  0.0  0.0]"
+	  }
+	  Object {
+	    $ObjectID		    214
+	    Type		    "checkbox"
+	    Name		    "p16q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "Line8"
+      SID		      "25"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1, 1]
       Position		      [500, 94, 585, 106]
+      ZOrder		      -25
       ShowName		      off
       FontName		      "Arial"
       FontSize		      16
@@ -1017,165 +3109,532 @@ Model {
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
       RConnTagsString	      "__newr0"
-      MaskType		      "Line"
-      MaskDescription	      "This block defines a pi model for a tree phase line."
-      MaskPromptString	      "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Length of line [km] (0 for p.u. param"
-      "eters)|Resistance [p.u. (Ohms/km)]|Reactance [p.u. (H/km)]|Susceptance [p.u. (F/km)]|Imax, Pmax and Smax [p.u., "
-      "p.u., p.u.]|Connected"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit,checkbox"
-      MaskTunableValueString  "on,on,on,on,on,on,on"
-      MaskCallbackString      "||||||fm_block"
-      MaskEnableString	      "on,on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,,"
-      MaskVariables	      "p3_4_5q=@1;p6q=@2;p8q=@3;p9q=@4;p10q=@5;p13_14_15q=@6;p16q=@7;"
-      MaskInitialization      "[xp,yp] = fm_draw('pi');"
-      MaskDisplay	      "plot([-1  1  1 -1 -1],[-0.2 -0.2 0.2 0.2 -0.2])\ncolor('blue')\nplot(0.35*xp,0.2*yp)"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "[100  400  60]|0|0.07|0.2|0.05|[0.9147  0.0  0.0]|on"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		215
+	$ClassName		"Simulink.Mask"
+	Type			"Line"
+	Description		"This block defines a pi model for a tree phase line."
+	Initialization		"[xp,yp] = fm_draw('pi');"
+	Display			"plot([-1  1  1 -1 -1],[-0.2 -0.2 0.2 0.2 -0.2])\ncolor('blue')\nplot(0.35*xp,0.2*yp)"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  7
+	  Object {
+	    $ObjectID		    216
+	    Type		    "edit"
+	    Name		    "p3_4_5q"
+	    Prompt		    "Power, Voltage and Frequency Ratings [MVA, kV, Hz]"
+	    Value		    "[100  400  60]"
+	  }
+	  Object {
+	    $ObjectID		    217
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Length of line [km] (0 for p.u. parameters)"
+	    Value		    "0"
+	  }
+	  Object {
+	    $ObjectID		    218
+	    Type		    "edit"
+	    Name		    "p8q"
+	    Prompt		    "Resistance [p.u. (Ohms/km)]"
+	    Value		    "0.07"
+	  }
+	  Object {
+	    $ObjectID		    219
+	    Type		    "edit"
+	    Name		    "p9q"
+	    Prompt		    "Reactance [p.u. (H/km)]"
+	    Value		    "0.2"
+	  }
+	  Object {
+	    $ObjectID		    220
+	    Type		    "edit"
+	    Name		    "p10q"
+	    Prompt		    "Susceptance [p.u. (F/km)]"
+	    Value		    "0.05"
+	  }
+	  Object {
+	    $ObjectID		    221
+	    Type		    "edit"
+	    Name		    "p13_14_15q"
+	    Prompt		    "Imax, Pmax and Smax [p.u., p.u., p.u.]"
+	    Value		    "[0.9147  0.0  0.0]"
+	  }
+	  Object {
+	    $ObjectID		    222
+	    Type		    "checkbox"
+	    Name		    "p16q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
-
-      BlockType		      Reference
+      BlockType		      PMComponent
       Name		      "Line9"
+      SID		      "26"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1, 1]
       Position		      [575, 400, 585, 475]
-      Orientation	      "down"
+      ZOrder		      -26
+      BlockRotation	      270
+      BlockMirror	      on
       NamePlacement	      "alternate"
       ShowName		      off
       FontName		      "Arial"
       FontSize		      16
-	SourceBlock	"fm_lib/Power Flow/Line"
-      SourceType	      "Line"
       PhysicalDomain	      "psatdomain"
-      SubClassName	      "unknown"
       LeftPortType	      "p1"
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
       RConnTagsString	      "__newr0"
-      p3_4_5q		      "[100  400  60]"
-      p6q		      "0"
-      p8q		      "0.1"
-      p9q		      "0.3"
-      p10q		      "0.04"
-      p13_14_15q	      "[0.7114  0.0  0.0]"
-      p16q		      on
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		223
+	$ClassName		"Simulink.Mask"
+	Type			"Line"
+	Description		"This block defines a pi model for a tree phase line."
+	Initialization		"[xp,yp] = fm_draw('pi');"
+	Display			"plot([-1  1  1 -1 -1],[-0.2 -0.2 0.2 0.2 -0.2])\ncolor('blue')\nplot(0.35*xp,0.2*yp)"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  7
+	  Object {
+	    $ObjectID		    224
+	    Type		    "edit"
+	    Name		    "p3_4_5q"
+	    Prompt		    "Power, Voltage and Frequency Ratings [MVA, kV, Hz]"
+	    Value		    "[100  400  60]"
+	  }
+	  Object {
+	    $ObjectID		    225
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Length of line [km] (0 for p.u. parameters)"
+	    Value		    "0"
+	  }
+	  Object {
+	    $ObjectID		    226
+	    Type		    "edit"
+	    Name		    "p8q"
+	    Prompt		    "Resistance [p.u. (Ohms/km)]"
+	    Value		    "0.1"
+	  }
+	  Object {
+	    $ObjectID		    227
+	    Type		    "edit"
+	    Name		    "p9q"
+	    Prompt		    "Reactance [p.u. (H/km)]"
+	    Value		    "0.3"
+	  }
+	  Object {
+	    $ObjectID		    228
+	    Type		    "edit"
+	    Name		    "p10q"
+	    Prompt		    "Susceptance [p.u. (F/km)]"
+	    Value		    "0.04"
+	  }
+	  Object {
+	    $ObjectID		    229
+	    Type		    "edit"
+	    Name		    "p13_14_15q"
+	    Prompt		    "Imax, Pmax and Smax [p.u., p.u., p.u.]"
+	    Value		    "[0.7114  0.0  0.0]"
+	  }
+	  Object {
+	    $ObjectID		    230
+	    Type		    "checkbox"
+	    Name		    "p16q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "Supply1"
+      SID		      "27"
       Tag		      "PSATblock"
       Description	      "OPF & CPF"
       Ports		      [0, 0, 0, 0, 0, 0, 1]
       Position		      [95, 650, 145, 700]
+      ZOrder		      -27
       ShowName		      off
       PhysicalDomain	      "psatdomain"
       LeftPortType	      "p1"
       RightPortType	      "p1"
       RConnTagsString	      "__newr0"
-      MaskType		      "Supply"
-      MaskDescription	      "This block defines a PV bus for bifurcation and market studies:\n"
-      MaskPromptString	      "Power Rating [MVA]|Active Power [p.u.]|Max and Min Power Supply [p.u.  p.u.]|Cost = a + "
-      "b*P + c*P^2 [$/h, $/MWh, $/(MW)^2 h]|Cost = a + b*Q + c*Q^2 [$/h, $/MVArh, $/(MVAr)^2 h]|Allow Unit Commitment|T"
-      "ie Breaking Cost [$/h]|Loss participation factor|Reactive power limits Qmax and Qmin [p.u. p.u.]|Up and down con"
-      "gestion costs [$/h $/h]|Number of Input Signals|Connected"
-      MaskStyleString	      "edit,edit,edit,edit,edit,checkbox,edit,edit,edit,edit,popup(0|1|2),checkbox"
-      MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskCallbackString      "|||||||||||fm_block"
-      MaskEnableString	      "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,,,,,,,"
-      MaskVariables	      "p2q=@1;p3q=@2;p4_5q=@3;p7_8_9q=@4;p10_11_12q=@5;p13q=@6;p14q=@7;p15q=@8;p16_17q=@9;p18_19q="
-      "@10;in=@11;p20q=@12;"
-      MaskInitialization      "fm_inout;\n[x,y] = fm_draw('circle');\n[xs,ys] = fm_draw('$');"
-      MaskDisplay	      "plot(x,y)\ncolor('blue')\nplot(xs,ys)"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "none"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "100|0.2|[0.2  0.00001]|[0.00  9.70  0.00]|[0.00  0.00  0.00]|off|0|1|[1.5  -1.5]|[0 0]|0|"
-      "on"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		231
+	$ClassName		"Simulink.Mask"
+	Type			"Supply"
+	Description		"This block defines a PV bus for bifurcation and market studies:\n"
+	Initialization		"fm_inout;\n[x,y] = fm_draw('circle');\n[xs,ys] = fm_draw('$');"
+	Display			"plot(x,y)\ncolor('blue')\nplot(xs,ys)"
+	IconFrame		"off"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  12
+	  Object {
+	    $ObjectID		    232
+	    Type		    "edit"
+	    Name		    "p2q"
+	    Prompt		    "Power Rating [MVA]"
+	    Value		    "100"
+	  }
+	  Object {
+	    $ObjectID		    233
+	    Type		    "edit"
+	    Name		    "p3q"
+	    Prompt		    "Active Power [p.u.]"
+	    Value		    "0.2"
+	  }
+	  Object {
+	    $ObjectID		    234
+	    Type		    "edit"
+	    Name		    "p4_5q"
+	    Prompt		    "Max and Min Power Supply [p.u.  p.u.]"
+	    Value		    "[0.2  0.00001]"
+	  }
+	  Object {
+	    $ObjectID		    235
+	    Type		    "edit"
+	    Name		    "p7_8_9q"
+	    Prompt		    "Cost = a + b*P + c*P^2 [$/h, $/MWh, $/(MW)^2 h]"
+	    Value		    "[0.00  9.70  0.00]"
+	  }
+	  Object {
+	    $ObjectID		    236
+	    Type		    "edit"
+	    Name		    "p10_11_12q"
+	    Prompt		    "Cost = a + b*Q + c*Q^2 [$/h, $/MVArh, $/(MVAr)^2 h]"
+	    Value		    "[0.00  0.00  0.00]"
+	  }
+	  Object {
+	    $ObjectID		    237
+	    Type		    "checkbox"
+	    Name		    "p13q"
+	    Prompt		    "Allow Unit Commitment"
+	    Value		    "off"
+	  }
+	  Object {
+	    $ObjectID		    238
+	    Type		    "edit"
+	    Name		    "p14q"
+	    Prompt		    "Tie Breaking Cost [$/h]"
+	    Value		    "0"
+	  }
+	  Object {
+	    $ObjectID		    239
+	    Type		    "edit"
+	    Name		    "p15q"
+	    Prompt		    "Loss participation factor"
+	    Value		    "1"
+	  }
+	  Object {
+	    $ObjectID		    240
+	    Type		    "edit"
+	    Name		    "p16_17q"
+	    Prompt		    "Reactive power limits Qmax and Qmin [p.u. p.u.]"
+	    Value		    "[1.5  -1.5]"
+	  }
+	  Object {
+	    $ObjectID		    241
+	    Type		    "edit"
+	    Name		    "p18_19q"
+	    Prompt		    "Up and down congestion costs [$/h $/h]"
+	    Value		    "[0 0]"
+	  }
+	  Object {
+	    $ObjectID		    242
+	    Type		    "popup"
+	    Array {
+	      Type		      "Cell"
+	      Dimension		      3
+	      Cell		      "0"
+	      Cell		      "1"
+	      Cell		      "2"
+	      PropName		      "TypeOptions"
+	    }
+	    Name		    "in"
+	    Prompt		    "Number of Input Signals"
+	    Value		    "0"
+	  }
+	  Object {
+	    $ObjectID		    243
+	    Type		    "checkbox"
+	    Name		    "p20q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "Supply2"
+      SID		      "28"
       Tag		      "PSATblock"
       Description	      "OPF & CPF"
       Ports		      [0, 0, 0, 0, 0, 0, 1]
       Position		      [200, 175, 250, 225]
+      ZOrder		      -28
       ShowName		      off
       PhysicalDomain	      "psatdomain"
       LeftPortType	      "p1"
       RightPortType	      "p1"
       RConnTagsString	      "__newr0"
-      MaskType		      "Supply"
-      MaskDescription	      "This block defines a PV bus for bifurcation and market studies:\n"
-      MaskPromptString	      "Power Rating [MVA]|Active Power [p.u.]|Max and Min Power Supply [p.u.  p.u.]|Cost = a + "
-      "b*P + c*P^2 [$/h, $/MWh, $/(MW)^2 h]|Cost = a + b*Q + c*Q^2 [$/h, $/MVArh, $/(MVAr)^2 h]|Allow Unit Commitment|T"
-      "ie Breaking Cost [$/h]|Loss participation factor|Reactive power limits Qmax and Qmin [p.u. p.u.]|Up and down con"
-      "gestion costs [$/h $/h]|Number of Input Signals|Connected"
-      MaskStyleString	      "edit,edit,edit,edit,edit,checkbox,edit,edit,edit,edit,popup(0|1|2),checkbox"
-      MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskCallbackString      "|||||||||||fm_block"
-      MaskEnableString	      "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,,,,,,,"
-      MaskVariables	      "p2q=@1;p3q=@2;p4_5q=@3;p7_8_9q=@4;p10_11_12q=@5;p13q=@6;p14q=@7;p15q=@8;p16_17q=@9;p18_19q="
-      "@10;in=@11;p20q=@12;"
-      MaskInitialization      "fm_inout;\n[x,y] = fm_draw('circle');\n[xs,ys] = fm_draw('$');"
-      MaskDisplay	      "plot(x,y)\ncolor('blue')\nplot(xs,ys)"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "none"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "100|0.25|[0.25 0.00001]|[0.00  8.80  0.00]|[0.00  0.00  0.00]|off|0|1|[1.5  -1.5]|[0 0]|0"
-      "|on"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		244
+	$ClassName		"Simulink.Mask"
+	Type			"Supply"
+	Description		"This block defines a PV bus for bifurcation and market studies:\n"
+	Initialization		"fm_inout;\n[x,y] = fm_draw('circle');\n[xs,ys] = fm_draw('$');"
+	Display			"plot(x,y)\ncolor('blue')\nplot(xs,ys)"
+	IconFrame		"off"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  12
+	  Object {
+	    $ObjectID		    245
+	    Type		    "edit"
+	    Name		    "p2q"
+	    Prompt		    "Power Rating [MVA]"
+	    Value		    "100"
+	  }
+	  Object {
+	    $ObjectID		    246
+	    Type		    "edit"
+	    Name		    "p3q"
+	    Prompt		    "Active Power [p.u.]"
+	    Value		    "0.25"
+	  }
+	  Object {
+	    $ObjectID		    247
+	    Type		    "edit"
+	    Name		    "p4_5q"
+	    Prompt		    "Max and Min Power Supply [p.u.  p.u.]"
+	    Value		    "[0.25 0.00001]"
+	  }
+	  Object {
+	    $ObjectID		    248
+	    Type		    "edit"
+	    Name		    "p7_8_9q"
+	    Prompt		    "Cost = a + b*P + c*P^2 [$/h, $/MWh, $/(MW)^2 h]"
+	    Value		    "[0.00  8.80  0.00]"
+	  }
+	  Object {
+	    $ObjectID		    249
+	    Type		    "edit"
+	    Name		    "p10_11_12q"
+	    Prompt		    "Cost = a + b*Q + c*Q^2 [$/h, $/MVArh, $/(MVAr)^2 h]"
+	    Value		    "[0.00  0.00  0.00]"
+	  }
+	  Object {
+	    $ObjectID		    250
+	    Type		    "checkbox"
+	    Name		    "p13q"
+	    Prompt		    "Allow Unit Commitment"
+	    Value		    "off"
+	  }
+	  Object {
+	    $ObjectID		    251
+	    Type		    "edit"
+	    Name		    "p14q"
+	    Prompt		    "Tie Breaking Cost [$/h]"
+	    Value		    "0"
+	  }
+	  Object {
+	    $ObjectID		    252
+	    Type		    "edit"
+	    Name		    "p15q"
+	    Prompt		    "Loss participation factor"
+	    Value		    "1"
+	  }
+	  Object {
+	    $ObjectID		    253
+	    Type		    "edit"
+	    Name		    "p16_17q"
+	    Prompt		    "Reactive power limits Qmax and Qmin [p.u. p.u.]"
+	    Value		    "[1.5  -1.5]"
+	  }
+	  Object {
+	    $ObjectID		    254
+	    Type		    "edit"
+	    Name		    "p18_19q"
+	    Prompt		    "Up and down congestion costs [$/h $/h]"
+	    Value		    "[0 0]"
+	  }
+	  Object {
+	    $ObjectID		    255
+	    Type		    "popup"
+	    Array {
+	      Type		      "Cell"
+	      Dimension		      3
+	      Cell		      "0"
+	      Cell		      "1"
+	      Cell		      "2"
+	      PropName		      "TypeOptions"
+	    }
+	    Name		    "in"
+	    Prompt		    "Number of Input Signals"
+	    Value		    "0"
+	  }
+	  Object {
+	    $ObjectID		    256
+	    Type		    "checkbox"
+	    Name		    "p20q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "Supply3"
+      SID		      "29"
       Tag		      "PSATblock"
       Description	      "OPF & CPF"
       Ports		      [0, 0, 0, 0, 0, 0, 1]
       Position		      [455, 185, 495, 225]
+      ZOrder		      -29
       ShowName		      off
       PhysicalDomain	      "psatdomain"
       LeftPortType	      "p1"
       RightPortType	      "p1"
       RConnTagsString	      "__newr0"
-      MaskType		      "Supply"
-      MaskDescription	      "This block defines a PV bus for bifurcation and market studies:\n"
-      MaskPromptString	      "Power Rating [MVA]|Active Power [p.u.]|Max and Min Power Supply [p.u.  p.u.]|Cost = a + "
-      "b*P + c*P^2 [$/h, $/MWh, $/(MW)^2 h]|Cost = a + b*Q + c*Q^2 [$/h, $/MVArh, $/(MVAr)^2 h]|Allow Unit Commitment|T"
-      "ie Breaking Cost [$/h]|Loss participation factor|Reactive power limits Qmax and Qmin [p.u. p.u.]|Up and down con"
-      "gestion costs [$/h $/h]|Number of Input Signals|Connected"
-      MaskStyleString	      "edit,edit,edit,edit,edit,checkbox,edit,edit,edit,edit,popup(0|1|2),checkbox"
-      MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskCallbackString      "|||||||||||fm_block"
-      MaskEnableString	      "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,,,,,,,"
-      MaskVariables	      "p2q=@1;p3q=@2;p4_5q=@3;p7_8_9q=@4;p10_11_12q=@5;p13q=@6;p14q=@7;p15q=@8;p16_17q=@9;p18_19q="
-      "@10;in=@11;p20q=@12;"
-      MaskInitialization      "fm_inout;\n[x,y] = fm_draw('circle');\n[xs,ys] = fm_draw('$');"
-      MaskDisplay	      "plot(x,y)\ncolor('blue')\nplot(xs,ys)"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "none"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "100|0.2|[0.2  0.00001]|[0.00  7.0  0.00]|[0.00  0.00  0.00]|off|0|1|[1.5  -1.5]|[0 0]|0|on"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		257
+	$ClassName		"Simulink.Mask"
+	Type			"Supply"
+	Description		"This block defines a PV bus for bifurcation and market studies:\n"
+	Initialization		"fm_inout;\n[x,y] = fm_draw('circle');\n[xs,ys] = fm_draw('$');"
+	Display			"plot(x,y)\ncolor('blue')\nplot(xs,ys)"
+	IconFrame		"off"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  12
+	  Object {
+	    $ObjectID		    258
+	    Type		    "edit"
+	    Name		    "p2q"
+	    Prompt		    "Power Rating [MVA]"
+	    Value		    "100"
+	  }
+	  Object {
+	    $ObjectID		    259
+	    Type		    "edit"
+	    Name		    "p3q"
+	    Prompt		    "Active Power [p.u.]"
+	    Value		    "0.2"
+	  }
+	  Object {
+	    $ObjectID		    260
+	    Type		    "edit"
+	    Name		    "p4_5q"
+	    Prompt		    "Max and Min Power Supply [p.u.  p.u.]"
+	    Value		    "[0.2  0.00001]"
+	  }
+	  Object {
+	    $ObjectID		    261
+	    Type		    "edit"
+	    Name		    "p7_8_9q"
+	    Prompt		    "Cost = a + b*P + c*P^2 [$/h, $/MWh, $/(MW)^2 h]"
+	    Value		    "[0.00  7.0  0.00]"
+	  }
+	  Object {
+	    $ObjectID		    262
+	    Type		    "edit"
+	    Name		    "p10_11_12q"
+	    Prompt		    "Cost = a + b*Q + c*Q^2 [$/h, $/MVArh, $/(MVAr)^2 h]"
+	    Value		    "[0.00  0.00  0.00]"
+	  }
+	  Object {
+	    $ObjectID		    263
+	    Type		    "checkbox"
+	    Name		    "p13q"
+	    Prompt		    "Allow Unit Commitment"
+	    Value		    "off"
+	  }
+	  Object {
+	    $ObjectID		    264
+	    Type		    "edit"
+	    Name		    "p14q"
+	    Prompt		    "Tie Breaking Cost [$/h]"
+	    Value		    "0"
+	  }
+	  Object {
+	    $ObjectID		    265
+	    Type		    "edit"
+	    Name		    "p15q"
+	    Prompt		    "Loss participation factor"
+	    Value		    "1"
+	  }
+	  Object {
+	    $ObjectID		    266
+	    Type		    "edit"
+	    Name		    "p16_17q"
+	    Prompt		    "Reactive power limits Qmax and Qmin [p.u. p.u.]"
+	    Value		    "[1.5  -1.5]"
+	  }
+	  Object {
+	    $ObjectID		    267
+	    Type		    "edit"
+	    Name		    "p18_19q"
+	    Prompt		    "Up and down congestion costs [$/h $/h]"
+	    Value		    "[0 0]"
+	  }
+	  Object {
+	    $ObjectID		    268
+	    Type		    "popup"
+	    Array {
+	      Type		      "Cell"
+	      Dimension		      3
+	      Cell		      "0"
+	      Cell		      "1"
+	      Cell		      "2"
+	      PropName		      "TypeOptions"
+	    }
+	    Name		    "in"
+	    Prompt		    "Number of Input Signals"
+	    Value		    "0"
+	  }
+	  Object {
+	    $ObjectID		    269
+	    Type		    "checkbox"
+	    Name		    "p20q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      1
       SrcBlock		      "Line7"
       SrcPort		      RConn1
       DstBlock		      "Bus5"
@@ -1183,6 +3642,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      2
       SrcBlock		      "Bus1"
       SrcPort		      RConn3
       DstBlock		      "Line7"
@@ -1190,6 +3650,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      3
       SrcBlock		      "Bus2"
       SrcPort		      RConn3
       Points		      [40, 0; 0, 85; 220, 0]
@@ -1198,6 +3659,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      4
       SrcBlock		      "Line4"
       SrcPort		      RConn1
       DstBlock		      "Bus4"
@@ -1205,6 +3667,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      5
       SrcBlock		      "Bus2"
       SrcPort		      RConn4
       Points		      [20, 0; 0, 250]
@@ -1213,6 +3676,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      6
       SrcBlock		      "Line6"
       SrcPort		      RConn1
       DstBlock		      "Bus4"
@@ -1220,6 +3684,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      7
       SrcBlock		      "Supply3"
       SrcPort		      RConn1
       DstBlock		      "Bus3"
@@ -1227,6 +3692,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      8
       SrcBlock		      "Line"
       SrcPort		      RConn1
       DstBlock		      "Bus3"
@@ -1234,6 +3700,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      9
       SrcBlock		      "Supply2"
       SrcPort		      RConn1
       DstBlock		      "Bus2"
@@ -1241,6 +3708,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      10
       SrcBlock		      "Supply1"
       SrcPort		      RConn1
       DstBlock		      "Bus1"
@@ -1248,6 +3716,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      11
       SrcBlock		      "Bus4"
       SrcPort		      RConn2
       DstBlock		      "Demand3"
@@ -1255,6 +3724,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      12
       SrcBlock		      "Bus4"
       SrcPort		      RConn3
       DstBlock		      "Line10"
@@ -1262,6 +3732,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      13
       SrcBlock		      "Bus6"
       SrcPort		      RConn2
       DstBlock		      "Demand"
@@ -1269,6 +3740,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      14
       SrcBlock		      "Bus5"
       SrcPort		      RConn3
       DstBlock		      "Demand1"
@@ -1276,6 +3748,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      15
       SrcBlock		      "GENCO 1"
       SrcPort		      RConn1
       DstBlock		      "Bus1"
@@ -1283,6 +3756,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      16
       SrcBlock		      "GENCO 2"
       SrcPort		      RConn1
       DstBlock		      "Bus2"
@@ -1290,6 +3764,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      17
       SrcBlock		      "Bus6"
       SrcPort		      RConn1
       DstBlock		      "ESCO 3"
@@ -1297,6 +3772,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      18
       SrcBlock		      "Line10"
       SrcPort		      RConn1
       DstBlock		      "Bus5"
@@ -1304,6 +3780,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      19
       SrcBlock		      "Bus4"
       SrcPort		      RConn1
       DstBlock		      "ESCO 1"
@@ -1311,6 +3788,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      20
       SrcBlock		      "Line9"
       SrcPort		      RConn1
       Points		      [0, 100]
@@ -1319,6 +3797,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      21
       SrcBlock		      "Line8"
       SrcPort		      RConn1
       DstBlock		      "Bus6"
@@ -1326,6 +3805,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      22
       SrcBlock		      "Line1"
       SrcPort		      RConn1
       DstBlock		      "Bus6"
@@ -1333,6 +3813,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      23
       SrcBlock		      "Line3"
       SrcPort		      RConn1
       Points		      [0, -95]
@@ -1341,6 +3822,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      24
       SrcBlock		      "Bus2"
       SrcPort		      RConn2
       Points		      [55, 0; 0, 90]
@@ -1349,6 +3831,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      25
       SrcBlock		      "Bus2"
       SrcPort		      RConn1
       DstBlock		      "Line8"
@@ -1356,6 +3839,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      26
       SrcBlock		      "Bus1"
       SrcPort		      RConn2
       DstBlock		      "Line6"
@@ -1363,6 +3847,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      27
       SrcBlock		      "Bus1"
       SrcPort		      RConn1
       Points		      [40, 0]
@@ -1371,6 +3856,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      28
       SrcBlock		      "Bus5"
       SrcPort		      RConn1
       Points		      [20, 0]
@@ -1379,6 +3865,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      29
       SrcBlock		      "Line2"
       SrcPort		      RConn1
       Points		      [0, 110]
@@ -1387,6 +3874,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      30
       SrcBlock		      "Bus3"
       SrcPort		      RConn2
       Points		      [45, 0]
@@ -1395,6 +3883,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      31
       SrcBlock		      "Bus3"
       SrcPort		      RConn1
       DstBlock		      "Line1"
@@ -1402,6 +3891,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      32
       SrcBlock		      "Bus5"
       SrcPort		      RConn2
       DstBlock		      "ESCO 2"
@@ -1409,6 +3899,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      33
       SrcBlock		      "GENCO 3"
       SrcPort		      RConn1
       DstBlock		      "Bus3"
@@ -1416,6 +3907,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      34
       SrcBlock		      "Line5"
       SrcPort		      RConn1
       Points		      [0, -80]

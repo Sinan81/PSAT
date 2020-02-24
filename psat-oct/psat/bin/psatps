@@ -1,0 +1,2 @@
+latex psat.tex
+dvips -tletter -Ppdf -G0 -o psat.ps psat.dvi

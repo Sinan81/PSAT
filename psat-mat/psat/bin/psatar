@@ -1,0 +1,17 @@
+daycode=`date "+%Y%m%d"`
+
+tar cvf psat-${daycode}.tar psat/help/*.tex psat/help/*.bib \
+psat/help/*.ist psat/help/misc/*.bst psat/help/*/*.eps psat/help/*/*.gif \
+psat/help/*/*.ps psat/help/*/*.fig psat/help/*/*.txt \
+psat/help/misc/*.sty psat/help/*.sty psat/help/*.bst \
+psat/help/*/*.gms psat/help/*/*.m psat/build/*.m \
+psat/*.m psat/*.mdl psat/*.gms psat/*.ini psat/gnulicense.txt \
+psat/themes/*.thm psat/themes/legend.txt psat/images/*.jpg \
+psat/images/*.png psat/images/*.bmp psat/help/cleantex \
+psat/tests/*.mdl psat/tests/*.m psat/gams/*.gms psat/gams/*.m \
+psat/filters/*2psat psat/filters/*.m psat/help/interface/d_006_mdl.cf \
+psat/help/interface/psatuw.* psat/help/*/*.dwb psat/help/*/*.dwg \
+psat/\@*/*.m psat/filters/*octave psat/bin/*
+
+gzip -9 psat-${daycode}.tar
+

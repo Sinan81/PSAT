@@ -6,7 +6,7 @@
 %        \ \_\      /\_____\  \ \_\ \_\    \ \_\
 %         \/_/      \/_____/   \/_/\/_/     \/_/
 %
-% Copyright (C) 2002-2016 Federico Milano
+% Copyright (C) 2002-2019 Federico Milano
 %
 % PSAT is free software; you can redistribute it and/or modify
 % it under the terms of the GNU General Public License as published by
@@ -55,13 +55,13 @@ if ~exist('OCTAVE_VERSION')
   end
 end
 
-psatver = '2.1.10';
-psatdate = 'May 26, 2016';
+psatver = '2.1.11';
+psatdate = 'August 17, 2019';
 
 failed = 0;
 disp(' ')
 disp('                        < P S A T >')
-disp('          Copyright (C) 2002-2016 Federico Milano')
+disp('          Copyright (C) 2002-2019 Federico Milano')
 disp([blanks(30-floor(5+length(psatver)/2)),'Version ',psatver])
 disp([blanks(30-ceil(length(psatdate)/2)),psatdate])
 disp('  ')
@@ -218,7 +218,7 @@ History = struct('text','', ...
                  'ForegroundColor','k');
 
 History.text = {['PSAT version ',psatver, ...
-		 ', Copyright (C) 2002-2016 Federico Milano']; ...
+		 ', Copyright (C) 2002-2019 Federico Milano']; ...
 		' '; ['Session  ', datestr(now)]};
 
 if ~command_line_psat
@@ -228,7 +228,7 @@ if ~command_line_psat
 end
 
 try
-  settings
+  settings()
 catch
   Theme = struct('color01',[0.800 0.800 0.800], ...
                  'color02',[0.753 0.753 0.753], ...
@@ -322,7 +322,7 @@ Settings.color = [0      0      1.0000;
                   0.2500 0.2500 0.2500];
 
 if ~command_line_psat
-  set(0,'DefaultUicontrolBackgroundColor',Theme.color01)
+  set(0,'DefaultUicontrolBackgroundColor', Theme.color01)
 end
 a = version;
 idx = findstr(a, '.');
@@ -365,6 +365,12 @@ else
     Settings.platform = 'UNIX';
   end
 
+  % avoid annoying warning message of Simulink models
+  if Settings.hostver >= 9.05
+    % warning('off','Simulink:Engine:InvalidDomainRegistrationKey');
+    warning('off','all');
+  end
+  
   % Use default colors if the Java Desktop is in use
   if Settings.hostver >= 6.1
     if usejava('jvm')

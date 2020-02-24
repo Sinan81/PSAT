@@ -20,7 +20,7 @@ function check = matpower2psat(filename, pathname)
 %Author:    Liulin
 %Date:      13-Mar-2003
 %Update:    01-May-2004
-%           02-Jun-2016
+%           02-Jun-2019
 %E-mail:    liu.lin2@zte.com.cn
 %
 % Copyright (C) 2002-2007 Federico Milano

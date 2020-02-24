@@ -12,7 +12,7 @@ function fm_block
 %E-mail:    federico.milano@ucd.ie
 %Web-site:  faraday1.ucd.ie/psat.html
 %
-% Copyright (C) 2002-2016 Federico Milano
+% Copyright (C) 2002-2019 Federico Milano
 
 fm_var
 
@@ -45,7 +45,9 @@ set_param(Object,'MaskPrompts',b);
 % set block status
 if strcmp(mask,'Breaker'), return, end
 if strcmp(mask,'Fault'), return, end
-switch Values{end}
- case 'off', set_param(Object,'ForegroundColor','orange');
- otherwise,  set_param(Object,'ForegroundColor','black');
+if Settings.hostver < 9.05
+  switch Values{end}
+    case 'off', set_param(Object,'ForegroundColor','orange');
+    otherwise,  set_param(Object,'ForegroundColor','black');
+  end
 end

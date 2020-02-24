@@ -25,7 +25,7 @@ function fm_simrep(varargin)
 %E-mail:    federico.milano@ucd.ie
 %Web-site:  faraday1.ucd.ie/psat.html
 %
-% Copyright (C) 2002-2016 Federico Milano
+% Copyright (C) 2002-2019 Federico Milano
 
 fm_var
 
@@ -141,7 +141,7 @@ switch flag
         end
         return
       end
-      zlevel = 1.005*max(DAE.x(Syn.omega));
+      zlevel = 1.05*max(DAE.x(Syn.omega));
      case 6 % locational marginal prices
       if ~OPF.init
         fm_disp(['Run OPF before displaying Locational Marginal ' ...
@@ -650,7 +650,12 @@ switch flag
     shading interp
     alpha(Varout.alpha)
     xlabel('')
+    % if Settings.hostver < 8.04
+    %  set(gca,'YDir','reverse')
+    % end
     set(gca,'YDir','reverse')
+    % set(gca,'XDir','reverse')
+    % set(gca)
     set(gca,'XTickLabel',[])
     set(gca,'YTickLabel',[])
     set(gca,'XTick',[])

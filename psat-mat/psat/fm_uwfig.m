@@ -12,7 +12,7 @@ function fig = fm_uwfig(varargin)
 %E-mail:    federico.milano@ucd.ie
 %Web-site:  faraday1.ucd.ie/psat.html
 %
-% Copyright (C) 2002-2016 Federico Milano
+% Copyright (C) 2002-2019 Federico Milano
 
 global Settings Path PQ UWPFLOW GAMS Theme Fig Hdl History
 

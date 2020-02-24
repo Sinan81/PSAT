@@ -13,7 +13,7 @@ function [x,y] = fm_getxy(idx)
 %E-mail:    federico.milano@ucd.ie
 %Web-site:  faraday1.ucd.ie/psat.html
 %
-% Copyright (C) 2002-2016 Federico Milano
+% Copyright (C) 2002-2019 Federico Milano
 
 global Busfreq COI Cluster Cac Cswt Ddsg Dfig Mass Exload Sofc Fl
 global Hvdc Ind Jimma Ltc Phs Mixload Exc Oxl Pmu Pod Pss SSR Sssc

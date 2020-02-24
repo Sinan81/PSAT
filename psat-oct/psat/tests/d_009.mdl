@@ -1,28 +1,91 @@
 Model {
-  Name			  d_009
-  Version		  5.1
-  SaveDefaultBlockParams  on
+  Name			  "d_009"
+  Version		  8.4
+  MdlSubVersion		  0
+  SavedCharacterEncoding  "UTF-8"
+  GraphicalInterface {
+    NumRootInports	    0
+    NumRootOutports	    0
+    ParameterArgumentNames  ""
+    ComputedModelVersion    "1.130"
+    NumModelReferences	    0
+    NumTestPointedSignals   0
+  }
+  ScopeRefreshTime	  0.035000
+  OverrideScopeRefreshTime on
+  DisableAllScopes	  off
   DataTypeOverride	  "UseLocalSettings"
+  DataTypeOverrideAppliesTo "AllNumericTypes"
   MinMaxOverflowLogging	  "UseLocalSettings"
   MinMaxOverflowArchiveMode "Overwrite"
+  FPTRunName		  "Run 1"
+  MaxMDLFileLineLength	  120
+  Object {
+    $PropName		    "BdWindowsInfo"
+    $ObjectID		    1
+    $ClassName		    "Simulink.BDWindowsInfo"
+    Object {
+      $PropName		      "WindowsInfo"
+      $ObjectID		      2
+      $ClassName	      "Simulink.WindowInfo"
+      IsActive		      [1]
+      Location		      [527.0, 29.0, 968.0, 873.0]
+      Object {
+	$PropName		"ModelBrowserInfo"
+	$ObjectID		3
+	$ClassName		"Simulink.ModelBrowserInfo"
+	Visible			[0]
+	DockPosition		"Left"
+	Width			[50]
+	Height			[50]
+	Filter			[8]
+      }
+      Object {
+	$PropName		"ExplorerBarInfo"
+	$ObjectID		4
+	$ClassName		"Simulink.ExplorerBarInfo"
+	Visible			[1]
+      }
+      Object {
+	$PropName		"EditorsInfo"
+	$ObjectID		5
+	$ClassName		"Simulink.EditorInfo"
+	IsActive		[1]
+	ViewObjType		"SimulinkTopLevel"
+	LoadSaveID		"0"
+	Extents			[932.0, 737.0]
+	ZoomFactor		[0.8]
+	Offset			[-158.41666666666669, -36.416666666666629]
+      }
+    }
+  }
   Created		  "Sat Apr 20 18:54:50 2002"
   Creator		  "fmilano"
   UpdateHistory		  "UpdateHistoryNever"
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "fmilano"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri Oct 30 13:34:04 2009"
-  ModelVersionFormat	  "1.%<AutoIncrement:125>"
-  ConfigurationManager	  "None"
+  LastModifiedDate	  "Fri Oct 27 16:29:58 2017"
+  RTWModifiedTimeStamp	  431022593
+  ModelVersionFormat	  "1.%<AutoIncrement:130>"
+  ConfigurationManager	  "none"
   SampleTimeColors	  off
+  SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "none"
   WideLines		  off
   ShowLineDimensions	  off
   ShowPortDataTypes	  off
+  ShowDesignRanges	  off
   ShowLoopsOnError	  on
   IgnoreBidirectionalLines off
   ShowStorageClass	  off
+  ShowTestPointIcons	  on
+  ShowSignalResolutionIcons on
+  ShowViewerIcons	  on
   SortedOrder		  off
+  ExecutionContextIcon	  off
+  ShowLinearizationAnnotations on
+  ShowMarkup		  on
   BlockNameDataTip	  off
   BlockParametersDataTip  off
   BlockDescriptionStringDataTip	off
@@ -30,6 +93,12 @@ Model {
   StatusBar		  on
   BrowserShowLibraryLinks off
   BrowserLookUnderMasks	  off
+  SimulationMode	  "normal"
+  PauseTimes		  "5"
+  NumberOfSteps		  1
+  SnapshotBufferSize	  10
+  SnapshotInterval	  10
+  NumberOfLastSnapshots	  0
   LinearizationMsg	  "none"
   Profile		  off
   ParamWorkspaceSource	  "MATLABWorkspace"
@@ -37,22 +106,53 @@ Model {
   AccelTemplateMakefile	  "accel_default_tmf"
   AccelMakeCommand	  "make_rtw"
   TryForcingSFcnDF	  off
+  Object {
+    $PropName		    "DataLoggingOverride"
+    $ObjectID		    6
+    $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
+    model_		    "d_009"
+    Array {
+      Type		      "Cell"
+      Dimension		      1
+      Cell		      "d_009"
+      PropName		      "logAsSpecifiedByModels_"
+    }
+    Array {
+      Type		      "Cell"
+      Dimension		      1
+      Cell		      ""
+      PropName		      "logAsSpecifiedByModelsSSIDs_"
+    }
+  }
   RecordCoverage	  off
   CovPath		  "/"
   CovSaveName		  "covdata"
   CovMetricSettings	  "dw"
   CovNameIncrementing	  off
   CovHtmlReporting	  on
+  CovForceBlockReductionOff on
+  CovEnableCumulative	  on
   covSaveCumulativeToWorkspaceVar on
   CovSaveSingleToWorkspaceVar on
   CovCumulativeVarName	  "covCumulativeData"
   CovCumulativeReport	  off
+  CovReportOnPause	  on
+  CovModelRefEnable	  "Off"
+  CovExternalEMLEnable	  off
+  CovSFcnEnable		  off
+  CovBoundaryAbsTol	  0.000010
+  CovBoundaryRelTol	  0.010000
+  CovUseTimeInterval	  off
+  CovStartTime		  0
+  CovStopTime		  0
   ExtModeBatchMode	  off
+  ExtModeEnableFloating	  on
   ExtModeTrigType	  "manual"
   ExtModeTrigMode	  "normal"
   ExtModeTrigPort	  "1"
   ExtModeTrigElement	  "any"
   ExtModeTrigDuration	  1000
+  ExtModeTrigDurationFloating "auto"
   ExtModeTrigHoldOff	  0
   ExtModeTrigDelay	  0
   ExtModeTrigDirection	  "rising"
@@ -67,96 +167,578 @@ Model {
   ExtModeLogAll		  on
   ExtModeAutoUpdateStatusClock off
   BufferReuse		  on
-  Solver		  "ode45"
-  SolverMode		  "Auto"
-  StartTime		  "0.0"
-  StopTime		  "10.0"
-  MaxOrder		  5
-  MaxStep		  "auto"
-  MinStep		  "auto"
-  MaxNumMinSteps	  "-1"
-  InitialStep		  "auto"
-  FixedStep		  "auto"
-  RelTol		  "1e-3"
-  AbsTol		  "auto"
-  OutputOption		  "RefineOutputTimes"
-  OutputTimes		  "[]"
-  Refine		  "1"
-  LoadExternalInput	  off
-  ExternalInput		  "[t, u]"
-  LoadInitialState	  off
-  InitialState		  "xInitial"
-  SaveTime		  on
-  TimeSaveName		  "tout"
-  SaveState		  off
-  StateSaveName		  "xout"
-  SaveOutput		  on
-  OutputSaveName	  "yout"
-  SaveFinalState	  off
-  FinalStateName	  "xFinal"
-  SaveFormat		  "Array"
-  Decimation		  "1"
-  LimitDataPoints	  on
-  MaxDataPoints		  "1000"
-  SignalLoggingName	  "logsout"
-  ConsistencyChecking	  "none"
-  ArrayBoundsChecking	  "none"
-  AlgebraicLoopMsg	  "warning"
-  BlockPriorityViolationMsg "warning"
-  MinStepSizeMsg	  "warning"
-  InheritedTsInSrcMsg	  "warning"
-  DiscreteInheritContinuousMsg "warning"
-  MultiTaskRateTransMsg	  "error"
-  SingleTaskRateTransMsg  "none"
-  CheckForMatrixSingularity "none"
-  IntegerOverflowMsg	  "warning"
-  Int32ToFloatConvMsg	  "warning"
-  ParameterDowncastMsg	  "error"
-  ParameterOverflowMsg	  "error"
-  ParameterPrecisionLossMsg "warning"
-  UnderSpecifiedDataTypeMsg "none"
-  UnnecessaryDatatypeConvMsg "none"
-  VectorMatrixConversionMsg "none"
-  InvalidFcnCallConnMsg	  "error"
-  SignalLabelMismatchMsg  "none"
-  UnconnectedInputMsg	  "warning"
-  UnconnectedOutputMsg	  "warning"
-  UnconnectedLineMsg	  "warning"
-  SfunCompatibilityCheckMsg "none"
-  RTWInlineParameters	  off
-  BlockReductionOpt	  on
-  BooleanDataType	  off
-  ConditionallyExecuteInputs on
-  OptimizeBlockIOStorage  on
-  AssertionControl	  "UseLocalSettings"
-  ProdHWWordLengths	  "8,16,32,32"
-  RTWSystemTargetFile	  "grt.tlc"
-  RTWTemplateMakefile	  "grt_default_tmf"
-  RTWMakeCommand	  "make_rtw"
-  RTWGenerateCodeOnly	  off
-  RTWRetainRTWFile	  off
-  TLCProfiler		  off
-  TLCDebug		  off
-  TLCCoverage		  off
-  TLCAssertion		  off
-  RTWOptions		  "-aEnforceIntegerDowncast=1 -aFoldNonRolledExpr=1 -aInlineInvariantSignals=1 -aInlineParameters=0 -aLo"
-  "calBlockOutputs=1 -aRollThreshold=5 -aZeroInternalMemoryAtStartup=1 -aZeroExternalMemoryAtStartup=1 -aInitFltsAndDbl"
-  "sToZero=1 -aForceBlockIOInitOptimize=0 -aGenerateReport=0 -aGenCodeOnly=0 -aRTWVerbose=1 -aIncludeHyperlinkInReport="
-  "0 -aLaunchReport=0 -aGenerateTraceInfo=0  -aForceParamTrailComments=0 -aGenerateComments=1 -aIgnoreCustomStorageClas"
-  "ses=1 -aIncHierarchyInIds=0 -aMaxRTWIdLen=31 -aShowEliminatedStatements=0 -aIncDataTypeInIds=0 -aInsertBlockDesc=0 -"
-  "aIgnoreTestpoints=0 -aSimulinkBlockComments=1 -aInlinedPrmAccess=\"Literals\"  -aSuppressErrorStatus=0 -aModelRefere"
-  "nceCompliant=1 -aParenthesesLevel=\"Nominal\" -aModelStepFunctionPrototypeControlCompliant=0 -aPortableWordSizes=0 -"
-  "aParMdlRefBuildCompliant=1 -aSupportNonInlinedSFcns=1 -aSupportContinuousTime=1 -aSupportComplex=1 -aSupportNonFinit"
-  "e=1 -aSupportAbsoluteTime=1 -aMultiwordLength=2048 -aTargetPreCompLibLocation=\"\" -aTargetLibSuffix=\"\" -aTargetFu"
-  "nctionLibrary=\"ANSI_C\" -aTargetFcnLib=\"ansi_tfl_tmw.mat\" -aMultiInstanceERTCode=0 -aLogVarNameModifier=\"rt_\" -"
-  "aERTFirstTimeCompliant=0 -aIsPILTarget=0 -aCombineOutputUpdateFcns=0 -aGenerateASAP2=0 -aGenerateClassInterface=0 -a"
-  "GenerateTestInterfaces=0 -aGenerateSampleERTMain=0 -aGenerateFullHeader=1 -aUtilityFuncGeneration=\"Auto\" -aInclude"
-  "FileDelimiter=\"Auto\" -aIncludeMdlTerminateFcn=1 -aPurelyIntegerCode=0 -aAutosarCompliant=0 -aERTCustomFileBanners="
-  "0 -aRTWCAPIStates=0 -aRTWCAPIParams=0 -aRTWCAPISignals=0 -aMatFileLogging=1 -aCompOptLevelCompliant=0 -aCPPClassGenC"
-  "ompliant=0 -aExtModeIntrfLevel=\"Level1\" -aExtModeMexFile=\"ext_comm\" -aExtModeTransport=0 -aExtModeStaticAllocSiz"
-  "e=1000000 -aExtModeTesting=0 -aExtModeStaticAlloc=0 -aExtMode=0 -aERTMultiwordLength=256 -aERTMultiwordTypeDef=\"Sys"
-  "tem defined\"  -aGenerateTraceInfo=0 -aIgnoreTestpoints=0 -aGenerateTraceInfo=0 -aGenerateTraceInfo=0 -aGenerateTrac"
-  "eInfo=0 -aGenerateTraceInfo=0 -aPrefixModelToSubsysFcnNames=1 "
+  ShowModelReferenceBlockVersion off
+  ShowModelReferenceBlockIO off
+  Array {
+    Type		    "Handle"
+    Dimension		    1
+    Simulink.ConfigSet {
+      $ObjectID		      7
+      Version		      "1.14.3"
+      Array {
+	Type			"Handle"
+	Dimension		8
+	Simulink.SolverCC {
+	  $ObjectID		  8
+	  Version		  "1.14.3"
+	  StartTime		  "0.0"
+	  StopTime		  "10.0"
+	  AbsTol		  "auto"
+	  FixedStep		  "auto"
+	  InitialStep		  "auto"
+	  MaxNumMinSteps	  "-1"
+	  MaxOrder		  5
+	  ZcThreshold		  "auto"
+	  ConsecutiveZCsStepRelTol "10*128*eps"
+	  MaxConsecutiveZCs	  "1000"
+	  ExtrapolationOrder	  4
+	  NumberNewtonIterations  1
+	  MaxStep		  "auto"
+	  MinStep		  "auto"
+	  MaxConsecutiveMinStep	  "1"
+	  RelTol		  "1e-3"
+	  SolverMode		  "Auto"
+	  EnableConcurrentExecution off
+	  ConcurrentTasks	  off
+	  Solver		  "ode45"
+	  SolverName		  "ode45"
+	  SolverJacobianMethodControl "auto"
+	  ShapePreserveControl	  "DisableAll"
+	  ZeroCrossControl	  "UseLocalSettings"
+	  ZeroCrossAlgorithm	  "Nonadaptive"
+	  AlgebraicLoopSolver	  "TrustRegion"
+	  SolverResetMethod	  "Fast"
+	  PositivePriorityOrder	  off
+	  AutoInsertRateTranBlk	  off
+	  SampleTimeConstraint	  "Unconstrained"
+	  InsertRTBMode		  "Whenever possible"
+	}
+	Simulink.DataIOCC {
+	  $ObjectID		  9
+	  Version		  "1.14.3"
+	  Decimation		  "1"
+	  ExternalInput		  "[t, u]"
+	  FinalStateName	  "xFinal"
+	  InitialState		  "xInitial"
+	  LimitDataPoints	  on
+	  MaxDataPoints		  "1000"
+	  LoadExternalInput	  off
+	  LoadInitialState	  off
+	  SaveFinalState	  off
+	  SaveCompleteFinalSimState off
+	  SaveFormat		  "Array"
+	  SignalLoggingSaveFormat "ModelDataLogs"
+	  SaveOutput		  on
+	  SaveState		  off
+	  SignalLogging		  on
+	  DSMLogging		  on
+	  InspectSignalLogs	  off
+	  VisualizeSimOutput	  on
+	  SaveTime		  on
+	  ReturnWorkspaceOutputs  off
+	  StateSaveName		  "xout"
+	  TimeSaveName		  "tout"
+	  OutputSaveName	  "yout"
+	  SignalLoggingName	  "logsout"
+	  DSMLoggingName	  "dsmout"
+	  OutputOption		  "RefineOutputTimes"
+	  OutputTimes		  "[]"
+	  ReturnWorkspaceOutputsName "out"
+	  Refine		  "1"
+	}
+	Simulink.OptimizationCC {
+	  $ObjectID		  10
+	  Version		  "1.14.3"
+	  Array {
+	    Type		    "Cell"
+	    Dimension		    8
+	    Cell		    "BooleansAsBitfields"
+	    Cell		    "PassReuseOutputArgsAs"
+	    Cell		    "PassReuseOutputArgsThreshold"
+	    Cell		    "ZeroExternalMemoryAtStartup"
+	    Cell		    "ZeroInternalMemoryAtStartup"
+	    Cell		    "OptimizeModelRefInitCode"
+	    Cell		    "NoFixptDivByZeroProtection"
+	    Cell		    "UseSpecifiedMinMax"
+	    PropName		    "DisabledProps"
+	  }
+	  BlockReduction	  on
+	  BooleanDataType	  off
+	  ConditionallyExecuteInputs on
+	  InlineParams		  off
+	  UseDivisionForNetSlopeComputation "Off"
+	  UseFloatMulNetSlope	  off
+	  DefaultUnderspecifiedDataType	"double"
+	  UseSpecifiedMinMax	  off
+	  InlineInvariantSignals  off
+	  OptimizeBlockIOStorage  on
+	  BufferReuse		  on
+	  EnhancedBackFolding	  off
+	  CachingGlobalReferences off
+	  GlobalBufferReuse	  on
+	  StrengthReduction	  off
+	  ExpressionFolding	  on
+	  BooleansAsBitfields	  off
+	  BitfieldContainerType	  "uint_T"
+	  EnableMemcpy		  on
+	  MemcpyThreshold	  64
+	  PassReuseOutputArgsAs	  "Structure reference"
+	  ExpressionDepthLimit	  128
+	  FoldNonRolledExpr	  on
+	  LocalBlockOutputs	  on
+	  RollThreshold		  5
+	  SystemCodeInlineAuto	  off
+	  StateBitsets		  off
+	  DataBitsets		  off
+	  ActiveStateOutputEnumStorageType "Native Integer"
+	  UseTempVars		  off
+	  ZeroExternalMemoryAtStartup on
+	  ZeroInternalMemoryAtStartup on
+	  InitFltsAndDblsToZero	  on
+	  NoFixptDivByZeroProtection off
+	  EfficientFloat2IntCast  off
+	  EfficientMapNaN2IntZero on
+	  OptimizeModelRefInitCode off
+	  LifeSpan		  "inf"
+	  MaxStackSize		  "Inherit from target"
+	  BufferReusableBoundary  on
+	  SimCompilerOptimization "Off"
+	  AccelVerboseBuild	  off
+	  ParallelExecutionInRapidAccelerator on
+	}
+	Simulink.DebuggingCC {
+	  $ObjectID		  11
+	  Version		  "1.14.3"
+	  RTPrefix		  "error"
+	  ConsistencyChecking	  "none"
+	  ArrayBoundsChecking	  "none"
+	  SignalInfNanChecking	  "none"
+	  SignalRangeChecking	  "none"
+	  ReadBeforeWriteMsg	  "UseLocalSettings"
+	  WriteAfterWriteMsg	  "UseLocalSettings"
+	  WriteAfterReadMsg	  "UseLocalSettings"
+	  AlgebraicLoopMsg	  "warning"
+	  ArtificialAlgebraicLoopMsg "warning"
+	  SaveWithDisabledLinksMsg "warning"
+	  SaveWithParameterizedLinksMsg	"none"
+	  CheckSSInitialOutputMsg on
+	  UnderspecifiedInitializationDetection	"Classic"
+	  MergeDetectMultiDrivingBlocksExec "none"
+	  CheckExecutionContextPreStartOutputMsg off
+	  CheckExecutionContextRuntimeOutputMsg	off
+	  SignalResolutionControl "TryResolveAllWithWarning"
+	  BlockPriorityViolationMsg "warning"
+	  MinStepSizeMsg	  "warning"
+	  TimeAdjustmentMsg	  "none"
+	  MaxConsecutiveZCsMsg	  "error"
+	  MaskedZcDiagnostic	  "warning"
+	  IgnoredZcDiagnostic	  "warning"
+	  SolverPrmCheckMsg	  "none"
+	  InheritedTsInSrcMsg	  "warning"
+	  DiscreteInheritContinuousMsg "warning"
+	  MultiTaskDSMMsg	  "warning"
+	  MultiTaskCondExecSysMsg "none"
+	  MultiTaskRateTransMsg	  "error"
+	  SingleTaskRateTransMsg  "none"
+	  TasksWithSamePriorityMsg "warning"
+	  SigSpecEnsureSampleTimeMsg "warning"
+	  CheckMatrixSingularityMsg "none"
+	  IntegerOverflowMsg	  "warning"
+	  Int32ToFloatConvMsg	  "warning"
+	  ParameterDowncastMsg	  "error"
+	  ParameterOverflowMsg	  "error"
+	  ParameterUnderflowMsg	  "none"
+	  ParameterPrecisionLossMsg "warning"
+	  ParameterTunabilityLossMsg "warning"
+	  FixptConstUnderflowMsg  "none"
+	  FixptConstOverflowMsg	  "none"
+	  FixptConstPrecisionLossMsg "none"
+	  UnderSpecifiedDataTypeMsg "none"
+	  UnnecessaryDatatypeConvMsg "none"
+	  VectorMatrixConversionMsg "none"
+	  InvalidFcnCallConnMsg	  "error"
+	  FcnCallInpInsideContextMsg "EnableAllAsError"
+	  SignalLabelMismatchMsg  "none"
+	  UnconnectedInputMsg	  "warning"
+	  UnconnectedOutputMsg	  "warning"
+	  UnconnectedLineMsg	  "warning"
+	  SFcnCompatibilityMsg	  "none"
+	  FrameProcessingCompatibilityMsg "warning"
+	  UniqueDataStoreMsg	  "none"
+	  BusObjectLabelMismatch  "warning"
+	  RootOutportRequireBusObject "warning"
+	  AssertControl		  "UseLocalSettings"
+	  EnableOverflowDetection off
+	  ModelReferenceIOMsg	  "none"
+	  ModelReferenceMultiInstanceNormalModeStructChecksumCheck "error"
+	  ModelReferenceVersionMismatchMessage "none"
+	  ModelReferenceIOMismatchMessage "none"
+	  ModelReferenceCSMismatchMessage "none"
+	  UnknownTsInhSupMsg	  "warning"
+	  ModelReferenceDataLoggingMessage "warning"
+	  ModelReferenceSymbolNameMessage "warning"
+	  ModelReferenceExtraNoncontSigs "error"
+	  StateNameClashWarn	  "none"
+	  SimStateInterfaceChecksumMismatchMsg "warning"
+	  SimStateOlderReleaseMsg "error"
+	  InitInArrayFormatMsg	  "warning"
+	  StrictBusMsg		  "None"
+	  BusNameAdapt		  "WarnAndRepair"
+	  NonBusSignalsTreatedAsBus "none"
+	  LoggingUnavailableSignals "error"
+	  BlockIODiagnostic	  "none"
+	  SFUnusedDataAndEventsDiag "warning"
+	  SFUnexpectedBacktrackingDiag "warning"
+	  SFInvalidInputDataAccessInChartInitDiag "warning"
+	  SFNoUnconditionalDefaultTransitionDiag "warning"
+	  SFTransitionOutsideNaturalParentDiag "warning"
+	  SFUnconditionalTransitionShadowingDiag "warning"
+	  SFUndirectedBroadcastEventsDiag "warning"
+	  SFTransitionActionBeforeConditionDiag	"warning"
+	  IntegerSaturationMsg	  "warning"
+	}
+	Simulink.HardwareCC {
+	  $ObjectID		  12
+	  Version		  "1.14.3"
+	  ProdBitPerChar	  8
+	  ProdBitPerShort	  16
+	  ProdBitPerInt		  32
+	  ProdBitPerLong	  32
+	  ProdBitPerLongLong	  64
+	  ProdBitPerFloat	  32
+	  ProdBitPerDouble	  64
+	  ProdBitPerPointer	  32
+	  ProdLargestAtomicInteger "Char"
+	  ProdLargestAtomicFloat  "None"
+	  ProdIntDivRoundTo	  "Undefined"
+	  ProdEndianess		  "Unspecified"
+	  ProdWordSize		  32
+	  ProdShiftRightIntArith  on
+	  ProdLongLongMode	  off
+	  ProdHWDeviceType	  "32-bit Generic"
+	  TargetBitPerChar	  8
+	  TargetBitPerShort	  16
+	  TargetBitPerInt	  32
+	  TargetBitPerLong	  32
+	  TargetBitPerLongLong	  64
+	  TargetBitPerFloat	  32
+	  TargetBitPerDouble	  64
+	  TargetBitPerPointer	  32
+	  TargetLargestAtomicInteger "Char"
+	  TargetLargestAtomicFloat "None"
+	  TargetShiftRightIntArith on
+	  TargetLongLongMode	  off
+	  TargetIntDivRoundTo	  "Undefined"
+	  TargetEndianess	  "Unspecified"
+	  TargetWordSize	  32
+	  TargetTypeEmulationWarnSuppressLevel 0
+	  TargetPreprocMaxBitsSint 32
+	  TargetPreprocMaxBitsUint 32
+	  TargetHWDeviceType	  "Specified"
+	  TargetUnknown		  on
+	  ProdEqTarget		  on
+	}
+	Simulink.ModelReferenceCC {
+	  $ObjectID		  13
+	  Version		  "1.14.3"
+	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
+	  CheckModelReferenceTargetMessage "error"
+	  EnableParallelModelReferenceBuilds off
+	  ParallelModelReferenceErrorOnInvalidPool on
+	  ParallelModelReferenceMATLABWorkerInit "None"
+	  ModelReferenceNumInstancesAllowed "Multi"
+	  PropagateVarSize	  "Infer from blocks in model"
+	  ModelReferencePassRootInputsByReference on
+	  ModelReferenceMinAlgLoopOccurrences off
+	  PropagateSignalLabelsOutOfModel off
+	  SupportModelReferenceSimTargetCustomCode off
+	}
+	Simulink.SFSimCC {
+	  $ObjectID		  14
+	  Version		  "1.14.3"
+	  SFSimEnableDebug	  on
+	  SFSimOverflowDetection  on
+	  SFSimEcho		  on
+	  SimBlas		  on
+	  SimCtrlC		  on
+	  SimExtrinsic		  on
+	  SimIntegrity		  on
+	  SimUseLocalCustomCode	  off
+	  SimParseCustomCode	  on
+	  SimBuildMode		  "sf_incremental_build"
+	  SimGenImportedTypeDefs  off
+	}
+	Simulink.RTWCC {
+	  $BackupClass		  "Simulink.RTWCC"
+	  $ObjectID		  15
+	  Version		  "1.14.3"
+	  Array {
+	    Type		    "Cell"
+	    Dimension		    15
+	    Cell		    "IncludeHyperlinkInReport"
+	    Cell		    "GenerateTraceInfo"
+	    Cell		    "GenerateTraceReport"
+	    Cell		    "GenerateTraceReportSl"
+	    Cell		    "GenerateTraceReportSf"
+	    Cell		    "GenerateTraceReportEml"
+	    Cell		    "PortableWordSizes"
+	    Cell		    "GenerateWebview"
+	    Cell		    "GenerateCodeMetricsReport"
+	    Cell		    "GenerateCodeReplacementReport"
+	    Cell		    "GenerateErtSFunction"
+	    Cell		    "CreateSILPILBlock"
+	    Cell		    "CodeExecutionProfiling"
+	    Cell		    "CodeProfilingSaveOptions"
+	    Cell		    "CodeProfilingInstrumentation"
+	    PropName		    "DisabledProps"
+	  }
+	  SystemTargetFile	  "grt.tlc"
+	  TLCOptions		  ""
+	  GenCodeOnly		  off
+	  MakeCommand		  "make_rtw"
+	  GenerateMakefile	  on
+	  PackageGeneratedCodeAndArtifacts off
+	  PackageName		  ""
+	  TemplateMakefile	  "grt_default_tmf"
+	  PostCodeGenCommand	  ""
+	  Description		  ""
+	  GenerateReport	  off
+	  SaveLog		  off
+	  RTWVerbose		  on
+	  RetainRTWFile		  off
+	  ProfileTLC		  off
+	  TLCDebug		  off
+	  TLCCoverage		  off
+	  TLCAssert		  off
+	  ProcessScriptMode	  "Default"
+	  ConfigurationMode	  "Optimized"
+	  ProcessScript		  ""
+	  ConfigurationScript	  ""
+	  ConfigAtBuild		  off
+	  RTWUseLocalCustomCode	  off
+	  RTWUseSimCustomCode	  off
+	  CustomSourceCode	  ""
+	  CustomHeaderCode	  ""
+	  CustomInclude		  ""
+	  CustomSource		  ""
+	  CustomLibrary		  ""
+	  CustomInitializer	  ""
+	  CustomTerminator	  ""
+	  Toolchain		  "Automatically locate an installed toolchain"
+	  BuildConfiguration	  "Faster Builds"
+	  IncludeHyperlinkInReport off
+	  LaunchReport		  off
+	  PortableWordSizes	  off
+	  CreateSILPILBlock	  "None"
+	  CodeExecutionProfiling  off
+	  CodeExecutionProfileVariable "executionProfile"
+	  CodeProfilingSaveOptions "SummaryOnly"
+	  CodeProfilingInstrumentation off
+	  SILDebugging		  off
+	  TargetLang		  "C"
+	  IncludeBusHierarchyInRTWFileBlockHierarchyMap	off
+	  IncludeERTFirstTime	  on
+	  GenerateTraceInfo	  off
+	  GenerateTraceReport	  off
+	  GenerateTraceReportSl	  off
+	  GenerateTraceReportSf	  off
+	  GenerateTraceReportEml  off
+	  GenerateCodeInfo	  off
+	  GenerateWebview	  off
+	  GenerateCodeMetricsReport off
+	  GenerateCodeReplacementReport	off
+	  RTWCompilerOptimization "Off"
+	  RTWCustomCompilerOptimizations ""
+	  CheckMdlBeforeBuild	  "Off"
+	  CustomRebuildMode	  "OnUpdate"
+	  DataInitializer	  ""
+	  SharedConstantsCachingThreshold 1024
+	  Array {
+	    Type		    "Handle"
+	    Dimension		    2
+	    Simulink.CodeAppCC {
+	      $ObjectID		      16
+	      Version		      "1.14.3"
+	      Array {
+		Type			"Cell"
+		Dimension		24
+		Cell			"IgnoreCustomStorageClasses"
+		Cell			"ParameterTuningSideEffectCode"
+		Cell			"IgnoreTestpoints"
+		Cell			"InsertBlockDesc"
+		Cell			"InsertPolySpaceComments"
+		Cell			"SFDataObjDesc"
+		Cell			"MATLABFcnDesc"
+		Cell			"SimulinkDataObjDesc"
+		Cell			"DefineNamingRule"
+		Cell			"SignalNamingRule"
+		Cell			"ParamNamingRule"
+		Cell			"InternalIdentifier"
+		Cell			"InlinedPrmAccess"
+		Cell			"CustomSymbolStr"
+		Cell			"CustomSymbolStrGlobalVar"
+		Cell			"CustomSymbolStrType"
+		Cell			"CustomSymbolStrField"
+		Cell			"CustomSymbolStrFcn"
+		Cell			"CustomSymbolStrFcnArg"
+		Cell			"CustomSymbolStrBlkIO"
+		Cell			"CustomSymbolStrTmpVar"
+		Cell			"CustomSymbolStrMacro"
+		Cell			"CustomSymbolStrUtil"
+		Cell			"ReqsInCode"
+		PropName		"DisabledProps"
+	      }
+	      ForceParamTrailComments off
+	      GenerateComments	      on
+	      CommentStyle	      "Auto"
+	      IgnoreCustomStorageClasses on
+	      IgnoreTestpoints	      off
+	      IncHierarchyInIds	      off
+	      MaxIdLength	      31
+	      PreserveName	      off
+	      PreserveNameWithParent  off
+	      ShowEliminatedStatement off
+	      OperatorAnnotations     off
+	      IncAutoGenComments      off
+	      SimulinkDataObjDesc     off
+	      SFDataObjDesc	      off
+	      MATLABFcnDesc	      off
+	      IncDataTypeInIds	      off
+	      MangleLength	      1
+	      CustomSymbolStrGlobalVar "$R$N$M"
+	      CustomSymbolStrType     "$N$R$M_T"
+	      CustomSymbolStrField    "$N$M"
+	      CustomSymbolStrFcn      "$R$N$M$F"
+	      CustomSymbolStrFcnArg   "rt$I$N$M"
+	      CustomSymbolStrBlkIO    "rtb_$N$M"
+	      CustomSymbolStrTmpVar   "$N$M"
+	      CustomSymbolStrMacro    "$R$N$M"
+	      CustomSymbolStrUtil     "$N$C"
+	      DefineNamingRule	      "None"
+	      ParamNamingRule	      "None"
+	      SignalNamingRule	      "None"
+	      InsertBlockDesc	      off
+	      InsertPolySpaceComments off
+	      SimulinkBlockComments   on
+	      MATLABSourceComments    off
+	      EnableCustomComments    off
+	      InternalIdentifier      "Shortened"
+	      InlinedPrmAccess	      "Literals"
+	      ReqsInCode	      off
+	      UseSimReservedNames     off
+	    }
+	    Simulink.GRTTargetCC {
+	      $BackupClass	      "Simulink.TargetCC"
+	      $ObjectID		      17
+	      Version		      "1.14.3"
+	      Array {
+		Type			"Cell"
+		Dimension		13
+		Cell			"GeneratePreprocessorConditionals"
+		Cell			"IncludeMdlTerminateFcn"
+		Cell			"SupportNonInlinedSFcns"
+		Cell			"SuppressErrorStatus"
+		Cell			"ERTCustomFileBanners"
+		Cell			"GenerateSampleERTMain"
+		Cell			"GenerateTestInterfaces"
+		Cell			"ModelStepFunctionPrototypeControlCompliant"
+		Cell			"GenerateAllocFcn"
+		Cell			"PurelyIntegerCode"
+		Cell			"SupportComplex"
+		Cell			"SupportAbsoluteTime"
+		Cell			"SupportContinuousTime"
+		PropName		"DisabledProps"
+	      }
+	      TargetFcnLib	      "ansi_tfl_tmw.mat"
+	      TargetLibSuffix	      ""
+	      TargetPreCompLibLocation ""
+	      GenFloatMathFcnCalls    "NOT IN USE"
+	      TargetLangStandard      "C89/C90 (ANSI)"
+	      CodeReplacementLibrary  "ANSI_C"
+	      UtilityFuncGeneration   "Auto"
+	      ERTMultiwordTypeDef     "System defined"
+	      ERTMultiwordLength      256
+	      MultiwordLength	      2048
+	      GenerateFullHeader      on
+	      GenerateSampleERTMain   off
+	      GenerateTestInterfaces  off
+	      ModelReferenceCompliant on
+	      ParMdlRefBuildCompliant on
+	      CompOptLevelCompliant   off
+	      ConcurrentExecutionCompliant on
+	      IncludeMdlTerminateFcn  on
+	      GeneratePreprocessorConditionals "Disable all"
+	      CombineOutputUpdateFcns off
+	      CombineSignalStateStructs	off
+	      SuppressErrorStatus     off
+	      ERTFirstTimeCompliant   off
+	      IncludeFileDelimiter    "Auto"
+	      ERTCustomFileBanners    off
+	      SupportAbsoluteTime     on
+	      LogVarNameModifier      "rt_"
+	      MatFileLogging	      on
+	      MultiInstanceERTCode    off
+	      CodeInterfacePackaging  "Nonreusable function"
+	      SupportNonFinite	      on
+	      SupportComplex	      on
+	      PurelyIntegerCode	      off
+	      SupportContinuousTime   on
+	      SupportNonInlinedSFcns  on
+	      SupportVariableSizeSignals off
+	      EnableShiftOperators    on
+	      ParenthesesLevel	      "Nominal"
+	      CastingMode	      "Nominal"
+	      MATLABClassNameForMDSCustomization "Simulink.SoftwareTarget.GRTCustomization"
+	      ModelStepFunctionPrototypeControlCompliant off
+	      CPPClassGenCompliant    off
+	      AutosarCompliant	      off
+	      GRTInterface	      on
+	      GenerateAllocFcn	      off
+	      GenerateSharedConstants on
+	      UseMalloc		      off
+	      ExtMode		      off
+	      ExtModeStaticAlloc      off
+	      ExtModeTesting	      off
+	      ExtModeStaticAllocSize  1000000
+	      ExtModeTransport	      0
+	      ExtModeMexFile	      "ext_comm"
+	      ExtModeIntrfLevel	      "Level1"
+	      RTWCAPISignals	      off
+	      RTWCAPIParams	      off
+	      RTWCAPIStates	      off
+	      RTWCAPIRootIO	      off
+	      GenerateASAP2	      off
+	      MultiInstanceErrorCode  "Error"
+	    }
+	    PropName		    "Components"
+	  }
+	}
+	PropName		"Components"
+      }
+      Name		      "Configuration"
+      ExtraOptions	      "-aEnforceIntegerDowncast=1 -aGenerateTraceInfo=0 -aIgnoreTestpoints=0 -aGenerateTraceInfo=0 "
+      "-aIgnoreTestpoints=0 -aGenerateTraceInfo=0 -aGenerateTraceInfo=0 -aGenerateTraceInfo=0 -aGenerateTraceInfo=0 -aP"
+      "refixModelToSubsysFcnNames=1 "
+      CurrentDlgPage	      "Solver"
+      ConfigPrmDlgPosition     [ 420, 209, 1500, 849 ] 
+    }
+    PropName		    "ConfigurationSets"
+  }
+  Simulink.ConfigSet {
+    $PropName		    "ActiveConfigurationSet"
+    $ObjectID		    7
+  }
+  Object {
+    $PropName		    "DataTransfer"
+    $ObjectID		    18
+    $ClassName		    "Simulink.GlobalDataTransfer"
+    DefaultTransitionBetweenSyncTasks "Ensure deterministic transfer (maximum delay)"
+    DefaultTransitionBetweenAsyncTasks "Ensure data integrity only"
+    DefaultTransitionBetweenContTasks "Ensure deterministic transfer (minimum delay)"
+    DefaultExtrapolationMethodBetweenContTasks "None"
+    AutoInsertRateTranBlk   [0]
+  }
+  ExplicitPartitioning	  off
   BlockDefaults {
     ForegroundColor	    "black"
     BackgroundColor	    "white"
@@ -167,7 +749,8 @@ Model {
     FontWeight		    "normal"
     FontAngle		    "normal"
     ShowName		    on
-    Orientation		    "right"
+    BlockRotation	    0
+    BlockMirror		    off
   }
   AnnotationDefaults {
     HorizontalAlignment	    "center"
@@ -179,6 +762,7 @@ Model {
     FontSize		    10
     FontWeight		    "normal"
     FontAngle		    "normal"
+    UseDisplayTextAsClickCallback off
   }
   LineDefaults {
     FontName		    "Helvetica"
@@ -186,33 +770,71 @@ Model {
     FontWeight		    "normal"
     FontAngle		    "normal"
   }
+  MaskDefaults {
+    SelfModifiable	    "off"
+    IconFrame		    "on"
+    IconOpaque		    "on"
+    RunInitForIconRedraw    "off"
+    IconRotate		    "none"
+    PortRotate		    "default"
+    IconUnits		    "autoscale"
+  }
+  MaskParameterDefaults {
+    Evaluate		    "on"
+    Tunable		    "on"
+    NeverSave		    "off"
+    Internal		    "off"
+    ReadOnly		    "off"
+    Enabled		    "on"
+    Visible		    "on"
+    ToolTip		    "on"
+  }
   BlockParameterDefaults {
     Block {
       BlockType		      Constant
       Value		      "1"
       VectorParams1D	      on
-      OutDataTypeMode	      "Inherit from 'Constant value'"
-      OutDataType	      "fixdt(1,16,0)"
-      ConRadixGroup	      "Use specified scaling"
-      OutScaling	      "[]"
+      SamplingMode	      "Sample based"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: Inherit from 'Constant value'"
+      LockScale		      off
       SampleTime	      "inf"
+      FramePeriod	      "inf"
+      PreserveConstantTs      off
     }
     Block {
       BlockType		      Inport
       Port		      "1"
+      OutputFunctionCall      off
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      LockScale		      off
+      BusOutputAsStruct	      off
       PortDimensions	      "-1"
+      VarSizeSig	      "Inherit"
       SampleTime	      "-1"
-      DataType		      "auto"
-      OutDataType	      "fixdt(1,16,0)"
-      OutScaling	      "[]"
       SignalType	      "auto"
       SamplingMode	      "auto"
-      LatchInput off
+      LatchByDelayingOutsideSignal off
+      LatchInputForFeedbackSignals off
       Interpolate	      on
     }
     Block {
       BlockType		      Outport
       Port		      "1"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      LockScale		      off
+      BusOutputAsStruct	      off
+      PortDimensions	      "-1"
+      VarSizeSig	      "Inherit"
+      SampleTime	      "-1"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      SourceOfInitialOutputValue "Dialog"
       OutputWhenDisabled      "held"
       InitialOutput	      "[]"
     }
@@ -225,21 +847,42 @@ Model {
     }
     Block {
       BlockType		      SubSystem
+      ShowPortLabels	      "FromPortIcon"
       Permissions	      "ReadWrite"
+      PermitHierarchicalResolution "All"
       TreatAsAtomicUnit	      off
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      CheckFcnCallInpInsideContextMsg off
+      SystemSampleTime	      "-1"
+      RTWSystemCode	      "Auto"
       RTWFcnNameOpts	      "Auto"
       RTWFileNameOpts	      "Auto"
+      FunctionInterfaceSpec   "void_void"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
       SimViewingDevice	      off
       DataTypeOverride	      "UseLocalSettings"
+      DataTypeOverrideAppliesTo	"AllNumericTypes"
       MinMaxOverflowLogging   "UseLocalSettings"
+      Opaque		      off
+      MaskHideContents	      off
+      SFBlockType	      "NONE"
+      Variant		      off
+      GeneratePreprocessorConditionals off
+      ContentPreviewEnabled   off
     }
     Block {
       BlockType		      Terminator
     }
   }
   System {
-    Name		    d_009
-    Location		    [540, 121, 1277, 763]
+    Name		    "d_009"
+    Location		    [527, 29, 1495, 902]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -248,46 +891,148 @@ Model {
     PaperPositionMode	    "auto"
     PaperType		    "usletter"
     PaperUnits		    "inches"
+    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+    TiledPageScale	    1
+    ShowPageBoundaries	    off
     ZoomFactor		    "80"
     ReportName		    "simulink-default.rpt"
+    SIDHighWatermark	    "75"
     Block {
       BlockType		      SubSystem
       Name		      "AVR1"
+      SID		      "1"
       Tag		      "PSATblock"
       Description	      "Controls"
       Ports		      [0, 1]
-      Position		      [430, 685, 470, 705]
-      Orientation	      "up"
+      Position		      [420, 685, 460, 705]
+      ZOrder		      -1
+      BlockRotation	      270
       NamePlacement	      "alternate"
       ShowName		      off
-      RTWSystemCode	      "Auto"
-      MaskType		      "Exc"
-      MaskDescription	      "This block defines an Automatic Voltage Regulator."
-      MaskHelp		      "This block defines an Automatic Voltage Regulator.\nThere are three kind of regulators:\n\nType"
-      " 1:\n\n     IEEE Model 1\n\nType 2:\n\n     IEEE Model 2\n\nType 3:\n \n     IEEE Model 3"
-      MaskPromptString	      "Automatic Voltage Regulator Type|Maximum Regulator Voltage [p.u.]|Minimum Regulator Volt"
-      "age [p.u.]|Amplifier Gain Ka [p.u./p.u.]|Amplifier Time Constant Ta [s]|Stabilizer Gain Kf [p.u./p.u.]|Stabilize"
-      "r Time Tf [s]|Coefficient Kd [p.u./p.u.]|Time Constant of the Field Circuit Td [s]|Time Delay of the Measurement"
-      " System Tr [s]|Coefficient of the Ceiling Function (A B)|Number of input signals"
-      MaskStyleString	      "popup(1|2|3),edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,popup(0|1|2|3)"
-      MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskCallbackString      "fm_block|||||||||||"
-      MaskEnableString	      "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,,,,,,,"
-      MaskVariables	      "p2q=@1;p3q=@2;p4q=@3;p5q=@4;p6q=@5;p7q=@6;p8q=@7;p9q=@8;p10q=@9;p11q=@10;p12_13q=@11;in=@12;"
-      MaskInitialization      "fm_inout\n[x,y] = fm_draw('R');"
-      MaskDisplay	      "plot([-1.8 4.1 4.1 -1.8 -1.8],[-1.5 -1.5 1.5 1.5 -1.5])\ncolor('red')\nplot([-1.3 -0.5],[-1 1"
-      "],[-0.5 0.3],[1 -1],[-0.9 -0.1],[0.0 0.0])\nplot(2.8+1.3*x,2*y,1.5+[-1.3 -0.5],[1 -1],1.5+[-0.5 0.3],[-1 1])\n"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "none"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "2|5.00|-5.00|20|0.2|0.063|0.35|1|0.314|0.001|[0.0039  1.555]|0"
+      RequestExecContextInheritance off
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		19
+	$ClassName		"Simulink.Mask"
+	Type			"Exc"
+	Description		"This block defines an Automatic Voltage Regulator."
+	Help			"This block defines an Automatic Voltage Regulator.\nThere are three kind of regulators:\n\nType 1:\n\n     IE"
+	"EE Model 1\n\nType 2:\n\n     IEEE Model 2\n\nType 3:\n \n     IEEE Model 3"
+	Initialization		"fm_inout\n[x,y] = fm_draw('R');"
+	Display			"plot([-1.8 4.1 4.1 -1.8 -1.8],[-1.5 -1.5 1.5 1.5 -1.5])\ncolor('red')\nplot([-1.3 -0.5],[-1 1],[-0.5 0.3],"
+	"[1 -1],[-0.9 -0.1],[0.0 0.0])\nplot(2.8+1.3*x,2*y,1.5+[-1.3 -0.5],[1 -1],1.5+[-0.5 0.3],[-1 1])\n"
+	IconFrame		"off"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  12
+	  Object {
+	    $ObjectID		    20
+	    Type		    "popup"
+	    Array {
+	      Type		      "Cell"
+	      Dimension		      3
+	      Cell		      "1"
+	      Cell		      "2"
+	      Cell		      "3"
+	      PropName		      "TypeOptions"
+	    }
+	    Name		    "p2q"
+	    Prompt		    "Automatic Voltage Regulator Type"
+	    Value		    "2"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    21
+	    Type		    "edit"
+	    Name		    "p3q"
+	    Prompt		    "Maximum Regulator Voltage [p.u.]"
+	    Value		    "5.00"
+	  }
+	  Object {
+	    $ObjectID		    22
+	    Type		    "edit"
+	    Name		    "p4q"
+	    Prompt		    "Minimum Regulator Voltage [p.u.]"
+	    Value		    "-5.00"
+	  }
+	  Object {
+	    $ObjectID		    23
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Amplifier Gain Ka [p.u./p.u.]"
+	    Value		    "20"
+	  }
+	  Object {
+	    $ObjectID		    24
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Amplifier Time Constant Ta [s]"
+	    Value		    "0.2"
+	  }
+	  Object {
+	    $ObjectID		    25
+	    Type		    "edit"
+	    Name		    "p7q"
+	    Prompt		    "Stabilizer Gain Kf [p.u./p.u.]"
+	    Value		    "0.063"
+	  }
+	  Object {
+	    $ObjectID		    26
+	    Type		    "edit"
+	    Name		    "p8q"
+	    Prompt		    "Stabilizer Time Tf [s]"
+	    Value		    "0.35"
+	  }
+	  Object {
+	    $ObjectID		    27
+	    Type		    "edit"
+	    Name		    "p9q"
+	    Prompt		    "Coefficient Kd [p.u./p.u.]"
+	    Value		    "1"
+	  }
+	  Object {
+	    $ObjectID		    28
+	    Type		    "edit"
+	    Name		    "p10q"
+	    Prompt		    "Time Constant of the Field Circuit Td [s]"
+	    Value		    "0.314"
+	  }
+	  Object {
+	    $ObjectID		    29
+	    Type		    "edit"
+	    Name		    "p11q"
+	    Prompt		    "Time Delay of the Measurement System Tr [s]"
+	    Value		    "0.001"
+	  }
+	  Object {
+	    $ObjectID		    30
+	    Type		    "edit"
+	    Name		    "p12_13q"
+	    Prompt		    "Coefficient of the Ceiling Function (A B)"
+	    Value		    "[0.0039  1.555]"
+	  }
+	  Object {
+	    $ObjectID		    31
+	    Type		    "popup"
+	    Array {
+	      Type		      "Cell"
+	      Dimension		      4
+	      Cell		      "0"
+	      Cell		      "1"
+	      Cell		      "2"
+	      Cell		      "3"
+	      PropName		      "TypeOptions"
+	    }
+	    Name		    "in"
+	    Prompt		    "Number of input signals"
+	    Value		    "0"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
       System {
 	Name			"AVR1"
-	Location		[158, 247, 492, 439]
+	Location		[124, 128, 506, 555]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -296,69 +1041,179 @@ Model {
 	PaperPositionMode	"auto"
 	PaperType		"usletter"
 	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
 	ZoomFactor		"100"
 	Block {
 	  BlockType		  Constant
 	  Name			  "Constant"
+	  SID			  "2"
 	  Position		  [170, 100, 200, 130]
+	  ZOrder		  -1
 	  ShowName		  off
-	  OutDataType		  "sfix(16)"
-	  OutScaling		  "2^0"
 	}
 	Block {
 	  BlockType		  Outport
 	  Name			  "Out1"
+	  SID			  "3"
 	  Position		  [240, 105, 260, 125]
+	  ZOrder		  -2
 	  ShowName		  off
+	  IconDisplay		  "Port number"
 	}
 	Line {
+	  ZOrder		  1
 	  SrcBlock		  "Constant"
 	  SrcPort		  1
 	  DstBlock		  "Out1"
 	  DstPort		  1
 	}
 	Annotation {
+	  SID			  "4"
 	  Name			  "Automatic Voltage Regulator"
-	  Position		  [234, 30]
+	  Position		  [234, 30, 365, 47]
+	  InternalMargins	  [0, 0, 0, 0]
+	  FixedHeight		  off
+	  FixedWidth		  off
+	  ZOrder		  -1
 	}
       }
     }
     Block {
       BlockType		      SubSystem
       Name		      "AVR2"
+      SID		      "5"
       Tag		      "PSATblock"
       Description	      "Controls"
       Ports		      [0, 1]
-      Position		      [30, 140, 70, 160]
+      Position		      [30, 135, 70, 155]
+      ZOrder		      -2
       ShowName		      off
-      RTWSystemCode	      "Auto"
-      MaskType		      "Exc"
-      MaskDescription	      "This block defines an Automatic Voltage Regulator."
-      MaskHelp		      "This block defines an Automatic Voltage Regulator.\nThere are three kind of regulators:\n\nType"
-      " 1:\n\n     IEEE Model 1\n\nType 2:\n\n     IEEE Model 2\n\nType 3:\n \n     IEEE Model 3"
-      MaskPromptString	      "Automatic Voltage Regulator Type|Maximum Regulator Voltage [p.u.]|Minimum Regulator Volt"
-      "age [p.u.]|Amplifier Gain Ka [p.u./p.u.]|Amplifier Time Constant Ta [s]|Stabilizer Gain Kf [p.u./p.u.]|Stabilize"
-      "r Time Tf [s]|Coefficient Kd [p.u./p.u.]|Time Constant of the Field Circuit Td [s]|Time Delay of the Measurement"
-      " System Tr [s]|Coefficient of the Ceiling Function (A B)|Number of input signals"
-      MaskStyleString	      "popup(1|2|3),edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,popup(0|1|2|3)"
-      MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskCallbackString      "fm_block|||||||||||"
-      MaskEnableString	      "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,,,,,,,"
-      MaskVariables	      "p2q=@1;p3q=@2;p4q=@3;p5q=@4;p6q=@5;p7q=@6;p8q=@7;p9q=@8;p10q=@9;p11q=@10;p12_13q=@11;in=@12;"
-      MaskInitialization      "fm_inout\n[x,y] = fm_draw('R');"
-      MaskDisplay	      "plot([-1.8 4.1 4.1 -1.8 -1.8],[-1.5 -1.5 1.5 1.5 -1.5])\ncolor('red')\nplot([-1.3 -0.5],[-1 1"
-      "],[-0.5 0.3],[1 -1],[-0.9 -0.1],[0.0 0.0])\nplot(2.8+1.3*x,2*y,1.5+[-1.3 -0.5],[1 -1],1.5+[-0.5 0.3],[-1 1])\n"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "none"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "2|5.00|-5.00|20|0.2|0.063|0.35|1|0.314|0.001|[0.0039  1.555]|0"
+      RequestExecContextInheritance off
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		32
+	$ClassName		"Simulink.Mask"
+	Type			"Exc"
+	Description		"This block defines an Automatic Voltage Regulator."
+	Help			"This block defines an Automatic Voltage Regulator.\nThere are three kind of regulators:\n\nType 1:\n\n     IE"
+	"EE Model 1\n\nType 2:\n\n     IEEE Model 2\n\nType 3:\n \n     IEEE Model 3"
+	Initialization		"fm_inout\n[x,y] = fm_draw('R');"
+	Display			"plot([-1.8 4.1 4.1 -1.8 -1.8],[-1.5 -1.5 1.5 1.5 -1.5])\ncolor('red')\nplot([-1.3 -0.5],[-1 1],[-0.5 0.3],"
+	"[1 -1],[-0.9 -0.1],[0.0 0.0])\nplot(2.8+1.3*x,2*y,1.5+[-1.3 -0.5],[1 -1],1.5+[-0.5 0.3],[-1 1])\n"
+	IconFrame		"off"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  12
+	  Object {
+	    $ObjectID		    33
+	    Type		    "popup"
+	    Array {
+	      Type		      "Cell"
+	      Dimension		      3
+	      Cell		      "1"
+	      Cell		      "2"
+	      Cell		      "3"
+	      PropName		      "TypeOptions"
+	    }
+	    Name		    "p2q"
+	    Prompt		    "Automatic Voltage Regulator Type"
+	    Value		    "2"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    34
+	    Type		    "edit"
+	    Name		    "p3q"
+	    Prompt		    "Maximum Regulator Voltage [p.u.]"
+	    Value		    "5.00"
+	  }
+	  Object {
+	    $ObjectID		    35
+	    Type		    "edit"
+	    Name		    "p4q"
+	    Prompt		    "Minimum Regulator Voltage [p.u.]"
+	    Value		    "-5.00"
+	  }
+	  Object {
+	    $ObjectID		    36
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Amplifier Gain Ka [p.u./p.u.]"
+	    Value		    "20"
+	  }
+	  Object {
+	    $ObjectID		    37
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Amplifier Time Constant Ta [s]"
+	    Value		    "0.2"
+	  }
+	  Object {
+	    $ObjectID		    38
+	    Type		    "edit"
+	    Name		    "p7q"
+	    Prompt		    "Stabilizer Gain Kf [p.u./p.u.]"
+	    Value		    "0.063"
+	  }
+	  Object {
+	    $ObjectID		    39
+	    Type		    "edit"
+	    Name		    "p8q"
+	    Prompt		    "Stabilizer Time Tf [s]"
+	    Value		    "0.35"
+	  }
+	  Object {
+	    $ObjectID		    40
+	    Type		    "edit"
+	    Name		    "p9q"
+	    Prompt		    "Coefficient Kd [p.u./p.u.]"
+	    Value		    "1"
+	  }
+	  Object {
+	    $ObjectID		    41
+	    Type		    "edit"
+	    Name		    "p10q"
+	    Prompt		    "Time Constant of the Field Circuit Td [s]"
+	    Value		    "0.314"
+	  }
+	  Object {
+	    $ObjectID		    42
+	    Type		    "edit"
+	    Name		    "p11q"
+	    Prompt		    "Time Delay of the Measurement System Tr [s]"
+	    Value		    "0.001"
+	  }
+	  Object {
+	    $ObjectID		    43
+	    Type		    "edit"
+	    Name		    "p12_13q"
+	    Prompt		    "Coefficient of the Ceiling Function (A B)"
+	    Value		    "[0.0039  1.555]"
+	  }
+	  Object {
+	    $ObjectID		    44
+	    Type		    "popup"
+	    Array {
+	      Type		      "Cell"
+	      Dimension		      4
+	      Cell		      "0"
+	      Cell		      "1"
+	      Cell		      "2"
+	      Cell		      "3"
+	      PropName		      "TypeOptions"
+	    }
+	    Name		    "in"
+	    Prompt		    "Number of input signals"
+	    Value		    "0"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
       System {
 	Name			"AVR2"
-	Location		[158, 247, 492, 439]
+	Location		[124, 128, 506, 555]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -367,70 +1222,180 @@ Model {
 	PaperPositionMode	"auto"
 	PaperType		"usletter"
 	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
 	ZoomFactor		"100"
 	Block {
 	  BlockType		  Constant
 	  Name			  "Constant"
+	  SID			  "6"
 	  Position		  [170, 100, 200, 130]
+	  ZOrder		  -1
 	  ShowName		  off
-	  OutDataType		  "sfix(16)"
-	  OutScaling		  "2^0"
 	}
 	Block {
 	  BlockType		  Outport
 	  Name			  "Out1"
+	  SID			  "7"
 	  Position		  [240, 105, 260, 125]
+	  ZOrder		  -2
 	  ShowName		  off
+	  IconDisplay		  "Port number"
 	}
 	Line {
+	  ZOrder		  1
 	  SrcBlock		  "Constant"
 	  SrcPort		  1
 	  DstBlock		  "Out1"
 	  DstPort		  1
 	}
 	Annotation {
+	  SID			  "8"
 	  Name			  "Automatic Voltage Regulator"
-	  Position		  [234, 30]
+	  Position		  [234, 30, 365, 47]
+	  InternalMargins	  [0, 0, 0, 0]
+	  FixedHeight		  off
+	  FixedWidth		  off
+	  ZOrder		  -1
 	}
       }
     }
     Block {
       BlockType		      SubSystem
       Name		      "AVR3"
+      SID		      "9"
       Tag		      "PSATblock"
       Description	      "Controls"
       Ports		      [0, 1]
-      Position		      [790, 140, 830, 160]
-      Orientation	      "left"
+      Position		      [790, 135, 830, 155]
+      ZOrder		      -3
+      BlockMirror	      on
       ShowName		      off
-      RTWSystemCode	      "Auto"
-      MaskType		      "Exc"
-      MaskDescription	      "This block defines an Automatic Voltage Regulator."
-      MaskHelp		      "This block defines an Automatic Voltage Regulator.\nThere are three kind of regulators:\n\nType"
-      " 1:\n\n     IEEE Model 1\n\nType 2:\n\n     IEEE Model 2\n\nType 3:\n \n     IEEE Model 3"
-      MaskPromptString	      "Automatic Voltage Regulator Type|Maximum Regulator Voltage [p.u.]|Minimum Regulator Volt"
-      "age [p.u.]|Amplifier Gain Ka [p.u./p.u.]|Amplifier Time Constant Ta [s]|Stabilizer Gain Kf [p.u./p.u.]|Stabilize"
-      "r Time Tf [s]|Coefficient Kd [p.u./p.u.]|Time Constant of the Field Circuit Td [s]|Time Delay of the Measurement"
-      " System Tr [s]|Coefficient of the Ceiling Function (A B)|Number of input signals"
-      MaskStyleString	      "popup(1|2|3),edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,popup(0|1|2|3)"
-      MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskCallbackString      "fm_block|||||||||||"
-      MaskEnableString	      "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,,,,,,,"
-      MaskVariables	      "p2q=@1;p3q=@2;p4q=@3;p5q=@4;p6q=@5;p7q=@6;p8q=@7;p9q=@8;p10q=@9;p11q=@10;p12_13q=@11;in=@12;"
-      MaskInitialization      "fm_inout\n[x,y] = fm_draw('R');"
-      MaskDisplay	      "plot([-1.8 4.1 4.1 -1.8 -1.8],[-1.5 -1.5 1.5 1.5 -1.5])\ncolor('red')\nplot([-1.3 -0.5],[-1 1"
-      "],[-0.5 0.3],[1 -1],[-0.9 -0.1],[0.0 0.0])\nplot(2.8+1.3*x,2*y,1.5+[-1.3 -0.5],[1 -1],1.5+[-0.5 0.3],[-1 1])\n"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "none"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "2|5.00|-5.00|20|0.2|0.063|0.35|1|0.314|0.001|[0.0039  1.555]|0"
+      RequestExecContextInheritance off
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		45
+	$ClassName		"Simulink.Mask"
+	Type			"Exc"
+	Description		"This block defines an Automatic Voltage Regulator."
+	Help			"This block defines an Automatic Voltage Regulator.\nThere are three kind of regulators:\n\nType 1:\n\n     IE"
+	"EE Model 1\n\nType 2:\n\n     IEEE Model 2\n\nType 3:\n \n     IEEE Model 3"
+	Initialization		"fm_inout\n[x,y] = fm_draw('R');"
+	Display			"plot([-1.8 4.1 4.1 -1.8 -1.8],[-1.5 -1.5 1.5 1.5 -1.5])\ncolor('red')\nplot([-1.3 -0.5],[-1 1],[-0.5 0.3],"
+	"[1 -1],[-0.9 -0.1],[0.0 0.0])\nplot(2.8+1.3*x,2*y,1.5+[-1.3 -0.5],[1 -1],1.5+[-0.5 0.3],[-1 1])\n"
+	IconFrame		"off"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  12
+	  Object {
+	    $ObjectID		    46
+	    Type		    "popup"
+	    Array {
+	      Type		      "Cell"
+	      Dimension		      3
+	      Cell		      "1"
+	      Cell		      "2"
+	      Cell		      "3"
+	      PropName		      "TypeOptions"
+	    }
+	    Name		    "p2q"
+	    Prompt		    "Automatic Voltage Regulator Type"
+	    Value		    "2"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    47
+	    Type		    "edit"
+	    Name		    "p3q"
+	    Prompt		    "Maximum Regulator Voltage [p.u.]"
+	    Value		    "5.00"
+	  }
+	  Object {
+	    $ObjectID		    48
+	    Type		    "edit"
+	    Name		    "p4q"
+	    Prompt		    "Minimum Regulator Voltage [p.u.]"
+	    Value		    "-5.00"
+	  }
+	  Object {
+	    $ObjectID		    49
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Amplifier Gain Ka [p.u./p.u.]"
+	    Value		    "20"
+	  }
+	  Object {
+	    $ObjectID		    50
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Amplifier Time Constant Ta [s]"
+	    Value		    "0.2"
+	  }
+	  Object {
+	    $ObjectID		    51
+	    Type		    "edit"
+	    Name		    "p7q"
+	    Prompt		    "Stabilizer Gain Kf [p.u./p.u.]"
+	    Value		    "0.063"
+	  }
+	  Object {
+	    $ObjectID		    52
+	    Type		    "edit"
+	    Name		    "p8q"
+	    Prompt		    "Stabilizer Time Tf [s]"
+	    Value		    "0.35"
+	  }
+	  Object {
+	    $ObjectID		    53
+	    Type		    "edit"
+	    Name		    "p9q"
+	    Prompt		    "Coefficient Kd [p.u./p.u.]"
+	    Value		    "1"
+	  }
+	  Object {
+	    $ObjectID		    54
+	    Type		    "edit"
+	    Name		    "p10q"
+	    Prompt		    "Time Constant of the Field Circuit Td [s]"
+	    Value		    "0.314"
+	  }
+	  Object {
+	    $ObjectID		    55
+	    Type		    "edit"
+	    Name		    "p11q"
+	    Prompt		    "Time Delay of the Measurement System Tr [s]"
+	    Value		    "0.001"
+	  }
+	  Object {
+	    $ObjectID		    56
+	    Type		    "edit"
+	    Name		    "p12_13q"
+	    Prompt		    "Coefficient of the Ceiling Function (A B)"
+	    Value		    "[0.0039  1.555]"
+	  }
+	  Object {
+	    $ObjectID		    57
+	    Type		    "popup"
+	    Array {
+	      Type		      "Cell"
+	      Dimension		      4
+	      Cell		      "0"
+	      Cell		      "1"
+	      Cell		      "2"
+	      Cell		      "3"
+	      PropName		      "TypeOptions"
+	    }
+	    Name		    "in"
+	    Prompt		    "Number of input signals"
+	    Value		    "0"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
       System {
 	Name			"AVR3"
-	Location		[158, 247, 492, 439]
+	Location		[124, 128, 506, 555]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -439,41 +1404,132 @@ Model {
 	PaperPositionMode	"auto"
 	PaperType		"usletter"
 	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
 	ZoomFactor		"100"
 	Block {
 	  BlockType		  Constant
 	  Name			  "Constant"
+	  SID			  "10"
 	  Position		  [170, 100, 200, 130]
+	  ZOrder		  -1
 	  ShowName		  off
-	  OutDataType		  "sfix(16)"
-	  OutScaling		  "2^0"
 	}
 	Block {
 	  BlockType		  Outport
 	  Name			  "Out1"
+	  SID			  "11"
 	  Position		  [240, 105, 260, 125]
+	  ZOrder		  -2
 	  ShowName		  off
+	  IconDisplay		  "Port number"
 	}
 	Line {
+	  ZOrder		  1
 	  SrcBlock		  "Constant"
 	  SrcPort		  1
 	  DstBlock		  "Out1"
 	  DstPort		  1
 	}
 	Annotation {
+	  SID			  "12"
 	  Name			  "Automatic Voltage Regulator"
-	  Position		  [234, 30]
+	  Position		  [234, 30, 365, 47]
+	  InternalMargins	  [0, 0, 0, 0]
+	  FixedHeight		  off
+	  FixedWidth		  off
+	  ZOrder		  -1
+	}
+      }
+    }
+    Block {
+      BlockType		      PMComponent
+      Name		      "Breaker"
+      SID		      "66"
+      Tag		      "PSATblock"
+      Description	      "Faults & Breakers"
+      Ports		      [0, 0, 0, 0, 0, 1, 1]
+      Position		      [285, 160, 305, 180]
+      ZOrder		      5
+      BlockRotation	      270
+      BlockMirror	      on
+      NamePlacement	      "alternate"
+      ShowName		      off
+      PhysicalDomain	      "psatdomain"
+      LeftPortType	      "p1"
+      RightPortType	      "p1"
+      LConnTagsString	      "__newl0"
+      RConnTagsString	      "__newr0"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		58
+	$ClassName		"Simulink.Mask"
+	Type			"Breaker"
+	Description		"This block defines a transmission line breaker."
+	Display			"plot([1 2 2 1 1],[-1 -1 1 1 -1]),color('red'),plot([1 2],[-1 1],[2 1],[-1 1])"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  6
+	  Object {
+	    $ObjectID		    59
+	    Type		    "edit"
+	    Name		    "p3_4_5q"
+	    Prompt		    "Power, Voltage and Frequency Ratings [MVA, kV, Hz]"
+	    Value		    "[100  230  60]"
+	  }
+	  Object {
+	    $ObjectID		    60
+	    Type		    "checkbox"
+	    Name		    "p6q"
+	    Prompt		    "Initially close"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    61
+	    Type		    "edit"
+	    Name		    "p7q"
+	    Prompt		    "First intervention time [s]"
+	    Value		    "1.083"
+	  }
+	  Object {
+	    $ObjectID		    62
+	    Type		    "edit"
+	    Name		    "p8q"
+	    Prompt		    "Second intervention time [s]"
+	    Value		    "50"
+	  }
+	  Object {
+	    $ObjectID		    63
+	    Type		    "checkbox"
+	    Name		    "p9q"
+	    Prompt		    "Apply first intervention"
+	    Value		    "on"
+	  }
+	  Object {
+	    $ObjectID		    64
+	    Type		    "checkbox"
+	    Name		    "p10q"
+	    Prompt		    "Apply second intervention"
+	    Value		    "off"
+	  }
+	  PropName		  "Parameters"
 	}
       }
     }
     Block {
       BlockType		      PMComponent
       Name		      "Bus 1"
+      SID		      "13"
       Tag		      "PSATblock"
       Description	      "Connection"
       Ports		      [0, 0, 0, 0, 0, 2, 1]
       Position		      [376, 600, 474, 605]
-      Orientation	      "up"
+      ZOrder		      -4
+      BlockRotation	      270
       BackgroundColor	      "red"
       NamePlacement	      "alternate"
       FontName		      "Courier New"
@@ -483,34 +1539,76 @@ Model {
       RightPortType	      "p1"
       LConnTagsString	      "__newl0|__newl1"
       RConnTagsString	      "__newr0"
-      MaskType		      "Bus"
-      MaskDescription	      "Bus block."
-      MaskPromptString	      "Number of inputs:|Number of outputs:|Voltage Rating [kV]|Voltage initial guess [p.u.  ra"
-      "d]|Area number|Region number"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit"
-      MaskTunableValueString  "on,on,on,on,on,on"
-      MaskCallbackString      "||||fm_block|"
-      MaskEnableString	      "on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,"
-      MaskVariables	      "in=@1;out=@2;p2q=@3;p3_4q=@4;p5q=@5;p6q=@6;"
-      MaskInitialization      "fm_inout\n\n"
-      MaskDisplay	      "plot([0 1 1 0 0],[0 0 1 1 0])"
-      MaskSelfModifiable      on
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "2|1|16.5|[1.00   0.00]|4|1"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		65
+	$ClassName		"Simulink.Mask"
+	Type			"Bus"
+	Description		"Bus block."
+	Initialization		"fm_inout\n\n"
+	SelfModifiable		"on"
+	Display			"plot([0 1 1 0 0],[0 0 1 1 0])"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  6
+	  Object {
+	    $ObjectID		    66
+	    Type		    "edit"
+	    Name		    "in"
+	    Prompt		    "Number of inputs:"
+	    Value		    "2"
+	  }
+	  Object {
+	    $ObjectID		    67
+	    Type		    "edit"
+	    Name		    "out"
+	    Prompt		    "Number of outputs:"
+	    Value		    "1"
+	  }
+	  Object {
+	    $ObjectID		    68
+	    Type		    "edit"
+	    Name		    "p2q"
+	    Prompt		    "Voltage Rating [kV]"
+	    Value		    "16.5"
+	  }
+	  Object {
+	    $ObjectID		    69
+	    Type		    "edit"
+	    Name		    "p3_4q"
+	    Prompt		    "Voltage initial guess [p.u.  rad]"
+	    Value		    "[1.00   0.00]"
+	  }
+	  Object {
+	    $ObjectID		    70
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Area number"
+	    Value		    "4"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    71
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Region number"
+	    Value		    "1"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "Bus 2"
+      SID		      "14"
       Tag		      "PSATblock"
       Description	      "Connection"
-      Ports		      [0, 0, 0, 0, 0, 2, 1]
+      Ports		      [0, 0, 0, 0, 0, 2, 2]
       Position		      [155, 91, 160, 169]
+      ZOrder		      -5
       BackgroundColor	      "yellow"
       FontName		      "Courier New"
       FontSize		      14
@@ -518,36 +1616,78 @@ Model {
       LeftPortType	      "p1"
       RightPortType	      "p1"
       LConnTagsString	      "__newl0|__newl1"
-      RConnTagsString	      "__newr0"
-      MaskType		      "Bus"
-      MaskDescription	      "Bus block."
-      MaskPromptString	      "Number of inputs:|Number of outputs:|Voltage Rating [kV]|Voltage initial guess [p.u.  ra"
-      "d]|Area number|Region number"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit"
-      MaskTunableValueString  "on,on,on,on,on,on"
-      MaskCallbackString      "||||fm_block|"
-      MaskEnableString	      "on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,"
-      MaskVariables	      "in=@1;out=@2;p2q=@3;p3_4q=@4;p5q=@5;p6q=@6;"
-      MaskInitialization      "fm_inout\n\n"
-      MaskDisplay	      "plot([0 1 1 0 0],[0 0 1 1 0])"
-      MaskSelfModifiable      on
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "2|1|18|[1.00   0.00]|5|1"
+      RConnTagsString	      "__newr0|__newr1"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		72
+	$ClassName		"Simulink.Mask"
+	Type			"Bus"
+	Description		"Bus block."
+	Initialization		"fm_inout\n\n"
+	SelfModifiable		"on"
+	Display			"plot([0 1 1 0 0],[0 0 1 1 0])"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  6
+	  Object {
+	    $ObjectID		    73
+	    Type		    "edit"
+	    Name		    "in"
+	    Prompt		    "Number of inputs:"
+	    Value		    "2"
+	  }
+	  Object {
+	    $ObjectID		    74
+	    Type		    "edit"
+	    Name		    "out"
+	    Prompt		    "Number of outputs:"
+	    Value		    "2"
+	  }
+	  Object {
+	    $ObjectID		    75
+	    Type		    "edit"
+	    Name		    "p2q"
+	    Prompt		    "Voltage Rating [kV]"
+	    Value		    "18"
+	  }
+	  Object {
+	    $ObjectID		    76
+	    Type		    "edit"
+	    Name		    "p3_4q"
+	    Prompt		    "Voltage initial guess [p.u.  rad]"
+	    Value		    "[1.00   0.00]"
+	  }
+	  Object {
+	    $ObjectID		    77
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Area number"
+	    Value		    "5"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    78
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Region number"
+	    Value		    "1"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "Bus 3"
+      SID		      "15"
       Tag		      "PSATblock"
       Description	      "Connection"
       Ports		      [0, 0, 0, 0, 0, 2, 1]
       Position		      [705, 91, 710, 169]
-      Orientation	      "left"
+      ZOrder		      -6
+      BlockMirror	      on
       BackgroundColor	      "green"
       FontName		      "Courier New"
       FontSize		      14
@@ -556,35 +1696,78 @@ Model {
       RightPortType	      "p1"
       LConnTagsString	      "__newl0|__newl1"
       RConnTagsString	      "__newr0"
-      MaskType		      "Bus"
-      MaskDescription	      "Bus block."
-      MaskPromptString	      "Number of inputs:|Number of outputs:|Voltage Rating [kV]|Voltage initial guess [p.u.  ra"
-      "d]|Area number|Region number"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit"
-      MaskTunableValueString  "on,on,on,on,on,on"
-      MaskCallbackString      "||||fm_block|"
-      MaskEnableString	      "on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,"
-      MaskVariables	      "in=@1;out=@2;p2q=@3;p3_4q=@4;p5q=@5;p6q=@6;"
-      MaskInitialization      "fm_inout\n\n"
-      MaskDisplay	      "plot([0 1 1 0 0],[0 0 1 1 0])"
-      MaskSelfModifiable      on
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "2|1|13.8|[1.00   0.00]|3|1"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		79
+	$ClassName		"Simulink.Mask"
+	Type			"Bus"
+	Description		"Bus block."
+	Initialization		"fm_inout\n\n"
+	SelfModifiable		"on"
+	Display			"plot([0 1 1 0 0],[0 0 1 1 0])"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  6
+	  Object {
+	    $ObjectID		    80
+	    Type		    "edit"
+	    Name		    "in"
+	    Prompt		    "Number of inputs:"
+	    Value		    "2"
+	  }
+	  Object {
+	    $ObjectID		    81
+	    Type		    "edit"
+	    Name		    "out"
+	    Prompt		    "Number of outputs:"
+	    Value		    "1"
+	  }
+	  Object {
+	    $ObjectID		    82
+	    Type		    "edit"
+	    Name		    "p2q"
+	    Prompt		    "Voltage Rating [kV]"
+	    Value		    "13.8"
+	  }
+	  Object {
+	    $ObjectID		    83
+	    Type		    "edit"
+	    Name		    "p3_4q"
+	    Prompt		    "Voltage initial guess [p.u.  rad]"
+	    Value		    "[1.00   0.00]"
+	  }
+	  Object {
+	    $ObjectID		    84
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Area number"
+	    Value		    "3"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    85
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Region number"
+	    Value		    "1"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "Bus 4"
+      SID		      "16"
       Tag		      "PSATblock"
       Description	      "Connection"
       Ports		      [0, 0, 0, 0, 0, 2, 1]
       Position		      [268, 480, 577, 485]
-      Orientation	      "down"
+      ZOrder		      -7
+      BlockRotation	      270
+      BlockMirror	      on
       BackgroundColor	      "blue"
       FontName		      "Courier New"
       FontSize		      14
@@ -593,35 +1776,78 @@ Model {
       RightPortType	      "p1"
       LConnTagsString	      "__newl0|__newl1"
       RConnTagsString	      "__newr0"
-      MaskType		      "Bus"
-      MaskDescription	      "Bus block."
-      MaskPromptString	      "Number of inputs:|Number of outputs:|Voltage Rating [kV]|Voltage initial guess [p.u.  ra"
-      "d]|Area number|Region number"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit"
-      MaskTunableValueString  "on,on,on,on,on,on"
-      MaskCallbackString      "||||fm_block|"
-      MaskEnableString	      "on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,"
-      MaskVariables	      "in=@1;out=@2;p2q=@3;p3_4q=@4;p5q=@5;p6q=@6;"
-      MaskInitialization      "fm_inout\n\n"
-      MaskDisplay	      "plot([0 1 1 0 0],[0 0 1 1 0])"
-      MaskSelfModifiable      on
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "2|1|230|[1.00   0.00]|2|1"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		86
+	$ClassName		"Simulink.Mask"
+	Type			"Bus"
+	Description		"Bus block."
+	Initialization		"fm_inout\n\n"
+	SelfModifiable		"on"
+	Display			"plot([0 1 1 0 0],[0 0 1 1 0])"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  6
+	  Object {
+	    $ObjectID		    87
+	    Type		    "edit"
+	    Name		    "in"
+	    Prompt		    "Number of inputs:"
+	    Value		    "2"
+	  }
+	  Object {
+	    $ObjectID		    88
+	    Type		    "edit"
+	    Name		    "out"
+	    Prompt		    "Number of outputs:"
+	    Value		    "1"
+	  }
+	  Object {
+	    $ObjectID		    89
+	    Type		    "edit"
+	    Name		    "p2q"
+	    Prompt		    "Voltage Rating [kV]"
+	    Value		    "230"
+	  }
+	  Object {
+	    $ObjectID		    90
+	    Type		    "edit"
+	    Name		    "p3_4q"
+	    Prompt		    "Voltage initial guess [p.u.  rad]"
+	    Value		    "[1.00   0.00]"
+	  }
+	  Object {
+	    $ObjectID		    91
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Area number"
+	    Value		    "2"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    92
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Region number"
+	    Value		    "1"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "Bus 5"
+      SID		      "17"
       Tag		      "PSATblock"
       Description	      "Connection"
       Ports		      [0, 0, 0, 0, 0, 1, 2]
       Position		      [246, 290, 344, 295]
-      Orientation	      "down"
+      ZOrder		      -8
+      BlockRotation	      270
+      BlockMirror	      on
       BackgroundColor	      "blue"
       NamePlacement	      "alternate"
       FontName		      "Courier New"
@@ -631,35 +1857,78 @@ Model {
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
       RConnTagsString	      "__newr0|__newr1"
-      MaskType		      "Bus"
-      MaskDescription	      "Bus block."
-      MaskPromptString	      "Number of inputs:|Number of outputs:|Voltage Rating [kV]|Voltage initial guess [p.u.  ra"
-      "d]|Area number|Region number"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit"
-      MaskTunableValueString  "on,on,on,on,on,on"
-      MaskCallbackString      "||||fm_block|"
-      MaskEnableString	      "on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,"
-      MaskVariables	      "in=@1;out=@2;p2q=@3;p3_4q=@4;p5q=@5;p6q=@6;"
-      MaskInitialization      "fm_inout\n\n"
-      MaskDisplay	      "plot([0 1 1 0 0],[0 0 1 1 0])"
-      MaskSelfModifiable      on
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "1|2|230|[1.00   0.00]|2|1"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		93
+	$ClassName		"Simulink.Mask"
+	Type			"Bus"
+	Description		"Bus block."
+	Initialization		"fm_inout\n\n"
+	SelfModifiable		"on"
+	Display			"plot([0 1 1 0 0],[0 0 1 1 0])"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  6
+	  Object {
+	    $ObjectID		    94
+	    Type		    "edit"
+	    Name		    "in"
+	    Prompt		    "Number of inputs:"
+	    Value		    "1"
+	  }
+	  Object {
+	    $ObjectID		    95
+	    Type		    "edit"
+	    Name		    "out"
+	    Prompt		    "Number of outputs:"
+	    Value		    "2"
+	  }
+	  Object {
+	    $ObjectID		    96
+	    Type		    "edit"
+	    Name		    "p2q"
+	    Prompt		    "Voltage Rating [kV]"
+	    Value		    "230"
+	  }
+	  Object {
+	    $ObjectID		    97
+	    Type		    "edit"
+	    Name		    "p3_4q"
+	    Prompt		    "Voltage initial guess [p.u.  rad]"
+	    Value		    "[1.00   0.00]"
+	  }
+	  Object {
+	    $ObjectID		    98
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Area number"
+	    Value		    "2"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    99
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Region number"
+	    Value		    "1"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "Bus 6"
+      SID		      "18"
       Tag		      "PSATblock"
       Description	      "Connection"
       Ports		      [0, 0, 0, 0, 0, 1, 2]
       Position		      [496, 290, 594, 295]
-      Orientation	      "down"
+      ZOrder		      -9
+      BlockRotation	      270
+      BlockMirror	      on
       BackgroundColor	      "blue"
       FontName		      "Courier New"
       FontSize		      14
@@ -668,34 +1937,76 @@ Model {
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
       RConnTagsString	      "__newr0|__newr1"
-      MaskType		      "Bus"
-      MaskDescription	      "Bus block."
-      MaskPromptString	      "Number of inputs:|Number of outputs:|Voltage Rating [kV]|Voltage initial guess [p.u.  ra"
-      "d]|Area number|Region number"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit"
-      MaskTunableValueString  "on,on,on,on,on,on"
-      MaskCallbackString      "||||fm_block|"
-      MaskEnableString	      "on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,"
-      MaskVariables	      "in=@1;out=@2;p2q=@3;p3_4q=@4;p5q=@5;p6q=@6;"
-      MaskInitialization      "fm_inout\n\n"
-      MaskDisplay	      "plot([0 1 1 0 0],[0 0 1 1 0])"
-      MaskSelfModifiable      on
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "1|2|230|[1.00   0.00]|2|1"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		100
+	$ClassName		"Simulink.Mask"
+	Type			"Bus"
+	Description		"Bus block."
+	Initialization		"fm_inout\n\n"
+	SelfModifiable		"on"
+	Display			"plot([0 1 1 0 0],[0 0 1 1 0])"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  6
+	  Object {
+	    $ObjectID		    101
+	    Type		    "edit"
+	    Name		    "in"
+	    Prompt		    "Number of inputs:"
+	    Value		    "1"
+	  }
+	  Object {
+	    $ObjectID		    102
+	    Type		    "edit"
+	    Name		    "out"
+	    Prompt		    "Number of outputs:"
+	    Value		    "2"
+	  }
+	  Object {
+	    $ObjectID		    103
+	    Type		    "edit"
+	    Name		    "p2q"
+	    Prompt		    "Voltage Rating [kV]"
+	    Value		    "230"
+	  }
+	  Object {
+	    $ObjectID		    104
+	    Type		    "edit"
+	    Name		    "p3_4q"
+	    Prompt		    "Voltage initial guess [p.u.  rad]"
+	    Value		    "[1.00   0.00]"
+	  }
+	  Object {
+	    $ObjectID		    105
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Area number"
+	    Value		    "2"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    106
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Region number"
+	    Value		    "1"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "Bus 7"
+      SID		      "19"
       Tag		      "PSATblock"
       Description	      "Connection"
       Ports		      [0, 0, 0, 0, 0, 1, 2]
       Position		      [265, 91, 270, 169]
+      ZOrder		      -10
       BackgroundColor	      "blue"
       NamePlacement	      "alternate"
       FontName		      "Courier New"
@@ -705,35 +2016,78 @@ Model {
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
       RConnTagsString	      "__newr0|__newr1"
-      MaskType		      "Bus"
-      MaskDescription	      "Bus block."
-      MaskPromptString	      "Number of inputs:|Number of outputs:|Voltage Rating [kV]|Voltage initial guess [p.u.  ra"
-      "d]|Area number|Region number"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit"
-      MaskTunableValueString  "on,on,on,on,on,on"
-      MaskCallbackString      "||||fm_block|"
-      MaskEnableString	      "on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,"
-      MaskVariables	      "in=@1;out=@2;p2q=@3;p3_4q=@4;p5q=@5;p6q=@6;"
-      MaskInitialization      "fm_inout\n\n"
-      MaskDisplay	      "plot([0 1 1 0 0],[0 0 1 1 0])"
-      MaskSelfModifiable      on
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "1|2|230|[1.00   0.00]|2|1"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		107
+	$ClassName		"Simulink.Mask"
+	Type			"Bus"
+	Description		"Bus block."
+	Initialization		"fm_inout\n\n"
+	SelfModifiable		"on"
+	Display			"plot([0 1 1 0 0],[0 0 1 1 0])"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  6
+	  Object {
+	    $ObjectID		    108
+	    Type		    "edit"
+	    Name		    "in"
+	    Prompt		    "Number of inputs:"
+	    Value		    "1"
+	  }
+	  Object {
+	    $ObjectID		    109
+	    Type		    "edit"
+	    Name		    "out"
+	    Prompt		    "Number of outputs:"
+	    Value		    "2"
+	  }
+	  Object {
+	    $ObjectID		    110
+	    Type		    "edit"
+	    Name		    "p2q"
+	    Prompt		    "Voltage Rating [kV]"
+	    Value		    "230"
+	  }
+	  Object {
+	    $ObjectID		    111
+	    Type		    "edit"
+	    Name		    "p3_4q"
+	    Prompt		    "Voltage initial guess [p.u.  rad]"
+	    Value		    "[1.00   0.00]"
+	  }
+	  Object {
+	    $ObjectID		    112
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Area number"
+	    Value		    "2"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    113
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Region number"
+	    Value		    "1"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "Bus 8"
+      SID		      "20"
       Tag		      "PSATblock"
       Description	      "Connection"
       Ports		      [0, 0, 0, 0, 0, 2, 1]
       Position		      [381, 135, 474, 140]
-      Orientation	      "down"
+      ZOrder		      -11
+      BlockRotation	      270
+      BlockMirror	      on
       BackgroundColor	      "blue"
       NamePlacement	      "alternate"
       FontName		      "Courier New"
@@ -743,35 +2097,77 @@ Model {
       RightPortType	      "p1"
       LConnTagsString	      "__newl0|__newl1"
       RConnTagsString	      "__newr0"
-      MaskType		      "Bus"
-      MaskDescription	      "Bus block."
-      MaskPromptString	      "Number of inputs:|Number of outputs:|Voltage Rating [kV]|Voltage initial guess [p.u.  ra"
-      "d]|Area number|Region number"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit"
-      MaskTunableValueString  "on,on,on,on,on,on"
-      MaskCallbackString      "||||fm_block|"
-      MaskEnableString	      "on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,"
-      MaskVariables	      "in=@1;out=@2;p2q=@3;p3_4q=@4;p5q=@5;p6q=@6;"
-      MaskInitialization      "fm_inout\n\n"
-      MaskDisplay	      "plot([0 1 1 0 0],[0 0 1 1 0])"
-      MaskSelfModifiable      on
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "2|1|230|[1.00   0.00]|2|1"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		114
+	$ClassName		"Simulink.Mask"
+	Type			"Bus"
+	Description		"Bus block."
+	Initialization		"fm_inout\n\n"
+	SelfModifiable		"on"
+	Display			"plot([0 1 1 0 0],[0 0 1 1 0])"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  6
+	  Object {
+	    $ObjectID		    115
+	    Type		    "edit"
+	    Name		    "in"
+	    Prompt		    "Number of inputs:"
+	    Value		    "2"
+	  }
+	  Object {
+	    $ObjectID		    116
+	    Type		    "edit"
+	    Name		    "out"
+	    Prompt		    "Number of outputs:"
+	    Value		    "1"
+	  }
+	  Object {
+	    $ObjectID		    117
+	    Type		    "edit"
+	    Name		    "p2q"
+	    Prompt		    "Voltage Rating [kV]"
+	    Value		    "230"
+	  }
+	  Object {
+	    $ObjectID		    118
+	    Type		    "edit"
+	    Name		    "p3_4q"
+	    Prompt		    "Voltage initial guess [p.u.  rad]"
+	    Value		    "[1.00   0.00]"
+	  }
+	  Object {
+	    $ObjectID		    119
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Area number"
+	    Value		    "2"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    120
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Region number"
+	    Value		    "1"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "Bus 9"
+      SID		      "21"
       Tag		      "PSATblock"
       Description	      "Connection"
       Ports		      [0, 0, 0, 0, 0, 1, 2]
       Position		      [585, 92, 590, 168]
-      Orientation	      "left"
+      ZOrder		      -12
+      BlockMirror	      on
       BackgroundColor	      "blue"
       NamePlacement	      "alternate"
       FontName		      "Courier New"
@@ -781,69 +2177,250 @@ Model {
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
       RConnTagsString	      "__newr0|__newr1"
-      MaskType		      "Bus"
-      MaskDescription	      "Bus block."
-      MaskPromptString	      "Number of inputs:|Number of outputs:|Voltage Rating [kV]|Voltage initial guess [p.u.  ra"
-      "d]|Area number|Region number"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit"
-      MaskTunableValueString  "on,on,on,on,on,on"
-      MaskCallbackString      "||||fm_block|"
-      MaskEnableString	      "on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,"
-      MaskVariables	      "in=@1;out=@2;p2q=@3;p3_4q=@4;p5q=@5;p6q=@6;"
-      MaskInitialization      "fm_inout\n\n"
-      MaskDisplay	      "plot([0 1 1 0 0],[0 0 1 1 0])"
-      MaskSelfModifiable      on
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "1|2|230|[1.00   0.00]|2|1"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		121
+	$ClassName		"Simulink.Mask"
+	Type			"Bus"
+	Description		"Bus block."
+	Initialization		"fm_inout\n\n"
+	SelfModifiable		"on"
+	Display			"plot([0 1 1 0 0],[0 0 1 1 0])"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  6
+	  Object {
+	    $ObjectID		    122
+	    Type		    "edit"
+	    Name		    "in"
+	    Prompt		    "Number of inputs:"
+	    Value		    "1"
+	  }
+	  Object {
+	    $ObjectID		    123
+	    Type		    "edit"
+	    Name		    "out"
+	    Prompt		    "Number of outputs:"
+	    Value		    "2"
+	  }
+	  Object {
+	    $ObjectID		    124
+	    Type		    "edit"
+	    Name		    "p2q"
+	    Prompt		    "Voltage Rating [kV]"
+	    Value		    "230"
+	  }
+	  Object {
+	    $ObjectID		    125
+	    Type		    "edit"
+	    Name		    "p3_4q"
+	    Prompt		    "Voltage initial guess [p.u.  rad]"
+	    Value		    "[1.00   0.00]"
+	  }
+	  Object {
+	    $ObjectID		    126
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Area number"
+	    Value		    "2"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    127
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Region number"
+	    Value		    "1"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Fault"
+      SID		      "65"
+      Tag		      "PSATblock"
+      Description	      "Faults & Breakers"
+      Ports		      [0, 0, 0, 0, 0, 1]
+      Position		      [168, 200, 192, 240]
+      ZOrder		      4
+      BlockRotation	      270
+      BlockMirror	      on
+      ShowName		      off
+      LibraryVersion	      "1.1192"
+      SourceBlock	      "fm_lib/Faults & \nBreakers/Fault"
+      SourceType	      "Fault"
+      LConnTagsString	      "__newl0"
+      p2_3_4q		      "[100  230  60]"
+      p5q		      "1.00"
+      p6q		      "1.083"
+      p7q		      "0.00"
+      p8q		      "0.01"
     }
     Block {
       BlockType		      SubSystem
       Name		      "Gen1"
+      SID		      "22"
       Tag		      "PSATblock"
       Description	      "Machines"
-      Ports		      [1, 0, 0, 0, 0, 0, 1]
+      Ports		      [2, 0, 0, 0, 0, 0, 1]
       Position		      [432, 635, 468, 665]
-      Orientation	      "up"
+      ZOrder		      -13
+      BlockRotation	      270
       NamePlacement	      "alternate"
       ShowName		      off
       FontSize		      12
-      RTWSystemCode	      "Auto"
-      MaskType		      "Syn"
-      MaskDescription	      "This block defines  a fourth order synchronous machine."
-      MaskPromptString	      "Power, voltage and frequency ratings [MVA, kV, Hz]|Machine Dynamic Order|resistance ra a"
-      "nd leakage reactance xl [p.u. p.u.]|d-axis reactances Xd, X'd X\"d [p.u.,p.u.,p.u.]|d-axis open circuit time con"
-      "stants T'd0 and T\"d0 [s, s]|q-axis reactances Xq, X'q, X\"q [p.u.  p.u.  p.u.]|q-axis open circuit time constan"
-      "ts T'q0 and T\"q0 [s s]|Inertia (M = 2H) and Damping [s, p.u.]|Speed and active power additional signals Kw and "
-      "Kp [p.u., p.u.]|Percentage of active and reactive powers at bus [p.u. p.u.]|d-axis additional circuit leakage ti"
-      "me constant Taa [s] |Saturation coefficients S(1.0) and S(1.2)|Number of input signals|COI number|Connected"
-      MaskStyleString	      "edit,popup(8|6|5.3|5.2|5.1|4|3|2),edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,popup"
-      "(0|1|2),edit,checkbox"
-      MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskCallbackString      "|fm_block|||||||||||||fm_block"
-      MaskEnableString	      "on,on,on,on,on,on,on,on,on,on,off,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,,,,,,,,,,"
-      MaskVariables	      "p2_3_4q=@1;p5q=@2;p7_6q=@3;p8_9_10q=@4;p11_12q=@5;p13_14_15q=@6;p16_17q=@7;p18_19q=@8;p20_2"
-      "1q=@9;p22_23q=@10;p24q=@11;p25_26q=@12;in=@13;p27q=@14;p28q=@15;"
-      MaskInitialization      "fm_inout\n[x,y] = fm_draw('circle');\n[xg,yg] = fm_draw('G');\n[xs,ys] = fm_draw('sinus"
-      "');\n"
-      MaskDisplay	      "plot(x+1.4,y,0.12*xs+1,0.15*ys-0.6)\ncolor('blue')\nplot(1.4+0.45*xg,0.3+0.45*yg)\n"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "none"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "[100  16.5   60]|4|[0.00  0.00]|[0.1460  0.0608  0.0000]|[8.96  0.00]|[0.0969  0.0969  0."
-      "0000]|[0.310  0.0000]|[2*23.64  0.00]|[0.00  0.00]|[1.00  1.00]|0.002|[0 0]|1|1|on"
+      RequestExecContextInheritance off
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		128
+	$ClassName		"Simulink.Mask"
+	Type			"Syn"
+	Description		"This block defines  a fourth order synchronous machine."
+	Initialization		"fm_inout\n[x,y] = fm_draw('circle');\n[xg,yg] = fm_draw('G');\n[xs,ys] = fm_draw('sinus');\n"
+	Display			"plot(x+1.4,y,0.12*xs+1,0.15*ys-0.6)\ncolor('blue')\nplot(1.4+0.45*xg,0.3+0.45*yg)\n"
+	IconFrame		"off"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  15
+	  Object {
+	    $ObjectID		    129
+	    Type		    "edit"
+	    Name		    "p2_3_4q"
+	    Prompt		    "Power, voltage and frequency ratings [MVA, kV, Hz]"
+	    Value		    "[100  16.5   60]"
+	  }
+	  Object {
+	    $ObjectID		    130
+	    Type		    "popup"
+	    Array {
+	      Type		      "Cell"
+	      Dimension		      8
+	      Cell		      "8"
+	      Cell		      "6"
+	      Cell		      "5.3"
+	      Cell		      "5.2"
+	      Cell		      "5.1"
+	      Cell		      "4"
+	      Cell		      "3"
+	      Cell		      "2"
+	      PropName		      "TypeOptions"
+	    }
+	    Name		    "p5q"
+	    Prompt		    "Machine Dynamic Order"
+	    Value		    "4"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    131
+	    Type		    "edit"
+	    Name		    "p7_6q"
+	    Prompt		    "resistance ra and leakage reactance xl [p.u. p.u.]"
+	    Value		    "[0.00  0.00]"
+	  }
+	  Object {
+	    $ObjectID		    132
+	    Type		    "edit"
+	    Name		    "p8_9_10q"
+	    Prompt		    "d-axis reactances Xd, X'd X\"d [p.u.,p.u.,p.u.]"
+	    Value		    "[0.1460  0.0608  0.0000]"
+	  }
+	  Object {
+	    $ObjectID		    133
+	    Type		    "edit"
+	    Name		    "p11_12q"
+	    Prompt		    "d-axis open circuit time constants T'd0 and T\"d0 [s, s]"
+	    Value		    "[8.96  0.00]"
+	  }
+	  Object {
+	    $ObjectID		    134
+	    Type		    "edit"
+	    Name		    "p13_14_15q"
+	    Prompt		    "q-axis reactances Xq, X'q, X\"q [p.u.  p.u.  p.u.]"
+	    Value		    "[0.0969  0.0969  0.0000]"
+	  }
+	  Object {
+	    $ObjectID		    135
+	    Type		    "edit"
+	    Name		    "p16_17q"
+	    Prompt		    "q-axis open circuit time constants T'q0 and T\"q0 [s s]"
+	    Value		    "[0.310  0.0000]"
+	  }
+	  Object {
+	    $ObjectID		    136
+	    Type		    "edit"
+	    Name		    "p18_19q"
+	    Prompt		    "Inertia (M = 2H) and Damping [s, p.u.]"
+	    Value		    "[2*23.64  0.00]"
+	  }
+	  Object {
+	    $ObjectID		    137
+	    Type		    "edit"
+	    Name		    "p20_21q"
+	    Prompt		    "Speed and active power additional signals Kw and Kp [p.u., p.u.]"
+	    Value		    "[0.00  0.00]"
+	  }
+	  Object {
+	    $ObjectID		    138
+	    Type		    "edit"
+	    Name		    "p22_23q"
+	    Prompt		    "Percentage of active and reactive powers at bus [p.u. p.u.]"
+	    Value		    "[1.00  1.00]"
+	  }
+	  Object {
+	    $ObjectID		    139
+	    Type		    "edit"
+	    Name		    "p24q"
+	    Prompt		    "d-axis additional circuit leakage time constant Taa [s] "
+	    Value		    "0.002"
+	    Enabled		    "off"
+	  }
+	  Object {
+	    $ObjectID		    140
+	    Type		    "edit"
+	    Name		    "p25_26q"
+	    Prompt		    "Saturation coefficients S(1.0) and S(1.2)"
+	    Value		    "[0 0]"
+	  }
+	  Object {
+	    $ObjectID		    141
+	    Type		    "popup"
+	    Array {
+	      Type		      "Cell"
+	      Dimension		      3
+	      Cell		      "0"
+	      Cell		      "1"
+	      Cell		      "2"
+	      PropName		      "TypeOptions"
+	    }
+	    Name		    "in"
+	    Prompt		    "Number of input signals"
+	    Value		    "2"
+	  }
+	  Object {
+	    $ObjectID		    142
+	    Type		    "edit"
+	    Name		    "p27q"
+	    Prompt		    "COI number"
+	    Value		    "1"
+	  }
+	  Object {
+	    $ObjectID		    143
+	    Type		    "checkbox"
+	    Name		    "p28q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
       System {
 	Name			"Gen1"
-	Location		[412, 233, 746, 425]
+	Location		[378, 114, 760, 541]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -852,19 +2429,34 @@ Model {
 	PaperPositionMode	"auto"
 	PaperType		"usletter"
 	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
 	ZoomFactor		"100"
 	Block {
 	  BlockType		  Inport
 	  Name			  "in_1"
+	  SID			  "23"
 	  Position		  [25, 25, 45, 45]
-	  OutDataType		  "sfix(16)"
-	  OutScaling		  "2^0"
+	  ZOrder		  -1
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "in_2"
+	  SID			  "60"
+	  Position		  [25, 75, 45, 95]
+	  ZOrder		  1
+	  Port			  "2"
+	  IconDisplay		  "Port number"
 	}
 	Block {
 	  BlockType		  PMComponent
 	  Name			  "Atomic Subsystem"
+	  SID			  "24"
 	  Ports			  [0, 0, 0, 0, 0, 0, 1]
 	  Position		  [140, 89, 240, 131]
+	  ZOrder		  -2
 	  ShowName		  off
 	  PhysicalDomain	  "psatdomain"
 	  LeftPortType		  "p1"
@@ -874,77 +2466,221 @@ Model {
 	Block {
 	  BlockType		  Terminator
 	  Name			  "t1"
+	  SID			  "25"
 	  Position		  [80, 20, 105, 50]
+	  ZOrder		  -3
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "t2"
+	  SID			  "61"
+	  Position		  [80, 70, 105, 100]
+	  ZOrder		  2
 	}
 	Block {
 	  BlockType		  PMIOPort
 	  Name			  "Connection\nPort1"
+	  SID			  "26"
 	  Tag			  "PMCPort"
 	  Position		  [280, 101, 310, 119]
-	  Orientation		  "left"
+	  ZOrder		  -4
+	  BlockMirror		  on
 	  ShowName		  off
 	  Port			  "1"
 	  Side			  "Right"
 	}
 	Line {
 	  LineType		  "Connection"
+	  ZOrder		  1
 	  SrcBlock		  "Atomic Subsystem"
 	  SrcPort		  RConn1
 	  DstBlock		  "Connection\nPort1"
 	  DstPort		  RConn1
 	}
 	Line {
+	  ZOrder		  2
 	  SrcBlock		  "in_1"
 	  SrcPort		  1
 	  DstBlock		  "t1"
 	  DstPort		  1
 	}
+	Line {
+	  ZOrder		  3
+	  SrcBlock		  "in_2"
+	  SrcPort		  1
+	  DstBlock		  "t2"
+	  DstPort		  1
+	}
 	Annotation {
+	  SID			  "27"
 	  Name			  "Synchronous Machine"
-	  Position		  [164, 45]
+	  Position		  [164, 45, 265, 62]
+	  InternalMargins	  [0, 0, 0, 0]
+	  FixedHeight		  off
+	  FixedWidth		  off
+	  ZOrder		  -1
 	}
       }
     }
     Block {
       BlockType		      SubSystem
       Name		      "Gen2"
+      SID		      "28"
       Tag		      "PSATblock"
       Description	      "Machines"
-      Ports		      [1, 0, 0, 0, 0, 0, 1]
-      Position		      [95, 133, 130, 167]
+      Ports		      [2, 0, 0, 0, 0, 0, 1]
+      Position		      [95, 130, 130, 165]
+      ZOrder		      -14
       ShowName		      off
       FontSize		      12
-      RTWSystemCode	      "Auto"
-      MaskType		      "Syn"
-      MaskDescription	      "This block defines  a fourth order synchronous machine."
-      MaskPromptString	      "Power, voltage and frequency ratings [MVA, kV, Hz]|Machine Dynamic Order|resistance ra a"
-      "nd leakage reactance xl [p.u. p.u.]|d-axis reactances Xd, X'd X\"d [p.u.,p.u.,p.u.]|d-axis open circuit time con"
-      "stants T'd0 and T\"d0 [s, s]|q-axis reactances Xq, X'q, X\"q [p.u.  p.u.  p.u.]|q-axis open circuit time constan"
-      "ts T'q0 and T\"q0 [s s]|Inertia (M = 2H) and Damping [s, p.u.]|Speed and active power additional signals Kw and "
-      "Kp [p.u., p.u.]|Percentage of active and reactive powers at bus [p.u. p.u.]|d-axis additional circuit leakage ti"
-      "me constant Taa [s] |Saturation coefficients S(1.0) and S(1.2)|Number of input signals|COI number|Connected"
-      MaskStyleString	      "edit,popup(8|6|5.3|5.2|5.1|4|3|2),edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,popup"
-      "(0|1|2),edit,checkbox"
-      MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskCallbackString      "|fm_block|||||||||||||fm_block"
-      MaskEnableString	      "on,on,on,on,on,on,on,on,on,on,off,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,,,,,,,,,,"
-      MaskVariables	      "p2_3_4q=@1;p5q=@2;p7_6q=@3;p8_9_10q=@4;p11_12q=@5;p13_14_15q=@6;p16_17q=@7;p18_19q=@8;p20_2"
-      "1q=@9;p22_23q=@10;p24q=@11;p25_26q=@12;in=@13;p27q=@14;p28q=@15;"
-      MaskInitialization      "fm_inout\n[x,y] = fm_draw('circle');\n[xg,yg] = fm_draw('G');\n[xs,ys] = fm_draw('sinus"
-      "');\n"
-      MaskDisplay	      "plot(x+1.4,y,0.12*xs+1,0.15*ys-0.6)\ncolor('blue')\nplot(1.4+0.45*xg,0.3+0.45*yg)\n"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "none"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "[100  18   60]|4|[0.00  0.00]|[0.8958  0.1198  0.0000]|[6.00  0.00]|[0.8645  0.1969  0.00"
-      "00]|[0.5350  0.0000]|[12.80  0.00]|[0.00  0.00]|[1.00  1.00]|0.002|[0 0]|1|1|on"
+      RequestExecContextInheritance off
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		144
+	$ClassName		"Simulink.Mask"
+	Type			"Syn"
+	Description		"This block defines  a fourth order synchronous machine."
+	Initialization		"fm_inout\n[x,y] = fm_draw('circle');\n[xg,yg] = fm_draw('G');\n[xs,ys] = fm_draw('sinus');\n"
+	Display			"plot(x+1.4,y,0.12*xs+1,0.15*ys-0.6)\ncolor('blue')\nplot(1.4+0.45*xg,0.3+0.45*yg)\n"
+	IconFrame		"off"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  15
+	  Object {
+	    $ObjectID		    145
+	    Type		    "edit"
+	    Name		    "p2_3_4q"
+	    Prompt		    "Power, voltage and frequency ratings [MVA, kV, Hz]"
+	    Value		    "[100  18   60]"
+	  }
+	  Object {
+	    $ObjectID		    146
+	    Type		    "popup"
+	    Array {
+	      Type		      "Cell"
+	      Dimension		      8
+	      Cell		      "8"
+	      Cell		      "6"
+	      Cell		      "5.3"
+	      Cell		      "5.2"
+	      Cell		      "5.1"
+	      Cell		      "4"
+	      Cell		      "3"
+	      Cell		      "2"
+	      PropName		      "TypeOptions"
+	    }
+	    Name		    "p5q"
+	    Prompt		    "Machine Dynamic Order"
+	    Value		    "4"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    147
+	    Type		    "edit"
+	    Name		    "p7_6q"
+	    Prompt		    "resistance ra and leakage reactance xl [p.u. p.u.]"
+	    Value		    "[0.00  0.00]"
+	  }
+	  Object {
+	    $ObjectID		    148
+	    Type		    "edit"
+	    Name		    "p8_9_10q"
+	    Prompt		    "d-axis reactances Xd, X'd X\"d [p.u.,p.u.,p.u.]"
+	    Value		    "[0.8958  0.1198  0.0000]"
+	  }
+	  Object {
+	    $ObjectID		    149
+	    Type		    "edit"
+	    Name		    "p11_12q"
+	    Prompt		    "d-axis open circuit time constants T'd0 and T\"d0 [s, s]"
+	    Value		    "[6.00  0.00]"
+	  }
+	  Object {
+	    $ObjectID		    150
+	    Type		    "edit"
+	    Name		    "p13_14_15q"
+	    Prompt		    "q-axis reactances Xq, X'q, X\"q [p.u.  p.u.  p.u.]"
+	    Value		    "[0.8645  0.1969  0.0000]"
+	  }
+	  Object {
+	    $ObjectID		    151
+	    Type		    "edit"
+	    Name		    "p16_17q"
+	    Prompt		    "q-axis open circuit time constants T'q0 and T\"q0 [s s]"
+	    Value		    "[0.5350  0.0000]"
+	  }
+	  Object {
+	    $ObjectID		    152
+	    Type		    "edit"
+	    Name		    "p18_19q"
+	    Prompt		    "Inertia (M = 2H) and Damping [s, p.u.]"
+	    Value		    "[12.80  0.00]"
+	  }
+	  Object {
+	    $ObjectID		    153
+	    Type		    "edit"
+	    Name		    "p20_21q"
+	    Prompt		    "Speed and active power additional signals Kw and Kp [p.u., p.u.]"
+	    Value		    "[0.00  0.00]"
+	  }
+	  Object {
+	    $ObjectID		    154
+	    Type		    "edit"
+	    Name		    "p22_23q"
+	    Prompt		    "Percentage of active and reactive powers at bus [p.u. p.u.]"
+	    Value		    "[1.00  1.00]"
+	  }
+	  Object {
+	    $ObjectID		    155
+	    Type		    "edit"
+	    Name		    "p24q"
+	    Prompt		    "d-axis additional circuit leakage time constant Taa [s] "
+	    Value		    "0.002"
+	    Enabled		    "off"
+	  }
+	  Object {
+	    $ObjectID		    156
+	    Type		    "edit"
+	    Name		    "p25_26q"
+	    Prompt		    "Saturation coefficients S(1.0) and S(1.2)"
+	    Value		    "[0 0]"
+	  }
+	  Object {
+	    $ObjectID		    157
+	    Type		    "popup"
+	    Array {
+	      Type		      "Cell"
+	      Dimension		      3
+	      Cell		      "0"
+	      Cell		      "1"
+	      Cell		      "2"
+	      PropName		      "TypeOptions"
+	    }
+	    Name		    "in"
+	    Prompt		    "Number of input signals"
+	    Value		    "2"
+	  }
+	  Object {
+	    $ObjectID		    158
+	    Type		    "edit"
+	    Name		    "p27q"
+	    Prompt		    "COI number"
+	    Value		    "1"
+	  }
+	  Object {
+	    $ObjectID		    159
+	    Type		    "checkbox"
+	    Name		    "p28q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
       System {
 	Name			"Gen2"
-	Location		[412, 233, 746, 425]
+	Location		[378, 114, 760, 541]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -953,19 +2689,34 @@ Model {
 	PaperPositionMode	"auto"
 	PaperType		"usletter"
 	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
 	ZoomFactor		"100"
 	Block {
 	  BlockType		  Inport
 	  Name			  "in_1"
+	  SID			  "29"
 	  Position		  [25, 25, 45, 45]
-	  OutDataType		  "sfix(16)"
-	  OutScaling		  "2^0"
+	  ZOrder		  -1
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "in_2"
+	  SID			  "56"
+	  Position		  [25, 75, 45, 95]
+	  ZOrder		  1
+	  Port			  "2"
+	  IconDisplay		  "Port number"
 	}
 	Block {
 	  BlockType		  PMComponent
 	  Name			  "Atomic Subsystem"
+	  SID			  "30"
 	  Ports			  [0, 0, 0, 0, 0, 0, 1]
 	  Position		  [140, 89, 240, 131]
+	  ZOrder		  -2
 	  ShowName		  off
 	  PhysicalDomain	  "psatdomain"
 	  LeftPortType		  "p1"
@@ -975,78 +2726,222 @@ Model {
 	Block {
 	  BlockType		  Terminator
 	  Name			  "t1"
+	  SID			  "31"
 	  Position		  [80, 20, 105, 50]
+	  ZOrder		  -3
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "t2"
+	  SID			  "57"
+	  Position		  [80, 70, 105, 100]
+	  ZOrder		  2
 	}
 	Block {
 	  BlockType		  PMIOPort
 	  Name			  "Connection\nPort1"
+	  SID			  "32"
 	  Tag			  "PMCPort"
 	  Position		  [280, 101, 310, 119]
-	  Orientation		  "left"
+	  ZOrder		  -4
+	  BlockMirror		  on
 	  ShowName		  off
 	  Port			  "1"
 	  Side			  "Right"
 	}
 	Line {
 	  LineType		  "Connection"
+	  ZOrder		  1
 	  SrcBlock		  "Atomic Subsystem"
 	  SrcPort		  RConn1
 	  DstBlock		  "Connection\nPort1"
 	  DstPort		  RConn1
 	}
 	Line {
+	  ZOrder		  2
 	  SrcBlock		  "in_1"
 	  SrcPort		  1
 	  DstBlock		  "t1"
 	  DstPort		  1
 	}
+	Line {
+	  ZOrder		  3
+	  SrcBlock		  "in_2"
+	  SrcPort		  1
+	  DstBlock		  "t2"
+	  DstPort		  1
+	}
 	Annotation {
+	  SID			  "33"
 	  Name			  "Synchronous Machine"
-	  Position		  [164, 45]
+	  Position		  [164, 45, 265, 62]
+	  InternalMargins	  [0, 0, 0, 0]
+	  FixedHeight		  off
+	  FixedWidth		  off
+	  ZOrder		  -1
 	}
       }
     }
     Block {
       BlockType		      SubSystem
       Name		      "Gen3"
+      SID		      "34"
       Tag		      "PSATblock"
       Description	      "Machines"
-      Ports		      [1, 0, 0, 0, 0, 0, 1]
-      Position		      [735, 133, 770, 167]
-      Orientation	      "left"
+      Ports		      [2, 0, 0, 0, 0, 0, 1]
+      Position		      [735, 135, 770, 170]
+      ZOrder		      -15
+      BlockMirror	      on
       ShowName		      off
       FontSize		      12
-      RTWSystemCode	      "Auto"
-      MaskType		      "Syn"
-      MaskDescription	      "This block defines  a fourth order synchronous machine."
-      MaskPromptString	      "Power, voltage and frequency ratings [MVA, kV, Hz]|Machine Dynamic Order|resistance ra a"
-      "nd leakage reactance xl [p.u. p.u.]|d-axis reactances Xd, X'd X\"d [p.u.,p.u.,p.u.]|d-axis open circuit time con"
-      "stants T'd0 and T\"d0 [s, s]|q-axis reactances Xq, X'q, X\"q [p.u.  p.u.  p.u.]|q-axis open circuit time constan"
-      "ts T'q0 and T\"q0 [s s]|Inertia (M = 2H) and Damping [s, p.u.]|Speed and active power additional signals Kw and "
-      "Kp [p.u., p.u.]|Percentage of active and reactive powers at bus [p.u. p.u.]|d-axis additional circuit leakage ti"
-      "me constant Taa [s] |Saturation coefficients S(1.0) and S(1.2)|Number of input signals|COI number|Connected"
-      MaskStyleString	      "edit,popup(8|6|5.3|5.2|5.1|4|3|2),edit,edit,edit,edit,edit,edit,edit,edit,edit,edit,popup"
-      "(0|1|2),edit,checkbox"
-      MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskCallbackString      "|fm_block|||||||||||||fm_block"
-      MaskEnableString	      "on,on,on,on,on,on,on,on,on,on,off,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,,,,,,,,,,"
-      MaskVariables	      "p2_3_4q=@1;p5q=@2;p7_6q=@3;p8_9_10q=@4;p11_12q=@5;p13_14_15q=@6;p16_17q=@7;p18_19q=@8;p20_2"
-      "1q=@9;p22_23q=@10;p24q=@11;p25_26q=@12;in=@13;p27q=@14;p28q=@15;"
-      MaskInitialization      "fm_inout\n[x,y] = fm_draw('circle');\n[xg,yg] = fm_draw('G');\n[xs,ys] = fm_draw('sinus"
-      "');\n"
-      MaskDisplay	      "plot(x+1.4,y,0.12*xs+1,0.15*ys-0.6)\ncolor('blue')\nplot(1.4+0.45*xg,0.3+0.45*yg)\n"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "none"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "[100  13.8   60]|4|[0.00  0.00]|[1.3125  0.1813  0.0000]|[5.89  0.00]|[1.2578  0.2500  0."
-      "0000]|[0.600  0.0000]|[6.02  0.00]|[0.00  0.00]|[1.00  1.00]|0.002|[0 0]|1|1|on"
+      RequestExecContextInheritance off
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		160
+	$ClassName		"Simulink.Mask"
+	Type			"Syn"
+	Description		"This block defines  a fourth order synchronous machine."
+	Initialization		"fm_inout\n[x,y] = fm_draw('circle');\n[xg,yg] = fm_draw('G');\n[xs,ys] = fm_draw('sinus');\n"
+	Display			"plot(x+1.4,y,0.12*xs+1,0.15*ys-0.6)\ncolor('blue')\nplot(1.4+0.45*xg,0.3+0.45*yg)\n"
+	IconFrame		"off"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  15
+	  Object {
+	    $ObjectID		    161
+	    Type		    "edit"
+	    Name		    "p2_3_4q"
+	    Prompt		    "Power, voltage and frequency ratings [MVA, kV, Hz]"
+	    Value		    "[100  13.8   60]"
+	  }
+	  Object {
+	    $ObjectID		    162
+	    Type		    "popup"
+	    Array {
+	      Type		      "Cell"
+	      Dimension		      8
+	      Cell		      "8"
+	      Cell		      "6"
+	      Cell		      "5.3"
+	      Cell		      "5.2"
+	      Cell		      "5.1"
+	      Cell		      "4"
+	      Cell		      "3"
+	      Cell		      "2"
+	      PropName		      "TypeOptions"
+	    }
+	    Name		    "p5q"
+	    Prompt		    "Machine Dynamic Order"
+	    Value		    "4"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    163
+	    Type		    "edit"
+	    Name		    "p7_6q"
+	    Prompt		    "resistance ra and leakage reactance xl [p.u. p.u.]"
+	    Value		    "[0.00  0.00]"
+	  }
+	  Object {
+	    $ObjectID		    164
+	    Type		    "edit"
+	    Name		    "p8_9_10q"
+	    Prompt		    "d-axis reactances Xd, X'd X\"d [p.u.,p.u.,p.u.]"
+	    Value		    "[1.3125  0.1813  0.0000]"
+	  }
+	  Object {
+	    $ObjectID		    165
+	    Type		    "edit"
+	    Name		    "p11_12q"
+	    Prompt		    "d-axis open circuit time constants T'd0 and T\"d0 [s, s]"
+	    Value		    "[5.89  0.00]"
+	  }
+	  Object {
+	    $ObjectID		    166
+	    Type		    "edit"
+	    Name		    "p13_14_15q"
+	    Prompt		    "q-axis reactances Xq, X'q, X\"q [p.u.  p.u.  p.u.]"
+	    Value		    "[1.2578  0.2500  0.0000]"
+	  }
+	  Object {
+	    $ObjectID		    167
+	    Type		    "edit"
+	    Name		    "p16_17q"
+	    Prompt		    "q-axis open circuit time constants T'q0 and T\"q0 [s s]"
+	    Value		    "[0.600  0.0000]"
+	  }
+	  Object {
+	    $ObjectID		    168
+	    Type		    "edit"
+	    Name		    "p18_19q"
+	    Prompt		    "Inertia (M = 2H) and Damping [s, p.u.]"
+	    Value		    "[6.02  0.00]"
+	  }
+	  Object {
+	    $ObjectID		    169
+	    Type		    "edit"
+	    Name		    "p20_21q"
+	    Prompt		    "Speed and active power additional signals Kw and Kp [p.u., p.u.]"
+	    Value		    "[0.00  0.00]"
+	  }
+	  Object {
+	    $ObjectID		    170
+	    Type		    "edit"
+	    Name		    "p22_23q"
+	    Prompt		    "Percentage of active and reactive powers at bus [p.u. p.u.]"
+	    Value		    "[1.00  1.00]"
+	  }
+	  Object {
+	    $ObjectID		    171
+	    Type		    "edit"
+	    Name		    "p24q"
+	    Prompt		    "d-axis additional circuit leakage time constant Taa [s] "
+	    Value		    "0.002"
+	    Enabled		    "off"
+	  }
+	  Object {
+	    $ObjectID		    172
+	    Type		    "edit"
+	    Name		    "p25_26q"
+	    Prompt		    "Saturation coefficients S(1.0) and S(1.2)"
+	    Value		    "[0 0]"
+	  }
+	  Object {
+	    $ObjectID		    173
+	    Type		    "popup"
+	    Array {
+	      Type		      "Cell"
+	      Dimension		      3
+	      Cell		      "0"
+	      Cell		      "1"
+	      Cell		      "2"
+	      PropName		      "TypeOptions"
+	    }
+	    Name		    "in"
+	    Prompt		    "Number of input signals"
+	    Value		    "2"
+	  }
+	  Object {
+	    $ObjectID		    174
+	    Type		    "edit"
+	    Name		    "p27q"
+	    Prompt		    "COI number"
+	    Value		    "1"
+	  }
+	  Object {
+	    $ObjectID		    175
+	    Type		    "checkbox"
+	    Name		    "p28q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
       System {
 	Name			"Gen3"
-	Location		[412, 233, 746, 425]
+	Location		[378, 114, 760, 541]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -1055,19 +2950,34 @@ Model {
 	PaperPositionMode	"auto"
 	PaperType		"usletter"
 	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
 	ZoomFactor		"100"
 	Block {
 	  BlockType		  Inport
 	  Name			  "in_1"
+	  SID			  "35"
 	  Position		  [25, 25, 45, 45]
-	  OutDataType		  "sfix(16)"
-	  OutScaling		  "2^0"
+	  ZOrder		  -1
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "in_2"
+	  SID			  "58"
+	  Position		  [25, 75, 45, 95]
+	  ZOrder		  1
+	  Port			  "2"
+	  IconDisplay		  "Port number"
 	}
 	Block {
 	  BlockType		  PMComponent
 	  Name			  "Atomic Subsystem"
+	  SID			  "36"
 	  Ports			  [0, 0, 0, 0, 0, 0, 1]
 	  Position		  [140, 89, 240, 131]
+	  ZOrder		  -2
 	  ShowName		  off
 	  PhysicalDomain	  "psatdomain"
 	  LeftPortType		  "p1"
@@ -1077,55 +2987,78 @@ Model {
 	Block {
 	  BlockType		  Terminator
 	  Name			  "t1"
+	  SID			  "37"
 	  Position		  [80, 20, 105, 50]
+	  ZOrder		  -3
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "t2"
+	  SID			  "59"
+	  Position		  [80, 70, 105, 100]
+	  ZOrder		  2
 	}
 	Block {
 	  BlockType		  PMIOPort
 	  Name			  "Connection\nPort1"
+	  SID			  "38"
 	  Tag			  "PMCPort"
 	  Position		  [280, 101, 310, 119]
-	  Orientation		  "left"
+	  ZOrder		  -4
+	  BlockMirror		  on
 	  ShowName		  off
 	  Port			  "1"
 	  Side			  "Right"
 	}
 	Line {
 	  LineType		  "Connection"
+	  ZOrder		  1
 	  SrcBlock		  "Atomic Subsystem"
 	  SrcPort		  RConn1
 	  DstBlock		  "Connection\nPort1"
 	  DstPort		  RConn1
 	}
 	Line {
+	  ZOrder		  2
 	  SrcBlock		  "in_1"
 	  SrcPort		  1
 	  DstBlock		  "t1"
 	  DstPort		  1
 	}
+	Line {
+	  ZOrder		  3
+	  SrcBlock		  "in_2"
+	  SrcPort		  1
+	  DstBlock		  "t2"
+	  DstPort		  1
+	}
 	Annotation {
+	  SID			  "39"
 	  Name			  "Synchronous Machine"
-	  Position		  [164, 45]
+	  Position		  [164, 45, 265, 62]
+	  InternalMargins	  [0, 0, 0, 0]
+	  FixedHeight		  off
+	  FixedWidth		  off
+	  ZOrder		  -1
 	}
       }
     }
     Block {
-
       BlockType		      Reference
       Name		      "Line"
+      SID		      "40"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1, 1]
       Position		      [470, 104, 555, 116]
-      Orientation	      "left"
+      ZOrder		      -16
+      BlockMirror	      on
       ShowName		      off
+      LibraryVersion	      "1.1192"
       FontName		      "Courier"
       FontSize		      14
-	SourceBlock	"fm_lib/Power Flow/Line"
+      SourceBlock	      "fm_lib/Power Flow/Line"
       SourceType	      "Line"
-      PhysicalDomain	      "psatdomain"
-      SubClassName	      "unknown"
-      LeftPortType	      "p1"
-      RightPortType	      "p1"
       LConnTagsString	      "__newl0"
       RConnTagsString	      "__newr0"
       p3_4_5q		      "[100  230  60]"
@@ -1139,10 +3072,12 @@ Model {
     Block {
       BlockType		      PMComponent
       Name		      "Line1"
+      SID		      "41"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1, 1]
       Position		      [305, 104, 390, 116]
+      ZOrder		      -17
       ShowName		      off
       FontName		      "Courier"
       FontSize		      14
@@ -1151,46 +3086,91 @@ Model {
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
       RConnTagsString	      "__newr0"
-      MaskType		      "Line"
-      MaskDescription	      "This block defines a pi model for a tree phase line."
-      MaskPromptString	      "Power, Voltage and Frequency Ratings [MVA, kV, Hz]|Length of line [km] (0 for p.u. param"
-      "eters)|Resistance [p.u. (Ohms/km)]|Reactance [p.u. (H/km)]|Susceptance [p.u. (F/km)]|Imax, Pmax and Smax [p.u., "
-      "p.u., p.u.]|Connected"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit,checkbox"
-      MaskTunableValueString  "on,on,on,on,on,on,on"
-      MaskCallbackString      "||||||fm_block"
-      MaskEnableString	      "on,on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,,"
-      MaskVariables	      "p3_4_5q=@1;p6q=@2;p8q=@3;p9q=@4;p10q=@5;p13_14_15q=@6;p16q=@7;"
-      MaskInitialization      "[xp,yp] = fm_draw('pi');"
-      MaskDisplay	      "plot([-1  1  1 -1 -1],[-0.2 -0.2 0.2 0.2 -0.2])\ncolor('blue')\nplot(0.35*xp,0.2*yp)"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "[100  230  60]|0|0.0085|0.072|0.0745*2|[0.0  0.0  0.0]|on"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		176
+	$ClassName		"Simulink.Mask"
+	Type			"Line"
+	Description		"This block defines a pi model for a tree phase line."
+	Initialization		"[xp,yp] = fm_draw('pi');"
+	Display			"plot([-1  1  1 -1 -1],[-0.2 -0.2 0.2 0.2 -0.2])\ncolor('blue')\nplot(0.35*xp,0.2*yp)"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  7
+	  Object {
+	    $ObjectID		    177
+	    Type		    "edit"
+	    Name		    "p3_4_5q"
+	    Prompt		    "Power, Voltage and Frequency Ratings [MVA, kV, Hz]"
+	    Value		    "[100  230  60]"
+	  }
+	  Object {
+	    $ObjectID		    178
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Length of line [km] (0 for p.u. parameters)"
+	    Value		    "0"
+	  }
+	  Object {
+	    $ObjectID		    179
+	    Type		    "edit"
+	    Name		    "p8q"
+	    Prompt		    "Resistance [p.u. (Ohms/km)]"
+	    Value		    "0.0085"
+	  }
+	  Object {
+	    $ObjectID		    180
+	    Type		    "edit"
+	    Name		    "p9q"
+	    Prompt		    "Reactance [p.u. (H/km)]"
+	    Value		    "0.072"
+	  }
+	  Object {
+	    $ObjectID		    181
+	    Type		    "edit"
+	    Name		    "p10q"
+	    Prompt		    "Susceptance [p.u. (F/km)]"
+	    Value		    "0.0745*2"
+	  }
+	  Object {
+	    $ObjectID		    182
+	    Type		    "edit"
+	    Name		    "p13_14_15q"
+	    Prompt		    "Imax, Pmax and Smax [p.u., p.u., p.u.]"
+	    Value		    "[0.0  0.0  0.0]"
+	  }
+	  Object {
+	    $ObjectID		    183
+	    Type		    "checkbox"
+	    Name		    "p16q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
-
       BlockType		      Reference
       Name		      "Line2"
+      SID		      "42"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1, 1]
       Position		      [539, 190, 551, 265]
-      Orientation	      "down"
+      ZOrder		      -18
+      BlockRotation	      270
+      BlockMirror	      on
       NamePlacement	      "alternate"
       ShowName		      off
+      LibraryVersion	      "1.1192"
       FontName		      "Courier"
       FontSize		      14
-	SourceBlock	"fm_lib/Power Flow/Line"
+      SourceBlock	      "fm_lib/Power Flow/Line"
       SourceType	      "Line"
-      PhysicalDomain	      "psatdomain"
-      SubClassName	      "unknown"
-      LeftPortType	      "p1"
-      RightPortType	      "p1"
       LConnTagsString	      "__newl0"
       RConnTagsString	      "__newr0"
       p3_4_5q		      "[100  230  60]"
@@ -1202,24 +3182,23 @@ Model {
       p16q		      on
     }
     Block {
-
       BlockType		      Reference
       Name		      "Line3"
+      SID		      "43"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1, 1]
       Position		      [289, 190, 301, 265]
-      Orientation	      "down"
+      ZOrder		      -19
+      BlockRotation	      270
+      BlockMirror	      on
       NamePlacement	      "alternate"
       ShowName		      off
+      LibraryVersion	      "1.1192"
       FontName		      "Courier"
       FontSize		      14
-	SourceBlock	"fm_lib/Power Flow/Line"
+      SourceBlock	      "fm_lib/Power Flow/Line"
       SourceType	      "Line"
-      PhysicalDomain	      "psatdomain"
-      SubClassName	      "unknown"
-      LeftPortType	      "p1"
-      RightPortType	      "p1"
       LConnTagsString	      "__newl0"
       RConnTagsString	      "__newr0"
       p3_4_5q		      "[100  230  60]"
@@ -1231,24 +3210,23 @@ Model {
       p16q		      on
     }
     Block {
-
       BlockType		      Reference
       Name		      "Line4"
+      SID		      "44"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1, 1]
       Position		      [314, 350, 326, 425]
-      Orientation	      "down"
+      ZOrder		      -20
+      BlockRotation	      270
+      BlockMirror	      on
       NamePlacement	      "alternate"
       ShowName		      off
+      LibraryVersion	      "1.1192"
       FontName		      "Courier"
       FontSize		      14
-	SourceBlock	"fm_lib/Power Flow/Line"
+      SourceBlock	      "fm_lib/Power Flow/Line"
       SourceType	      "Line"
-      PhysicalDomain	      "psatdomain"
-      SubClassName	      "unknown"
-      LeftPortType	      "p1"
-      RightPortType	      "p1"
       LConnTagsString	      "__newl0"
       RConnTagsString	      "__newr0"
       p3_4_5q		      "[100  230  60]"
@@ -1260,24 +3238,23 @@ Model {
       p16q		      on
     }
     Block {
-
       BlockType		      Reference
       Name		      "Line5"
+      SID		      "45"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1, 1]
       Position		      [514, 350, 526, 425]
-      Orientation	      "down"
+      ZOrder		      -21
+      BlockRotation	      270
+      BlockMirror	      on
       NamePlacement	      "alternate"
       ShowName		      off
+      LibraryVersion	      "1.1192"
       FontName		      "Courier"
       FontSize		      14
-	SourceBlock	"fm_lib/Power Flow/Line"
+      SourceBlock	      "fm_lib/Power Flow/Line"
       SourceType	      "Line"
-      PhysicalDomain	      "psatdomain"
-      SubClassName	      "unknown"
-      LeftPortType	      "p1"
-      RightPortType	      "p1"
       LConnTagsString	      "__newl0"
       RConnTagsString	      "__newr0"
       p3_4_5q		      "[100  230  60]"
@@ -1291,11 +3268,14 @@ Model {
     Block {
       BlockType		      PMComponent
       Name		      "PQ1"
+      SID		      "46"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1]
       Position		      [555, 330, 585, 360]
-      Orientation	      "down"
+      ZOrder		      -22
+      BlockRotation	      270
+      BlockMirror	      on
       NamePlacement	      "alternate"
       ShowName		      off
       FontName		      "Courier"
@@ -1304,33 +3284,71 @@ Model {
       LeftPortType	      "p1"
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
-      MaskType		      "PQ"
-      MaskDescription	      "This block defines a constant power load:\n\nP = Pcost.\nQ = Qcost."
-      MaskPromptString	      "Power and Voltage Ratings [MVA, kV]|Active and Reactive Powers [p.u.  p.u.]|Maximum and "
-      "Minimum Allowable Voltage [p.u.   p.u.]|Allow conversion to impendance for min & max voltage|Connected"
-      MaskStyleString	      "edit,edit,edit,checkbox,checkbox"
-      MaskTunableValueString  "on,on,on,on,on"
-      MaskCallbackString      "|||fm_block|fm_block"
-      MaskEnableString	      "on,on,off,on,on"
-      MaskVisibilityString    "on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on"
-      MaskVarAliasString      ",,,,"
-      MaskVariables	      "p2_3q=@1;p4_5q=@2;p6_7q=@3;p8q=@4;p9q=@5;"
-      MaskDisplay	      "plot([1 -0.5 -0.5 1],[0 0.866 -0.866 0])"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "[100  230]|[0.90  0.30]|[1.2  0.8]|off|on"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		184
+	$ClassName		"Simulink.Mask"
+	Type			"PQ"
+	Description		"This block defines a constant power load:\n\nP = Pcost.\nQ = Qcost."
+	Display			"plot([1 -0.5 -0.5 1],[0 0.866 -0.866 0])"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  5
+	  Object {
+	    $ObjectID		    185
+	    Type		    "edit"
+	    Name		    "p2_3q"
+	    Prompt		    "Power and Voltage Ratings [MVA, kV]"
+	    Value		    "[100  230]"
+	  }
+	  Object {
+	    $ObjectID		    186
+	    Type		    "edit"
+	    Name		    "p4_5q"
+	    Prompt		    "Active and Reactive Powers [p.u.  p.u.]"
+	    Value		    "[0.90  0.30]"
+	  }
+	  Object {
+	    $ObjectID		    187
+	    Type		    "edit"
+	    Name		    "p6_7q"
+	    Prompt		    "Maximum and Minimum Allowable Voltage [p.u.   p.u.]"
+	    Value		    "[1.2  0.8]"
+	    Enabled		    "off"
+	  }
+	  Object {
+	    $ObjectID		    188
+	    Type		    "checkbox"
+	    Name		    "p8q"
+	    Prompt		    "Allow conversion to impendance for min & max voltage"
+	    Value		    "off"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    189
+	    Type		    "checkbox"
+	    Name		    "p9q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "PQ2"
+      SID		      "47"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1]
       Position		      [415, 170, 445, 200]
-      Orientation	      "down"
+      ZOrder		      -23
+      BlockRotation	      270
+      BlockMirror	      on
       NamePlacement	      "alternate"
       ShowName		      off
       FontName		      "Courier"
@@ -1339,33 +3357,71 @@ Model {
       LeftPortType	      "p1"
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
-      MaskType		      "PQ"
-      MaskDescription	      "This block defines a constant power load:\n\nP = Pcost.\nQ = Qcost."
-      MaskPromptString	      "Power and Voltage Ratings [MVA, kV]|Active and Reactive Powers [p.u.  p.u.]|Maximum and "
-      "Minimum Allowable Voltage [p.u.   p.u.]|Allow conversion to impendance for min & max voltage|Connected"
-      MaskStyleString	      "edit,edit,edit,checkbox,checkbox"
-      MaskTunableValueString  "on,on,on,on,on"
-      MaskCallbackString      "|||fm_block|fm_block"
-      MaskEnableString	      "on,on,off,on,on"
-      MaskVisibilityString    "on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on"
-      MaskVarAliasString      ",,,,"
-      MaskVariables	      "p2_3q=@1;p4_5q=@2;p6_7q=@3;p8q=@4;p9q=@5;"
-      MaskDisplay	      "plot([1 -0.5 -0.5 1],[0 0.866 -0.866 0])"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "[100  230]|[1.00  0.35]|[1.2  0.8]|off|on"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		190
+	$ClassName		"Simulink.Mask"
+	Type			"PQ"
+	Description		"This block defines a constant power load:\n\nP = Pcost.\nQ = Qcost."
+	Display			"plot([1 -0.5 -0.5 1],[0 0.866 -0.866 0])"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  5
+	  Object {
+	    $ObjectID		    191
+	    Type		    "edit"
+	    Name		    "p2_3q"
+	    Prompt		    "Power and Voltage Ratings [MVA, kV]"
+	    Value		    "[100  230]"
+	  }
+	  Object {
+	    $ObjectID		    192
+	    Type		    "edit"
+	    Name		    "p4_5q"
+	    Prompt		    "Active and Reactive Powers [p.u.  p.u.]"
+	    Value		    "[1.00  0.35]"
+	  }
+	  Object {
+	    $ObjectID		    193
+	    Type		    "edit"
+	    Name		    "p6_7q"
+	    Prompt		    "Maximum and Minimum Allowable Voltage [p.u.   p.u.]"
+	    Value		    "[1.2  0.8]"
+	    Enabled		    "off"
+	  }
+	  Object {
+	    $ObjectID		    194
+	    Type		    "checkbox"
+	    Name		    "p8q"
+	    Prompt		    "Allow conversion to impendance for min & max voltage"
+	    Value		    "off"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    195
+	    Type		    "checkbox"
+	    Name		    "p9q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "PQ3"
+      SID		      "48"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1]
       Position		      [255, 330, 285, 360]
-      Orientation	      "down"
+      ZOrder		      -24
+      BlockRotation	      270
+      BlockMirror	      on
       NamePlacement	      "alternate"
       ShowName		      off
       FontName		      "Courier"
@@ -1374,32 +3430,69 @@ Model {
       LeftPortType	      "p1"
       RightPortType	      "p1"
       LConnTagsString	      "__newl0"
-      MaskType		      "PQ"
-      MaskDescription	      "This block defines a constant power load:\n\nP = Pcost.\nQ = Qcost."
-      MaskPromptString	      "Power and Voltage Ratings [MVA, kV]|Active and Reactive Powers [p.u.  p.u.]|Maximum and "
-      "Minimum Allowable Voltage [p.u.   p.u.]|Allow conversion to impendance for min & max voltage|Connected"
-      MaskStyleString	      "edit,edit,edit,checkbox,checkbox"
-      MaskTunableValueString  "on,on,on,on,on"
-      MaskCallbackString      "|||fm_block|fm_block"
-      MaskEnableString	      "on,on,off,on,on"
-      MaskVisibilityString    "on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on"
-      MaskVarAliasString      ",,,,"
-      MaskVariables	      "p2_3q=@1;p4_5q=@2;p6_7q=@3;p8q=@4;p9q=@5;"
-      MaskDisplay	      "plot([1 -0.5 -0.5 1],[0 0.866 -0.866 0])"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "port"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "[100  230]|[1.25  0.50]|[1.2  0.8]|off|on"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		196
+	$ClassName		"Simulink.Mask"
+	Type			"PQ"
+	Description		"This block defines a constant power load:\n\nP = Pcost.\nQ = Qcost."
+	Display			"plot([1 -0.5 -0.5 1],[0 0.866 -0.866 0])"
+	IconFrame		"off"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  5
+	  Object {
+	    $ObjectID		    197
+	    Type		    "edit"
+	    Name		    "p2_3q"
+	    Prompt		    "Power and Voltage Ratings [MVA, kV]"
+	    Value		    "[100  230]"
+	  }
+	  Object {
+	    $ObjectID		    198
+	    Type		    "edit"
+	    Name		    "p4_5q"
+	    Prompt		    "Active and Reactive Powers [p.u.  p.u.]"
+	    Value		    "[1.25  0.50]"
+	  }
+	  Object {
+	    $ObjectID		    199
+	    Type		    "edit"
+	    Name		    "p6_7q"
+	    Prompt		    "Maximum and Minimum Allowable Voltage [p.u.   p.u.]"
+	    Value		    "[1.2  0.8]"
+	    Enabled		    "off"
+	  }
+	  Object {
+	    $ObjectID		    200
+	    Type		    "checkbox"
+	    Name		    "p8q"
+	    Prompt		    "Allow conversion to impendance for min & max voltage"
+	    Value		    "off"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    201
+	    Type		    "checkbox"
+	    Name		    "p9q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "PV"
+      SID		      "49"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 0, 1]
       Position		      [90, 92, 125, 128]
+      ZOrder		      -25
       ShowName		      off
       FontName		      "Courier"
       FontSize		      14
@@ -1407,34 +3500,82 @@ Model {
       LeftPortType	      "p1"
       RightPortType	      "p1"
       RConnTagsString	      "__newr0"
-      MaskType		      "PV"
-      MaskDescription	      "This block defines a PV bus for load flow studies:\n\nP = Pcost.\nV = Vdes."
-      MaskPromptString	      "Power and Voltage Ratings [MVA, kV]|Active Power [p.u.]|Voltage Magnitude [p.u.]|Qmax an"
-      "d Qmin [p.u.  p.u.]|Vmax and Vmin [p.u.  p.u.]|Loss Participation Factor|Connected"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit,checkbox"
-      MaskTunableValueString  "on,on,on,on,on,on,on"
-      MaskCallbackString      "||||||fm_block"
-      MaskEnableString	      "on,on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,,"
-      MaskVariables	      "p2_3q=@1;p4q=@2;p5q=@3;p6_7q=@4;p8_9q=@5;p10q=@6;p11q=@7;"
-      MaskInitialization      "[x,y] = fm_draw('circle');\n[xp,yp] = fm_draw('P');"
-      MaskDisplay	      "plot(x,y)\ncolor('blue')\nplot(0.3*xp-0.35,0.6*yp,[0.1 0.3 0.5],[0.3 -0.3 0.3])\n"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "none"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "[100  18]|1.63|1.025|[99 -99]|[1.1  0.9]|1|on"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		202
+	$ClassName		"Simulink.Mask"
+	Type			"PV"
+	Description		"This block defines a PV bus for load flow studies:\n\nP = Pcost.\nV = Vdes."
+	Initialization		"[x,y] = fm_draw('circle');\n[xp,yp] = fm_draw('P');"
+	Display			"plot(x,y)\ncolor('blue')\nplot(0.3*xp-0.35,0.6*yp,[0.1 0.3 0.5],[0.3 -0.3 0.3])\n"
+	IconFrame		"off"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  7
+	  Object {
+	    $ObjectID		    203
+	    Type		    "edit"
+	    Name		    "p2_3q"
+	    Prompt		    "Power and Voltage Ratings [MVA, kV]"
+	    Value		    "[100  18]"
+	  }
+	  Object {
+	    $ObjectID		    204
+	    Type		    "edit"
+	    Name		    "p4q"
+	    Prompt		    "Active Power [p.u.]"
+	    Value		    "1.63"
+	  }
+	  Object {
+	    $ObjectID		    205
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Voltage Magnitude [p.u.]"
+	    Value		    "1.025"
+	  }
+	  Object {
+	    $ObjectID		    206
+	    Type		    "edit"
+	    Name		    "p6_7q"
+	    Prompt		    "Qmax and Qmin [p.u.  p.u.]"
+	    Value		    "[99 -99]"
+	  }
+	  Object {
+	    $ObjectID		    207
+	    Type		    "edit"
+	    Name		    "p8_9q"
+	    Prompt		    "Vmax and Vmin [p.u.  p.u.]"
+	    Value		    "[1.1  0.9]"
+	  }
+	  Object {
+	    $ObjectID		    208
+	    Type		    "edit"
+	    Name		    "p10q"
+	    Prompt		    "Loss Participation Factor"
+	    Value		    "1"
+	  }
+	  Object {
+	    $ObjectID		    209
+	    Type		    "checkbox"
+	    Name		    "p11q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
       BlockType		      PMComponent
       Name		      "PV1"
+      SID		      "50"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 0, 1]
       Position		      [735, 92, 770, 128]
-      Orientation	      "left"
+      ZOrder		      -26
+      BlockMirror	      on
       ShowName		      off
       FontName		      "Courier"
       FontSize		      14
@@ -1442,44 +3583,88 @@ Model {
       LeftPortType	      "p1"
       RightPortType	      "p1"
       RConnTagsString	      "__newr0"
-      MaskType		      "PV"
-      MaskDescription	      "This block defines a PV bus for load flow studies:\n\nP = Pcost.\nV = Vdes."
-      MaskPromptString	      "Power and Voltage Ratings [MVA, kV]|Active Power [p.u.]|Voltage Magnitude [p.u.]|Qmax an"
-      "d Qmin [p.u.  p.u.]|Vmax and Vmin [p.u.  p.u.]|Loss Participation Factor|Connected"
-      MaskStyleString	      "edit,edit,edit,edit,edit,edit,checkbox"
-      MaskTunableValueString  "on,on,on,on,on,on,on"
-      MaskCallbackString      "||||||fm_block"
-      MaskEnableString	      "on,on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on,on"
-      MaskVarAliasString      ",,,,,,"
-      MaskVariables	      "p2_3q=@1;p4q=@2;p5q=@3;p6_7q=@4;p8_9q=@5;p10q=@6;p11q=@7;"
-      MaskInitialization      "[x,y] = fm_draw('circle');\n[xp,yp] = fm_draw('P');"
-      MaskDisplay	      "plot(x,y)\ncolor('blue')\nplot(0.3*xp-0.35,0.6*yp,[0.1 0.3 0.5],[0.3 -0.3 0.3])\n"
-      MaskIconFrame	      off
-      MaskIconOpaque	      on
-      MaskIconRotate	      "none"
-      MaskIconUnits	      "autoscale"
-      MaskValueString	      "[100  13.8]|0.85|1.025|[99  -99]|[1.1  0.9]|1|on"
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		210
+	$ClassName		"Simulink.Mask"
+	Type			"PV"
+	Description		"This block defines a PV bus for load flow studies:\n\nP = Pcost.\nV = Vdes."
+	Initialization		"[x,y] = fm_draw('circle');\n[xp,yp] = fm_draw('P');"
+	Display			"plot(x,y)\ncolor('blue')\nplot(0.3*xp-0.35,0.6*yp,[0.1 0.3 0.5],[0.3 -0.3 0.3])\n"
+	IconFrame		"off"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  7
+	  Object {
+	    $ObjectID		    211
+	    Type		    "edit"
+	    Name		    "p2_3q"
+	    Prompt		    "Power and Voltage Ratings [MVA, kV]"
+	    Value		    "[100  13.8]"
+	  }
+	  Object {
+	    $ObjectID		    212
+	    Type		    "edit"
+	    Name		    "p4q"
+	    Prompt		    "Active Power [p.u.]"
+	    Value		    "0.85"
+	  }
+	  Object {
+	    $ObjectID		    213
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Voltage Magnitude [p.u.]"
+	    Value		    "1.025"
+	  }
+	  Object {
+	    $ObjectID		    214
+	    Type		    "edit"
+	    Name		    "p6_7q"
+	    Prompt		    "Qmax and Qmin [p.u.  p.u.]"
+	    Value		    "[99  -99]"
+	  }
+	  Object {
+	    $ObjectID		    215
+	    Type		    "edit"
+	    Name		    "p8_9q"
+	    Prompt		    "Vmax and Vmin [p.u.  p.u.]"
+	    Value		    "[1.1  0.9]"
+	  }
+	  Object {
+	    $ObjectID		    216
+	    Type		    "edit"
+	    Name		    "p10q"
+	    Prompt		    "Loss Participation Factor"
+	    Value		    "1"
+	  }
+	  Object {
+	    $ObjectID		    217
+	    Type		    "checkbox"
+	    Name		    "p11q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
     }
     Block {
-
       BlockType		      Reference
       Name		      "Slack"
+      SID		      "51"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 0, 1]
       Position		      [381, 630, 419, 665]
-      Orientation	      "up"
+      ZOrder		      -27
+      BlockRotation	      270
       ShowName		      off
+      LibraryVersion	      "1.1192"
       FontName		      "Courier"
       FontSize		      14
-	SourceBlock	"fm_lib/Power Flow/Slack"
+      SourceBlock	      "fm_lib/Power Flow/Slack"
       SourceType	      "SW"
-      PhysicalDomain	      "psatdomain"
-      SubClassName	      "unknown"
-      LeftPortType	      "p1"
-      RightPortType	      "p1"
       RConnTagsString	      "__newr0"
       p2_3q		      "[100  16.5]"
       p4q		      "1.04"
@@ -1492,22 +3677,692 @@ Model {
       p13q		      on
     }
     Block {
-
+      BlockType		      SubSystem
+      Name		      "Tg"
+      SID		      "62"
+      Tag		      "PSATblock"
+      Description	      "Controls"
+      Ports		      [0, 1]
+      Position		      [30, 166, 70, 194]
+      ZOrder		      1
+      ShowName		      off
+      RequestExecContextInheritance off
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		218
+	$ClassName		"Simulink.Mask"
+	Type			"Tg"
+	Description		"This block defines  a Turbine Governor."
+	Initialization		"[x,y] = fm_draw('G');"
+	Display			"plot([-1.8 2.8 2.8 -1.8 -1.8],[-1.5 -1.5 1.5 1.5 -1.5])\ncolor('red')\nplot([-0.5 -0.5],[-1 1],[-1.3 0.3],"
+	"[1 1])\nplot(1.4+x,y)"
+	IconFrame		"off"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  19
+	  Object {
+	    $ObjectID		    219
+	    Type		    "popup"
+	    Array {
+	      Type		      "Cell"
+	      Dimension		      6
+	      Cell		      "1"
+	      Cell		      "2"
+	      Cell		      "3"
+	      Cell		      "4"
+	      Cell		      "5"
+	      Cell		      "6"
+	      PropName		      "TypeOptions"
+	    }
+	    Name		    "p2q"
+	    Prompt		    "Turbine governor type"
+	    Value		    "4"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    220
+	    Type		    "edit"
+	    Name		    "p3q"
+	    Prompt		    "Reference speed [p.u.]"
+	    Value		    "1.00"
+	  }
+	  Object {
+	    $ObjectID		    221
+	    Type		    "edit"
+	    Name		    "p4q"
+	    Prompt		    "Pilot valve droop [p.u.]"
+	    Value		    "0.2"
+	  }
+	  Object {
+	    $ObjectID		    222
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Maximum gate opening [p.u.]"
+	    Value		    "10"
+	  }
+	  Object {
+	    $ObjectID		    223
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Minimum gate opening [p.u.]"
+	    Value		    "0.0"
+	  }
+	  Object {
+	    $ObjectID		    224
+	    Type		    "edit"
+	    Name		    "p7q"
+	    Prompt		    "Maximum gate opening rate vmax [p.u.]"
+	    Value		    "0.10"
+	  }
+	  Object {
+	    $ObjectID		    225
+	    Type		    "edit"
+	    Name		    "p8q"
+	    Prompt		    "Minimum gate opening rate vmin [p.u.]"
+	    Value		    "-0.10"
+	  }
+	  Object {
+	    $ObjectID		    226
+	    Type		    "edit"
+	    Name		    "p9q"
+	    Prompt		    "Pilot valve time constant Tp [s]"
+	    Value		    "0.04"
+	  }
+	  Object {
+	    $ObjectID		    227
+	    Type		    "edit"
+	    Name		    "p10q"
+	    Prompt		    "Dashpot time constant Tr [s]"
+	    Value		    "5.0"
+	  }
+	  Object {
+	    $ObjectID		    228
+	    Type		    "edit"
+	    Name		    "p11q"
+	    Prompt		    "Permanent speed droop sigma [p.u./p.u.]"
+	    Value		    "0.04"
+	  }
+	  Object {
+	    $ObjectID		    229
+	    Type		    "edit"
+	    Name		    "p12q"
+	    Prompt		    "Transient speed droop delta [p.u./p.u.]"
+	    Value		    "0.3"
+	  }
+	  Object {
+	    $ObjectID		    230
+	    Type		    "edit"
+	    Name		    "p13q"
+	    Prompt		    "Water starting time Tw [s]"
+	    Value		    "1.0"
+	  }
+	  Object {
+	    $ObjectID		    231
+	    Type		    "edit"
+	    Name		    "p14q"
+	    Prompt		    "Derivative of flow rate with respect to tubine head a11"
+	    Value		    "0.5"
+	  }
+	  Object {
+	    $ObjectID		    232
+	    Type		    "edit"
+	    Name		    "p15q"
+	    Prompt		    "Derivative of flow rate with respect to gate position a13"
+	    Value		    "1.0"
+	  }
+	  Object {
+	    $ObjectID		    233
+	    Type		    "edit"
+	    Name		    "p16q"
+	    Prompt		    "Derivative of torque with respect to tubine head a21"
+	    Value		    "1.5"
+	  }
+	  Object {
+	    $ObjectID		    234
+	    Type		    "edit"
+	    Name		    "p17q"
+	    Prompt		    "Derivative of torque with respect to gate position a23"
+	    Value		    "1.0"
+	  }
+	  Object {
+	    $ObjectID		    235
+	    Type		    "edit"
+	    Name		    "p18q"
+	    Prompt		    "Proportional droop Kp [p.u./p.u.]"
+	    Value		    "1.163"
+	  }
+	  Object {
+	    $ObjectID		    236
+	    Type		    "edit"
+	    Name		    "p19q"
+	    Prompt		    "Integral droop Ki [p.u./p.u.]"
+	    Value		    "0.105"
+	  }
+	  Object {
+	    $ObjectID		    237
+	    Type		    "checkbox"
+	    Name		    "p20q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
+      System {
+	Name			"Tg"
+	Location		[120, 124, 502, 551]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant"
+	  SID			  "67"
+	  Position		  [115, 100, 145, 130]
+	  ZOrder		  -1
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Out1"
+	  SID			  "68"
+	  Position		  [185, 105, 205, 125]
+	  ZOrder		  -2
+	  ShowName		  off
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  ZOrder		  1
+	  SrcBlock		  "Constant"
+	  SrcPort		  1
+	  DstBlock		  "Out1"
+	  DstPort		  1
+	}
+	Annotation {
+	  SID			  "69"
+	  Name			  "Turbine Governor"
+	  Position		  [164, 45, 245, 62]
+	  InternalMargins	  [0, 0, 0, 0]
+	  FixedHeight		  off
+	  FixedWidth		  off
+	  ZOrder		  -1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Tg1"
+      SID		      "63"
+      Tag		      "PSATblock"
+      Description	      "Controls"
+      Ports		      [0, 1]
+      Position		      [468, 680, 512, 705]
+      ZOrder		      2
+      BlockRotation	      270
+      ShowName		      off
+      RequestExecContextInheritance off
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		238
+	$ClassName		"Simulink.Mask"
+	Type			"Tg"
+	Description		"This block defines  a Turbine Governor."
+	Initialization		"[x,y] = fm_draw('G');"
+	Display			"plot([-1.8 2.8 2.8 -1.8 -1.8],[-1.5 -1.5 1.5 1.5 -1.5])\ncolor('red')\nplot([-0.5 -0.5],[-1 1],[-1.3 0.3],"
+	"[1 1])\nplot(1.4+x,y)"
+	IconFrame		"off"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  19
+	  Object {
+	    $ObjectID		    239
+	    Type		    "popup"
+	    Array {
+	      Type		      "Cell"
+	      Dimension		      6
+	      Cell		      "1"
+	      Cell		      "2"
+	      Cell		      "3"
+	      Cell		      "4"
+	      Cell		      "5"
+	      Cell		      "6"
+	      PropName		      "TypeOptions"
+	    }
+	    Name		    "p2q"
+	    Prompt		    "Turbine governor type"
+	    Value		    "4"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    240
+	    Type		    "edit"
+	    Name		    "p3q"
+	    Prompt		    "Reference speed [p.u.]"
+	    Value		    "1.00"
+	  }
+	  Object {
+	    $ObjectID		    241
+	    Type		    "edit"
+	    Name		    "p4q"
+	    Prompt		    "Pilot valve droop [p.u.]"
+	    Value		    "0.2"
+	  }
+	  Object {
+	    $ObjectID		    242
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Maximum gate opening [p.u.]"
+	    Value		    "10"
+	  }
+	  Object {
+	    $ObjectID		    243
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Minimum gate opening [p.u.]"
+	    Value		    "0.0"
+	  }
+	  Object {
+	    $ObjectID		    244
+	    Type		    "edit"
+	    Name		    "p7q"
+	    Prompt		    "Maximum gate opening rate vmax [p.u.]"
+	    Value		    "0.10"
+	  }
+	  Object {
+	    $ObjectID		    245
+	    Type		    "edit"
+	    Name		    "p8q"
+	    Prompt		    "Minimum gate opening rate vmin [p.u.]"
+	    Value		    "-0.10"
+	  }
+	  Object {
+	    $ObjectID		    246
+	    Type		    "edit"
+	    Name		    "p9q"
+	    Prompt		    "Pilot valve time constant Tp [s]"
+	    Value		    "0.04"
+	  }
+	  Object {
+	    $ObjectID		    247
+	    Type		    "edit"
+	    Name		    "p10q"
+	    Prompt		    "Dashpot time constant Tr [s]"
+	    Value		    "5.0"
+	  }
+	  Object {
+	    $ObjectID		    248
+	    Type		    "edit"
+	    Name		    "p11q"
+	    Prompt		    "Permanent speed droop sigma [p.u./p.u.]"
+	    Value		    "0.04"
+	  }
+	  Object {
+	    $ObjectID		    249
+	    Type		    "edit"
+	    Name		    "p12q"
+	    Prompt		    "Transient speed droop delta [p.u./p.u.]"
+	    Value		    "0.3"
+	  }
+	  Object {
+	    $ObjectID		    250
+	    Type		    "edit"
+	    Name		    "p13q"
+	    Prompt		    "Water starting time Tw [s]"
+	    Value		    "1.0"
+	  }
+	  Object {
+	    $ObjectID		    251
+	    Type		    "edit"
+	    Name		    "p14q"
+	    Prompt		    "Derivative of flow rate with respect to tubine head a11"
+	    Value		    "0.5"
+	  }
+	  Object {
+	    $ObjectID		    252
+	    Type		    "edit"
+	    Name		    "p15q"
+	    Prompt		    "Derivative of flow rate with respect to gate position a13"
+	    Value		    "1.0"
+	  }
+	  Object {
+	    $ObjectID		    253
+	    Type		    "edit"
+	    Name		    "p16q"
+	    Prompt		    "Derivative of torque with respect to tubine head a21"
+	    Value		    "1.5"
+	  }
+	  Object {
+	    $ObjectID		    254
+	    Type		    "edit"
+	    Name		    "p17q"
+	    Prompt		    "Derivative of torque with respect to gate position a23"
+	    Value		    "1.0"
+	  }
+	  Object {
+	    $ObjectID		    255
+	    Type		    "edit"
+	    Name		    "p18q"
+	    Prompt		    "Proportional droop Kp [p.u./p.u.]"
+	    Value		    "1.163"
+	  }
+	  Object {
+	    $ObjectID		    256
+	    Type		    "edit"
+	    Name		    "p19q"
+	    Prompt		    "Integral droop Ki [p.u./p.u.]"
+	    Value		    "0.105"
+	  }
+	  Object {
+	    $ObjectID		    257
+	    Type		    "checkbox"
+	    Name		    "p20q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
+      System {
+	Name			"Tg1"
+	Location		[120, 124, 502, 551]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant"
+	  SID			  "70"
+	  Position		  [115, 100, 145, 130]
+	  ZOrder		  -1
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Out1"
+	  SID			  "71"
+	  Position		  [185, 105, 205, 125]
+	  ZOrder		  -2
+	  ShowName		  off
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  ZOrder		  1
+	  SrcBlock		  "Constant"
+	  SrcPort		  1
+	  DstBlock		  "Out1"
+	  DstPort		  1
+	}
+	Annotation {
+	  SID			  "72"
+	  Name			  "Turbine Governor"
+	  Position		  [164, 45, 245, 62]
+	  InternalMargins	  [0, 0, 0, 0]
+	  FixedHeight		  off
+	  FixedWidth		  off
+	  ZOrder		  -1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Tg2"
+      SID		      "64"
+      Tag		      "PSATblock"
+      Description	      "Controls"
+      Ports		      [0, 1]
+      Position		      [795, 158, 830, 182]
+      ZOrder		      3
+      BlockMirror	      on
+      NamePlacement	      "alternate"
+      ShowName		      off
+      RequestExecContextInheritance off
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		258
+	$ClassName		"Simulink.Mask"
+	Type			"Tg"
+	Description		"This block defines  a Turbine Governor."
+	Initialization		"[x,y] = fm_draw('G');"
+	Display			"plot([-1.8 2.8 2.8 -1.8 -1.8],[-1.5 -1.5 1.5 1.5 -1.5])\ncolor('red')\nplot([-0.5 -0.5],[-1 1],[-1.3 0.3],"
+	"[1 1])\nplot(1.4+x,y)"
+	IconFrame		"off"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  19
+	  Object {
+	    $ObjectID		    259
+	    Type		    "popup"
+	    Array {
+	      Type		      "Cell"
+	      Dimension		      6
+	      Cell		      "1"
+	      Cell		      "2"
+	      Cell		      "3"
+	      Cell		      "4"
+	      Cell		      "5"
+	      Cell		      "6"
+	      PropName		      "TypeOptions"
+	    }
+	    Name		    "p2q"
+	    Prompt		    "Turbine governor type"
+	    Value		    "4"
+	    Callback		    "fm_block"
+	  }
+	  Object {
+	    $ObjectID		    260
+	    Type		    "edit"
+	    Name		    "p3q"
+	    Prompt		    "Reference speed [p.u.]"
+	    Value		    "1.00"
+	  }
+	  Object {
+	    $ObjectID		    261
+	    Type		    "edit"
+	    Name		    "p4q"
+	    Prompt		    "Pilot valve droop [p.u.]"
+	    Value		    "0.2"
+	  }
+	  Object {
+	    $ObjectID		    262
+	    Type		    "edit"
+	    Name		    "p5q"
+	    Prompt		    "Maximum gate opening [p.u.]"
+	    Value		    "10"
+	  }
+	  Object {
+	    $ObjectID		    263
+	    Type		    "edit"
+	    Name		    "p6q"
+	    Prompt		    "Minimum gate opening [p.u.]"
+	    Value		    "0.0"
+	  }
+	  Object {
+	    $ObjectID		    264
+	    Type		    "edit"
+	    Name		    "p7q"
+	    Prompt		    "Maximum gate opening rate vmax [p.u.]"
+	    Value		    "0.10"
+	  }
+	  Object {
+	    $ObjectID		    265
+	    Type		    "edit"
+	    Name		    "p8q"
+	    Prompt		    "Minimum gate opening rate vmin [p.u.]"
+	    Value		    "-0.10"
+	  }
+	  Object {
+	    $ObjectID		    266
+	    Type		    "edit"
+	    Name		    "p9q"
+	    Prompt		    "Pilot valve time constant Tp [s]"
+	    Value		    "0.04"
+	  }
+	  Object {
+	    $ObjectID		    267
+	    Type		    "edit"
+	    Name		    "p10q"
+	    Prompt		    "Dashpot time constant Tr [s]"
+	    Value		    "5.0"
+	  }
+	  Object {
+	    $ObjectID		    268
+	    Type		    "edit"
+	    Name		    "p11q"
+	    Prompt		    "Permanent speed droop sigma [p.u./p.u.]"
+	    Value		    "0.04"
+	  }
+	  Object {
+	    $ObjectID		    269
+	    Type		    "edit"
+	    Name		    "p12q"
+	    Prompt		    "Transient speed droop delta [p.u./p.u.]"
+	    Value		    "0.3"
+	  }
+	  Object {
+	    $ObjectID		    270
+	    Type		    "edit"
+	    Name		    "p13q"
+	    Prompt		    "Water starting time Tw [s]"
+	    Value		    "1.0"
+	  }
+	  Object {
+	    $ObjectID		    271
+	    Type		    "edit"
+	    Name		    "p14q"
+	    Prompt		    "Derivative of flow rate with respect to tubine head a11"
+	    Value		    "0.5"
+	  }
+	  Object {
+	    $ObjectID		    272
+	    Type		    "edit"
+	    Name		    "p15q"
+	    Prompt		    "Derivative of flow rate with respect to gate position a13"
+	    Value		    "1.0"
+	  }
+	  Object {
+	    $ObjectID		    273
+	    Type		    "edit"
+	    Name		    "p16q"
+	    Prompt		    "Derivative of torque with respect to tubine head a21"
+	    Value		    "1.5"
+	  }
+	  Object {
+	    $ObjectID		    274
+	    Type		    "edit"
+	    Name		    "p17q"
+	    Prompt		    "Derivative of torque with respect to gate position a23"
+	    Value		    "1.0"
+	  }
+	  Object {
+	    $ObjectID		    275
+	    Type		    "edit"
+	    Name		    "p18q"
+	    Prompt		    "Proportional droop Kp [p.u./p.u.]"
+	    Value		    "1.163"
+	  }
+	  Object {
+	    $ObjectID		    276
+	    Type		    "edit"
+	    Name		    "p19q"
+	    Prompt		    "Integral droop Ki [p.u./p.u.]"
+	    Value		    "0.105"
+	  }
+	  Object {
+	    $ObjectID		    277
+	    Type		    "checkbox"
+	    Name		    "p20q"
+	    Prompt		    "Connected"
+	    Value		    "on"
+	    Callback		    "fm_block"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
+      System {
+	Name			"Tg2"
+	Location		[120, 124, 502, 551]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant"
+	  SID			  "73"
+	  Position		  [115, 100, 145, 130]
+	  ZOrder		  -1
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Out1"
+	  SID			  "74"
+	  Position		  [185, 105, 205, 125]
+	  ZOrder		  -2
+	  ShowName		  off
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  ZOrder		  1
+	  SrcBlock		  "Constant"
+	  SrcPort		  1
+	  DstBlock		  "Out1"
+	  DstPort		  1
+	}
+	Annotation {
+	  SID			  "75"
+	  Name			  "Turbine Governor"
+	  Position		  [164, 45, 245, 62]
+	  InternalMargins	  [0, 0, 0, 0]
+	  FixedHeight		  off
+	  FixedWidth		  off
+	  ZOrder		  -1
+	}
+      }
+    }
+    Block {
       BlockType		      Reference
       Name		      "Trasf1"
+      SID		      "52"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1, 1]
       Position		      [185, 114, 245, 146]
+      ZOrder		      -28
       ShowName		      off
+      LibraryVersion	      "1.1192"
       FontName		      "Courier"
       FontSize		      14
-	SourceBlock	"fm_lib/Power Flow/Transf1"
+      SourceBlock	      "fm_lib/Power Flow/Transf1"
       SourceType	      "Line"
-      PhysicalDomain	      "psatdomain"
-      SubClassName	      "unknown"
-      LeftPortType	      "p1"
-      RightPortType	      "p1"
       LConnTagsString	      "__newl0"
       RConnTagsString	      "__newr0"
       p3_4_5q		      "[100  18  60]"
@@ -1518,23 +4373,21 @@ Model {
       p16q		      on
     }
     Block {
-
       BlockType		      Reference
       Name		      "Trasf2"
+      SID		      "53"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1, 1]
       Position		      [610, 114, 670, 146]
-      Orientation	      "left"
+      ZOrder		      -29
+      BlockMirror	      on
       ShowName		      off
+      LibraryVersion	      "1.1192"
       FontName		      "Courier"
       FontSize		      14
-	SourceBlock	"fm_lib/Power Flow/Transf1"
+      SourceBlock	      "fm_lib/Power Flow/Transf1"
       SourceType	      "Line"
-      PhysicalDomain	      "psatdomain"
-      SubClassName	      "unknown"
-      LeftPortType	      "p1"
-      RightPortType	      "p1"
       LConnTagsString	      "__newl0"
       RConnTagsString	      "__newr0"
       p3_4_5q		      "[100  13.8  60]"
@@ -1545,24 +4398,22 @@ Model {
       p16q		      on
     }
     Block {
-
       BlockType		      Reference
       Name		      "Trasf4"
+      SID		      "54"
       Tag		      "PSATblock"
       Description	      "Power Flow"
       Ports		      [0, 0, 0, 0, 0, 1, 1]
       Position		      [409, 515, 441, 570]
-      Orientation	      "up"
+      ZOrder		      -30
+      BlockRotation	      270
       NamePlacement	      "alternate"
       ShowName		      off
+      LibraryVersion	      "1.1192"
       FontName		      "Courier"
       FontSize		      14
-	SourceBlock	"fm_lib/Power Flow/Transf1"
+      SourceBlock	      "fm_lib/Power Flow/Transf1"
       SourceType	      "Line"
-      PhysicalDomain	      "psatdomain"
-      SubClassName	      "unknown"
-      LeftPortType	      "p1"
-      RightPortType	      "p1"
       LConnTagsString	      "__newl0"
       RConnTagsString	      "__newr0"
       p3_4_5q		      "[100  16.5  60]"
@@ -1573,22 +4424,16 @@ Model {
       p16q		      on
     }
     Line {
+      ZOrder		      1
       Labels		      [0, 0]
       SrcBlock		      "AVR2"
       SrcPort		      1
+      Points		      [5, 0]
       DstBlock		      "Gen2"
       DstPort		      1
     }
     Line {
-      LineType		      "Connection"
-      Labels		      [0, 0]
-      SrcBlock		      "Bus 7"
-      SrcPort		      RConn2
-      Points		      [10, 0]
-      DstBlock		      "Line3"
-      DstPort		      LConn1
-    }
-    Line {
+      ZOrder		      3
       Labels		      [0, 0]
       SrcBlock		      "AVR3"
       SrcPort		      1
@@ -1597,14 +4442,17 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      4
       Labels		      [0, 0]
       SrcBlock		      "Gen3"
       SrcPort		      RConn1
+      Points		      [0, -5]
       DstBlock		      "Bus 3"
       DstPort		      LConn2
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      5
       Labels		      [0, 0]
       SrcBlock		      "Gen2"
       SrcPort		      RConn1
@@ -1613,6 +4461,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      6
       Labels		      [0, 0]
       SrcBlock		      "Line5"
       SrcPort		      RConn1
@@ -1622,6 +4471,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      7
       Labels		      [0, 0]
       SrcBlock		      "Line4"
       SrcPort		      RConn1
@@ -1631,6 +4481,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      8
       Labels		      [0, 0]
       SrcBlock		      "Bus 5"
       SrcPort		      RConn2
@@ -1639,6 +4490,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      9
       Labels		      [0, 0]
       SrcBlock		      "Bus 6"
       SrcPort		      RConn1
@@ -1647,6 +4499,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      10
       Labels		      [0, 0]
       SrcBlock		      "Line3"
       SrcPort		      RConn1
@@ -1655,6 +4508,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      11
       Labels		      [0, 0]
       SrcBlock		      "Line2"
       SrcPort		      RConn1
@@ -1663,6 +4517,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      12
       Labels		      [0, 0]
       SrcBlock		      "Bus 9"
       SrcPort		      RConn2
@@ -1672,6 +4527,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      13
       Labels		      [0, 0]
       SrcBlock		      "Line"
       SrcPort		      RConn1
@@ -1681,6 +4537,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      14
       Labels		      [0, 0]
       SrcBlock		      "Bus 7"
       SrcPort		      RConn1
@@ -1689,6 +4546,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      15
       Labels		      [0, 0]
       SrcBlock		      "Bus 9"
       SrcPort		      RConn1
@@ -1697,6 +4555,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      16
       Labels		      [0, 0]
       SrcBlock		      "Trasf2"
       SrcPort		      RConn1
@@ -1705,6 +4564,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      17
       Labels		      [0, 0]
       SrcBlock		      "Trasf1"
       SrcPort		      RConn1
@@ -1713,6 +4573,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      18
       Labels		      [0, 0]
       SrcBlock		      "Bus 3"
       SrcPort		      RConn1
@@ -1721,14 +4582,17 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      19
       Labels		      [0, 0]
       SrcBlock		      "Bus 2"
       SrcPort		      RConn1
+      Points		      [0, 20]
       DstBlock		      "Trasf1"
       DstPort		      LConn1
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      20
       Labels		      [0, 0]
       SrcBlock		      "PV1"
       SrcPort		      RConn1
@@ -1737,6 +4601,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      21
       Labels		      [0, 0]
       SrcBlock		      "PV"
       SrcPort		      RConn1
@@ -1745,6 +4610,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      22
       Labels		      [0, 0]
       SrcBlock		      "PQ1"
       SrcPort		      LConn1
@@ -1753,6 +4619,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      23
       Labels		      [0, 0]
       SrcBlock		      "PQ2"
       SrcPort		      LConn1
@@ -1761,6 +4628,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      24
       Labels		      [0, 0]
       SrcBlock		      "PQ3"
       SrcPort		      LConn1
@@ -1769,6 +4637,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      25
       SrcBlock		      "Line1"
       SrcPort		      RConn1
       DstBlock		      "Bus 8"
@@ -1776,6 +4645,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      26
       SrcBlock		      "Trasf4"
       SrcPort		      RConn1
       DstBlock		      "Bus 4"
@@ -1783,6 +4653,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      27
       SrcBlock		      "Bus 1"
       SrcPort		      RConn1
       DstBlock		      "Trasf4"
@@ -1790,6 +4661,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      28
       SrcBlock		      "Slack"
       SrcPort		      RConn1
       DstBlock		      "Bus 1"
@@ -1797,20 +4669,77 @@ Model {
     }
     Line {
       LineType		      "Connection"
+      ZOrder		      29
       SrcBlock		      "Gen1"
       SrcPort		      RConn1
       DstBlock		      "Bus 1"
       DstPort		      LConn2
     }
     Line {
+      ZOrder		      30
       SrcBlock		      "AVR1"
       SrcPort		      1
       DstBlock		      "Gen1"
       DstPort		      1
     }
+    Line {
+      ZOrder		      31
+      SrcBlock		      "Tg"
+      SrcPort		      1
+      Points		      [5, 0]
+      DstBlock		      "Gen2"
+      DstPort		      2
+    }
+    Line {
+      ZOrder		      32
+      SrcBlock		      "Tg1"
+      SrcPort		      1
+      Points		      [0, -2; -30, 0]
+      DstBlock		      "Gen1"
+      DstPort		      2
+    }
+    Line {
+      ZOrder		      33
+      SrcBlock		      "Tg2"
+      SrcPort		      1
+      Points		      [-10, 0; 0, -10]
+      DstBlock		      "Gen3"
+      DstPort		      2
+    }
+    Line {
+      LineType		      "Connection"
+      ZOrder		      34
+      SrcBlock		      "Fault"
+      SrcPort		      LConn1
+      Points		      [0, -35]
+      DstBlock		      "Bus 2"
+      DstPort		      RConn2
+    }
+    Line {
+      LineType		      "Connection"
+      ZOrder		      35
+      SrcBlock		      "Breaker"
+      SrcPort		      RConn1
+      DstBlock		      "Line3"
+      DstPort		      LConn1
+    }
+    Line {
+      LineType		      "Connection"
+      ZOrder		      36
+      SrcBlock		      "Breaker"
+      SrcPort		      LConn1
+      Points		      [0, 5]
+      DstBlock		      "Bus 7"
+      DstPort		      RConn2
+    }
     Annotation {
+      SID		      "55"
       Name		      "WSCC 3-machine, 9-bus system (Copyright 1977)"
-      Position		      [430, 28]
+      Position		      [430, 28, 699, 48]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      off
+      FixedWidth	      off
+      ZOrder		      -1
       FontSize		      12
     }
   }

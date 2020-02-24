@@ -13,7 +13,7 @@ function pos = sizefig(dx,dy)
 %E-mail:    federico.milano@ucd.ie
 %Web-site:  faraday1.ucd.ie/psat.html
 %
-% Copyright (C) 2002-2016 Federico Milano
+% Copyright (C) 2002-2019 Federico Milano
 
 if ~strcmp(get(0,'Units'),'pixels')
   set(0,'Units','pixels')

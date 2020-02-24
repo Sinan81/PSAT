@@ -12,7 +12,7 @@ function fm_base
 %E-mail:    federico.milano@ucd.ie
 %Web-site:  faraday1.ucd.ie/psat.html
 %
-% Copyright (C) 2002-2016 Federico Milano
+% Copyright (C) 2002-2019 Federico Milano
 
 global Areas Regions Shunt SW PV PQ Line Lines Fault Demand Supply
 global Rmpg Rmpl Vltn Pl Mn Ltc Phs Tap Tg COI Svc Statcom Tcsc Sssc Upfc

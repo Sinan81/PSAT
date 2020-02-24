@@ -14,7 +14,7 @@ function fm_pareto
 %E-mail:    federico.milano@ucd.ie
 %Web-site:  faraday1.ucd.ie/psat.html
 %
-% Copyright (C) 2002-2016 Federico Milano
+% Copyright (C) 2002-2019 Federico Milano
 
 global Fig Hdl Varname File Path DAE OPF Settings Varout
 global PV SW Bus Line Demand Supply Rsrv History Theme GAMS

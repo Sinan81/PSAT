@@ -13,7 +13,7 @@ function [nu,nl,pmu_test, I_idx, pseudoi, ok] = fm_annealing(rangoH,ntest,pmu_te
 %E-mail:    federico.milano@ucd.ie
 %Web-site:  faraday1.ucd.ie/psat.html
 %
-% Copyright (C) 2002-2016 Federico Milano
+% Copyright (C) 2002-2019 Federico Milano
 
 global Bus Line Fig
 

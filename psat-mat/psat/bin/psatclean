@@ -1,0 +1,7 @@
+echo cleaning psat tree
+rm *.*~
+rm *.asv
+rm ./*/*.*~
+rm ./*/*.asv
+rm ./*/*/*.*~
+rm ./help/*/*.bak

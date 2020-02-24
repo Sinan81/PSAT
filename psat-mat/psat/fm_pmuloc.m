@@ -15,7 +15,7 @@ function [pmu_test, I_idx, pseudoi] = fm_pmuloc
 %E-mail:    federico.milano@ucd.ie
 %Web-site:  faraday1.ucd.ie/psat.html
 %
-% Copyright (C) 2002-2016 Federico Milano
+% Copyright (C) 2002-2019 Federico Milano
 
 global Line Bus DAE Settings PMU
 global Ltc File Path Fig
@@ -977,7 +977,7 @@ tic
   Header{1,1}{2,1} = ' ';
   Header{1,1}{3,1} = ['P S A T  ',Settings.version];
   Header{1,1}{4,1} = ' ';
-  Header{1,1}{5,1} = 'Author:  Federico Milano, (c) 2002-2016';
+  Header{1,1}{5,1} = 'Author:  Federico Milano, (c) 2002-2019';
   Header{1,1}{6,1} = 'e-mail:  federico.milano@ucd.ie';
   Header{1,1}{7,1} = 'website: faraday1.ucd.ie/psat.html';
   Header{1,1}{8,1} = ' ';

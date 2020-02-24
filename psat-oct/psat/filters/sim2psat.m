@@ -125,6 +125,7 @@ else
     check_model = 0;
     return
   end
+  warning('off', 'Simulink:Engine:InvalidDomainRegistrationKey');
   cur_sys = load_system(File_Data);
   cd(localpath)
 end

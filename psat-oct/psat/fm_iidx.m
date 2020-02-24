@@ -15,7 +15,7 @@ function  I_idx = fm_iidx(bus_no, Line)
 %E-mail:    federico.milano@ucd.ie
 %Web-site:  faraday1.ucd.ie/psat.html
 %
-% Copyright (C) 2002-2016 Federico Milano
+% Copyright (C) 2002-2019 Federico Milano
 
 I_idx_fr = find(Line(:,1) == bus_no);
 I_idx_to = find(Line(:,2) == bus_no);

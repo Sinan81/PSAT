@@ -1,0 +1,20 @@
+latex psat.tex
+makeindex -s index psat.idx
+bibtex bu1.aux
+bibtex bu2.aux
+bibtex bu3.aux
+bibtex bu4.aux
+bibtex psat.aux
+latex psat.tex
+latex psat.tex
+dvips -tletter -Ppdf -G0 -o psat.ps psat.dvi
+daycode=`date "+%Y%m%d"`
+ps2pdf -dCompatibilityLevel=1.2 \
+  -dMaxSubsetPct=100 \
+  -dEmbedAllFonts=true \
+  -dAutoFilterColorImages=false \
+  -dAutoFilterGrayImages=false \
+  -dColorImageFilter=/FlateEncode \
+  -dGrayImageFilter=/FlateEncode \
+  -dMonoImageFilter=/FlateEncode \
+psat.ps psat-${daycode}.pdf 

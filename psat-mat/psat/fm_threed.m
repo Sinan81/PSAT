@@ -10,7 +10,7 @@ function varargout = fm_threed(varargin)
 %E-mail:    federico.milano@ucd.ie
 %Web-site:  faraday1.ucd.ie/psat.html
 %
-% Copyright (C) 2002-2016 Federico Milano
+% Copyright (C) 2002-2019 Federico Milano
 
 global Settings Theme Varout Path Fig File CPF OPF
 
@@ -84,9 +84,10 @@ if nargin
     cd(Path.data)
     filedata = strrep(File.data,'@ ','');
     filedata = strrep(filedata,'(mdl)','_mdl');
-    mov = avifile(filedata);
-    mov = addframe(mov,Varout.movie);
-    mov = close(mov);
+    mov = VideoWriter(filedata);
+    open(mov);
+    writeVideo(mov, Varout.movie);
+    close(mov);
     cd(Path.local)
 
    case 'openmovie'

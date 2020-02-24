@@ -15,7 +15,7 @@ function fm_spf
 %E-mail:    federico.milano@ucd.ie
 %Web-site:  faraday1.ucd.ie/psat.html
 %
-% Copyright (C) 2002-2016 Federico Milano
+% Copyright (C) 2002-2019 Federico Milano
 
 global DAE Pl Mn Lines Line SW PV PQ Bus
 global History Theme Fig Settings LIB Snapshot Path File

@@ -13,7 +13,7 @@ function [pmu_test, pmu_test2, I_idx, pseudoi, index_pmu, pmunum] = fm_spantree(
 %E-mail:    federico.milano@ucd.ie
 %Web-site:  faraday1.ucd.ie/psat.html
 %
-% Copyright (C) 2002-2016 Federico Milano
+% Copyright (C) 2002-2019 Federico Milano
 
 global Bus Line Fig
 

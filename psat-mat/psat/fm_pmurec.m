@@ -12,7 +12,7 @@ function [bus_pmu, bus2] = fm_pmurec(bus1,bus2,bus0)
 %E-mail:    federico.milano@ucd.ie
 %Web-site:  faraday1.ucd.ie/psat.html
 %
-% Copyright (C) 2002-2016 Federico Milano
+% Copyright (C) 2002-2019 Federico Milano
 
 global Bus Line
 
