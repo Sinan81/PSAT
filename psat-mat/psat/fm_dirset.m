@@ -34,32 +34,36 @@ IEEE = 1;
 PSAT = 2;
 PSATPERT = 3;
 PSATMDL = 4;
-CYME = 5;
-MATPOWER = 6;
-PST = 7;
-EPRI = 8;
-PSSE = 9;
-PSAP = 10;
-EUROSTAG = 11;
-TH = 12;
-CESI = 13;
-VST = 14;
-SIMPOW = 15;
-NEPLAN = 16;
-DIGSILENT = 17;
-POWERWORLD = 18;
-PET = 19;
-FLOWDEMO = 20;
-GEEPC = 21;
-CHAPMAN = 22;
-UCTE = 23;
-PCFLO = 24;
-WEBFLOW = 25;
-IPSS = 26;
-CEPEL = 27;
-ODM = 28;
-REDS = 29;
-VITRUVIO = 30; % all files
+PSATSLX=5;    %add by s. majid shariatzadeh
+CYME = 6;     %edit by s. majid shariatzadeh
+MATPOWER = 7; %edit by s. majid shariatzadeh
+PST = 8;      %edit by s. majid shariatzadeh
+EPRI = 9;     %edit by s. majid shariatzadeh
+PSSE = 10;      %edit by s. majid shariatzadeh
+PSAP = 11;      %edit by s. majid shariatzadeh
+EUROSTAG = 12;  %edit by s. majid shariatzadeh
+TH = 13;        %edit by s. majid shariatzadeh
+CESI = 14;      %edit by s. majid shariatzadeh
+VST = 15;       %edit by s. majid shariatzadeh
+SIMPOW = 16;    %edit by s. majid shariatzadeh
+NEPLAN = 17;    %edit by s. majid shariatzadeh
+DIGSILENT = 18; %edit by s. majid shariatzadeh
+POWERWORLD = 19;%edit by s. majid shariatzadeh
+PET = 20;       %edit by s. majid shariatzadeh
+FLOWDEMO = 21;  %edit by s. majid shariatzadeh
+GEEPC = 22;     %edit by s. majid shariatzadeh
+CHAPMAN = 23;   %edit by s. majid shariatzadeh
+UCTE = 24;      %edit by s. majid shariatzadeh
+PCFLO = 25;     %edit by s. majid shariatzadeh
+WEBFLOW = 26;   %edit by s. majid shariatzadeh
+IPSS = 27;      %edit by s. majid shariatzadeh
+CEPEL = 28;     %edit by s. majid shariatzadeh
+ODM = 29;       %edit by s. majid shariatzadeh
+REDS = 30;      %edit by s. majid shariatzadeh
+VITRUVIO = 31; % all files   %edit by s. majid shariatzadeh
+
+
+
 
 switch type
 
@@ -71,6 +75,7 @@ switch type
   formati{MATPOWER} = 'MatPower (.m)';
   formati{PSAT} = 'PSAT data (.m)';
   formati{PSATPERT} = 'PSAT pert. (.m)';
+  formati{PSATSLX} = 'PSAT Simulink (.slx)';  % add by S. Majid Shariatzadeh
   formati{PSATMDL} = 'PSAT Simulink (.mdl)';
   formati{PST} = 'PST (.m)';
   formati{EPRI} = 'EPRI (.wsc, .txt, .dat)';
@@ -173,6 +178,7 @@ switch type
    case MATPOWER, file = 'pserc';
    case PSAT, file = 'psatdata';
    case PSATPERT, file = 'psatpert';
+   case PSATSLX, file = 'simulinkSLX';  %add by majid  shariatzadeh(SLX avatar)   
    case PSATMDL, file = 'simulink';
    case PST, file = 'cherry';
    case EPRI, file = 'epri';
@@ -228,7 +234,8 @@ switch type
     set(hdl4,'Enable','off')
   end
 
-  if formato == PSATMDL
+  %if formato == PSATMDL   % old line
+  if formato == PSATMDL  ||  formato == PSATSLX  % add  by S. Majid Shariatzadeh
     set(hdlp,'Enable','on')
     set(hdlp,'Visible','on')
   else
@@ -472,6 +479,19 @@ switch type
         fm_disp(['Use modified file name <',filename,'>'])
       end
       check = sim2psat(filename,pwd);
+	  
+	  
+     case PSATSLX          %add By S.M. Shariatzadeh
+      first = double(filename(1));   %add S.M. Shariatzadeh
+      if first <= 57 && first >= 48  %add  S.M. Shariatzadeh
+        copyfile(filename,['d',filename])  %add S.M. Shariatzadeh
+        filename = ['d',filename]; %add S.M. Shariatzadeh
+        fm_disp(['Use modified file name <',filename,'>']) %add
+      end  %add S.M. Shariatzadeh
+      check = sim2psat(filename,pwd); %add S.M. Shariatzadeh
+
+ 
+	  
      case PSATPERT
       fm_disp('No filter is associated with pertubation files.')
      case PST
@@ -570,7 +590,8 @@ switch type
   % determine file name
   namefile = nomefile{numfile};
   switch type
-   case {PSAT,PSATPERT,PSATMDL,VITRUVIO}
+   %case {PSAT,PSATPERT,PSATMDL,VITRUVIO}  %old line
+   case {PSAT,PSATPERT,PSATMDL,PSATSLX,VITRUVIO}   %edit by majid   Shariatzadeh
     % nothing to do!
    case PCFLO
     namefile = regexprep([namefile,'.m'],'^bdat\.','','ignorecase');
@@ -612,7 +633,8 @@ switch type
   % check whether the selected file is a Simulink model
   hdl = findobj(Fig.dir,'Tag','PopupMenu1');
   type = get(hdl,'Value');
-  if type ~= PSATMDL
+  %if type ~= PSATMDL  % old line
+  if type ~= PSATMDL &&  type ~= PSATSLX  % edit by majid  shariatzadeh
     cd(Path.local)
     return
   end
@@ -716,6 +738,10 @@ switch type
       switch ext
        case 'mdl'
         open_system(file)
+
+       case 'slx'   %add by majid shariatzadeh
+        open_system(file)   %add by majid shariatzadeh		
+		
        case 'pdf',
         switch computer
          case 'GLNX86', eval(['! xpdf ',file, ' &']),
@@ -781,32 +807,36 @@ IEEE = 1;
 PSAT = 2;
 PSATPERT = 3;
 PSATMDL = 4;
-CYME = 5;
-MATPOWER = 6;
-PST = 7;
-EPRI = 8;
-PSSE = 9;
-PSAP = 10;
-EUROSTAG = 11;
-TH = 12;
-CESI = 13;
-VST = 14;
-SIMPOW = 15;
-NEPLAN = 16;
-DIGSILENT = 17;
-POWERWORLD = 18;
-PET = 19;
-FLOWDEMO = 20;
-GEEPC = 21;
-CHAPMAN = 22;
-UCTE = 23;
-PCFLO = 24;
-WEBFLOW = 25;
-IPSS = 26;
-CEPEL = 27;
-ODM = 28;
-REDS = 29;
-VITRUVIO = 30; % all files
+
+%edit by Majid Shariatzadeh
+PSATSLX = 5;
+CYME = 6;
+MATPOWER = 7;
+PST = 8;
+EPRI = 9;
+PSSE = 10;
+PSAP = 11;
+EUROSTAG = 12;
+TH = 13;
+CESI = 14;
+VST = 15;
+SIMPOW = 16;
+NEPLAN = 17;
+DIGSILENT = 18;
+POWERWORLD = 19;
+PET = 20;
+FLOWDEMO = 21;
+GEEPC = 22;
+CHAPMAN = 23;
+UCTE = 24;
+PCFLO = 25;
+WEBFLOW = 26;
+IPSS = 27;
+CEPEL = 28;
+ODM = 29;
+REDS = 30;
+VITRUVIO = 31; % all files
+
 
 a = dir;
 numfile = find([a.isdir] == 0);
@@ -870,6 +900,27 @@ for i = 1:length(numfile)
         add_file = 1;
       end
     end
+	
+	%add by Majid shariatzadeh inorder  to support SLX file
+   case PSATSLX
+    extent = nomefile(max(1,lfile-2):lfile);
+    if strcmpi(extent,'slx')
+      if strcmpi(nomefile,'fm_lib.slx')
+        add_file = 0;
+      %elseif strcmp(nomefile(1),'d')
+      %  add_file = 1;
+      %elseif isfile(nomefile,'PSATblock',1000) %% THIS IS TOO SLOW!!
+      %  add_file = 1;
+      else
+        add_file = 1;
+      end
+    end
+    	
+	
+	
+	
+	
+	
    case PST
     extent = nomefile(lfile);
     if strcmpi(extent,'m') && strcmp(nomefile(1),'d')
