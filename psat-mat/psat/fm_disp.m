@@ -103,9 +103,15 @@ if ishandle(Fig.main)
         'ForegroundColor', Theme.color07);
     if Settings.beep, beep, end
    case 3,
-    set(Hdl.text, ...
-        'String', testo{end,1}, ...
-        'ForegroundColor', Theme.color05);
+        % modified By S.m. Shariatzadeh
+     if Settings.hostver < 8.0
+      set(Hdl.text, ...
+          'String', testo{end,1}, ...
+          'ForegroundColor', Theme.color05);
+      else
+               Hdl.text=testo;      
+      end
+
   end
   drawnow;
 end

@@ -13,8 +13,7 @@ function fm_set(varargin)
 %Date:      11-Nov-2002
 %Update:    10-Feb-2003
 %Update:    27-Feb-2003
-%Update:    19-Jul-2023 by smshariatzadeh@yahoo.com
-%Version:   1.0.2+
+%Version:   1.0.2
 %
 %E-mail:    federico.milano@ucd.ie
 %Web-site:  faraday1.ucd.ie/psat.html
