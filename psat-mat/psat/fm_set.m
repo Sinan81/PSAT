@@ -13,7 +13,8 @@ function fm_set(varargin)
 %Date:      11-Nov-2002
 %Update:    10-Feb-2003
 %Update:    27-Feb-2003
-%Version:   1.0.2
+%Update:    19-Jul-2023 by smshariatzadeh@yahoo.com
+%Version:   1.0.2+
 %
 %E-mail:    federico.milano@ucd.ie
 %Web-site:  faraday1.ucd.ie/psat.html
@@ -500,13 +501,42 @@ switch command
       end
       exist(File.data(1:end-4));
       File.data = strrep(File.data,'.mdl','(mdl)');
-    end
+    %end  edit by S. Majid Shariatzadeh
+    
+	
+	%   add by S. Majid Shariatzadeh
+	% suypport simulink SLX file
+	
+    elseif ~isempty(findstr(File.data,'.slx'))% add by s. Majid Shariatzadeh
+      % make sure that the file name does not start with a number
+      first = double(File.data(1)); % add by s. Majid Shariatzadeh
+      if first <= 57 && first >= 48 % add by s. Majid Shariatzadeh
+        localpath = pwd; % add by s. Majid Shariatzadeh
+        cd(Path.data)% add by s. Majid Shariatzadeh
+        if exist(['d',File.data]) ~= 4% add by s. Majid Shariatzadeh
+          copyfile(File.data,['d',File.data])% add by s. Majid Shariatzadeh
+        end% add by s. Majid Shariatzadeh
+        cd(localpath)% add by s. Majid Shariatzadeh
+        File.data = ['d',File.data];% add by s. Majid Shariatzadeh
+      end% add by s. Majid Shariatzadeh
+      exist(File.data(1:end-4));% add by s. Majid Shariatzadeh
+      File.data = strrep(File.data,'.slx','(slx)');% add by s. Majid Shariatzadeh
+    end	
+	
+	
+		
+
+	
+	
+	
     File.data = strrep(File.data,'.m','');
     hdltext = findobj(Fig.main,'Tag','EditText9');
     set(hdltext,'String',File.data, ...
                 'TooltipString',[Path.data,File.data]);
     if ~isempty(findstr(File.data,'(mdl)'))
       set(hdltext,'ForegroundColor',[0 0.592 0])
+	elseif ~isempty(findstr(File.data,'(slx)')) % add by s. Majid Shariatzadeh
+      set(hdltext,'ForegroundColor',[0.2 0.442 0])% add by s. Majid Shariatzadeh  
     else
       set(hdltext,'ForegroundColor',Theme.color07)
     end
@@ -644,6 +674,7 @@ switch command
     return
   end
   filedata = deblank(strrep(filedata,'(mdl)','_mdl'));
+  filedata = deblank(strrep(filedata,'(slx)','_slx')); % add by S. Majid Shariatzadeh
   a = exist(filedata);
   if ~a
     fm_disp('Data file does not exist (maybe it was removed).',2)
@@ -725,6 +756,27 @@ switch command
   CPF.init = 0;
   OPF.init = 0;
 
+  
+  % add by s. m. Shariatzadeh
+  % short circuit calculation   
+  case 'sc'
+
+    if isempty(File.data),
+        fm_disp('Set a data file before running Short Circuit.',2),
+        return,
+    end
+
+    filedata = strrep(File.data,'@ ','');
+    if Settings.init == 0,
+        fm_disp('Run power flow before Short Circuit.',2),
+        return,
+    end  
+    %read Load Flow Data File
+  
+    symfault
+    
+    fm_disp(['Finished "',File.data,'" Short Circuit Calculations']),
+  
   % ---------------------------------------------------------------------------
   %case 'stabrep'
   %for i = 1:Bus.n;  [Istab(i),Vnew(i),angnew(i)]= fm_stab(i,0);
